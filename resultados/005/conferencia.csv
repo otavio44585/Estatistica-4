@@ -1,0 +1,923 @@
+﻿base;aba;item;A_toolpak;B_formula;C_script;dif_rel_A_C;dif_rel_B_C;ok;excecao_documentada;dentro_tolerancia
+vigitel2024;reg_completo;R múltiplo;0,23335244450247897;;0,2333524445023929;3,688413899737438e-13;;True;False;True
+vigitel2024;reg_completo;R²;0,05445336335528252;;0,054453363355242354;7,376818314717033e-13;;True;False;True
+vigitel2024;reg_completo;R² ajustado;0,05424341295117223;;0,054243412951132;7,416883390259588e-13;;True;False;True
+vigitel2024;reg_completo;erro padrão;3,2891862395004337;;3,28918623950042;4,185462452695551e-15;;True;False;True
+vigitel2024;reg_completo;observações;27029,0;;27029,0;0,0;;True;False;True
+vigitel2024;reg_completo;gl regressão;6,0;;6,0;0,0;;True;False;True
+vigitel2024;reg_completo;SQ regressão;16835,893674460647;;16835,893674447376;7,88276936460026e-13;;True;False;True
+vigitel2024;reg_completo;F;259,3629842535426;;259,3629842533403;7,800100245910571e-13;;True;False;True
+vigitel2024;reg_completo;F de significação;0,0;0,0;0,0;0,0;0,0;True;False;True
+vigitel2024;reg_completo;gl resíduo;27022,0;;27022,0;0,0;;True;False;True
+vigitel2024;reg_completo;SQ resíduo;292344,1576038117;;292344,1576038093;8,163371955209026e-15;;True;False;True
+vigitel2024;reg_completo;Intercepto: coeficiente;4,0885472584443745;;4,0885472584443185;1,3685849007991641e-14;;True;False;True
+vigitel2024;reg_completo;Intercepto: erro padrão;0,09909381030739445;;0,09909381030739678;2,3527890838796397e-14;;True;False;True
+vigitel2024;reg_completo;Intercepto: t;41,25936065796114;;41,259360657959604;3,719816024210925e-14;;True;False;True
+vigitel2024;reg_completo;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+vigitel2024;reg_completo;Intercepto: IC inferior;3,8943182592862247;;3,8943182592861936;7,982461273003935e-15;;True;False;True
+vigitel2024;reg_completo;Intercepto: IC superior;4,282776257602524;;4,2827762576024435;1,8871925903025433e-14;;True;False;True
+vigitel2024;reg_completo;tela_1a3h: coeficiente;0,18894778481354124;;0,1889477848135286;6,683744356978614e-14;;True;False;True
+vigitel2024;reg_completo;tela_1a3h: erro padrão;0,049296199737041274;;0,04929619973704138;2,111388080903115e-15;;True;False;True
+vigitel2024;reg_completo;tela_1a3h: t;3,8329077255739343;;3,83290772557367;6,893802271778441e-14;;True;False;True
+vigitel2024;reg_completo;tela_1a3h: p;0,00012692423559785082;0,00012692423559785082;0,000126924235597987;1,072890391835766e-12;1,072890391835766e-12;True;False;True
+vigitel2024;reg_completo;tela_1a3h: IC inferior;0,09232468083233027;;0,09232468083233202;1,8939694651749753e-14;;True;False;True
+vigitel2024;reg_completo;tela_1a3h: IC superior;0,28557088879475223;;0,2855708887947252;9,466626925356038e-14;;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: coeficiente;0,5568015402909406;;0,5568015402909311;1,714779382037513e-14;;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: erro padrão;0,05750344384413016;;0,05750344384412975;7,240151309249492e-15;;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: t;9,68292510967198;;9,682925109671885;9,90643511554155e-15;;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: p;3,871598525402992e-22;3,871598525402992e-22;3,8715985254066146e-22;0,0;0,0;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: IC inferior;0,4440918128988268;;0,4440918128988351;1,862489082936911e-14;;True;False;True
+vigitel2024;reg_completo;tela_3h_mais: IC superior;0,6695112676830545;;0,669511267683027;4,095899506387865e-14;;True;False;True
+vigitel2024;reg_completo;idade: coeficiente;-0,0005571700128396766;;-0,0005571700128393846;5,242278990912615e-13;;True;False;True
+vigitel2024;reg_completo;idade: erro padrão;0,0014351978406117172;;0,0014351978406116927;1,7072885984644893e-14;;True;False;True
+vigitel2024;reg_completo;idade: t;-0,38821826306692103;;-0,38821826306672413;5,071839018128064e-13;;True;False;True
+vigitel2024;reg_completo;idade: p;0,6978575773066094;0,6978575773066094;0,6978575773067551;2,088854343258157e-13;2,088854343258157e-13;True;False;True
+vigitel2024;reg_completo;idade: IC inferior;-0,003370232093218177;;-0,003370232093217412;2,2699120765159945e-13;;True;False;True
+vigitel2024;reg_completo;idade: IC superior;0,0022558920675388233;;0,002255892067538643;7,997334805934066e-14;;True;False;True
+vigitel2024;reg_completo;feminino: coeficiente;1,3601798634857027;;1,3601798634857574;4,0158639513729037e-14;;True;False;True
+vigitel2024;reg_completo;feminino: erro padrão;0,04034253082203994;;0,0403425308220408;2,1327934230998013e-14;;True;False;True
+vigitel2024;reg_completo;feminino: t;33,715779247607564;;33,715779247608204;1,8967037881215676e-14;;True;False;True
+vigitel2024;reg_completo;feminino: p;3,895980181407231e-244;3,895980181407231e-244;3,8959801813266346e-244;0,0;0,0;True;False;True
+vigitel2024;reg_completo;feminino: IC inferior;1,2811064141878619;;1,2811064141879267;5,0610178764274097e-14;;True;False;True
+vigitel2024;reg_completo;feminino: IC superior;1,4392533127835436;;1,439253312783588;3,085552806483883e-14;;True;False;True
+vigitel2024;reg_completo;esc_medio: coeficiente;-0,4900460568012464;;-0,49004605680123065;3,2170786257486983e-14;;True;False;True
+vigitel2024;reg_completo;esc_medio: erro padrão;0,057212598781427065;;0,05721259878142688;3,2746307525942113e-15;;True;False;True
+vigitel2024;reg_completo;esc_medio: t;-8,565352164361569;;-8,565352164361322;2,882702263007757e-14;;True;False;True
+vigitel2024;reg_completo;esc_medio: p;1,1338977786865992e-17;1,1338977786865992e-17;1,133897778689035e-17;0,0;0,0;True;False;True
+vigitel2024;reg_completo;esc_medio: IC inferior;-0,6021857128108624;;-0,6021857128108293;5,494093504709412e-14;;True;False;True
+vigitel2024;reg_completo;esc_medio: IC superior;-0,3779064007916304;;-0,37790640079163196;4,112955565767799e-15;;True;False;True
+vigitel2024;reg_completo;esc_superior: coeficiente;-0,9986854100744499;;-0,998685410074419;3,090482725914509e-14;;True;False;True
+vigitel2024;reg_completo;esc_superior: erro padrão;0,057414649689873275;;0,05741464968987258;1,208558084284733e-14;;True;False;True
+vigitel2024;reg_completo;esc_superior: t;-17,394261141866668;;-17,39426114186634;1,8790660654331775e-14;;True;False;True
+vigitel2024;reg_completo;esc_superior: p;2,1255867338118092e-67;2,1255867338118092e-67;2,1255867338223195e-67;0,0;0,0;True;False;True
+vigitel2024;reg_completo;esc_superior: IC inferior;-1,111221096326568;;-1,1112210963265188;4,4360121002301735e-14;;True;False;True
+vigitel2024;reg_completo;esc_superior: IC superior;-0,8861497238223317;;-0,8861497238223192;1,4157336893533331e-14;;True;False;True
+vigitel2024;reg_simples;R múltiplo;0,05075880700755337;;0,050758807006996455;1,0971802876389906e-11;;True;False;True
+vigitel2024;reg_simples;R²;0,0025764564888300493;;0,002576456488773512;2,1943797775126125e-11;;True;False;True
+vigitel2024;reg_simples;R² ajustado;0,0025026443417486338;;0,0025026443416920063;2,2627044859471517e-11;;True;False;True
+vigitel2024;reg_simples;erro padrão;3,37796117647846;;3,37796117647847;3,0237327467450663e-15;;True;False;True
+vigitel2024;reg_simples;observações;27029,0;;27029,0;0,0;;True;False;True
+vigitel2024;reg_simples;gl regressão;2,0;;2,0;0,0;;True;False;True
+vigitel2024;reg_simples;SQ regressão;796,5889493327122;;796,5889493151917;2,1994412487934076e-11;;True;False;True
+vigitel2024;reg_simples;F;34,90558926552004;;34,9055892647521;2,2000498891831555e-11;;True;False;True
+vigitel2024;reg_simples;F de significação;7,771561172376096e-16;7,771561172376096e-16;7,248374645591722e-16;0,0;0,0;True;False;True
+vigitel2024;reg_simples;gl resíduo;27026,0;;27026,0;0,0;;True;False;True
+vigitel2024;reg_simples;SQ resíduo;308383,46232893964;;308383,4623289415;6,040029303660067e-15;;True;False;True
+vigitel2024;reg_simples;Intercepto: coeficiente;4,362407031778244;;4,362407031778227;3,868366672658576e-15;;True;False;True
+vigitel2024;reg_simples;Intercepto: erro padrão;0,03585873309236387;;0,035858733092370074;1,7299471049670181e-13;;True;False;True
+vigitel2024;reg_simples;Intercepto: t;121,65535855775173;;121,65535855773021;1,7685397744812213e-13;;True;False;True
+vigitel2024;reg_simples;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+vigitel2024;reg_simples;Intercepto: IC inferior;4,292122058662096;;4,292122058662054;9,725815145834435e-15;;True;False;True
+vigitel2024;reg_simples;Intercepto: IC superior;4,432692004894393;;4,432692004894401;1,8033298430107276e-15;;True;False;True
+vigitel2024;reg_simples;tela_1a3h: coeficiente;-0,021283875567072476;;-0,021283875567105925;1,5715623763314932e-12;;True;False;True
+vigitel2024;reg_simples;tela_1a3h: erro padrão;0,04795587263816614;;0,04795587263818035;2,963318970842363e-13;;True;False;True
+vigitel2024;reg_simples;tela_1a3h: t;-0,4438220888536913;;-0,4438220888542573;1,275267076983556e-12;;True;False;True
+vigitel2024;reg_simples;tela_1a3h: p;0,657174770224862;0,657174770224862;0,657174770224453;6,223704573015793e-13;6,223704573015793e-13;True;False;True
+vigitel2024;reg_simples;tela_1a3h: IC inferior;-0,11527986841079924;;-0,11527986841087817;6,847410405562183e-13;;True;False;True
+vigitel2024;reg_simples;tela_1a3h: IC superior;0,07271211727665428;;0,07271211727666632;1,6566592018423514e-13;;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: coeficiente;0,3812533073029527;;0,38125330730306395;2,9178592011271627e-13;;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: erro padrão;0,054215518040503244;;0,05421551804051307;1,8122991577043412e-13;;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: t;7,032180473091239;;7,0321804730920165;1,1051424522042986e-13;;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: p;2,081653890713472e-12;2,081653890713472e-12;2,0816538907018925e-12;5,5625562621379105e-12;5,5625562621379105e-12;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: IC inferior;0,27498808543524866;;0,2749880854353207;2,6202398618146745e-13;;True;False;True
+vigitel2024;reg_simples;tela_3h_mais: IC superior;0,48751852917065674;;0,4875185291708072;3,0857333790487e-13;;True;False;True
+vigitel2024;reg_covariaveis;R múltiplo;0,22595720236113678;;0,22595720236103253;4,613702989900026e-13;;True;False;True
+vigitel2024;reg_covariaveis;R²;0,051056657298871724;;0,05105665729882461;9,228001224547704e-13;;True;False;True
+vigitel2024;reg_covariaveis;R² ajustado;0,05091619795270519;;0,050916197952658004;9,267086004810819e-13;;True;False;True
+vigitel2024;reg_covariaveis;erro padrão;3,2949669137292834;;3,2949669137292816;5,391121932055301e-16;;True;False;True
+vigitel2024;reg_covariaveis;observações;27029,0;;27029,0;0,0;;True;False;True
+vigitel2024;reg_covariaveis;gl regressão;4,0;;4,0;0,0;;True;False;True
+vigitel2024;reg_covariaveis;SQ regressão;15785,699921762338;;15785,699921746971;9,734647533727996e-13;;True;False;True
+vigitel2024;reg_covariaveis;F;363,4977571256502;;363,4977571252967;9,725210540244615e-13;;True;False;True
+vigitel2024;reg_covariaveis;F de significação;0,0;0,0;2,0422542836644027e-305;0,0;0,0;True;False;True
+vigitel2024;reg_covariaveis;gl resíduo;27024,0;;27024,0;0,0;;True;False;True
+vigitel2024;reg_covariaveis;SQ resíduo;293394,35135651;;293394,3513565097;9,919696927419366e-16;;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: coeficiente;4,469839462632277;;4,469839462632214;1,4108038627761505e-14;;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: erro padrão;0,08816054391876947;;0,08816054391877189;2,739020168460587e-14;;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: t;50,70113300061711;;50,701133000615;4,162257922681554e-14;;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: IC inferior;4,297040232279816;;4,29704023227973;2,0049453124436558e-14;;True;False;True
+vigitel2024;reg_covariaveis;Intercepto: IC superior;4,642638692984738;;4,642638692984698;8,608903584700517e-15;;True;False;True
+vigitel2024;reg_covariaveis;idade: coeficiente;-0,00512583805930513;;-0,00512583805930498;2,927396045990876e-14;;True;False;True
+vigitel2024;reg_covariaveis;idade: erro padrão;0,0013509663397645096;;0,0013509663397644914;1,3482642728856966e-14;;True;False;True
+vigitel2024;reg_covariaveis;idade: t;-3,794201164329992;;-3,794201164329932;1,5800965930161806e-14;;True;False;True
+vigitel2024;reg_covariaveis;idade: p;0,00014844235632639353;0,00014844235632639353;0,00014844235632642945;2,419403588865558e-13;2,419403588865558e-13;True;False;True
+vigitel2024;reg_covariaveis;idade: IC inferior;-0,007773802027840584;;-0,007773802027840679;1,2273246840738787e-14;;True;False;True
+vigitel2024;reg_covariaveis;idade: IC superior;-0,0024778740907696758;;-0,0024778740907692807;1,5944445003297052e-13;;True;False;True
+vigitel2024;reg_covariaveis;feminino: coeficiente;1,366419184061292;;1,3664191840613427;3,7050248205995895e-14;;True;False;True
+vigitel2024;reg_covariaveis;feminino: erro padrão;0,04040579832510494;;0,04040579832510595;2,490087209689873e-14;;True;False;True
+vigitel2024;reg_covariaveis;feminino: t;33,817403459451214;;33,817403459451626;1,2186470414116793e-14;;True;False;True
+vigitel2024;reg_covariaveis;feminino: p;1,4422797924901033e-245;1,4422797924901033e-245;1,4422797924701544e-245;0,0;0,0;True;False;True
+vigitel2024;reg_covariaveis;feminino: IC inferior;1,287221727444099;;1,287221727444139;3,122233927112979e-14;;True;False;True
+vigitel2024;reg_covariaveis;feminino: IC superior;1,4456166406784852;;1,4456166406785462;4,22395984081382e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: coeficiente;-0,43994665928718535;;-0,43994665928717236;2,9525418852277414e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: erro padrão;0,056901461052002986;;0,05690146105200181;2,0608839352799755e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: t;-7,7317286964760426;;-7,731728696475973;8,960210511290337e-15;;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: p;1,0977695472301498e-14;1,0977695472301498e-14;1,0977695472307462e-14;5,432641539852524e-13;5,432641539852524e-13;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: IC inferior;-0,5514764688670388;;-0,5514764688670354;6,2408671459883785e-15;;True;False;True
+vigitel2024;reg_covariaveis;esc_medio: IC superior;-0,32841684970733187;;-0,32841684970730933;6,862475972220962e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: coeficiente;-0,941140394599571;;-0,941140394599541;3,1850743881451595e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: erro padrão;0,05660213189721503;;0,05660213189721427;1,3484974926666153e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: t;-16,627295881869028;;-16,627295881868722;1,837540984099568e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: p;8,968850745401006e-62;8,968850745401006e-62;8,968850745447462e-62;0,0;0,0;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: IC inferior;-1,0520835035390896;;-1,0520835035390699;1,878365146098267e-14;;True;False;True
+vigitel2024;reg_covariaveis;esc_superior: IC superior;-0,8301972856600524;;-0,8301972856600122;4,841026848151805e-14;;True;False;True
+vigitel2024;f_parcial;F parcial;48,53583498643467;;48,53583498653192;2,0035686795768846e-12;;True;False;True
+vigitel2024;f_parcial;p do F parcial;0,0;;9,097566530211588e-22;0,0;;True;False;True
+vigitel2024;f_parcial;ΔR²;0,003396706056410799;;0,003396706056417745;2,0448730865856533e-12;;True;False;True
+vigitel2024;f_parcial;f²;0,0035923199605088197;;0,003592319960516013;2,00245653312394e-12;;True;False;True
+vigitel2024;anova_saida;< 1 h: n;8874,0;;8874,0;0,0;;True;False;True
+vigitel2024;anova_saida;< 1 h: média;4,362407031778228;;4,362407031778228;0,0;;True;False;True
+vigitel2024;anova_saida;< 1 h: variância;12,922630337631151;;12,922630337631151;0,0;;True;False;True
+vigitel2024;anova_saida;1 a < 3 h: n;11254,0;;11254,0;0,0;;True;False;True
+vigitel2024;anova_saida;1 a < 3 h: média;4,3411231562111245;;4,3411231562111245;0,0;;True;False;True
+vigitel2024;anova_saida;1 a < 3 h: variância;10,43698819899631;;10,43698819899631;0,0;;True;False;True
+vigitel2024;anova_saida;≥ 3 h: n;6901,0;;6901,0;0,0;;True;False;True
+vigitel2024;anova_saida;≥ 3 h: média;4,743660339081292;;4,743660339081292;0,0;;True;False;True
+vigitel2024;anova_saida;≥ 3 h: variância;11,05413552751229;;11,05413552751229;0,0;;True;False;True
+vigitel2024;anova_saida;SQ entre;796,5889493346331;;796,5889493151722;2,4430307371752208e-11;;True;False;True
+vigitel2024;anova_saida;SQ dentro;308383,46232893894;;308383,4623289415;8,305040292532592e-15;;True;False;True
+vigitel2024;anova_saida;gl entre;2,0;;2,0;0,0;;True;False;True
+vigitel2024;anova_saida;gl dentro;27026,0;;27026,0;0,0;;True;False;True
+vigitel2024;anova_saida;F;34,90558926560429;;34,90558926475122;2,4439366905827544e-11;;True;False;True
+vigitel2024;anova_saida;p;7,771561172376096e-16;7,771561172376096e-16;7,248374645598108e-16;0,0;0,0;True;False;True
+vigitel2024;anova_saida;F (ANOVA) = F global da regressão nas dummies;34,90558926560429;;34,9055892647521;2,4414125303812514e-11;;True;False;True
+vigitel2024;teste_t_welch;média ≥ 3 h;4,743660339081292;;4,743660339081292;0,0;;True;False;True
+vigitel2024;teste_t_welch;média < 1 h;4,362407031778228;;4,362407031778228;0,0;;True;False;True
+vigitel2024;teste_t_welch;gl (Excel arredonda o gl de Welch);15309,0;;15309,0;0,0;;True;False;True
+vigitel2024;teste_t_welch;t;6,894316488782624;;6,894316488782624;0,0;;True;False;True
+vigitel2024;teste_t_welch;p bicaudal (C com gl inteiro, como o Excel);5,624061751425991e-12;5,624061751425991e-12;5,624061751425989e-12;4,3089510889963035e-16;4,3089510889963035e-16;True;False;True
+vigitel2024;teste_t_welch;p bicaudal: gl inteiro (Excel) × gl fracionário (script);5,624061751425991e-12;;5,624059241789963e-12;4,4623214657409357e-07;;informativo;True;False
+vigitel2024;teste_t_igual;gl;15773,0;;15773,0;0,0;;True;False;True
+vigitel2024;teste_t_igual;t;6,827439564687805;;6,827439564687805;0,0;;True;False;True
+vigitel2024;teste_t_igual;p bicaudal;8,959728939828318e-12;8,959728939828318e-12;8,959728939828324e-12;7,212660761246593e-16;7,212660761246593e-16;True;False;True
+vigitel2024;reg_dummy_2grupos;R múltiplo;0,054282510400504295;;0,054282510399995876;9,366178746745346e-12;;True;False;True
+vigitel2024;reg_dummy_2grupos;R²;0,0029465909353808568;;0,0029465909353256605;1,8732257083127736e-11;;True;False;True
+vigitel2024;reg_dummy_2grupos;R² ajustado;0,002883378267590036;;0,0028833782675349307;1,911134121987293e-11;;True;False;True
+vigitel2024;reg_dummy_2grupos;erro padrão;3,479259303437022;;3,4792593034371353;3,254794731737708e-14;;True;False;True
+vigitel2024;reg_dummy_2grupos;observações;15775,0;;15775,0;0,0;;True;False;True
+vigitel2024;reg_dummy_2grupos;gl regressão;1,0;;1,0;0,0;;True;False;True
+vigitel2024;reg_dummy_2grupos;SQ regressão;564,2730693032208;;564,2730692926561;1,8722655803580864e-11;;True;False;True
+vigitel2024;reg_dummy_2grupos;F;46,61393101033979;;46,61393100946402;1,878778134672856e-11;;True;False;True
+vigitel2024;reg_dummy_2grupos;F de significação;8,959728935837707e-12;8,959728935837707e-12;8,959728939830127e-12;4,4559601803149646e-10;4,4559601803149646e-10;True;False;True
+vigitel2024;reg_dummy_2grupos;gl resíduo;15773,0;;15773,0;0,0;;True;False;True
+vigitel2024;reg_dummy_2grupos;SQ resíduo;190936,0341256236;;190936,034125636;6,493395461650008e-14;;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: coeficiente;4,362407031778276;;4,3624070317782;1,7509449149928162e-14;;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: erro padrão;0,03693406294596373;;0,036934062945969695;1,6157033051278194e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: t;118,11338054415197;;118,11338054413082;1,7902926593753776e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: IC inferior;4,290012043271185;;4,290012043271085;2,3187809731779312e-14;;True;False;True
+vigitel2024;reg_dummy_2grupos;Intercepto: IC superior;4,4348020202853675;;4,434802020285314;1,201647896304025e-14;;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: coeficiente;0,38125330730295504;;0,3812533073030974;3,7346850553345885e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: erro padrão;0,05584133022207655;;0,05584133022208558;1,6166342981229472e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: t;6,827439564686959;;6,8274395646884045;2,1178575856610975e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: p;8,959728939881049e-12;8,959728939881049e-12;8,959728939791022e-12;1,00479577064335e-11;1,00479577064335e-11;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: IC inferior;0,2717979120066815;;0,27179791200678804;3,919305281864098e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;tela_3h_mais: IC superior;0,49070870259922855;;0,4907087025994068;3,632426033191455e-13;;True;False;True
+vigitel2024;reg_dummy_2grupos;t da dummy = t do teste t com variâncias iguais;6,827439564686959;;6,827439564687805;1,2397532427120412e-13;;True;False;True
+nhanes0506;reg_completo;R múltiplo;0,15743243129574763;;0,15743243129575354;3,755222197529781e-14;;True;False;True
+nhanes0506;reg_completo;R²;0,024784970423690295;;0,02478497042369216;7,531025570104299e-14;;True;False;True
+nhanes0506;reg_completo;R² ajustado;0,023727826760192937;;0,023727826760194803;7,866554653384194e-14;;True;False;True
+nhanes0506;reg_completo;erro padrão;3,168715801538426;;3,168715801538426;0,0;;True;False;True
+nhanes0506;reg_completo;observações;5542,0;;5542,0;0,0;;True;False;True
+nhanes0506;reg_completo;gl regressão;6,0;;6,0;0,0;;True;False;True
+nhanes0506;reg_completo;SQ regressão;1412,44720486187;;1412,4472048619791;7,72696946385449e-14;;True;False;True
+nhanes0506;reg_completo;F;23,44522440941852;;23,445224409420327;7,713004708041374e-14;;True;False;True
+nhanes0506;reg_completo;F de significação;1,658263327219529e-27;1,658263327219529e-27;1,6582633272109385e-27;0,0;0,0;True;False;True
+nhanes0506;reg_completo;gl resíduo;5535,0;;5535,0;0,0;;True;False;True
+nhanes0506;reg_completo;SQ resíduo;55575,60566413838;;55575,60566413838;0,0;;True;False;True
+nhanes0506;reg_completo;Intercepto: coeficiente;2,4381959667143946;;2,438195966714393;7,285537600958264e-16;;True;False;True
+nhanes0506;reg_completo;Intercepto: erro padrão;0,13868430034445667;;0,13868430034445678;8,005398028959608e-16;;True;False;True
+nhanes0506;reg_completo;Intercepto: t;17,58090829790058;;17,580908297900553;1,616623495715405e-15;;True;False;True
+nhanes0506;reg_completo;Intercepto: p;2,273248077741319e-67;2,273248077741319e-67;2,273248077742387e-67;0,0;0,0;True;False;True
+nhanes0506;reg_completo;Intercepto: IC inferior;2,1663202806939026;;2,1663202806939013;6,149910709987186e-16;;True;False;True
+nhanes0506;reg_completo;Intercepto: IC superior;2,7100716527348867;;2,7100716527348845;8,193311224850957e-16;;True;False;True
+nhanes0506;reg_completo;tela_1a3h: coeficiente;0,12852714956849998;;0,1285271495685017;1,3388966408625017e-14;;True;False;True
+nhanes0506;reg_completo;tela_1a3h: erro padrão;0,11100426833850909;;0,1110042683385097;5,500893548360954e-15;;True;False;True
+nhanes0506;reg_completo;tela_1a3h: t;1,1578577246827537;;1,1578577246827628;7,862648931603931e-15;;True;False;True
+nhanes0506;reg_completo;tela_1a3h: p;0,24697206115432005;0,24697206115432005;0,24697206115431647;1,4497466789082998e-14;1,4497466789082998e-14;True;False;True
+nhanes0506;reg_completo;tela_1a3h: IC inferior;-0,08908480456601311;;-0,08908480456601214;1,0904723328288353e-14;;True;False;True
+nhanes0506;reg_completo;tela_1a3h: IC superior;0,34613910370301304;;0,34613910370301554;7,216757016710447e-15;;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: coeficiente;0,6584898352868198;;0,6584898352868223;3,709230611147482e-15;;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: erro padrão;0,16202199314908178;;0,16202199314908175;1,7130745694561413e-16;;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: t;4,0642003131076265;;4,064200313107642;3,715130153945792e-15;;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: p;4,886512887734912e-05;4,886512887734912e-05;4,886512887734585e-05;6,697895581950974e-14;6,697895581950974e-14;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: IC inferior;0,3408631073269467;;0,3408631073269499;9,445571263670742e-15;;True;False;True
+nhanes0506;reg_completo;tela_3h_mais: IC superior;0,9761165632466929;;0,9761165632466946;1,706081629635101e-15;;True;False;True
+nhanes0506;reg_completo;idade: coeficiente;0,012052685182426123;;0,012052685182426092;2,5907108743793756e-15;;True;False;True
+nhanes0506;reg_completo;idade: erro padrão;0,002161493238068646;;0,0021614932380686434;1,2038368513658853e-15;;True;False;True
+nhanes0506;reg_completo;idade: t;5,576092013683804;;5,576092013683797;1,2742665185876036e-15;;True;False;True
+nhanes0506;reg_completo;idade: p;2,5763035660830894e-08;2,5763035660830894e-08;2,5763035660831906e-08;3,929929233084067e-14;3,929929233084067e-14;True;False;True
+nhanes0506;reg_completo;idade: IC inferior;0,007815309679438578;;0,00781530967943856;2,2196477774140143e-15;;True;False;True
+nhanes0506;reg_completo;idade: IC superior;0,01629006068541367;;0,016290060685413624;2,7687318817530635e-15;;True;False;True
+nhanes0506;reg_completo;feminino: coeficiente;0,8039310009786307;;0,8039310009786379;8,976454013191205e-15;;True;False;True
+nhanes0506;reg_completo;feminino: erro padrão;0,08549814434577727;;0,08549814434577771;5,194138577488247e-15;;True;False;True
+nhanes0506;reg_completo;feminino: t;9,402905842345767;;9,402905842345803;3,778314638439667e-15;;True;False;True
+nhanes0506;reg_completo;feminino: p;7,586690837901429e-21;7,586690837901429e-21;7,586690837898621e-21;0,0;0,0;True;False;True
+nhanes0506;reg_completo;feminino: IC inferior;0,6363210653928947;;0,6363210653929013;1,0468517404241276e-14;;True;False;True
+nhanes0506;reg_completo;feminino: IC superior;0,9715409365643667;;0,9715409365643745;7,999211232270243e-15;;True;False;True
+nhanes0506;reg_completo;esc_medio: coeficiente;0,4259604499004449;;0,4259604499004404;1,0555917223729996e-14;;True;False;True
+nhanes0506;reg_completo;esc_medio: erro padrão;0,11675881043168063;;0,11675881043168052;9,5086873574717e-16;;True;False;True
+nhanes0506;reg_completo;esc_medio: t;3,6482082022383073;;3,6482082022382722;9,616514637687134e-15;;True;False;True
+nhanes0506;reg_completo;esc_medio: p;0,000266505990491365;0,000266505990491365;0,0002665059904914014;1,3669183543807922e-13;1,3669183543807922e-13;True;False;True
+nhanes0506;reg_completo;esc_medio: IC inferior;0,19706733361975565;;0,19706733361975184;1,9295505701001508e-14;;True;False;True
+nhanes0506;reg_completo;esc_medio: IC superior;0,6548535661811341;;0,654853566181129;7,798729635173284e-15;;True;False;True
+nhanes0506;reg_completo;esc_superior: coeficiente;0,06409303698414705;;0,06409303698414588;1,8188156322577603e-14;;True;False;True
+nhanes0506;reg_completo;esc_superior: erro padrão;0,10444803762445469;;0,10444803762445429;3,853168097553527e-15;;True;False;True
+nhanes0506;reg_completo;esc_superior: t;0,6136356263063077;;0,613635626306299;1,4293110632009893e-14;;True;False;True
+nhanes0506;reg_completo;esc_superior: p;0,5394813522958879;0,5394813522958879;0,5394813522958937;1,0701314704357683e-14;1,0701314704357683e-14;True;False;True
+nhanes0506;reg_completo;esc_superior: IC inferior;-0,1406661305071416;;-0,14066613050714155;3,946305413472615e-16;;True;False;True
+nhanes0506;reg_completo;esc_superior: IC superior;0,26885220447543573;;0,2688522044754333;9,084882375954286e-15;;True;False;True
+nhanes0506;reg_simples;R múltiplo;0,04125792355601301;;0,04125792355588455;3,1135775087816445e-12;;True;False;True
+nhanes0506;reg_simples;R²;0,0017022162561538133;;0,001702216256143213;6,227319591191198e-12;;True;False;True
+nhanes0506;reg_simples;R² ajustado;0,0013417548791024158;;0,0013417548790918277;7,89123389150035e-12;;True;False;True
+nhanes0506;reg_simples;erro padrão;3,204839466544127;;3,204839466544147;6,235574246969083e-15;;True;False;True
+nhanes0506;reg_simples;observações;5542,0;;5542,0;0,0;;True;False;True
+nhanes0506;reg_simples;gl regressão;2,0;;2,0;0,0;;True;False;True
+nhanes0506;reg_simples;SQ regressão;97,00599000016518;;97,00598999956128;6,225434965162419e-12;;True;False;True
+nhanes0506;reg_simples;F;4,7223263420843455;;4,722326342054887;6,238072405896403e-12;;True;False;True
+nhanes0506;reg_simples;F de significação;0,008930303936000805;0,008930303936000805;0,008930303936263456;2,9411206373855254e-11;2,9411206373855254e-11;True;False;True
+nhanes0506;reg_simples;gl resíduo;5539,0;;5539,0;0,0;;True;False;True
+nhanes0506;reg_simples;SQ resíduo;56891,04687900008;;56891,046879000794;1,2533498420349323e-14;;True;False;True
+nhanes0506;reg_simples;Intercepto: coeficiente;3,5730964467005055;;3,5730964467004966;2,4857387225589542e-15;;True;False;True
+nhanes0506;reg_simples;Intercepto: erro padrão;0,051057338143048296;;0,05105733814304802;5,436157979459407e-15;;True;False;True
+nhanes0506;reg_simples;Intercepto: t;69,98203542632196;;69,98203542632217;3,0459648598310653e-15;;True;False;True
+nhanes0506;reg_simples;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+nhanes0506;reg_simples;Intercepto: IC inferior;3,4730040309980543;;3,47300403099804;4,091804843404734e-15;;True;False;True
+nhanes0506;reg_simples;Intercepto: IC superior;3,6731888624029567;;3,673188862402953;9,672014731299054e-16;;True;False;True
+nhanes0506;reg_simples;tela_1a3h: coeficiente;0,013259339137144024;;0,013259339137144607;4,3958984825674156e-14;;True;False;True
+nhanes0506;reg_simples;tela_1a3h: erro padrão;0,10712819933549178;;0,10712819933548802;3,510635406220004e-14;;True;False;True
+nhanes0506;reg_simples;tela_1a3h: t;0,12377076455490445;;0,12377076455491423;7,904807277948363e-14;;True;False;True
+nhanes0506;reg_simples;tela_1a3h: p;0,9015012711894113;0,9015012711894113;0,9015012711894036;8,497535294438926e-15;8,497535294438926e-15;True;False;True
+nhanes0506;reg_simples;tela_1a3h: IC inferior;-0,19675396455881156;;-0,19675396455881636;2,4404664944214674e-14;;True;False;True
+nhanes0506;reg_simples;tela_1a3h: IC superior;0,2232726428330996;;0,22327264283310558;2,672718288115949e-14;;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: coeficiente;0,48996661636258276;;0,4899666163625577;5,1096397936570045e-14;;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: erro padrão;0,1604360485251386;;0,1604360485251346;2,4912124958153078e-14;;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: t;3,0539683622649823;;3,0539683622649023;2,6174487843654843e-14;;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: p;0,002269088099708385;0,002269088099708385;0,0022690880997089913;2,67193616207167e-13;2,67193616207167e-13;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: IC inferior;0,17544901229858717;;0,17544901229855087;2,0692218456869e-13;;True;False;True
+nhanes0506;reg_simples;tela_3h_mais: IC superior;0,8044842204265783;;0,8044842204265645;1,7112536400095086e-14;;True;False;True
+nhanes0506;reg_covariaveis;R múltiplo;0,14782231198516044;;0,14782231198517543;1,0139207424886378e-13;;True;False;True
+nhanes0506;reg_covariaveis;R²;0,02185143592063811;;0,021851435920642537;2,0259603656118158e-13;;True;False;True
+nhanes0506;reg_covariaveis;R² ajustado;0,021144808819984786;;0,021144808819989258;2,1149952970208415e-13;;True;False;True
+nhanes0506;reg_covariaveis;erro padrão;3,1729049217830303;;3,1729049217830263;1,2596667682070156e-15;;True;False;True
+nhanes0506;reg_covariaveis;observações;5542,0;;5542,0;0,0;;True;False;True
+nhanes0506;reg_covariaveis;gl regressão;4,0;;4,0;0,0;;True;False;True
+nhanes0506;reg_covariaveis;SQ regressão;1245,2707855088956;;1245,2707855091503;2,0450051463489397e-13;;True;False;True
+nhanes0506;reg_covariaveis;F;30,923574683783052;;30,923574683789457;2,071410834089363e-13;;True;False;True
+nhanes0506;reg_covariaveis;F de significação;1,6772341001817927e-25;1,6772341001817927e-25;1,6772341001610857e-25;0,0;0,0;True;False;True
+nhanes0506;reg_covariaveis;gl resíduo;5537,0;;5537,0;0,0;;True;False;True
+nhanes0506;reg_covariaveis;SQ resíduo;55742,78208349135;;55742,782083491205;2,6105469954066952e-15;;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: coeficiente;2,5620152396009304;;2,56201523960093;1,7333589706485732e-16;;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: erro padrão;0,13380935349321574;;0,13380935349321568;4,1485254791304477e-16;;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: t;19,14675747783825;;19,146757477838257;3,711034291746423e-16;;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: p;3,5581634667879403e-79;3,5581634667879403e-79;3,5581634667872925e-79;0,0;0,0;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: IC inferior;2,299696384384702;;2,299696384384702;0,0;;True;False;True
+nhanes0506;reg_covariaveis;Intercepto: IC superior;2,824334094817159;;2,824334094817158;3,144735678863176e-16;;True;False;True
+nhanes0506;reg_covariaveis;idade: coeficiente;0,010463749831966145;;0,010463749831966063;7,791853272507951e-15;;True;False;True
+nhanes0506;reg_covariaveis;idade: erro padrão;0,002112431403215965;;0,0021124314032159603;2,2582932405159415e-15;;True;False;True
+nhanes0506;reg_covariaveis;idade: t;4,9534152048848235;;4,953415204884796;5,55849446732259e-15;;True;False;True
+nhanes0506;reg_covariaveis;idade: p;7,508879638928215e-07;7,508879638928215e-07;7,508879638929334e-07;1,4904251171607795e-13;1,4904251171607795e-13;True;False;True
+nhanes0506;reg_covariaveis;idade: IC inferior;0,006322555117633128;;0,006322555117633064;1,0014528255604448e-14;;True;False;True
+nhanes0506;reg_covariaveis;idade: IC superior;0,014604944546299162;;0,014604944546299063;6,770257690278847e-15;;True;False;True
+nhanes0506;reg_covariaveis;feminino: coeficiente;0,7892423021821978;;0,7892423021822037;7,455482320504044e-15;;True;False;True
+nhanes0506;reg_covariaveis;feminino: erro padrão;0,08550460403544874;;0,08550460403544904;3,570700492868666e-15;;True;False;True
+nhanes0506;reg_covariaveis;feminino: t;9,230407076734624;;9,230407076734659;3,848924158236915e-15;;True;False;True
+nhanes0506;reg_covariaveis;feminino: p;3,757724405777816e-20;3,757724405777816e-20;3,757724405776288e-20;0,0;0,0;True;False;True
+nhanes0506;reg_covariaveis;feminino: IC inferior;0,6216197163109267;;0,6216197163109323;8,930082134571697e-15;;True;False;True
+nhanes0506;reg_covariaveis;feminino: IC superior;0,9568648880534689;;0,9568648880534751;6,497520199062233e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: coeficiente;0,4621577004623234;;0,46215770046232585;5,2849723194744245e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: erro padrão;0,11616032361314493;;0,1161603236131451;1,4336517712225794e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: t;3,978619257307447;;3,9786192573074626;3,9066624221969475e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: p;7,020185147637286e-05;7,020185147637286e-05;7,020185147636823e-05;6,602339097759373e-14;6,602339097759373e-14;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: IC inferior;0,23443787134520766;;0,2344378713452103;1,1247242897893758e-14;;True;False;True
+nhanes0506;reg_covariaveis;esc_medio: IC superior;0,6898775295794392;;0,6898775295794414;3,2186090342787755e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: coeficiente;0,1210187847821111;;0,12101878478211092;1,490770559516114e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: erro padrão;0,10111091151478935;;0,10111091151478889;4,529352873956545e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: t;1,1968914429617208;;1,1968914429617246;3,1538017135328834e-15;;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: p;0,23140011196335428;0,23140011196335428;0,23140011196335278;6,477097485075198e-15;6,477097485075198e-15;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: IC inferior;-0,07719828948074066;;-0,07719828948073948;1,528028628093524e-14;;True;False;True
+nhanes0506;reg_covariaveis;esc_superior: IC superior;0,3192358590449629;;0,3192358590449613;4,868852262164889e-15;;True;False;True
+nhanes0506;f_parcial;F parcial;8,324888861407416;;8,324888861400169;8,705865057672067e-13;;True;False;True
+nhanes0506;f_parcial;p do F parcial;0,0002454559866398309;;0,000245455986641597;7,195004460577079e-12;;True;False;True
+nhanes0506;f_parcial;ΔR²;0,0029335345030521848;;0,0029335345030496243;8,728214540779237e-13;;True;False;True
+nhanes0506;f_parcial;f²;0,0030080899228211067;;0,0030080899228184872;8,707959256312293e-13;;True;False;True
+nhanes0506;anova_saida;< 1 h: n;3940,0;;3940,0;0,0;;True;False;True
+nhanes0506;anova_saida;< 1 h: média;3,5730964467005077;;3,5730964467005077;0,0;;True;False;True
+nhanes0506;anova_saida;< 1 h: variância;10,589984316666731;;10,589984316666731;0,0;;True;False;True
+nhanes0506;anova_saida;1 a < 3 h: n;1158,0;;1158,0;0,0;;True;False;True
+nhanes0506;anova_saida;1 a < 3 h: média;3,586355785837651;;3,586355785837651;0,0;;True;False;True
+nhanes0506;anova_saida;1 a < 3 h: variância;9,117428194828205;;9,117428194828207;1,9483091080529437e-16;;True;False;True
+nhanes0506;anova_saida;≥ 3 h: n;444,0;;444,0;0,0;;True;False;True
+nhanes0506;anova_saida;≥ 3 h: média;4,063063063063063;;4,063063063063063;0,0;;True;False;True
+nhanes0506;anova_saida;≥ 3 h: variância;10,447481341386533;;10,447481341386533;0,0;;True;False;True
+nhanes0506;anova_saida;SQ entre;97,00598999988142;;97,00598999963782;2,5112106121311737e-12;;True;False;True
+nhanes0506;anova_saida;SQ dentro;56891,04687900056;;56891,04687900073;2,941535343551375e-15;;True;False;True
+nhanes0506;anova_saida;gl entre;2,0;;2,0;0,0;;True;False;True
+nhanes0506;anova_saida;gl dentro;5539,0;;5539,0;0,0;;True;False;True
+nhanes0506;anova_saida;F;4,722326342070492;;4,722326342058613;2,515391212853235e-12;;True;False;True
+nhanes0506;anova_saida;p;0,008930303936124373;0,008930303936124373;0,008930303936230238;1,1854576319507166e-11;1,1854576319507166e-11;True;False;True
+nhanes0506;anova_saida;F (ANOVA) = F global da regressão nas dummies;4,722326342070492;;4,722326342054887;3,3043897277268195e-12;;True;False;True
+nhanes0506;teste_t_welch;média ≥ 3 h;4,063063063063063;;4,063063063063063;0,0;;True;False;True
+nhanes0506;teste_t_welch;média < 1 h;3,5730964467005077;;3,5730964467005077;0,0;;True;False;True
+nhanes0506;teste_t_welch;gl (Excel arredonda o gl de Welch);549,0;;549,0;0,0;;True;False;True
+nhanes0506;teste_t_welch;t;3,0259743884113464;;3,0259743884113464;0,0;;True;False;True
+nhanes0506;teste_t_welch;p bicaudal (C com gl inteiro, como o Excel);0,0025944724165525104;0,0025944724165525104;0,002594472416552475;1,3706767908050642e-14;1,3706767908050642e-14;True;False;True
+nhanes0506;teste_t_welch;p bicaudal: gl inteiro (Excel) × gl fracionário (script);0,0025944724165525104;;0,0025944339138812946;1,4840490254846073e-05;;informativo;True;False
+nhanes0506;teste_t_igual;gl;4382,0;;4382,0;0,0;;True;False;True
+nhanes0506;teste_t_igual;t;3,009669166638051;;3,009669166638051;0,0;;True;False;True
+nhanes0506;teste_t_igual;p bicaudal;0,0026302161090596765;0,0026302161090596765;0,0026302161090596757;3,2976824033614956e-16;3,2976824033614956e-16;True;False;True
+nhanes0506;reg_dummy_2grupos;R múltiplo;0,04541864430608273;;0,0454186443058787;4,492235280637011e-12;;True;False;True
+nhanes0506;reg_dummy_2grupos;R²;0,002062853250602461;;0,0020628532505839276;8,984328832433672e-12;;True;False;True
+nhanes0506;reg_dummy_2grupos;R² ajustado;0,0018351177082132786;;0,0018351177081946668;1,0142045979097534e-11;;True;False;True
+nhanes0506;reg_dummy_2grupos;erro padrão;3,2520113657198424;;3,2520113657199077;2,0074073090918525e-14;;True;False;True
+nhanes0506;reg_dummy_2grupos;observações;4384,0;;4384,0;0,0;;True;False;True
+nhanes0506;reg_dummy_2grupos;gl regressão;1,0;;1,0;0,0;;True;False;True
+nhanes0506;reg_dummy_2grupos;SQ regressão;95,79473219734064;;95,79473219648207;8,962528301712595e-12;;True;False;True
+nhanes0506;reg_dummy_2grupos;F;9,058108492688435;;9,058108492606888;9,002675723322473e-12;;True;False;True
+nhanes0506;reg_dummy_2grupos;F de significação;0,00263021610894964;0,00263021610894964;0,0026302161090667043;4,450750032508984e-11;4,450750032508984e-11;True;False;True
+nhanes0506;reg_dummy_2grupos;gl resíduo;4382,0;;4382,0;0,0;;True;False;True
+nhanes0506;reg_dummy_2grupos;SQ resíduo;46342,182457582676;;46342,18245758454;4,0193297994451906e-14;;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: coeficiente;3,5730964467005197;;3,5730964467004958;6,711494550909149e-15;;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: erro padrão;0,0518088489853865;;0,051808848985387866;2,63847224140274e-14;;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: t;68,96691427575178;;68,96691427574949;3,317456831546177e-14;;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: IC inferior;3,471524913378303;;3,4715249133782824;5,884475601594729e-15;;True;False;True
+nhanes0506;reg_dummy_2grupos;Intercepto: IC superior;3,6746679800227366;;3,674667980022709;7,492794222604439e-15;;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: coeficiente;0,4899666163624363;;0,48996661636255107;2,341823825607475e-13;;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: erro padrão;0,16279750006868918;;0,16279750006871097;1,3383575822154956e-13;;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: t;3,0096691666377224;;3,0096691666380244;1,0033682972383724e-13;;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: p;0,002630216109062518;0,002630216109062518;0,00263021610905991;9,916130986897304e-13;9,916130986897304e-13;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: IC inferior;0,17080122228729322;;0,1708012222873846;5,349572661307535e-13;;True;False;True
+nhanes0506;reg_dummy_2grupos;tela_3h_mais: IC superior;0,8091320104375794;;0,8091320104377175;1,7069123762469231e-13;;True;False;True
+nhanes0506;reg_dummy_2grupos;t da dummy = t do teste t com variâncias iguais;3,0096691666377224;;3,009669166638051;1,0919007940535132e-13;;True;False;True
+xuzhou;reg_completo;R múltiplo;0,2832984445123879;;0,2832984445123851;9,797291920681631e-15;;True;False;True
+xuzhou;reg_completo;R²;0,08025800866313852;;0,08025800866313695;1,9539358730729177e-14;;True;False;True
+xuzhou;reg_completo;R² ajustado;0,07706999482834871;;0,07706999482834709;2,1067877026988515e-14;;True;False;True
+xuzhou;reg_completo;erro padrão;2,8098715940783743;;2,809871594078372;7,902304339919881e-16;;True;False;True
+xuzhou;reg_completo;observações;2317,0;;2317,0;0,0;;True;False;True
+xuzhou;reg_completo;gl regressão;8,0;;8,0;0,0;;True;False;True
+xuzhou;reg_completo;SQ regressão;1590,1244571054922;;1590,1244571054558;2,2878579037227914e-14;;True;False;True
+xuzhou;reg_completo;F;25,174924834800766;;25,17492483480023;2,1309289661008087e-14;;True;False;True
+xuzhou;reg_completo;F de significação;1,6134591981423674e-37;1,6134591981423674e-37;1,61345919814555e-37;0,0;0,0;True;False;True
+xuzhou;reg_completo;gl resíduo;2308,0;;2308,0;0,0;;True;False;True
+xuzhou;reg_completo;SQ resíduo;18222,533289981322;;18222,533289981293;1,5971341631591298e-15;;True;False;True
+xuzhou;reg_completo;Intercepto: coeficiente;2,824527433596592;;2,8245274335965855;2,3583903163825075e-15;;True;False;True
+xuzhou;reg_completo;Intercepto: erro padrão;0,24231837838938075;;0,24231837838938033;1,7181265284196823e-15;;True;False;True
+xuzhou;reg_completo;Intercepto: t;11,656265828330472;;11,656265828330465;6,095800715466964e-16;;True;False;True
+xuzhou;reg_completo;Intercepto: p;1,5028275707476511e-30;1,5028275707476511e-30;1,502827570747688e-30;0,0;0,0;True;False;True
+xuzhou;reg_completo;Intercepto: IC inferior;2,349342944460299;;2,3493429444602825;6,993998387164793e-15;;True;False;True
+xuzhou;reg_completo;Intercepto: IC superior;3,2997119227328855;;3,2997119227328886;9,420896556253955e-16;;True;False;True
+xuzhou;reg_completo;sas_sv: coeficiente;0,08778663841547504;;0,0877866384154751;6,323416892732081e-16;;True;False;True
+xuzhou;reg_completo;sas_sv: erro padrão;0,0067189436486944825;;0,006718943648694476;9,036438588227404e-16;;True;False;True
+xuzhou;reg_completo;sas_sv: t;13,065541699033648;;13,065541699033668;1,495531198285329e-15;;True;False;True
+xuzhou;reg_completo;sas_sv: p;1,0882308593395246e-37;1,0882308593395246e-37;1,0882308593393818e-37;0,0;0,0;True;False;True
+xuzhou;reg_completo;sas_sv: IC inferior;0,07461084124127133;;0,0746108412412711;3,162039038937202e-15;;True;False;True
+xuzhou;reg_completo;sas_sv: IC superior;0,10096243558967875;;0,1009624355896791;3,4363740649579564e-15;;True;False;True
+xuzhou;reg_completo;sexo_cod2: coeficiente;-0,14179272561146414;;-0,14179272561146317;6,8511635019199415e-15;;True;False;True
+xuzhou;reg_completo;sexo_cod2: erro padrão;0,12416923201527136;;0,1241692320152713;4,470604378420462e-16;;True;False;True
+xuzhou;reg_completo;sexo_cod2: t;-1,1419312442395173;;-1,14193124423951;6,416736558781041e-15;;True;False;True
+xuzhou;reg_completo;sexo_cod2: p;0,25360105600359756;0,25360105600359756;0,2536010560036007;1,247682351975999e-14;1,247682351975999e-14;True;False;True
+xuzhou;reg_completo;sexo_cod2: IC inferior;-0,38528764115934866;;-0,385287641159353;1,123801890714501e-14;;True;False;True
+xuzhou;reg_completo;sexo_cod2: IC superior;0,10170218993642036;;0,10170218993642666;6,195063910311246e-14;;True;False;True
+xuzhou;reg_completo;serie_2: coeficiente;-0,6153299553837921;;-0,6153299553837946;4,149827152564316e-15;;True;False;True
+xuzhou;reg_completo;serie_2: erro padrão;0,15117080627769228;;0,15117080627769258;2,01964479312942e-15;;True;False;True
+xuzhou;reg_completo;serie_2: t;-4,070428481101474;;-4,070428481101482;1,9638241562072625e-15;;True;False;True
+xuzhou;reg_completo;serie_2: p;4,850589252321005e-05;4,850589252321005e-05;4,850589252320834e-05;3,534404988883292e-14;3,534404988883292e-14;True;False;True
+xuzhou;reg_completo;serie_2: IC inferior;-0,9117747518158517;;-0,9117747518158614;1,071532480718931e-14;;True;False;True
+xuzhou;reg_completo;serie_2: IC superior;-0,3188851589517326;;-0,31888515895172787;1,47966994455553e-14;;True;False;True
+xuzhou;reg_completo;serie_3: coeficiente;-0,07669115500225902;;-0,07669115500226094;2,4972041657501897e-14;;True;False;True
+xuzhou;reg_completo;serie_3: erro padrão;0,17030750770377012;;0,17030750770377;6,518931781658498e-16;;True;False;True
+xuzhou;reg_completo;serie_3: t;-0,4503098896594404;;-0,45030988965945196;2,564083028430391e-14;;True;False;True
+xuzhou;reg_completo;serie_3: p;0,652529303201637;0,652529303201637;0,6525293032016292;1,2080045196687247e-14;1,2080045196687247e-14;True;False;True
+xuzhou;reg_completo;serie_3: IC inferior;-0,4106628767601901;;-0,41066287676019925;2,230379338258522e-14;;True;False;True
+xuzhou;reg_completo;serie_3: IC superior;0,257280566755672;;0,2572805667556774;2,092883165383181e-14;;True;False;True
+xuzhou;reg_completo;serie_4: coeficiente;0,5360174979476807;;0,5360174979476782;4,763861191873072e-15;;True;False;True
+xuzhou;reg_completo;serie_4: erro padrão;0,2227914436810927;;0,2227914436810922;2,242457577484244e-15;;True;False;True
+xuzhou;reg_completo;serie_4: t;2,4059159952073603;;2,4059159952073546;2,399568288980613e-15;;True;False;True
+xuzhou;reg_completo;serie_4: p;0,016210157367776933;0,016210157367776933;0,016210157367777207;1,690830650103178e-14;1,690830650103178e-14;True;False;True
+xuzhou;reg_completo;serie_4: IC inferior;0,09912517862297887;;0,09912517862296749;1,1480217398337006e-13;;True;False;True
+xuzhou;reg_completo;serie_4: IC superior;0,9729098172723826;;0,9729098172723889;6,5044787584784385e-15;;True;False;True
+xuzhou;reg_completo;renda_1: coeficiente;0,894749804458319;;0,8947498044583144;5,08736003995985e-15;;True;False;True
+xuzhou;reg_completo;renda_1: erro padrão;0,4973562231646896;;0,4973562231646883;2,5670865646254468e-15;;True;False;True
+xuzhou;reg_completo;renda_1: t;1,7990119813219678;;1,7990119813219632;2,5919431064595756e-15;;True;False;True
+xuzhou;reg_completo;renda_1: p;0,0721473760487683;0,0721473760487683;0,07214737604876906;1,0579432977768258e-14;1,0579432977768258e-14;True;False;True
+xuzhou;reg_completo;renda_1: IC inferior;-0,08056195024276946;;-0,08056195024279333;2,962911766349169e-13;;True;False;True
+xuzhou;reg_completo;renda_1: IC superior;1,8700615591594074;;1,870061559159422;7,836610433102185e-15;;True;False;True
+xuzhou;reg_completo;renda_2: coeficiente;-0,06774951555116111;;-0,06774951555116085;3,89195356163629e-15;;True;False;True
+xuzhou;reg_completo;renda_2: erro padrão;0,12551760249198926;;0,12551760249198868;4,643707944990478e-15;;True;False;True
+xuzhou;reg_completo;renda_2: t;-0,5397610710058376;;-0,539761071005838;8,227514611650446e-16;;True;False;True
+xuzhou;reg_completo;renda_2: p;0,5894138877183455;0,5894138877183455;0,5894138877183454;1,883605133436697e-16;1,883605133436697e-16;True;False;True
+xuzhou;reg_completo;renda_2: IC inferior;-0,3138885753047157;;-0,3138885753047198;1,3086889789235702e-14;;True;False;True
+xuzhou;reg_completo;renda_2: IC superior;0,17838954420239345;;0,1783895442023981;2,61390695529507e-14;;True;False;True
+xuzhou;reg_completo;renda_4: coeficiente;0,13274424335601084;;0,13274424335600982;7,736352792520307e-15;;True;False;True
+xuzhou;reg_completo;renda_4: erro padrão;0,208170867646282;;0,20817086764628173;1,3333073897155674e-15;;True;False;True
+xuzhou;reg_completo;renda_4: t;0,6376696454067053;;0,6376696454067012;6,441933092946757e-15;;True;False;True
+xuzhou;reg_completo;renda_4: p;0,5237520029155027;0,5237520029155027;0,5237520029155058;5,935298484103241e-15;5,935298484103241e-15;True;False;True
+xuzhou;reg_completo;renda_4: IC inferior;-0,2754772380398568;;-0,2754772380398665;3,5264080381349924e-14;;True;False;True
+xuzhou;reg_completo;renda_4: IC superior;0,5409657247518785;;0,5409657247518862;1,4160858108759265e-14;;True;False;True
+xuzhou;reg_simples;R múltiplo;0,25942772897724;;0,25942772897723365;2,4393195227479256e-14;;True;False;True
+xuzhou;reg_simples;R²;0,06730274656228827;;0,06730274656228499;4,8663064881209174e-14;;True;False;True
+xuzhou;reg_simples;R² ajustado;0,06689985358024174;;0,06689985358023842;4,957845359241921e-14;;True;False;True
+xuzhou;reg_simples;erro padrão;2,8253107372448514;;2,825310737244852;1,5718243094319726e-16;;True;False;True
+xuzhou;reg_simples;observações;2317,0;;2317,0;0,0;;True;False;True
+xuzhou;reg_simples;gl regressão;1,0;;1,0;0,0;;True;False;True
+xuzhou;reg_simples;SQ regressão;1333,446283077541;;1333,446283077472;5,1836806785506685e-14;;True;False;True
+xuzhou;reg_simples;F;167,04869422251656;;167,04869422250786;5,206292168988022e-14;;True;False;True
+xuzhou;reg_simples;F de significação;5,996518817641547e-37;5,996518817641547e-37;5,99651881766618e-37;0,0;0,0;True;False;True
+xuzhou;reg_simples;gl resíduo;2315,0;;2315,0;0,0;;True;False;True
+xuzhou;reg_simples;SQ resíduo;18479,211464009273;;18479,211464009277;1,9686872538783167e-16;;True;False;True
+xuzhou;reg_simples;Intercepto: coeficiente;2,6869963892621342;;2,686996389262146;4,29711014954965e-15;;True;False;True
+xuzhou;reg_simples;Intercepto: erro padrão;0,22792037104084337;;0,22792037104084317;8,524425808107594e-16;;True;False;True
+xuzhou;reg_simples;Intercepto: t;11,789189254964068;;11,789189254964128;5,123009838371815e-15;;True;False;True
+xuzhou;reg_simples;Intercepto: p;3,3966727488548583e-31;3,3966727488548583e-31;3,3966727488525536e-31;0,0;0,0;True;False;True
+xuzhou;reg_simples;Intercepto: IC inferior;2,2400469916582337;;2,240046991658247;5,947498577089875e-15;;True;False;True
+xuzhou;reg_simples;Intercepto: IC superior;3,1339457868660348;;3,1339457868660445;3,117463823926377e-15;;True;False;True
+xuzhou;reg_simples;sas_sv: coeficiente;0,08626401975147978;;0,08626401975148015;4,343644915811625e-15;;True;False;True
+xuzhou;reg_simples;sas_sv: erro padrão;0,006674337273594056;;0,006674337273594055;1,2995473594359413e-16;;True;False;True
+xuzhou;reg_simples;sas_sv: t;12,924731882035617;;12,924731882035676;4,5354732489023605e-15;;True;False;True
+xuzhou;reg_simples;sas_sv: p;5,996518817665383e-37;5,996518817665383e-37;5,996518817661368e-37;0,0;0,0;True;False;True
+xuzhou;reg_simples;sas_sv: IC inferior;0,07317571610308167;;0,07317571610308209;5,689505431664619e-15;;True;False;True
+xuzhou;reg_simples;sas_sv: IC superior;0,09935232339987789;;0,09935232339987822;3,352381665469488e-15;;True;False;True
+xuzhou;reg_covariaveis;R múltiplo;0,11059124767802808;;0,11059124767799589;2,9113034159688056e-13;;True;False;True
+xuzhou;reg_covariaveis;R²;0,01223042406298295;;0,012230424062975831;5,820979803109498e-13;;True;False;True
+xuzhou;reg_covariaveis;R² ajustado;0,009235886587210269;;0,00923588658720309;7,772167485829049e-13;;True;False;True
+xuzhou;reg_covariaveis;erro padrão;2,9113017735888085;;2,9113017735888143;1,9830165943031513e-15;;True;False;True
+xuzhou;reg_covariaveis;observações;2317,0;;2317,0;0,0;;True;False;True
+xuzhou;reg_covariaveis;gl regressão;7,0;;7,0;0,0;;True;False;True
+xuzhou;reg_covariaveis;SQ regressão;242,31720606161616;;242,31720606147428;5,855183615830377e-13;;True;False;True
+xuzhou;reg_covariaveis;F;4,084244783020168;;4,08424478301776;5,895463723960518e-13;;True;False;True
+xuzhou;reg_covariaveis;F de significação;0,00018259112694023487;0,00018259112694023487;0,00018259112694150788;6,971948758669194e-12;6,971948758669194e-12;True;False;True
+xuzhou;reg_covariaveis;gl resíduo;2309,0;;2309,0;0,0;;True;False;True
+xuzhou;reg_covariaveis;SQ resíduo;19570,340541025198;;19570,340541025274;3,903741725330425e-15;;True;False;True
+xuzhou;reg_covariaveis;Intercepto: coeficiente;5,517399705647278;;5,517399705647276;3,219554380992334e-16;;True;False;True
+xuzhou;reg_covariaveis;Intercepto: erro padrão;0,13203221272007387;;0,1320322127200749;7,778073824722971e-15;;True;False;True
+xuzhou;reg_covariaveis;Intercepto: t;41,78828478278184;;41,7882847827815;7,99159591122648e-15;;True;False;True
+xuzhou;reg_covariaveis;Intercepto: p;1,0426356137608585e-284;1,0426356137608585e-284;1,0426356137692785e-284;0,0;0,0;True;False;True
+xuzhou;reg_covariaveis;Intercepto: IC inferior;5,2584856038310965;;5,258485603831097;1,6890384164084012e-16;;True;False;True
+xuzhou;reg_covariaveis;Intercepto: IC superior;5,776313807463459;;5,776313807463454;7,688107409889398e-16;;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: coeficiente;0,07737622953888124;;0,07737622953888536;5,3268335811704745e-14;;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: erro padrão;0,12747208400441487;;0,12747208400441704;1,6983600095092492e-14;;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: t;0,6070052917327482;;0,6070052917327703;3,639743918372147e-14;;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: p;0,5439070815859204;0,5439070815859204;0,5439070815859056;2,7147957302670308e-14;2,7147957302670308e-14;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: IC inferior;-0,17259549672926425;;-0,17259549672926006;2,4282742003020927e-14;;True;False;True
+xuzhou;reg_covariaveis;sexo_cod2: IC superior;0,3273479558070267;;0,32734795580703074;1,2379225127254594e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_2: coeficiente;-0,5235562632602538;;-0,5235562632602486;9,966547211649731e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_2: erro padrão;0,1564585713280528;;0,15645857132805213;4,257573165348578e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_2: t;-3,3462932635534104;;-3,3462932635533913;5,706563806447415e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_2: p;0,0008321148301006496;0,0008321148301006496;0,0008321148301007053;6,697151600940767e-14;6,697151600940767e-14;True;False;True
+xuzhou;reg_covariaveis;serie_2: IC inferior;-0,8303702568477955;;-0,8303702568477838;1,4172429664931708e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_2: IC superior;-0,2167422696727121;;-0,21674226967271348;6,402898626451721e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_3: coeficiente;0,06539993285470223;;0,06539993285470846;9,527726487963942e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_3: erro padrão;0,17609510393403158;;0,17609510393403074;4,728508912892886e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_3: t;0,37138984215712345;;0,3713898421571606;9,999455008787312e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_3: p;0,7103812643307533;0,7103812643307533;0,7103812643307257;3,89150934874531e-14;3,89150934874531e-14;True;False;True
+xuzhou;reg_covariaveis;serie_3: IC inferior;-0,27992114243448674;;-0,2799211424344729;4,9379180637697595e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_3: IC superior;0,41072100814389123;;0,41072100814388984;3,378884335751469e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_4: coeficiente;0,6227939032277031;;0,6227939032277077;7,308861530872852e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_4: erro padrão;0,23073113150965813;;0,23073113150965888;3,2479385712656172e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_4: t;2,6992192130849655;;2,6992192130849766;4,1131265635749035e-15;;True;False;True
+xuzhou;reg_covariaveis;serie_4: p;0,007000895770054592;0,007000895770054592;0,0070008957700543615;3,2955528818438074e-14;3,2955528818438074e-14;True;False;True
+xuzhou;reg_covariaveis;serie_4: IC inferior;0,17033201953186444;;0,17033201953187538;6,420223762163122e-14;;True;False;True
+xuzhou;reg_covariaveis;serie_4: IC superior;1,0752557869235417;;1,07525578692354;1,65203188023071e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_1: coeficiente;1,023140307709784;;1,023140307709772;1,1719222256809764e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_1: erro padrão;0,5152090976463063;;0,5152090976463042;4,094306091302618e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_1: t;1,9858739148511215;;1,9858739148511064;7,603218422874589e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_1: p;0,04716540678714857;0,04716540678714857;0,047165406787150255;3,5749744007483716e-14;3,5749744007483716e-14;True;False;True
+xuzhou;reg_covariaveis;renda_1: IC inferior;0,01281943209563563;;0,0128194320956454;7,621213282934828e-13;;True;False;True
+xuzhou;reg_covariaveis;renda_1: IC superior;2,0334611833239324;;2,0334611833238987;1,659770062265714e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_2: coeficiente;-0,03002038258183838;;-0,03002038258183566;9,06066537598757e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_2: erro padrão;0,1300140907402709;;0,13001409074027032;4,48310705870028e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_2: t;-0,2309009924301981;;-0,23090099243017823;8,606715775289686e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_2: p;0,8174121765617225;0,8174121765617225;0,8174121765617379;1,8879214776566414e-14;1,8879214776566414e-14;True;False;True
+xuzhou;reg_covariaveis;renda_2: IC inferior;-0,2849769635098102;;-0,28497696350980195;2,90239654166737e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_2: IC superior;0,2249361983461335;;0,22493619834613066;1,2586096562535833e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_4: coeficiente;0,10679065607647122;;0,10679065607647166;4,158502496061594e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_4: erro padrão;0,21567555799191515;;0,21567555799191582;3,0885920545528977e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_4: t;0,4951449161451776;;0,49514491614517814;1,1211091828110736e-15;;True;False;True
+xuzhou;reg_covariaveis;renda_4: p;0,6205449441343095;0,6205449441343095;0,6205449441343089;8,945548868937864e-16;8,945548868937864e-16;True;False;True
+xuzhou;reg_covariaveis;renda_4: IC inferior;-0,31614736965798945;;-0,316147369657983;2,036801239179052e-14;;True;False;True
+xuzhou;reg_covariaveis;renda_4: IC superior;0,5297286818109319;;0,5297286818109264;1,0479166625731357e-14;;True;False;True
+xuzhou;f_parcial;F parcial;170,7083798891748;;170,70837988918842;7,975003234170898e-14;;True;False;True
+xuzhou;f_parcial;p do F parcial;1,0882308593458411e-37;;1,0882308593389584e-37;0,0;;True;False;True
+xuzhou;f_parcial;ΔR²;0,06802758460015557;;0,06802758460016112;8,160094402517762e-14;;True;False;True
+xuzhou;f_parcial;f²;0,07396376944938249;;0,0739637694493884;7,993018271160927e-14;;True;False;True
+argentina;reg_completo;R múltiplo;0,1554220189545008;;0,15542201895450913;5,357460120966405e-14;;True;False;True
+argentina;reg_completo;R²;0,02415600397589321;;0,024156003975895794;1,0700188581624006e-13;;True;False;True
+argentina;reg_completo;R² ajustado;0,017043438407204386;;0,017043438407207012;1,5409867890966736e-13;;True;False;True
+argentina;reg_completo;erro padrão;21,009322382032387;;21,009322382032376;5,0730532106626e-16;;True;False;True
+argentina;reg_completo;observações;692,0;;692,0;0,0;;True;False;True
+argentina;reg_completo;gl regressão;5,0;;5,0;0,0;;True;False;True
+argentina;reg_completo;SQ regressão;7495,367032200214;;7495,367032201029;1,0872146077538308e-13;;True;False;True
+argentina;reg_completo;F;3,3962434149266167;;3,3962434149269893;1,0970675583104879e-13;;True;False;True
+argentina;reg_completo;F de significação;0,0048725062008162885;0,0048725062008162885;0,004872506200812557;7,658051202071316e-13;7,658051202071316e-13;True;False;True
+argentina;reg_completo;gl resíduo;686,0;;686,0;0,0;;True;False;True
+argentina;reg_completo;SQ resíduo;302794,65608918655;;302794,65608918626;9,611738474063864e-16;;True;False;True
+argentina;reg_completo;Intercepto: coeficiente;20,064955454166576;;20,064955454166885;1,540427491910807e-14;;True;False;True
+argentina;reg_completo;Intercepto: erro padrão;8,056463943343962;;8,056463943343969;8,819535974552846e-16;;True;False;True
+argentina;reg_completo;Intercepto: t;2,49054120955183;;2,490541209551866;1,444313623878062e-14;;True;False;True
+argentina;reg_completo;Intercepto: p;0,012990339792497786;0,012990339792497786;0,012990339792496476;1,0082232222431009e-13;1,0082232222431009e-13;True;False;True
+argentina;reg_completo;Intercepto: IC inferior;4,246667668503926;;4,246667668504363;1,0290039546380685e-13;;True;False;True
+argentina;reg_completo;Intercepto: IC superior;35,88324323982923;;35,883243239829405;4,950379840327654e-15;;True;False;True
+argentina;reg_completo;tela_presono_h: coeficiente;-1,3225024933698792;;-1,3225024933698672;9,066454487657588e-15;;True;False;True
+argentina;reg_completo;tela_presono_h: erro padrão;0,5207582920548486;;0,5207582920548464;4,263870749880341e-15;;True;False;True
+argentina;reg_completo;tela_presono_h: t;-2,5395706867219454;;-2,5395706867219334;4,721431353985583e-15;;True;False;True
+argentina;reg_completo;tela_presono_h: p;0,011318470753011454;0,011318470753011454;0,011318470753011834;3,3564997386049576e-14;3,3564997386049576e-14;True;False;True
+argentina;reg_completo;tela_presono_h: IC inferior;-2,344973963288064;;-2,344973963288038;1,0983991538732296e-14;;True;False;True
+argentina;reg_completo;tela_presono_h: IC superior;-0,30003102345169474;;-0,3000310234516963;5,180505057755992e-15;;True;False;True
+argentina;reg_completo;idade: coeficiente;-0,00998426503068406;;-0,009984265030692913;8,866244907057815e-13;;True;False;True
+argentina;reg_completo;idade: erro padrão;0,511642863017227;;0,5116428630172276;1,3019507608233058e-15;;True;False;True
+argentina;reg_completo;idade: t;-0,01951412939057823;;-0,01951412939059551;8,854018273065133e-13;;True;False;True
+argentina;reg_completo;idade: p;0,9844366398162336;0,9844366398162336;0,9844366398162199;1,398440991379781e-14;1,398440991379781e-14;True;False;True
+argentina;reg_completo;idade: IC inferior;-1,014558245328002;;-1,014558245328003;1,0942920524648887e-15;;True;False;True
+argentina;reg_completo;idade: IC superior;0,9945897152666339;;0,9945897152666172;1,6743934824333918e-14;;True;False;True
+argentina;reg_completo;feminino: coeficiente;1,0558860945353732;;1,0558860945353705;2,5235063449461036e-15;;True;False;True
+argentina;reg_completo;feminino: erro padrão;1,6572986276495902;;1,65729862764959;1,339798399760572e-16;;True;False;True
+argentina;reg_completo;feminino: t;0,6371127550095478;;0,6371127550095463;2,2653602846031144e-15;;True;False;True
+argentina;reg_completo;feminino: p;0,5242639578949602;0,5242639578949602;0,524263957894961;1,6941435823022498e-15;1,6941435823022498e-15;True;False;True
+argentina;reg_completo;feminino: IC inferior;-2,1981006201452837;;-2,198100620145256;1,2526055794881697e-14;;True;False;True
+argentina;reg_completo;feminino: IC superior;4,30987280921603;;4,309872809215997;7,624958550663674e-15;;True;False;True
+argentina;reg_completo;esc_pais_1: coeficiente;-7,19126491390693;;-7,191264913906904;3,581730680160698e-15;;True;False;True
+argentina;reg_completo;esc_pais_1: erro padrão;7,071349018992905;;7,071349018992886;2,637650434677455e-15;;True;False;True
+argentina;reg_completo;esc_pais_1: t;-1,0169579940958853;;-1,0169579940958842;1,091709816010825e-15;;True;False;True
+argentina;reg_completo;esc_pais_1: p;0,30953193719745564;0,30953193719745564;0,30953193719745614;1,6140510914795075e-15;1,6140510914795075e-15;True;False;True
+argentina;reg_completo;esc_pais_1: IC inferior;-21,075350364038687;;-21,0753503640385;8,934315288903394e-15;;True;False;True
+argentina;reg_completo;esc_pais_1: IC superior;6,692820536224828;;6,692820536224691;2,0569452640840214e-14;;True;False;True
+argentina;reg_completo;esc_pais_2: coeficiente;6,804580492120131;;6,804580492120143;1,827371707954837e-15;;True;False;True
+argentina;reg_completo;esc_pais_2: erro padrão;2,1965109242198255;;2,1965109242198224;1,415255637781353e-15;;True;False;True
+argentina;reg_completo;esc_pais_2: t;3,0979042339782747;;3,097904233978285;3,2970844335735643e-15;;True;False;True
+argentina;reg_completo;esc_pais_2: p;0,002028502294350669;0,002028502294350669;0,002028502294350546;6,071739092303022e-14;6,071739092303022e-14;True;False;True
+argentina;reg_completo;esc_pais_2: IC inferior;2,4918891962859977;;2,4918891962860545;2,2811374978280824e-14;;True;False;True
+argentina;reg_completo;esc_pais_2: IC superior;11,117271787954264;;11,117271787954232;2,876103392906998e-15;;True;False;True
+argentina;reg_simples;R múltiplo;0,08737130893369881;;0,08737130893369872;9,530213964182818e-16;;True;False;True
+argentina;reg_simples;R²;0,007633745624787836;;0,007633745624787823;1,704330574964325e-15;;True;False;True
+argentina;reg_simples;R² ajustado;0,0061955336619252096;;0,006195533661925157;8,539872253853847e-15;;True;False;True
+argentina;reg_simples;erro padrão;21,124933685342054;;21,12493368534207;8,408816168889603e-16;;True;False;True
+argentina;reg_simples;observações;692,0;;692,0;0,0;;True;False;True
+argentina;reg_simples;gl regressão;1,0;;1,0;0,0;;True;False;True
+argentina;reg_simples;SQ regressão;2368,6751064182026;;2368,6751064182026;0,0;;True;False;True
+argentina;reg_simples;F;5,3078028982553995;;5,307802898255391;1,6733447656695335e-15;;True;False;True
+argentina;reg_simples;F de significação;0,021526398816596907;0,021526398816596907;0,02152639881659704;6,1245257647362894e-15;6,1245257647362894e-15;True;False;True
+argentina;reg_simples;gl resíduo;690,0;;690,0;0,0;;True;False;True
+argentina;reg_simples;SQ resíduo;307921,34801496856;;307921,3480149691;1,7013076605384945e-15;;True;False;True
+argentina;reg_simples;Intercepto: coeficiente;21,49525699285747;;21,495256992857442;1,3222316644015043e-15;;True;False;True
+argentina;reg_simples;Intercepto: erro padrão;0,9042583394064238;;0,9042583394064235;2,4555438998858066e-16;;True;False;True
+argentina;reg_simples;Intercepto: t;23,771145983533266;;23,77114598353324;1,046184133017009e-15;;True;False;True
+argentina;reg_simples;Intercepto: p;1,0415620806588374e-91;1,0415620806588374e-91;1,0415620806592552e-91;0,0;0,0;True;False;True
+argentina;reg_simples;Intercepto: IC inferior;19,719828939768924;;19,719828939768906;9,007972862370407e-16;;True;False;True
+argentina;reg_simples;Intercepto: IC superior;23,270685045946017;;23,270685045945978;1,6793596918030398e-15;;True;False;True
+argentina;reg_simples;tela_presono_h: coeficiente;-1,2031186190269918;;-1,2031186190269827;7,56685887654943e-15;;True;False;True
+argentina;reg_simples;tela_presono_h: erro padrão;0,522217058526603;;0,5222170585266009;4,039362009236889e-15;;True;False;True
+argentina;reg_simples;tela_presono_h: t;-2,3038669445642053;;-2,3038669445641973;3,4696473232368813e-15;;True;False;True
+argentina;reg_simples;tela_presono_h: p;0,021526398816594423;0,021526398816594423;0,021526398816594846;1,9662951139418512e-14;1,9662951139418512e-14;True;False;True
+argentina;reg_simples;tela_presono_h: IC inferior;-2,2284437668361043;;-2,2284437668360857;8,369853029849603e-15;;True;False;True
+argentina;reg_simples;tela_presono_h: IC superior;-0,17779347121787925;;-0,1777934712178797;2,4977813122611616e-15;;True;False;True
+argentina;reg_covariaveis;R múltiplo;0,12239943008144208;;0,12239943008144734;4,2971454815286056e-14;;True;False;True
+argentina;reg_covariaveis;R²;0,014981620484261828;;0,014981620484263115;8,591626123000814e-14;;True;False;True
+argentina;reg_covariaveis;R² ajustado;0,009246433412845595;;0,009246433412846922;1,4352165855414542e-13;;True;False;True
+argentina;reg_covariaveis;erro padrão;21,092482837466182;;21,092482837466186;1,6843506315386832e-16;;True;False;True
+argentina;reg_covariaveis;observações;692,0;;692,0;0,0;;True;False;True
+argentina;reg_covariaveis;gl regressão;4,0;;4,0;0,0;;True;False;True
+argentina;reg_covariaveis;SQ regressão;4648,647366457444;;4648,647366457852;8,764993217903317e-14;;True;False;True
+argentina;reg_covariaveis;F;2,612228737738855;;2,6122287377390827;8,721202755401171e-14;;True;False;True
+argentina;reg_covariaveis;F de significação;0,034413948713630946;0,034413948713630946;0,03441394871361808;3,738225277458046e-13;3,738225277458046e-13;True;False;True
+argentina;reg_covariaveis;gl resíduo;687,0;;687,0;0,0;;True;False;True
+argentina;reg_covariaveis;SQ resíduo;305641,3757549293;;305641,37575492944;3,808886200024155e-16;;True;False;True
+argentina;reg_covariaveis;Intercepto: coeficiente;18,825369282929195;;18,825369282928563;3,3592065330688244e-14;;True;False;True
+argentina;reg_covariaveis;Intercepto: erro padrão;8,073495122125518;;8,073495122125534;1,9802094771555707e-15;;True;False;True
+argentina;reg_covariaveis;Intercepto: t;2,3317496323665354;;2,331749632366453;3,542429765423777e-14;;True;False;True
+argentina;reg_covariaveis;Intercepto: p;0,020002036131925655;0,020002036131925655;0,020002036131930027;2,185529078453745e-13;2,185529078453745e-13;True;False;True
+argentina;reg_covariaveis;Intercepto: IC inferior;2,973682782412414;;2,973682782411805;2,0489421384079044e-13;;True;False;True
+argentina;reg_covariaveis;Intercepto: IC superior;34,67705578344598;;34,67705578344532;1,9055964508161792e-14;;True;False;True
+argentina;reg_covariaveis;idade: coeficiente;0,010617197366206225;;0,010617197366218661;1,1713291342635106e-12;;True;False;True
+argentina;reg_covariaveis;idade: erro padrão;0,5136035121867432;;0,5136035121867442;1,9454709682735494e-15;;True;False;True
+argentina;reg_covariaveis;idade: t;0,020671971889370328;;0,0206719718893945;1,1692951714326678e-12;;True;False;True
+argentina;reg_covariaveis;idade: p;0,9835133297484933;0,9835133297484933;0,983513329748474;1,9528823601126828e-14;1,9528823601126828e-14;True;False;True
+argentina;reg_covariaveis;idade: IC inferior;-0,9978037823451414;;-0,9978037823451277;1,3797066867190929e-14;;True;False;True
+argentina;reg_covariaveis;idade: IC superior;1,0190381770775538;;1,019038177077565;1,089481286961294e-14;;True;False;True
+argentina;reg_covariaveis;feminino: coeficiente;0,9425554371378961;;0,9425554371378893;7,302894324791774e-15;;True;False;True
+argentina;reg_covariaveis;feminino: erro padrão;1,6632553477378578;;1,6632553477378627;2,9370002116599753e-15;;True;False;True
+argentina;reg_covariaveis;feminino: t;0,5666931649550002;;0,5666931649549944;1,018745254940431e-14;;True;False;True
+argentina;reg_covariaveis;feminino: p;0,5711077547048587;0,5711077547048587;0,5711077547048627;6,998334124732788e-15;6,998334124732788e-15;True;False;True
+argentina;reg_covariaveis;feminino: IC inferior;-2,3231184678842074;;-2,3231184678842123;2,1027689185389245e-15;;True;False;True
+argentina;reg_covariaveis;feminino: IC superior;4,208229342159999;;4,208229342159991;1,899517618305035e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_1: coeficiente;-7,172787558562395;;-7,17278755856241;2,1050439611693057e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_1: erro padrão;7,09933553106682;;7,099335531066808;1,6263943865696622e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_1: t;-1,0103463242685387;;-1,0103463242685424;3,736103346996718e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_1: p;0,3126851025224118;0,3126851025224118;0,3126851025224096;6,923690577372112e-15;6,923690577372112e-15;True;False;True
+argentina;reg_covariaveis;esc_pais_1: IC inferior;-21,11178665351985;;-21,111786653519797;2,524215787919714e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_1: IC superior;6,766211536395061;;6,766211536394977;1,2470338743867695e-14;;True;False;True
+argentina;reg_covariaveis;esc_pais_2: coeficiente;6,430362105553184;;6,430362105553174;1,5193487483798392e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_2: erro padrão;2,200237412090897;;2,200237412090893;1,8165325553901847e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_2: t;2,922576477527658;;2,922576477527659;3,039025416544363e-16;;True;False;True
+argentina;reg_covariaveis;esc_pais_2: p;0,0035855496444284407;0,0035855496444284407;0,003585549644428497;1,5723813239303912e-14;1,5723813239303912e-14;True;False;True
+argentina;reg_covariaveis;esc_pais_2: IC inferior;2,1103652323785065;;2,110365232378519;5,892107055700148e-15;;True;False;True
+argentina;reg_covariaveis;esc_pais_2: IC superior;10,75035897872786;;10,750358978727828;2,9742656196387026e-15;;True;False;True
+argentina;f_parcial;F parcial;6,44941927285645;;6,449419272857379;1,4404934579400162e-13;;True;False;True
+argentina;f_parcial;p do F parcial;0,01131847075301728;;0,011318470753011428;5,169622656762135e-13;;True;False;True
+argentina;f_parcial;ΔR²;0,009174383491631381;;0,009174383491632679;1,4143437117208786e-13;;True;False;True
+argentina;f_parcial;f²;0,009401485820490453;;0,009401485820491806;1,4392239025800368e-13;;True;False;True
+turquia;reg_completo;R múltiplo;0,09276802380074908;;0,09276802380074976;7,33023702265621e-15;;True;False;True
+turquia;reg_completo;R²;0,008605906239896348;;0,008605906239896474;1,471487257893136e-14;;True;False;True
+turquia;reg_completo;R² ajustado;0,006971291081182244;;0,00697129108118244;2,811871581642959e-14;;True;False;True
+turquia;reg_completo;erro padrão;19,61830586593383;;19,618305865933827;1,8109176720348743e-16;;True;False;True
+turquia;reg_completo;observações;1216,0;;1216,0;0,0;;True;False;True
+turquia;reg_completo;gl regressão;2,0;;2,0;0,0;;True;False;True
+turquia;reg_completo;SQ regressão;4052,603230947687;;4052,603230947745;1,4363029785142555e-14;;True;False;True
+turquia;reg_completo;F;5,264790427287071;;5,264790427287149;1,484573830869186e-14;;True;False;True
+turquia;reg_completo;F de significação;0,005289291292179699;0,005289291292179699;0,0052892912921792545;8,396005916835315e-14;8,396005916835315e-14;True;False;True
+turquia;reg_completo;gl resíduo;1213,0;;1213,0;0,0;;True;False;True
+turquia;reg_completo;SQ resíduo;466856,92308484187;;466856,9230848417;3,7403961279303553e-16;;True;False;True
+turquia;reg_completo;Intercepto: coeficiente;23,429917166182026;;23,429917166181948;3,3358931821758283e-15;;True;False;True
+turquia;reg_completo;Intercepto: erro padrão;3,1481953542844874;;3,148195354284487;1,4106151616216775e-16;;True;False;True
+turquia;reg_completo;Intercepto: t;7,442332679354045;;7,442332679354021;3,2222178670444475e-15;;True;False;True
+turquia;reg_completo;Intercepto: p;1,8682289401718818e-13;1,8682289401718818e-13;1,868228940172214e-13;1,778181984355995e-13;1,778181984355995e-13;True;False;True
+turquia;reg_completo;Intercepto: IC inferior;17,25340466769523;;17,253404667695115;6,58924078529729e-15;;True;False;True
+turquia;reg_completo;Intercepto: IC superior;29,606429664668823;;29,60642966466878;1,4399765398420221e-15;;True;False;True
+turquia;reg_completo;doomscrolling: coeficiente;0,10132110827085797;;0,10132110827085773;2,3284624177438246e-15;;True;False;True
+turquia;reg_completo;doomscrolling: erro padrão;0,036119352360520406;;0,03611935236052034;1,728991276250704e-15;;True;False;True
+turquia;reg_completo;doomscrolling: t;2,805175111102079;;2,8051751111020775;4,749320726101749e-16;;True;False;True
+turquia;reg_completo;doomscrolling: p;0,005109235983200758;0,005109235983200758;0,005109235983200779;4,074323789342898e-15;4,074323789342898e-15;True;False;True
+turquia;reg_completo;doomscrolling: IC inferior;0,0304577703307934;;0,030457770330792888;1,6858691339267157e-14;;True;False;True
+turquia;reg_completo;doomscrolling: IC superior;0,17218444621092255;;0,17218444621092258;1,6119676443729928e-16;;True;False;True
+turquia;reg_completo;idade: coeficiente;-0,11558246767131737;;-0,1155824676713182;7,204096652761584e-15;;True;False;True
+turquia;reg_completo;idade: erro padrão;0,09273623442964447;;0,09273623442964447;0,0;;True;False;True
+turquia;reg_completo;idade: t;-1,2463571373388627;;-1,2463571373388718;7,30435003675118e-15;;True;False;True
+turquia;reg_completo;idade: p;0,2128739498925242;0,2128739498925242;0,2128739498925208;1,6037358269745944e-14;1,6037358269745944e-14;True;False;True
+turquia;reg_completo;idade: IC inferior;-0,2975236900410715;;-0,2975236900410734;6,3436264238394325e-15;;True;False;True
+turquia;reg_completo;idade: IC superior;0,06635875469843676;;0,06635875469843698;3,3461237471091566e-15;;True;False;True
+turquia;reg_simples;R múltiplo;0,08565217831013597;;0,08565217831013959;4,228850555001921e-14;;True;False;True
+turquia;reg_simples;R²;0,007336295649271327;;0,0073362956492719475;8,453362191356798e-14;;True;False;True
+turquia;reg_simples;R² ajustado;0,00651861549741735;;0,0065186154974179455;9,141166774356658e-14;;True;False;True
+turquia;reg_simples;erro padrão;19,62277689287068;;19,622776892870668;5,431515169636263e-16;;True;False;True
+turquia;reg_simples;observações;1216,0;;1216,0;0,0;;True;False;True
+turquia;reg_simples;gl regressão;1,0;;1,0;0,0;;True;False;True
+turquia;reg_simples;SQ regressão;3454,7315091109485;;3454,7315091112396;8,424339309719881e-14;;True;False;True
+turquia;reg_simples;F;8,972084784786917;;8,97208478478768;8,513444302679797e-14;;True;False;True
+turquia;reg_simples;F de significação;0,002796940025170188;0,002796940025170188;0,002796940025169028;4,147734002586989e-13;4,147734002586989e-13;True;False;True
+turquia;reg_simples;gl resíduo;1214,0;;1214,0;0,0;;True;False;True
+turquia;reg_simples;SQ resíduo;467454,7948066786;;467454,7948066782;8,716428431604366e-16;;True;False;True
+turquia;reg_simples;Intercepto: coeficiente;19,802666229752234;;19,802666229752223;5,382174760077676e-16;;True;False;True
+turquia;reg_simples;Intercepto: erro padrão;1,2008533742201932;;1,2008533742201921;9,24528379949892e-16;;True;False;True
+turquia;reg_simples;Intercepto: t;16,490494722231706;;16,490494722231713;4,3088018141880226e-16;;True;False;True
+turquia;reg_simples;Intercepto: p;2,776727092448579e-55;2,776727092448579e-55;2,776727092448261e-55;0,0;0,0;True;False;True
+turquia;reg_simples;Intercepto: IC inferior;17,446687982595027;;17,44668798259499;2,0363255664024713e-15;;True;False;True
+turquia;reg_simples;Intercepto: IC superior;22,15864447690944;;22,158644476909455;6,413232871717631e-16;;True;False;True
+turquia;reg_simples;doomscrolling: coeficiente;0,10726661108825943;;0,10726661108825927;1,4231424330200317e-15;;True;False;True
+turquia;reg_simples;doomscrolling: erro padrão;0,035811117664518756;;0,035811117664518693;1,7438731100269413e-15;;True;False;True
+turquia;reg_simples;doomscrolling: t;2,9953438508437826;;2,995343850843784;4,447795297941804e-16;;True;False;True
+turquia;reg_simples;doomscrolling: p;0,0027969400251690543;0,0027969400251690543;0,0027969400251690447;3,4112204881103083e-15;3,4112204881103083e-15;True;False;True
+turquia;reg_simples;doomscrolling: IC inferior;0,03700806326281693;;0,03700806326281614;2,1374636641420754e-14;;True;False;True
+turquia;reg_simples;doomscrolling: IC superior;0,1775251589137019;;0,1775251589137024;2,8142510286341076e-15;;True;False;True
+turquia;reg_covariaveis;R múltiplo;0,04663160780666409;;0,04663160780666012;8,51149574231005e-14;;True;False;True
+turquia;reg_covariaveis;R²;0,002174506846634535;;0,0021745068466341648;1,7032066957814207e-13;;True;False;True
+turquia;reg_covariaveis;R² ajustado;0,001352574809440659;;0,0013525748094401768;3,5654451269943605e-13;;True;False;True
+turquia;reg_covariaveis;erro padrão;19,673729343943414;;19,673729343943414;0,0;;True;False;True
+turquia;reg_covariaveis;observações;1216,0;;1216,0;0,0;;True;False;True
+turquia;reg_covariaveis;gl regressão;1,0;;1,0;0,0;;True;False;True
+turquia;reg_covariaveis;SQ regressão;1023,9959891191102;;1023,9959891189355;1,7053092453088725e-13;;True;False;True
+turquia;reg_covariaveis;F;2,645604196252562;;2,6456041962521106;1,7054502629182799e-13;;True;False;True
+turquia;reg_covariaveis;F de significação;0,10409619054527047;0,10409619054527047;0,10409619054529999;2,835651767138957e-13;2,835651767138957e-13;True;False;True
+turquia;reg_covariaveis;gl resíduo;1214,0;;1214,0;0,0;;True;False;True
+turquia;reg_covariaveis;SQ resíduo;469885,53032667044;;469885,5303266705;1,2387625742167606e-16;;True;False;True
+turquia;reg_covariaveis;Intercepto: coeficiente;27,4572394220861;;27,45723942208624;5,04624049574944e-15;;True;False;True
+turquia;reg_covariaveis;Intercepto: erro padrão;2,8096948469656184;;2,8096948469656247;2,2127844041908307e-15;;True;False;True
+turquia;reg_covariaveis;Intercepto: t;9,772320809763043;;9,77232080976307;2,726614599510858e-15;;True;False;True
+turquia;reg_covariaveis;Intercepto: p;9,160575455474109e-22;9,160575455474109e-22;9,160575455472224e-22;0,0;0,0;True;False;True
+turquia;reg_covariaveis;Intercepto: IC inferior;21,944842919141433;;21,9448429191415;3,0759645965991827e-15;;True;False;True
+turquia;reg_covariaveis;Intercepto: IC superior;32,96963592503077;;32,96963592503098;6,24991412822935e-15;;True;False;True
+turquia;reg_covariaveis;idade: coeficiente;-0,14993949369992013;;-0,1499394936999203;1,1106710419275078e-15;;True;False;True
+turquia;reg_covariaveis;idade: erro padrão;0,09218358731789505;;0,09218358731789526;2,2581765710565508e-15;;True;False;True
+turquia;reg_covariaveis;idade: t;-1,6265313388472706;;-1,6265313388472689;1,0921135037331415e-15;;True;False;True
+turquia;reg_covariaveis;idade: p;0,10409619054528793;0,10409619054528793;0,1040961905452883;3,5995579554659344e-15;3,5995579554659344e-15;True;False;True
+turquia;reg_covariaveis;idade: IC inferior;-0,3307963169627196;;-0,3307963169627221;7,551480102144261e-15;;True;False;True
+turquia;reg_covariaveis;idade: IC superior;0,03091732956287932;;0,030917329562881513;7,092108227442668e-14;;True;False;True
+turquia;f_parcial;F parcial;7,8690074039459885;;7,869007403946597;7,731625937846362e-14;;True;False;True
+turquia;f_parcial;p do F parcial;0,005109235983202358;;0,005109235983200649;3,3460384119968207e-13;;True;False;True
+turquia;f_parcial;ΔR²;0,006431399393261813;;0,006431399393262309;7,714198478314466e-14;;True;False;True
+turquia;f_parcial;f²;0,006487227868051103;;0,0064872278680516045;7,72803260120212e-14;;True;False;True
+japao;reg_completo;R múltiplo;0,12566619370407972;;0,1256661937040804;5,3008195373825864e-15;;True;False;True
+japao;reg_completo;R²;0,015791992240071287;;0,01579199224007145;1,0325740049950917e-14;;True;False;True
+japao;reg_completo;R² ajustado;0,007960098279116947;;0,007960098279117145;2,4843722944999797e-14;;True;False;True
+japao;reg_completo;erro padrão;5,290067732013548;;5,290067732013549;1,6789547217423992e-16;;True;False;True
+japao;reg_completo;observações;381,0;;381,0;0,0;;True;False;True
+japao;reg_completo;gl regressão;3,0;;3,0;0,0;;True;False;True
+japao;reg_completo;SQ regressão;169,283193415411;;169,28319341541282;1,0745245094013225e-14;;True;False;True
+japao;reg_completo;F;2,0163695165948066;;2,016369516594828;1,0571614923439814e-14;;True;False;True
+japao;reg_completo;F de significação;0,11117167087906776;0,11117167087906776;0,11117167087906484;2,63395629866367e-14;2,63395629866367e-14;True;False;True
+japao;reg_completo;gl resíduo;377,0;;377,0;0,0;;True;False;True
+japao;reg_completo;SQ resíduo;10550,275861702694;;10550,275861702696;1,7241154898600842e-16;;True;False;True
+japao;reg_completo;Intercepto: coeficiente;15,07568738114311;;15,075687381143338;1,5082143168319538e-14;;True;False;True
+japao;reg_completo;Intercepto: erro padrão;3,069306959536243;;3,069306959536234;2,893742566023193e-15;;True;False;True
+japao;reg_completo;Intercepto: t;4,911756165118451;;4,91175616511854;1,8082705855955086e-14;;True;False;True
+japao;reg_completo;Intercepto: p;1,3476178605509109e-06;1,3476178605509109e-06;1,3476178605503573e-06;4,1075148024856083e-13;4,1075148024856083e-13;True;False;True
+japao;reg_completo;Intercepto: IC inferior;9,04058158012555;;9,040581580125803;2,7901155358118624e-14;;True;False;True
+japao;reg_completo;Intercepto: IC superior;21,11079318216067;;21,110793182160872;9,592471393388945e-15;;True;False;True
+japao;reg_completo;celular_presono_h: coeficiente;0,8471911012551124;;0,8471911012551159;4,0624734740947e-15;;True;False;True
+japao;reg_completo;celular_presono_h: erro padrão;0,35005132687741297;;0,3500513268774125;1,2686402700184063e-15;;True;False;True
+japao;reg_completo;celular_presono_h: t;2,420191086868231;;2,4201910868682437;5,321310021977175e-15;;True;False;True
+japao;reg_completo;celular_presono_h: p;0,015984344154394144;0,015984344154394144;0,015984344154393343;5,0139201093275134e-14;5,0139201093275134e-14;True;False;True
+japao;reg_completo;celular_presono_h: IC inferior;0,15889344274689587;;0,15889344274690131;3,423736515879198e-14;;True;False;True
+japao;reg_completo;celular_presono_h: IC superior;1,535488759763329;;1,5354887597633304;8,676505256577289e-16;;True;False;True
+japao;reg_completo;idade: coeficiente;-0,04009681694459232;;-0,040096816944604534;3,0457413334701225e-13;;True;False;True
+japao;reg_completo;idade: erro padrão;0,13937402880596056;;0,13937402880596023;2,389734373333282e-15;;True;False;True
+japao;reg_completo;idade: t;-0,28769217111759;;-0,2876921711176783;3,069886860869957e-13;;True;False;True
+japao;reg_completo;idade: p;0,7737404627212747;0,7737404627212747;0,7737404627212072;8,724057115974516e-14;8,724057115974516e-14;True;False;True
+japao;reg_completo;idade: IC inferior;-0,3141446788388399;;-0,314144678838851;3,534113736157458e-14;;True;False;True
+japao;reg_completo;idade: IC superior;0,23395104494965524;;0,23395104494964192;5,694642782368778e-14;;True;False;True
+japao;reg_completo;sexo_cod2: coeficiente;-0,2568997640021657;;-0,25689976400218484;7,454793603711164e-14;;True;False;True
+japao;reg_completo;sexo_cod2: erro padrão;0,5818911603532965;;0,5818911603532969;7,631826020186191e-16;;True;False;True
+japao;reg_completo;sexo_cod2: t;-0,44149109233106143;;-0,441491092331094;7,380680230873458e-14;;True;False;True
+japao;reg_completo;sexo_cod2: p;0,6591106148243043;0,6591106148243043;0,6591106148242806;3,604671536554088e-14;3,604671536554088e-14;True;False;True
+japao;reg_completo;sexo_cod2: IC inferior;-1,4010586127931093;;-1,4010586127931275;1,2995643035628666e-14;;True;False;True
+japao;reg_completo;sexo_cod2: IC superior;0,8872590847887778;;0,8872590847887578;2,2523313410772506e-14;;True;False;True
+japao;reg_simples;R múltiplo;0,12330843791048335;;0,12330843791048471;1,1029441522510571e-14;;True;False;True
+japao;reg_simples;R²;0,015204970859923526;;0,015204970859923861;2,2019222131228752e-14;;True;False;True
+japao;reg_simples;R² ajustado;0,012606567089105382;;0,012606567089105791;3,2474720313376416e-14;;True;False;True
+japao;reg_simples;erro padrão;5,277664509072802;;5,277664509072802;0,0;;True;False;True
+japao;reg_simples;observações;381,0;;381,0;0,0;;True;False;True
+japao;reg_simples;gl regressão;1,0;;1,0;0,0;;True;False;True
+japao;reg_simples;SQ regressão;162,99058306430015;;162,9905830643038;2,2320177882034087e-14;;True;False;True
+japao;reg_simples;F;5,851658249070363;;5,851658249070494;2,231200492897164e-14;;True;False;True
+japao;reg_simples;F de significação;0,016032575630235742;0,016032575630235742;0,016032575630234677;6,643475376726465e-14;6,643475376726465e-14;True;False;True
+japao;reg_simples;gl resíduo;379,0;;379,0;0,0;;True;False;True
+japao;reg_simples;SQ resíduo;10556,568472053805;;10556,568472053805;0,0;;True;False;True
+japao;reg_simples;Intercepto: coeficiente;14,136326961049678;;14,136326961049676;1,2565900918213829e-16;;True;False;True
+japao;reg_simples;Intercepto: erro padrão;0,6621386013187845;;0,6621386013187844;1,6767230039359133e-16;;True;False;True
+japao;reg_simples;Intercepto: t;21,34949832692776;;21,349498326927762;1,6640736116593068e-16;;True;False;True
+japao;reg_simples;Intercepto: p;5,687829377097029e-67;5,687829377097029e-67;5,687829377096703e-67;0,0;0,0;True;False;True
+japao;reg_simples;Intercepto: IC inferior;12,834401589661795;;12,8344015896618;4,1521768513877226e-16;;True;False;True
+japao;reg_simples;Intercepto: IC superior;15,43825233243756;;15,438252332437552;5,753102103623214e-16;;True;False;True
+japao;reg_simples;celular_presono_h: coeficiente;0,8284345736777418;;0,8284345736777434;2,0102185372885474e-15;;True;False;True
+japao;reg_simples;celular_presono_h: erro padrão;0,34246700692287085;;0,3424670069228708;1,6209196830385427e-16;;True;False;True
+japao;reg_simples;celular_presono_h: t;2,4190201010058723;;2,419020101005877;2,0194050087965023e-15;;True;False;True
+japao;reg_simples;celular_presono_h: p;0,016032575630234955;0,016032575630234955;0,01603257563023477;1,146919201845342e-14;1,146919201845342e-14;True;False;True
+japao;reg_simples;celular_presono_h: IC inferior;0,15506122814537027;;0,15506122814537537;3,29355440709376e-14;;True;False;True
+japao;reg_simples;celular_presono_h: IC superior;1,5018079192101133;;1,5018079192101115;1,1828122735792591e-15;;True;False;True
+japao;reg_covariaveis;R múltiplo;0,022375799668340777;;0,02237579966835594;6,775839703945331e-13;;True;False;True
+japao;reg_covariaveis;R²;0,0005006764107977192;;0,0005006764107983977;1,3551541572719129e-12;;True;False;True
+japao;reg_covariaveis;R² ajustado;-0,0047876797986689595;;-0,004787679798668343;1,288085715091482e-13;;True;False;True
+japao;reg_covariaveis;erro padrão;5,32394809760006;;5,323948097600059;1,66827024497196e-16;;True;False;True
+japao;reg_covariaveis;observações;381,0;;381,0;0,0;;True;False;True
+japao;reg_covariaveis;gl regressão;2,0;;2,0;0,0;;True;False;True
+japao;reg_covariaveis;SQ regressão;5,367030353050723;;5,367030353057999;1,3556766285172523e-12;;True;False;True
+japao;reg_covariaveis;F;0,09467524330177665;;0,09467524330190503;1,3560399797515835e-12;;True;False;True
+japao;reg_covariaveis;F de significação;0,9096898711284795;0,9096898711284795;0,9096898711283627;1,2839041732506102e-13;1,2839041732506102e-13;True;False;True
+japao;reg_covariaveis;gl resíduo;378,0;;378,0;0,0;;True;False;True
+japao;reg_covariaveis;SQ resíduo;10714,192024765054;;10714,19202476505;3,3954765778724116e-16;;True;False;True
+japao;reg_covariaveis;Intercepto: coeficiente;16,84233513661986;;16,84233513662017;1,8562675614658427e-14;;True;False;True
+japao;reg_covariaveis;Intercepto: erro padrão;3,000334877070887;;3,000334877070881;2,072185003552184e-15;;True;False;True
+japao;reg_covariaveis;Intercepto: t;5,613485103057026;;5,613485103057142;2,0727118865488867e-14;;True;False;True
+japao;reg_covariaveis;Intercepto: p;3,8437052545470814e-08;3,8437052545470814e-08;3,8437052545446574e-08;6,306337001667466e-13;6,306337001667466e-13;True;False;True
+japao;reg_covariaveis;Intercepto: IC inferior;10,942897774756943;;10,942897774757238;2,6946723017065123e-14;;True;False;True
+japao;reg_covariaveis;Intercepto: IC superior;22,741772498482774;;22,741772498483105;1,4528435378134432e-14;;True;False;True
+japao;reg_covariaveis;idade: coeficiente;-0,05986696908465985;;-0,05986696908465719;4,439169722185658e-14;;True;False;True
+japao;reg_covariaveis;idade: erro padrão;0,14002552108715838;;0,14002552108715807;2,180397754648441e-15;;True;False;True
+japao;reg_covariaveis;idade: t;-0,42754326939726844;;-0,4275432693972504;4,2197189013388914e-14;;True;False;True
+japao;reg_covariaveis;idade: p;0,6692271301241399;0,6692271301241399;0,669227130124153;1,9575762997155326e-14;1,9575762997155326e-14;True;False;True
+japao;reg_covariaveis;idade: IC inferior;-0,3351934991426539;;-0,33519349914265206;5,465105962129324e-15;;True;False;True
+japao;reg_covariaveis;idade: IC superior;0,2154595609733342;;0,2154595609733377;1,6231363842804862e-14;;True;False;True
+japao;reg_covariaveis;sexo_cod2: coeficiente;-0,026530282649981238;;-0,026530282649974382;2,584076192292354e-13;;True;False;True
+japao;reg_covariaveis;sexo_cod2: erro padrão;0,5777295439633245;;0,5777295439633248;3,8434005538606674e-16;;True;False;True
+japao;reg_covariaveis;sexo_cod2: t;-0,04592163050547651;;-0,045921630505464626;2,5883935580152247e-13;;True;False;True
+japao;reg_covariaveis;sexo_cod2: p;0,9633969640727196;0,9633969640727196;0,9633969640727289;9,68019804362523e-15;9,68019804362523e-15;True;False;True
+japao;reg_covariaveis;sexo_cod2: IC inferior;-1,1624965651992925;;-1,162496565199292;3,820133522492862e-16;;True;False;True
+japao;reg_covariaveis;sexo_cod2: IC superior;1,1094359998993302;;1,109435999899343;1,1608228944094354e-14;;True;False;True
+japao;f_parcial;F parcial;5,857324896956447;;5,857324896956252;3,3359811137599675e-14;;True;False;True
+japao;f_parcial;p do F parcial;0,015984344154393766;;0,01598434415439549;1,0787525083703741e-13;;True;False;True
+japao;f_parcial;ΔR²;0,015291315829273568;;0,015291315829273053;3,369316794692007e-14;;True;False;True
+japao;f_parcial;f²;0,015536670814208085;;0,015536670814207563;3,3607699648982575e-14;;True;False;True
+empilhada;reg_completo;R múltiplo;0,2330735825717911;;0,23307358257173938;2,218554192257693e-13;;True;False;True
+empilhada;reg_completo;R²;0,05432329489284952;;0,05432329489282541;4,437454957347719e-13;;True;False;True
+empilhada;reg_completo;R² ajustado;0,05406190579712259;;0,054061905797098464;4,462760560906743e-13;;True;False;True
+empilhada;reg_completo;erro padrão;3,2753633278355903;;3,275363327835579;3,3896179247961745e-15;;True;False;True
+empilhada;reg_completo;observações;32571,0;;32571,0;0,0;;True;False;True
+empilhada;reg_completo;gl regressão;9,0;;9,0;0,0;;True;False;True
+empilhada;reg_completo;SQ regressão;20065,967801392486;;20065,96780138294;4,757336642963318e-13;;True;False;True
+empilhada;reg_completo;F;207,825405806529;;207,8254058064315;4,692154199207758e-13;;True;False;True
+empilhada;reg_completo;F de significação;0,0;0,0;0,0;0,0;0,0;True;False;True
+empilhada;reg_completo;gl resíduo;32561,0;;32561,0;0,0;;True;False;True
+empilhada;reg_completo;SQ resíduo;349314,5685039216;;349314,56850391935;6,498723443879906e-15;;True;False;True
+empilhada;reg_completo;Intercepto: coeficiente;3,731395803999203;;3,731395803999181;5,831697419858523e-15;;True;False;True
+empilhada;reg_completo;Intercepto: erro padrão;0,08494198426084795;;0,08494198426084706;1,0456294698421715e-14;;True;False;True
+empilhada;reg_completo;Intercepto: t;43,92875721551873;;43,928757215518935;4,690717571623768e-15;;True;False;True
+empilhada;reg_completo;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+empilhada;reg_completo;Intercepto: IC inferior;3,564906385294923;;3,5649063852949117;3,2388843375325846e-15;;True;False;True
+empilhada;reg_completo;Intercepto: IC superior;3,8978852227034824;;3,8978852227034504;8,203018119406758e-15;;True;False;True
+empilhada;reg_completo;tela_1a3h: coeficiente;0,1830204954735913;;0,18302049547359697;3,093717679507175e-14;;True;False;True
+empilhada;reg_completo;tela_1a3h: erro padrão;0,048527511073071475;;0,04852751107307131;3,431732846199586e-15;;True;False;True
+empilhada;reg_completo;tela_1a3h: t;3,771479134753146;;3,7714791347532755;3,438280967308105e-14;;True;False;True
+empilhada;reg_completo;tela_1a3h: p;0,00016256965624361633;0,00016256965624361633;0,00016256965624353162;5,210277039553997e-13;5,210277039553997e-13;True;False;True
+empilhada;reg_completo;tela_1a3h: IC inferior;0,08790478585100446;;0,08790478585101517;1,2187791692924114e-13;;True;False;True
+empilhada;reg_completo;tela_1a3h: IC superior;0,27813620509617815;;0,27813620509617876;2,1954087686379572e-15;;True;False;True
+empilhada;reg_completo;tela_3h_mais: coeficiente;0,5764355461034741;;0,5764355461034654;1,5215511870887165e-14;;True;False;True
+empilhada;reg_completo;tela_3h_mais: erro padrão;0,056155861429508624;;0,05615586142950775;1,556917852626664e-14;;True;False;True
+empilhada;reg_completo;tela_3h_mais: t;10,264922154690167;;10,26492215469017;3,4610234985340067e-16;;True;False;True
+empilhada;reg_completo;tela_3h_mais: p;1,1058329139018406e-24;1,1058329139018406e-24;1,1058329139017993e-24;0,0;0,0;True;False;True
+empilhada;reg_completo;tela_3h_mais: IC inferior;0,46636798872777097;;0,46636798872776936;3,4518307958871626e-15;;True;False;True
+empilhada;reg_completo;tela_3h_mais: IC superior;0,6865031034791773;;0,6865031034791614;2,3126172586372418e-14;;True;False;True
+empilhada;reg_completo;idade: coeficiente;0,004289954825534377;;0,00428995482553463;5,88356465322849e-14;;True;False;True
+empilhada;reg_completo;idade: erro padrão;0,001198224619603008;;0,0011982246196030279;1,6649065331625798e-14;;True;False;True
+empilhada;reg_completo;idade: t;3,5802592897446157;;3,5802592897447667;4,217301573143471e-14;;True;False;True
+empilhada;reg_completo;idade: p;0,00034375266077156443;0,00034375266077156443;0,00034375266077136537;5,790777543991742e-13;5,790777543991742e-13;True;False;True
+empilhada;reg_completo;idade: IC inferior;0,0019413904244221666;;0,0019413904244224966;1,699973056180915e-13;;True;False;True
+empilhada;reg_completo;idade: IC superior;0,006638519226646588;;0,006638519226646763;2,6392492827373765e-14;;True;False;True
+empilhada;reg_completo;feminino: coeficiente;1,2651268722170665;;1,2651268722171007;2,7028806287648634e-14;;True;False;True
+empilhada;reg_completo;feminino: erro padrão;0,036538113829257125;;0,03653811382925726;3,608259167134938e-15;;True;False;True
+empilhada;reg_completo;feminino: t;34,62485442267255;;34,62485442267336;2,3394140777559212e-14;;True;False;True
+empilhada;reg_completo;feminino: p;5,183574437196034e-258;5,183574437196034e-258;5,1835744370571875e-258;0,0;0,0;True;False;True
+empilhada;reg_completo;feminino: IC inferior;1,193510822922728;;1,1935108229227656;3,144130535861814e-14;;True;False;True
+empilhada;reg_completo;feminino: IC superior;1,336742921511405;;1,336742921511436;2,308910680423252e-14;;True;False;True
+empilhada;reg_completo;esc_medio: coeficiente;-0,2708738396464751;;-0,2708738396464818;2,4796965656588968e-14;;True;False;True
+empilhada;reg_completo;esc_medio: erro padrão;0,0509410893941418;;0,05094108939414112;1,3348980374595393e-14;;True;False;True
+empilhada;reg_completo;esc_medio: t;-5,317393932247265;;-5,317393932247468;3,808344506197554e-14;;True;False;True
+empilhada;reg_completo;esc_medio: p;1,0595708892950512e-07;1,0595708892950512e-07;1,0595708892938698e-07;1,1149289543144206e-12;1,1149289543144206e-12;True;False;True
+empilhada;reg_completo;esc_medio: IC inferior;-0,37072025170283435;;-0,37072025170283474;1,0481705729156783e-15;;True;False;True
+empilhada;reg_completo;esc_medio: IC superior;-0,17102742759011585;;-0,17102742759012887;7,611273318643587e-14;;True;False;True
+empilhada;reg_completo;esc_superior: coeficiente;-0,7455986542044035;;-0,7455986542044256;2,963181071405624e-14;;True;False;True
+empilhada;reg_completo;esc_superior: erro padrão;0,05023078308237761;;0,05023078308237821;1,1880063162809214e-14;;True;False;True
+empilhada;reg_completo;esc_superior: t;-14,843460691855723;;-14,843460691855986;1,7711557815858955e-14;;True;False;True
+empilhada;reg_completo;esc_superior: p;1,1152512024652839e-49;1,1152512024652839e-49;1,115251202460953e-49;0,0;0,0;True;False;True
+empilhada;reg_completo;esc_superior: IC inferior;-0,8440528397195928;;-0,8440528397196111;2,1703238285887918e-14;;True;False;True
+empilhada;reg_completo;esc_superior: IC superior;-0,6471444686892143;;-0,6471444686892401;3,9972830991140095e-14;;True;False;True
+empilhada;reg_completo;eua: coeficiente;-0,6738966638019783;;-0,6738966638019998;3,1796127694677474e-14;;True;False;True
+empilhada;reg_completo;eua: erro padrão;0,06320673951610539;;0,06320673951610498;6,58685509522841e-15;;True;False;True
+empilhada;reg_completo;eua: t;-10,661784945104882;;-10,66178494510529;3,832023204047311e-14;;True;False;True
+empilhada;reg_completo;eua: p;1,698985115101869e-26;1,698985115101869e-26;1,6989851150944443e-26;0,0;0,0;True;False;True
+empilhada;reg_completo;eua: IC inferior;-0,7977842020058586;;-0,7977842020058731;1,8091232295448216e-14;;True;False;True
+empilhada;reg_completo;eua: IC superior;-0,550009125598098;;-0,5500091255981264;5,1674977936949386e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: coeficiente;0,09105862372351516;;0,09105862372351756;2,6366061692758e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: erro padrão;0,11901859961382334;;0,1190185996138227;5,363684678115814e-15;;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: t;0,7650789374011355;;0,7650789374011597;3,1634463783621245e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: p;0,4442300861969336;0,4442300861969336;0,4442300861969189;3,311449524326447e-14;3,311449524326447e-14;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: IC inferior;-0,1422222165715738;;-0,14222221657155856;1,0714086294184422e-13;;True;False;True
+empilhada;reg_completo;eua_x_tela_1a3h: IC superior;0,32433946401860414;;0,3243394640185937;3,217646197651068e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: coeficiente;0,1482189455883006;;0,1482189455883101;6,42304018448743e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: erro padrão;0,17225051428796492;;0,17225051428796503;6,445397444614345e-16;;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: t;0,860484778237069;;0,8604847782371238;6,360832463085962e-14;;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: p;0,38952820648887754;0,38952820648887754;0,38952820648884706;7,823726630905928e-14;7,823726630905928e-14;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: IC inferior;-0,18939840871378014;;-0,18939840871375407;1,3760667621268833e-13;;True;False;True
+empilhada;reg_completo;eua_x_tela_3h_mais: IC superior;0,48583629989038135;;0,4858362998903743;1,451088814886909e-14;;True;False;True
+empilhada;reg_restrito;R múltiplo;0,23300416660372605;;0,23300416660368548;1,7415418849166865e-13;;True;False;True
+empilhada;reg_restrito;R²;0,05429094165469693;;0,05429094165467802;3,4828067651523867e-13;;True;False;True
+empilhada;reg_restrito;R² ajustado;0,05408764455650521;;0,0540876445564864;3,476653981473289e-13;;True;False;True
+empilhada;reg_restrito;erro padrão;3,2753187665886214;;3,275318766588602;5,965808712339284e-15;;True;False;True
+empilhada;reg_restrito;observações;32571,0;;32571,0;0,0;;True;False;True
+empilhada;reg_restrito;gl regressão;7,0;;7,0;0,0;;True;False;True
+empilhada;reg_restrito;SQ regressão;20054,01714493247;;20054,017144924845;3,802332233265829e-13;;True;False;True
+empilhada;reg_restrito;F;267,05222129386476;;267,0522212937664;3,6823926853237187e-13;;True;False;True
+empilhada;reg_restrito;F de significação;0,0;0,0;0,0;0,0;0,0;True;False;True
+empilhada;reg_restrito;gl resíduo;32563,0;;32563,0;0,0;;True;False;True
+empilhada;reg_restrito;SQ resíduo;349326,51916038163;;349326,51916037744;1,1997232834892554e-14;;True;False;True
+empilhada;reg_restrito;Intercepto: coeficiente;3,7185817569843658;;3,7185817569843436;5,971217508072255e-15;;True;False;True
+empilhada;reg_restrito;Intercepto: erro padrão;0,08397881663711257;;0,08397881663711154;1,2228754094213198e-14;;True;False;True
+empilhada;reg_restrito;Intercepto: t;44,27999709799461;;44,27999709799489;6,258168137029697e-15;;True;False;True
+empilhada;reg_restrito;Intercepto: p;0,0;0,0;0,0;0,0;0,0;True;False;True
+empilhada;reg_restrito;Intercepto: IC inferior;3,5539801826849593;;3,5539801826847977;4,548378552389695e-14;;True;False;True
+empilhada;reg_restrito;Intercepto: IC superior;3,8831833312837722;;3,8831833312838895;3,019160863611707e-14;;True;False;True
+empilhada;reg_restrito;tela_1a3h: coeficiente;0,19966393532835136;;0,1996639353283541;1,3762134766243132e-14;;True;False;True
+empilhada;reg_restrito;tela_1a3h: erro padrão;0,044873488684087595;;0,04487348868408736;5,257500578877551e-15;;True;False;True
+empilhada;reg_restrito;tela_1a3h: t;4,449485457527027;;4,449485457527111;1,8963305010644094e-14;;True;False;True
+empilhada;reg_restrito;tela_1a3h: p;8,636133812426048e-06;8,636133812426048e-06;8,636133812422692e-06;3,885933925888061e-13;3,885933925888061e-13;True;False;True
+empilhada;reg_restrito;tela_1a3h: IC inferior;0,11171024441574047;;0,11171024441566804;6,483574979876975e-13;;True;False;True
+empilhada;reg_restrito;tela_1a3h: IC superior;0,28761762624096227;;0,28761762624104015;2,707836310149678e-13;;True;False;True
+empilhada;reg_restrito;tela_3h_mais: coeficiente;0,5949876802628274;;0,5949876802628244;5,038091150330666e-15;;True;False;True
+empilhada;reg_restrito;tela_3h_mais: erro padrão;0,053203397490362;;0,053203397490361085;1,721570498353379e-14;;True;False;True
+empilhada;reg_restrito;tela_3h_mais: t;11,1832647599359;;11,183264759936035;1,2071888012350984e-14;;True;False;True
+empilhada;reg_restrito;tela_3h_mais: p;5,561672248424144e-29;5,561672248424144e-29;5,561672248415631e-29;0,0;0,0;True;False;True
+empilhada;reg_restrito;tela_3h_mais: IC inferior;0,4907070612249002;;0,49070706122480934;1,8518534120690152e-13;;True;False;True
+empilhada;reg_restrito;tela_3h_mais: IC superior;0,6992682993007546;;0,6992682993008396;1,2145847519291728e-13;;True;False;True
+empilhada;reg_restrito;idade: coeficiente;0,004316080832619414;;0,004316080832619728;7,274769897236212e-14;;True;False;True
+empilhada;reg_restrito;idade: erro padrão;0,0011979483765101777;;0,0011979483765101947;1,411876690383405e-14;;True;False;True
+empilhada;reg_restrito;idade: t;3,6028938452196693;;3,60289384521988;5,854804047547678e-14;;True;False;True
+empilhada;reg_restrito;idade: p;0,00031516266434511886;0,00031516266434511886;0,0003151626643448629;8,122159185820201e-13;8,122159185820201e-13;True;False;True
+empilhada;reg_restrito;idade: IC inferior;0,00196805788350998;;0,0019680578835082414;8,834224940055928e-13;;True;False;True
+empilhada;reg_restrito;idade: IC superior;0,0066641037817288485;;0,0066641037817312156;3,551910745236685e-13;;True;False;True
+empilhada;reg_restrito;feminino: coeficiente;1,2648378379569643;;1,2648378379569971;2,5981671754843502e-14;;True;False;True
+empilhada;reg_restrito;feminino: erro padrão;0,03653579342861317;;0,03653579342861319;5,697613150894103e-16;;True;False;True
+empilhada;reg_restrito;feminino: t;34,619142469926516;;34,6191424699274;2,5450456871018274e-14;;True;False;True
+empilhada;reg_restrito;feminino: p;6,269801543920144e-258;6,269801543920144e-258;6,269801543729804e-258;0,0;0,0;True;False;True
+empilhada;reg_restrito;feminino: IC inferior;1,1932263368969462;;1,1932263368969176;2,4005298198344138e-14;;True;False;True
+empilhada;reg_restrito;feminino: IC superior;1,3364493390169823;;1,3364493390170766;7,061169798066883e-14;;True;False;True
+empilhada;reg_restrito;esc_medio: coeficiente;-0,2712102413201342;;-0,27121024132014054;2,3333452341474848e-14;;True;False;True
+empilhada;reg_restrito;esc_medio: erro padrão;0,05093383925723136;;0,050933839257230544;1,6075550019426522e-14;;True;False;True
+empilhada;reg_restrito;esc_medio: t;-5,324755511761839;;-5,324755511762048;3,936520777080076e-14;;True;False;True
+empilhada;reg_restrito;esc_medio: p;1,0175804719257585e-07;1,0175804719257585e-07;1,0175804719245884e-07;1,149881153948068e-12;1,149881153948068e-12;True;False;True
+empilhada;reg_restrito;esc_medio: IC inferior;-0,3710424426130037;;-0,37104244261309427;2,4416128292870305e-13;;True;False;True
+empilhada;reg_restrito;esc_medio: IC superior;-0,17137804002726473;;-0,17137804002718682;4,546084243971724e-13;;True;False;True
+empilhada;reg_restrito;esc_superior: coeficiente;-0,744955851212836;;-0,7449558512128569;2,8018026610531465e-14;;True;False;True
+empilhada;reg_restrito;esc_superior: erro padrão;0,050208358220961424;;0,05020835822096187;8,844925936348511e-15;;True;False;True
+empilhada;reg_restrito;esc_superior: t;-14,83728760726188;;-14,837287607262164;1,9155596482805184e-14;;True;False;True
+empilhada;reg_restrito;esc_superior: p;1,22196681366576e-49;1,22196681366576e-49;1,221966813660599e-49;0,0;0,0;True;False;True
+empilhada;reg_restrito;esc_superior: IC inferior;-0,8433660829486633;;-0,8433660829487698;1,2624456948670065e-13;;True;False;True
+empilhada;reg_restrito;esc_superior: IC superior;-0,6465456194770087;;-0,646545619476944;1,0011049550997429e-13;;True;False;True
+empilhada;reg_restrito;eua: coeficiente;-0,6363828485489327;;-0,6363828485489514;2,9483461345551785e-14;;True;False;True
+empilhada;reg_restrito;eua: erro padrão;0,051194265057322066;;0,05119426505732173;6,5059417693488315e-15;;True;False;True
+empilhada;reg_restrito;eua: t;-12,430744885904245;;-12,430744885904693;3,6010868828661056e-14;;True;False;True
+empilhada;reg_restrito;eua: p;2,1415596396523818e-35;2,1415596396523818e-35;2,1415596396404797e-35;0,0;0,0;True;False;True
+empilhada;reg_restrito;eua: IC inferior;-0,7367254940037906;;-0,736725494003895;1,41655155365389e-13;;True;False;True
+empilhada;reg_restrito;eua: IC superior;-0,5360402030940747;;-0,5360402030940079;1,24683607118746e-13;;True;False;True
+empilhada;f_parcial;F parcial;0,5569841055601629;;0,5569841054706415;1,6072521532851497e-10;;True;False;True
+empilhada;f_parcial;p do F parcial;0,5729398290977691;;0,5729398291490577;8,951837067755603e-11;;True;False;True
+empilhada;f_parcial;ΔR²;3,235323815258678e-05;;3,235323814738955e-05;1,606402274021209e-10;;True;False;True
+empilhada;f_parcial;f²;3,421173216794103e-05;;3,4211732162444376e-05;1,6066577002785903e-10;;True;False;True

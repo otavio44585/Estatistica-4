@@ -1,0 +1,22 @@
+﻿hipotese;conjunto;criterio;valor;decisao
+H2.1;insonia3_vigitel;análise paralela retém 1 e cargas ≥ 0,50;"retém 1; menor carga 0.708; λ1 = 2.261 (75.4%)";critério atendido: 1 dimensão
+H2.1;insonia3_nhanes;análise paralela retém 1 e cargas ≥ 0,50;"retém 1; menor carga 0.631; λ1 = 2.120 (70.7%)";critério atendido: 1 dimensão
+H2.2;vigitel2024 × nhanes0506;Tucker φ ≥ 0,95;φ = 0.998 (equivalente (≥ 0,95));critério atendido: estruturas equivalentes
+H2.3;pns2019 × nhanes0506;Tucker φ ≥ 0,95 e mesmo número de fatores;"φ = 0.997 (equivalente (≥ 0,95)); fatores retidos PNS 1, NHANES 1";critério atendido: estruturas equivalentes
+H2.4;phq9_pns × phq9_nhanes;maior carga do item de sono no mesmo fator;solução retida de 1 fator nos dois países: o sono carrega no único fator;critério atendido
+H2.4 (2 fatores, exploratória);phq9_pns × phq9_nhanes;maior carga do item de sono no mesmo fator;"PNS: somático (com cansaço), carga 0.597; NHANES: somático (com cansaço), carga 0.568";critério atendido
+H2.5;sassv_xuzhou;análise paralela retém 1;"retém 2 (Kaiser 2); λ1 = 4.784 (47.8%)";critério não atendido: 2 dimensões
+H2.5;doomscrolling_turquia;análise paralela retém 1;"retém 1 (Kaiser 1); λ1 = 8.750 (58.3%)";critério atendido: unidimensional
+H2.5;procrastinacao_turquia;análise paralela retém 1;"retém 2 (Kaiser 2); λ1 = 3.669 (40.8%)";critério não atendido: 2 dimensões
+H2.5;ais_japao;análise paralela retém 1;"retém 1 (Kaiser 1); λ1 = 4.690 (58.6%)";critério atendido: unidimensional
+H2.5;bps_japao;análise paralela retém 1;"retém 2 (Kaiser 2); λ1 = 3.822 (42.5%)";critério não atendido: 2 dimensões
+H2.6;insonia3_vigitel;r(PC1, escore fatorial) ≥ 0,95;r = 0.9882;critério atendido
+H2.6;insonia3_nhanes;r(PC1, escore fatorial) ≥ 0,95;r = 0.9666;critério atendido
+H2.6;sono7_nhanes;r(PC1, escore fatorial) ≥ 0,95;r = 0.9913;critério atendido
+H2.6;phq9_pns;r(PC1, escore fatorial) ≥ 0,95;r = 0.9967;critério atendido
+H2.6;phq9_nhanes;r(PC1, escore fatorial) ≥ 0,95;r = 0.9958;critério atendido
+H2.6;sassv_xuzhou;r(PC1, escore fatorial) ≥ 0,95;r = 0.9534;critério atendido
+H2.6;doomscrolling_turquia;r(PC1, escore fatorial) ≥ 0,95;r = 0.9988;critério atendido
+H2.6;procrastinacao_turquia;r(PC1, escore fatorial) ≥ 0,95;r = 0.9777;critério atendido
+H2.6;ais_japao;r(PC1, escore fatorial) ≥ 0,95;r = 0.9952;critério atendido
+H2.6;bps_japao;r(PC1, escore fatorial) ≥ 0,95;r = 0.9712;critério atendido

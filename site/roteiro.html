@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roteiro · Insônia digital</title><style>
+:root{--bg:#ffffff;--fg:#1d1f21;--muted:#5f6368;--line:#e3e5e8;--card:#f6f8f7;--accent:#00795a;--accent2:#0072B2;--warn:#8a5a00;--code:#f2f4f3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121416;--fg:#e8eaed;--muted:#a0a6ad;--line:#2c3035;--card:#1b1e21;--accent:#3fc79b;--accent2:#6cb6ff;--warn:#e0b050;--code:#1f2326}}
+:root[data-theme="dark"]{--bg:#121416;--fg:#e8eaed;--muted:#a0a6ad;--line:#2c3035;--card:#1b1e21;--accent:#3fc79b;--accent2:#6cb6ff;--warn:#e0b050;--code:#1f2326}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
+nav{max-width:1040px;margin:0 auto;padding:10px 16px;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+nav .marca{font-weight:700;margin-right:12px;color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;font-size:14px}
+nav a.ativo,nav a:hover{background:var(--card);color:var(--fg)}
+main{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:30px;line-height:1.2;margin:8px 0 16px}
+h2{font-size:22px;margin-top:40px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:18px;margin-top:28px}
+a{color:var(--accent2)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em}
+pre{background:var(--code);padding:12px;border-radius:8px;overflow-x:auto}
+pre code{padding:0;background:none}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--card);font-weight:600}
+img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff;margin:8px 0}
+blockquote{margin:12px 0;padding:8px 16px;border-left:4px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.secao-rotulo{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:32px}
+.rodape{color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:48px;padding-top:12px}
+.tema{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 8px;cursor:pointer}
+@media print{header{position:static}.tema{display:none}h2{break-before:auto}img,table{break-inside:avoid}}
+@media (max-width:600px){h1{font-size:24px}nav .marca{width:100%}}
+</style></head>
+<body><header><nav><span class="marca">Insônia digital</span><a href="index.html">Visão geral</a><a href="001.html">Dados</a><a href="002.html">PCA e análise fatorial</a><a href="003.html">Brasil × EUA</a><a href="004.html">Mundo</a><a href="005.html">Regressão, ANOVA e t</a><a href="roteiro.html" class=ativo>Roteiro</a><a href="verificacao.html">Verificação</a><button class="tema" type="button" aria-label="Alternar tema">◐</button></nav></header>
+<main><!-- Arquivo GERADO por analise/relatorio/relatorio.py a partir de docs/modelos/roteiro_apresentacao.md. Edite o modelo, não este arquivo. -->
+
+<h1 id="roteiro-da-apresentacao-insonia-digital">Roteiro da apresentação — Insônia digital</h1>
+<p>Duração-alvo: <strong>18 minutos + 5 de perguntas</strong>. Material de apoio: as páginas <code>site/*.html</code> (abrem no navegador, sem internet). Os números abaixo são preenchidos pelo script a partir de <code>resultados/</code>. Se algum resultado mudar, rode <code>python -m analise.rodar_tudo</code> e o roteiro se atualiza.</p>
+<p>Quem fala em cada bloco vem de <code>docs/modelos/integrantes.csv</code> (coluna <code>nome</code>). Enquanto o grupo não preencher, aparece o papel do bloco. Basta preencher os nomes e rodar <code>python -m analise.relatorio.relatorio</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Bloco</th>
+<th>Tempo</th>
+<th>Quem</th>
+<th>Tela</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Pergunta e por que importa</td>
+<td>2 min</td>
+<td>Apresentação da pergunta e da literatura</td>
+<td><code>index.html</code>, topo</td>
+</tr>
+<tr>
+<td>2. O que a literatura diz</td>
+<td>2 min</td>
+<td>Apresentação da pergunta e da literatura</td>
+<td><code>index.html</code>, seção 2</td>
+</tr>
+<tr>
+<td>3. Dados e harmonização</td>
+<td>2 min</td>
+<td>Apresentação dos dados, da PCA e da análise fatorial</td>
+<td><code>001.html</code></td>
+</tr>
+<tr>
+<td>4. PCA e análise fatorial</td>
+<td>3 min</td>
+<td>Apresentação dos dados, da PCA e da análise fatorial</td>
+<td><code>002.html</code></td>
+</tr>
+<tr>
+<td>5. Brasil × EUA (testes de hipótese)</td>
+<td>3 min</td>
+<td>Apresentação dos testes de hipótese e da regressão</td>
+<td><code>003.html</code></td>
+</tr>
+<tr>
+<td>6. Regressão, ANOVA, t e conferência dos p-valores</td>
+<td>3 min</td>
+<td>Apresentação dos testes de hipótese e da regressão</td>
+<td><code>005.html</code></td>
+</tr>
+<tr>
+<td>7. O Brasil no mundo</td>
+<td>2 min</td>
+<td>Apresentação da comparação mundial e das conclusões</td>
+<td><code>004.html</code></td>
+</tr>
+<tr>
+<td>8. Conclusões e limitações</td>
+<td>1 min</td>
+<td>Apresentação da comparação mundial e das conclusões</td>
+<td><code>index.html</code>, seções 7 e 8</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-pergunta-e-por-que-importa-apresentacao-da-pergunta-e-da-literatura-2-min">1. Pergunta e por que importa (Apresentação da pergunta e da literatura, 2 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Todo mundo já ouviu que celular à noite atrapalha o sono. Fomos ver se isso aparece nos dados brasileiros e se o tamanho é o mesmo de outros países."</li>
+<li>"Insônia digital não é diagnóstico. Chamamos assim os problemas de sono associados ao uso de telas."</li>
+<li>"A pergunta tem três partes:</li>
+<li>quem usa mais tela relata mais problema de sono?</li>
+<li>o tamanho disso é igual no Brasil e nos EUA?</li>
+<li>onde o Brasil fica frente a outros países e à literatura?"</li>
+</ul>
+<p><strong>Mostrar:</strong> o resumo no topo da <code>index.html</code>.</p>
+<h2 id="2-o-que-a-literatura-diz-apresentacao-da-pergunta-e-da-literatura-2-min">2. O que a literatura diz (Apresentação da pergunta e da literatura, 2 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"A associação é consistente: em 67 estudos, 90% acharam associação adversa (Hale e Guan, 2015)."</li>
+<li>"O efeito é pequeno: de 3 a 8 minutos de sono a menos por hora de tela (Przybylski, 2019)."</li>
+<li>"Pesa mais quando e como se usa: tela na cama e uso problemático se associam mais que o tempo total (Levenson, 2017; Hjetland, 2025; Han, Zhou e Liu, 2024)."</li>
+<li>"A relação vai nos dois sentidos: quem dorme mal também pega o celular (Bauducco, 2024)."</li>
+</ul>
+<p><strong>Transição:</strong> "Com isso em mente, fomos aos microdados."</p>
+<h2 id="3-dados-e-harmonizacao-apresentacao-dos-dados-da-pca-e-da-analise-fatorial-2-min">3. Dados e harmonização (Apresentação dos dados, da PCA e da análise fatorial, 2 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Usamos 125.920 pessoas de sete bases abertas.</li>
+<li>No Brasil: PNS 2019 (88.531 adultos) e Vigitel 2024 (27.048).</li>
+<li>Nos EUA: NHANES 2005-06 (5.563).</li>
+<li>E quatro amostras de China, Argentina, Turquia e Japão."</li>
+<li>"Cada pesquisa pergunta de um jeito. Harmonizar é criar as mesmas variáveis em todas:</li>
+<li>'não sabe' virou faltante;</li>
+<li>as horas de tela foram cortadas em 1 h e 3 h;</li>
+<li>cada variável ganhou uma nota de equivalência entre as bases."</li>
+<li>"No Brasil, 22% dos adultos (PNS) usam tela digital 3 h ou mais por dia no lazer; no Vigitel, 27%. No NHANES de 2005, antes do smartphone, eram 7%."</li>
+</ul>
+<p><strong>Mostrar:</strong> a figura de exposição em <code>001.html</code>.</p>
+<p><strong>Atenção:</strong> dizer já aqui que o NHANES é de 2005; isso volta nas limitações.</p>
+<h2 id="4-pca-e-analise-fatorial-apresentacao-dos-dados-da-pca-e-da-analise-fatorial-3-min">4. PCA e análise fatorial (Apresentação dos dados, da PCA e da análise fatorial, 3 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Antes de comparar países, precisamos saber se o índice de insônia mede a mesma coisa nos dois."</li>
+<li>"Os 3 sintomas são: dificuldade para adormecer, para voltar a dormir e acordar cedo demais."</li>
+<li>"A PCA, feita pela decomposição em valores singulares, mostra uma dimensão só. O primeiro componente explica 75% da variância no Vigitel e 71% no NHANES."</li>
+<li>"Três critérios dizem quantos fatores ficar: autovalor &gt; 1, gráfico scree e análise paralela. Os três dão 1."</li>
+<li>"A análise fatorial separa a parte comum dos itens. O coeficiente de Tucker compara as cargas dos dois países: 0,998. Acima de 0,95 as estruturas são consideradas equivalentes."</li>
+<li>"Conclusão: dá para comparar o índice entre os dois países, e a soma simples dos 3 itens serve (correlação 0,9998 com o componente)."</li>
+</ul>
+<p><strong>Mostrar:</strong> o gráfico de cargas Brasil × EUA em <code>002.html</code>.</p>
+<p><strong>Se perguntarem</strong> "por que PCA e análise fatorial?": a PCA resume a variância total; a análise fatorial modela só a variância comum. Aqui as duas contam a mesma história (escores correlacionam de 0,953 a 0,999).</p>
+<h2 id="5-brasil-eua-apresentacao-dos-testes-de-hipotese-e-da-regressao-3-min">5. Brasil × EUA (Apresentação dos testes de hipótese e da regressão, 3 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Comparamos quem usa tela 3 h ou mais com quem usa menos de 1 h, ajustando por idade, sexo e escolaridade."</li>
+<li>"A medida é a razão de prevalências. Com tela digital:</li>
+<li>Vigitel 1,32 (1,17 a 1,48);</li>
+<li>PNS 1,19;</li>
+<li>NHANES 1,41.
+  Nos três, rejeitamos H0 de RP = 1, já com a correção de Holm."</li>
+<li>"Cuidado com o NHANES: o desenho tem só 15 estratos. Com uma regra mais conservadora de graus de liberdade, a do <code>svyglm</code> do R, o p Holm vai a 0,061. Por isso dizemos que, nos EUA, a evidência é mais fraca."</li>
+<li>"Brasil e EUA são diferentes? A razão entre as duas RP é 1,07, com intervalo de 0,80 a 1,44, que contém o 1. Não detectamos diferença, o que não prova que sejam iguais: o intervalo é largo."</li>
+<li><strong>Ponto forte da fala:</strong> "Sem ajuste, a PNS mostra o contrário: RP de 0,85, como se tela protegesse. É confundimento por idade: jovens usam mais tela e relatam menos problema de sono. Ajustada, vai a 1,19."</li>
+</ul>
+<p><strong>Mostrar:</strong> <code>rp_por_pais.png</code> em <code>003.html</code>.</p>
+<p><strong>Se perguntarem</strong> "por que peso amostral?": cada entrevistado representa um número diferente de pessoas. Sem peso e sem estrato e UPA, o p-valor sai pequeno demais.</p>
+<h2 id="6-regressao-anova-t-e-conferencia-dos-p-valores-apresentacao-dos-testes-de-hipotese-e-da-regressao-3-min">6. Regressão, ANOVA, t e conferência dos p-valores (Apresentação dos testes de hipótese e da regressão, 3 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Fizemos a regressão linear múltipla no formato da aula: SUMMARY OUTPUT do Excel, ANOVA, t de cada coeficiente, IC 95% e dummies."</li>
+<li>"No Vigitel, quem usa 3 h ou mais tem índice de insônia 0,59 ponto maior, numa escala de 0 a 12 (p Holm &lt; 0,001)."</li>
+<li>"É significativo, mas pequeno: a tela acrescenta 0,4% ao R²."</li>
+<li>"No NHANES, sem peso o p seria &lt; 0,001. Com o desenho amostral, vai a 0,145 e não rejeitamos H0. O peso muda a conclusão."</li>
+<li>"A ANOVA de um fator do Excel no Vigitel (F = 34,91) dá exatamente o mesmo F que a regressão nas dummies de tela, sem covariáveis. É a mesma conta vista de dois jeitos. A decisão usa a versão com peso amostral (F de Wald = 9,61)."</li>
+<li>"Conferimos cada p-valor de três formas:</li>
+<li>a ferramenta Análise de Dados do Excel;</li>
+<li>a fórmula <code>T.DIST.2T</code> na planilha;</li>
+<li>o script em Python.
+  Foram 922 números: 920 dentro da tolerância e 2 exceções documentadas, porque o Excel arredonda o grau de liberdade do teste de Welch."</li>
+</ul>
+<p><strong>Mostrar:</strong> a tabela de hipóteses e a figura de efeitos em <code>005.html</code>. Se der tempo, a aba do SUMMARY OUTPUT de uma base.</p>
+<p><strong>Se perguntarem</strong> "por que o resultado da Argentina tem sinal contrário?": é frágil. Some quando a série escolar substitui a idade (p = 0,093), e são adolescentes com outra medida de tela.</p>
+<h2 id="7-o-brasil-no-mundo-apresentacao-da-comparacao-mundial-e-das-conclusoes-2-min">7. O Brasil no mundo (Apresentação da comparação mundial e das conclusões, 2 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ul>
+<li>"Para pôr bases com escalas diferentes no mesmo gráfico, usamos a correlação de Spearman e uma meta-análise de efeitos aleatórios."</li>
+<li>"O efeito varia muito entre as bases: I² = 98,4%."</li>
+<li>"Com tempo total de tela, a correlação combinada é 0,022. Bem abaixo dos 0,28 da meta-análise de referência."</li>
+<li>"Uso problemático (0,178) e celular antes de dormir (0,145) se associam mais, como diz a literatura. Mas com uma ou duas bases por grupo, o teste não confirma a diferença (p Holm 0,216)."</li>
+<li>"Entre o Brasil (0,016) e os outros países com tempo total, não detectamos diferença (p Holm 1,000)."</li>
+</ul>
+<p><strong>Mostrar:</strong> <code>floresta.png</code> em <code>004.html</code>.</p>
+<h2 id="8-conclusoes-e-limitacoes-apresentacao-da-comparacao-mundial-e-das-conclusoes-1-min">8. Conclusões e limitações (Apresentação da comparação mundial e das conclusões, 1 min)</h2>
+<p><strong>Dizer:</strong></p>
+<ol>
+<li>"Mais tela, mais problema de sono no Brasil, de forma consistente, mas com associação pequena."</li>
+<li>"Não detectamos diferença entre Brasil e EUA, mas o intervalo é largo."</li>
+<li>"Como e quando se usa parece importar mais do que quanto."</li>
+<li>"Os dados são transversais: é associação, não causa."</li>
+<li>"Principais limitações: NHANES de 2005, autorrelato e itens diferentes na PNS."</li>
+</ol>
+<p><strong>Fechar:</strong> "Todo número que mostramos sai de um script, e qualquer pessoa pode rodar tudo de novo a partir do repositório."</p>
+<hr />
+<h2 id="perguntas-provaveis">Perguntas prováveis</h2>
+<table>
+<thead>
+<tr>
+<th>Pergunta</th>
+<th>Resposta curta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Por que não usaram só uma base?</td>
+<td>Uma base responde se há associação; a pergunta era comparar países. Para isso, as medidas precisam ser equivalentes, o que a etapa 002 testou</td>
+</tr>
+<tr>
+<td>p &lt; 0,001 em quase tudo não é suspeito?</td>
+<td>Com 27.048 a 88.531 pessoas, qualquer diferença pequena fica significativa. Por isso mostramos tamanho de efeito e IC, não só p</td>
+</tr>
+<tr>
+<td>Por que Holm e não Bonferroni?</td>
+<td>Holm mantém a chance de pelo menos um falso positivo na família em no máximo 5%, como Bonferroni, mas rejeita mais</td>
+</tr>
+<tr>
+<td>Por que a RP e não o odds ratio?</td>
+<td>O desfecho é comum (16% a 22%). Nesse caso o OR exagera a associação, e a RP se lê direto como "quantas vezes mais"</td>
+</tr>
+<tr>
+<td>Tela causa insônia?</td>
+<td>Os dados não permitem dizer. São transversais, e a literatura mostra também o caminho inverso</td>
+</tr>
+<tr>
+<td>Os resultados do Excel batem com os do Python?</td>
+<td>Sim. A ferramenta do Excel foi executada de verdade e comparada número a número: 920 de 922 dentro da tolerância. As 2 exceções vêm do Excel arredondar o grau de liberdade de Welch</td>
+</tr>
+<tr>
+<td>Por que o NHANES de 2005 e não um mais recente?</td>
+<td>É o único ciclo do NHANES com os mesmos 3 sintomas de insônia do Vigitel e com latência em minutos. Os ciclos recentes só têm horas de sono</td>
+</tr>
+</tbody>
+</table>
+<div class="rodape">Estatística 4 · ESEG · Gerado por <code>analise/relatorio/gerar_site.py</code> a partir dos arquivos em <code>resultados/</code> e <code>docs/</code>. Associação observada em dados transversais não é causalidade.</div>
+</main><script>
+(function(){var b=document.querySelector('.tema');if(!b)return;var r=document.documentElement;
+try{var t=localStorage.getItem('tema');if(t)r.setAttribute('data-theme',t);}catch(e){}
+b.addEventListener('click',function(){var e=r.getAttribute('data-theme');
+var n=e==='dark'?'light':(e==='light'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'light':'dark'));
+r.setAttribute('data-theme',n);try{localStorage.setItem('tema',n);}catch(e){}});})();
+</script></body></html>

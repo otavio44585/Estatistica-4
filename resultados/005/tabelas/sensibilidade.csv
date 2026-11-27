@@ -1,0 +1,25 @@
+﻿hipotese;base;analise;b;ep;p;n;decisao_bruta_alfa;muda_em_relacao_ao_principal;exploratoria
+H5.1;vigitel2024;EP robusto HC3 (sem peso);0,5568015402909418;0,05873662081743837;2,7538614374216546e-21;27029;rejeita H0;False;False
+H5.1;vigitel2024;sem observações influentes (Cook > 4/n);0,5295822628695895;0,054114180195889566;1,4100131347677735e-22;25846;rejeita H0;False;False
+H5.1;vigitel2024;sem peso (o que o Excel calcula);0,5568015402909311;0,05750344384412975;3,8715985254066146e-22;27029;rejeita H0;False;False
+H5.1;vigitel2024;desfecho secundário: sono_horas (com peso);0,09465623271694508;0,055367821288515195;0,087353376913191;26922;não rejeita H0;True;True
+H5.2;nhanes0506;EP robusto HC3 (sem peso);0,658489835286816;0,1647177054573539;6,479660089318096e-05;5542;rejeita H0;True;False
+H5.2;nhanes0506;sem observações influentes (Cook > 4/n);0,22167550271422234;0,16038546663858608;0,16698645656378827;5295;não rejeita H0;False;False
+H5.2;nhanes0506;regra do svyglm, gl = d − p + 1 = 9 (com peso);0,4185953967124765;0,2721477012250015;0,15840045021613966;5542;não rejeita H0;False;False
+H5.2;nhanes0506;sem peso (o que o Excel calcula);0,6584898352868223;0,16202199314908175;4,886512887734585e-05;5542;rejeita H0;True;False
+H5.2;nhanes0506;desfecho secundário: sono_horas (com peso);-0,10023428232812243;0,09206092123232146;0,29343424986308836;5544;não rejeita H0;False;True
+H5.2;nhanes0506;desfecho secundário: latencia_min (com peso);3,348677435125197;1,1588812798024195;0,01122947219670472;5514;rejeita H0;True;True
+H5.3;xuzhou;EP robusto HC3 (sem peso);0,08778663841547182;0,00781433833108137;1,505773523920098e-28;2317;rejeita H0;False;False
+H5.3;xuzhou;sem observações influentes (Cook > 4/n);0,10288595746347108;0,006079905091249537;1,7917883159865033e-60;2202;rejeita H0;False;False
+H5.4;argentina;EP robusto HC3 (sem peso);-1,3225024933698646;0,41306279456769057;0,0014292759666967006;692;rejeita H0;False;False
+H5.4;argentina;sem observações influentes (Cook > 4/n);-0,9858277614859584;0,3233219448296419;0,002387725810281325;664;rejeita H0;False;False
+H5.4;argentina;log(1 + latência);-0,06218708220962652;0,0196849539132007;0,0016519669631747125;692;rejeita H0;False;False
+H5.4;argentina;série escolar no lugar da idade (mais casos completos);-0,7422612365359721;0,4408907494762109;0,09263994747254133;851;não rejeita H0;True;False
+H5.4;argentina;desfecho secundário: sono_horas;-0,023378942588002764;0,029715409943416548;0,4316931602636848;692;não rejeita H0;True;True
+H5.5;turquia;EP robusto HC3 (sem peso);0,10132110827085825;0,04066614917661742;0,01285204999685359;1216;rejeita H0;False;False
+H5.5;turquia;sem observações influentes (Cook > 4/n);0,04833539308472669;0,028996707724926584;0,09580028117462228;1157;não rejeita H0;True;False
+H5.5;turquia;log(1 + latência);0,0035510883585157457;0,0014476349457026182;0,014305916277927641;1216;rejeita H0;False;False
+H5.5;turquia;desfecho secundário: sono_horas;-0,00016366039369146955;0,0024449747528709426;0,9466425240262525;1216;não rejeita H0;True;True
+H5.6;japao;EP robusto HC3 (sem peso);0,8471911012551137;0,3948660819251526;0,032549859260195345;381;rejeita H0;False;False
+H5.6;japao;sem observações influentes (Cook > 4/n);0,9599246894345692;0,31682431407864475;0,0026252428174121296;361;rejeita H0;False;False
+H5.6;japao;desfecho secundário: sono_horas;-0,09723826583925352;0,09746066889984939;0,3190716932137586;372;não rejeita H0;True;True

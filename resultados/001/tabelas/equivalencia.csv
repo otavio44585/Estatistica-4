@@ -1,0 +1,23 @@
+﻿variavel;pns2019;vigitel2024;nhanes0506;xuzhou;argentina;turquia;japao
+dif_adormecer_freq;ausente;equivalente (âncoras diferentes);equivalente (âncoras diferentes);ausente;ausente;ausente;ausente
+problema_sono_freq;"aproximada: inclui despertar e dormir demais; 2 semanas";ausente;ausente;ausente;ausente;ausente;ausente
+sintoma_1;ausente;equivalente;equivalente;ausente;ausente;ausente;ausente
+sintoma_2;ausente;equivalente;equivalente;ausente;ausente;ausente;ausente
+sintoma_3;ausente;equivalente;equivalente;ausente;ausente;ausente;ausente
+insonia_idx;ausente;equivalente;equivalente;ausente;ausente;ausente;ausente
+sono_horas;ausente;aproximada: período de referência varia;aproximada;ausente;aproximada;aproximada;aproximada
+latencia_min;ausente;ausente;equivalente entre as 3 bases;ausente;equivalente;equivalente;ausente
+escore_sono_escala;ausente;ausente;ausente;não comparável entre escalas;não comparável entre escalas;não comparável entre escalas;não comparável entre escalas
+tela_digital_cat;aproximada;aproximada;"aproximada: inclui games; 2005, antes do smartphone";ausente;ausente;ausente;ausente
+tela_tv_cat;aproximada;aproximada;aproximada;ausente;ausente;ausente;ausente
+tela_presono_h;ausente;ausente;ausente;ausente;aproximada: janelas diferentes;ausente;aproximada: janelas diferentes
+uso_problematico;ausente;ausente;ausente;não comparável entre escalas;ausente;não comparável entre escalas;ausente
+idade;equivalente;equivalente;equivalente;ausente;equivalente;equivalente;equivalente
+faixa_etaria;derivada;derivada;derivada;ausente;ausente;ausente;ausente
+sexo;equivalente;equivalente;equivalente;rótulo desconhecido;equivalente;ausente;rótulo desconhecido
+escolaridade3;aproximada: médio incompleto = 0 (no Vigitel, 9-11 anos de estudo = 1);aproximada: 9-11 anos inclui médio incompleto, que na PNS e no NHANES fica em 0;aproximada: médio incompleto = 0 (no Vigitel = 1);ausente;ausente;ausente;ausente
+depressao_phq9;equivalente;ausente;equivalente;ausente;ausente;ausente;ausente
+depressao_diag;ausente;aproximada: diagnóstico referido;ausente;ausente;ausente;ausente;ausente
+peso;-;-;-;ausente;ausente;ausente;ausente
+estrato;-;ausente;-;ausente;ausente;ausente;ausente
+upa;-;ausente;-;ausente;ausente;ausente;ausente
