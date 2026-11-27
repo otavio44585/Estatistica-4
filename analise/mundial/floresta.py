@@ -88,3 +88,41 @@ def desenha(ef, meta, caminho, han=None):
     ax.set_title("Associação entre uso de tela e sono por base (IC 95%)", loc="left")
     ax.legend(loc="upper left", bbox_to_anchor=(0.0, -0.075), fontsize=8)
     salva(fig, caminho)
+
+
+def brasil_vs_resto(ef, meta, caminho):
+    """EXPLORATÓRIO: bases do Brasil × resto do mundo, cada uma e o combinado de cada lado (efeitos aleatórios)."""
+    estilo()
+    br, resto = ef[ef.pais == "Brasil"], ef[ef.pais != "Brasil"]
+    mb = meta[meta.analise == "Brasil (PNS + Vigitel)"].iloc[0]
+    mr = meta[meta.analise.str.startswith("resto do mundo")].iloc[0]
+    linhas = [("Brasil", "cab", None)] + [(f"{r.nome}  ({r.tipo})", "base", r) for r in br.itertuples()] +              [(f"Combinado Brasil (k = {int(mb.k)})", "comb", (mb, COR_PAIS["Brasil"])), ("", "branco", None),
+              ("Resto do mundo", "cab", None)] + [(f"{r.nome}  ({r.tipo})", "base", r) for r in resto.itertuples()] +              [(f"Combinado resto do mundo (k = {int(mr.k)})", "comb", (mr, "#444444"))]
+    n = len(linhas)
+    fig, ax = plt.subplots(figsize=(8.6, 0.38 * n + 1.3))
+    ax.axvline(0, color="black", lw=0.8)
+    for i, (rot, tipo, r) in enumerate(linhas):
+        y = n - i
+        if tipo == "base":
+            cor = COR_PAIS.get(r.pais, COR_NEUTRA)
+            ax.plot([r.rho_ic_inf, r.rho_ic_sup], [y, y], color=cor, lw=1.6)
+            ax.scatter([r.rho], [y], s=34, marker="s", color=cor, zorder=3)
+            ax.text(1.02, y, f"{r.rho:.3f} [{r.rho_ic_inf:.3f}; {r.rho_ic_sup:.3f}]".replace(".", ","),
+                    transform=ax.get_yaxis_transform(), va="center", fontsize=8.5)
+        elif tipo == "comb":
+            m, cor = r
+            _diamante(ax, y, m.rho, m.rho_ic_inf, m.rho_ic_sup, cor)
+            if m.rho_ic_inf_hk == m.rho_ic_inf_hk:
+                ax.plot([m.rho_ic_inf_hk, m.rho_ic_sup_hk], [y - 0.42] * 2, color=cor, lw=1.0, ls=(0, (3, 2)))
+            ax.text(1.02, y, f"{m.rho:.3f} [{m.rho_ic_inf:.3f}; {m.rho_ic_sup:.3f}]".replace(".", ","),
+                    transform=ax.get_yaxis_transform(), va="center", fontsize=8.5, fontweight="bold")
+    ax.set_yticks([n - i for i in range(n)])
+    ax.set_yticklabels([r for r, _, _ in linhas])
+    for lab, (_, tipo, _) in zip(ax.get_yticklabels(), linhas):
+        if tipo in ("cab", "comb"):
+            lab.set_fontweight("bold")
+    ax.set_ylim(0.3, n + 0.7)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("ρ de Spearman (positivo = mais tela, pior sono)")
+    ax.set_title("Brasil × resto do mundo (exploratório; tracejado = IC de Hartung-Knapp)", loc="left")
+    salva(fig, caminho)

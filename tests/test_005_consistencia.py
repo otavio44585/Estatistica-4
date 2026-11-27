@@ -131,10 +131,13 @@ def test_resultados_salvos_consistentes():
         pytest.skip("rode analise.regressao.modelos")
     h = le_csv(f)
     assert (h.p_holm >= h.p - 1e-15).all() and (h.p_holm <= 1).all()
-    assert set(h.hipotese) == {f"H5.{i}" for i in range(1, 12)}
+    # H5.2, H5.8, H5.10 e H5.11 retiradas em 2026-11-27 (EUA fora do trabalho)
+    assert set(h.hipotese) == {"H5.1", "H5.3", "H5.4", "H5.5", "H5.6", "H5.7", "H5.9"}
+    assert not h.base.astype(str).str.contains("nhanes").any()
+    assert set(h[h.familia == "R1"].hipotese) == {"H5.1", "H5.3", "H5.4", "H5.5", "H5.6"}
+    assert set(h[h.familia == "R2"].hipotese) == {"H5.7", "H5.9"}
     for _, r in h.dropna(subset=["ic_inf"]).iterrows():
-        if r.hipotese != "H5.11":                   # H5.11 decide pelo F do bloco, não pelo IC de um coeficiente
-            assert ic_p_consistentes(r.b, r.ic_inf, r.ic_sup, r.p), r.hipotese
+        assert ic_p_consistentes(r.b, r.ic_inf, r.ic_sup, r.p), r.hipotese
     eq = le_csv(caminhos.RESULTADOS / "005" / "tabelas" / "equivalencias.csv")
     exatas = eq[eq.checagem.str.contains(" = ")]
     assert (exatas.dif_relativa < 1e-9).all()

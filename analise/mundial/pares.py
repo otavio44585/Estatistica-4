@@ -1,5 +1,7 @@
 """T060 — Pares exposição × desfecho da spec 004 (fixados no plano em 2026-11-27, antes do cálculo).
 
+NHANES 2005-06 removido do trabalho por decisão do grupo (2026-11-27; Histórico da spec 004).
+
 Sinal padronizado: positivo = mais tela, pior sono. `inverte=True` troca o sinal quando o desfecho
 é "quanto maior, melhor" (duração, qualidade).
 """
@@ -28,10 +30,7 @@ PRINCIPAIS = [
         "aproximada: item do PHQ-9 inclui despertar e dormir demais", peso="peso"),
     Par("vigitel2024", "tempo total", "tela_digital_ord", "insonia_idx", False,
         "computador/tablet/celular no tempo livre (8 faixas)", "índice de insônia, 3 sintomas (0-12)",
-        "equivalente ao NHANES no desfecho; exposição aproximada", peso="peso"),
-    Par("nhanes0506", "tempo total", "tela_digital_ord", "insonia_idx", False,
-        "computador/games fora do trabalho (7 faixas)", "índice de insônia, 3 sintomas (0-12)",
-        "equivalente ao Vigitel no desfecho; exposição de 2005, antes do smartphone", peso="peso"),
+        "aproximada: exposição em faixas próprias", peso="peso"),
     Par("argentina", "tempo total", "tela_total_h", "latencia_min", False,
         "horas de tela por dia", "latência do sono (min)", "aproximada: adolescentes"),
     Par("japao", "pré-sono", "tela_presono_h", "escore_sono_escala", False,

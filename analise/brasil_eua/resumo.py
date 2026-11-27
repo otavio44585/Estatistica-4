@@ -45,11 +45,16 @@ def main():
 
     o = []
     w = o.append
-    w("# 003 — Brasil × EUA: resultados\n")
+    w("# 003 — Brasil: tela e sono na PNS 2019 e no Vigitel 2024 — resultados\n")
     w("Gerado por `python -m analise.brasil_eua.resumo` a partir de `resultados/003/tabelas/*.csv`. "
       "Execução de 2026-11-27; aprovação do grupo pendente.\n")
     w("## Transparência\n")
-    w("As hipóteses H3.1–H3.9 foram formuladas depois da análise exploratória de 2026-11-27 "
+    w("**Os EUA (NHANES 2005-06) saíram do trabalho inteiro em 2026-11-27**, por decisão do grupo: a única base dos "
+      "EUA é de 2005, antes do smartphone, e o tempo de tela daquela época não é comparável com o de 2019–2024. "
+      "A decisão veio depois de os resultados com o NHANES já terem sido estimados, e fica registrada aqui. H3.3 e "
+      "H3.6 foram retiradas; H3.4, H3.7 e H3.8 rodam só no Vigitel e na PNS. A comparação com outros países fica "
+      "na spec 004.\n")
+    w("As hipóteses H3.1–H3.9 (exceto as retiradas) foram formuladas depois da análise exploratória de 2026-11-27 "
       "(`docs/exploratorio_comparativo_br_eua_2026-11-27.*`). O modelo, as covariáveis e os pesos foram fixados no "
       "plano antes desta execução. A exposição digital foi fixada no código como a principal da família 2 antes de "
       "rodar (o foco da spec é a tela digital); a TV na família 2 é **complementar** e não entra na correção de Holm. "
@@ -59,16 +64,14 @@ def main():
     w("| Modelo | Poisson com ligação log, peso amostral; exp(β) = razão de prevalências (RP) |")
     w("| Covariáveis (ajustada) | faixa etária (18–29, 30–44, 45–59, 60+), sexo, escolaridade em 3 faixas |")
     w("| Exposição alta × baixa | tela ≥ 3 h/dia × não usa ou < 1 h/dia (`tela_digital_cat`, `tela_tv_cat`) |")
-    w("| Desfechos | Vigitel: dificuldade para adormecer quase sempre ou sempre; NHANES: often/almost always (5 ou mais "
-      "vezes por mês); PNS: problema de sono em mais da metade dos dias |")
-    w("| Variância | linearização de Taylor com estrato e UPA (PNS, NHANES); sanduíche robusto só com peso (Vigitel) |")
+    w("| Desfechos | Vigitel: dificuldade para adormecer quase sempre ou sempre; PNS: problema de sono em mais da "
+      "metade dos dias |")
+    w("| Variância | linearização de Taylor com estrato e UPA (PNS); sanduíche robusto só com peso (Vigitel) |")
     gl_pns = int(R[R.base == "pns2019"].gl.dropna().iloc[0])
-    gl_nh = int(R[R.base == "nhanes0506"].gl.dropna().iloc[0])
-    w(f"| Graus de liberdade do desenho | regra única do projeto: UPAs − estratos (PNS {gl_pns}; NHANES {gl_nh}); "
+    w(f"| Graus de liberdade do desenho | regra única do projeto: UPAs − estratos (PNS {gl_pns}); "
       f"Vigitel: normal. Sensibilidade: regra do svyglm (d − p + 1) |")
     w("| Wald conjunto (q > 1) | correção de Korn-Graubard: F = (d − q + 1)/(d·q)·W, gl (q, d − q + 1) |")
     w("| RP por faixa etária | estimadas por domínio: ajuste na faixa, variância com todas as UPAs e estratos |")
-    w(f"| Base empilhada (H3.6) | gl mostrado = gl do NHANES ({gl_nh}); Satterthwaite registrado como sensibilidade |")
     w("| Correção | Holm na família 1 (por exposição: digital e TV) e na família 2 |")
     w("| α | 0,05 bilateral |\n")
 
@@ -84,9 +87,9 @@ def main():
         w(f"| {r.familia} | {r.hipotese} | {nb(r.base)} | {r.exposicao} | {e} | {est(r)} | {formata_p(r.p)} | "
           f"{formata_p(r.p_holm)} | {r.decisao} |")
     w("")
-    w("Estimativas: H3.1–H3.3 = RP de tela alta; H3.4 = RP por faixa de exposição (escore 0/1/2); "
-      "H3.6 = razão das RP (NHANES ÷ Vigitel); H3.8 = razão RP da TV ÷ RP digital no mesmo modelo; "
-      "H3.9 = razão das RP (Vigitel ÷ PNS).\n")
+    w("Estimativas: H3.1–H3.2 = RP de tela alta; H3.4 = RP por faixa de exposição (escore 0/1/2); "
+      "H3.8 = razão RP da TV ÷ RP digital no mesmo modelo; H3.9 = razão das RP (Vigitel ÷ PNS). "
+      "H3.3 e H3.6 (NHANES) foram retiradas em 2026-11-27.\n")
 
     w("## Sensibilidade à regra de graus de liberdade\n")
     w("Fonte: colunas `gl2_svyglm`, `p_svyglm`, `p_holm_svyglm` de `resultados/003/tabelas/hipoteses.csv` (Holm "
@@ -116,21 +119,16 @@ def main():
         cel = [f"{num(100 * g.loc[k, 'prevalencia_ponderada'], 1)}% (n = {int(g.loc[k, 'n'])})" for k in (0, 1, 2)]
         w(f"| {nb(b)} | {e} | " + " | ".join(cel) + " |")
     w("")
-    w("## Comparações entre bases (inclui TV, complementar)\n")
+    w("## Comparação entre as duas pesquisas brasileiras (H3.9; inclui TV, complementar)\n")
     w("Fonte: `resultados/003/tabelas/comparacoes_entre_bases.csv`.\n")
-    w("| H | Exposição | Método | Razão (IC 95%) | Estatística | p | gl Satterthwaite (p) |\n|---|---|---|---|---|---|---|")
+    w("| H | Exposição | Método | Razão (IC 95%) | Estatística | p |\n|---|---|---|---|---|---|")
     for _, r in C.iterrows():
         e = rp(r, "razao") if not np.isnan(r.razao) else "—"
-        sat = (f"{num(r.gl_satterthwaite, 1)} ({formata_p(r.p_satterthwaite)})"
-               if not np.isnan(r.get("gl_satterthwaite", np.nan)) else "—")
-        w(f"| {r.hipotese} | {r.exposicao} | {r.metodo} | {e} | {est(r)} | {formata_p(r.p)} | {sat} |")
+        w(f"| {r.hipotese} | {r.exposicao} | {r.metodo} | {e} | {est(r)} | {formata_p(r.p)} |")
     w("")
-    w("Na base empilhada, a variância da interação país × tela vem quase toda do NHANES: o gl mostrado é o do "
-      "desenho do NHANES (regra do projeto), e não o da base empilhada (~27 mil, otimista). O gl de "
-      "Satterthwaite fica abaixo de 15 e não muda nenhuma decisão.\n")
     w("## Sensibilidades (não entram nas famílias)\n")
     w("Fonte: `resultados/003/tabelas/sensibilidade.csv`. Renda não existe no contrato de variáveis (ausente no "
-      "Vigitel e não harmonizada na PNS/NHANES): sensibilidade não feita.\n")
+      "Vigitel e não harmonizada na PNS): sensibilidade não feita.\n")
     w("| Base | Exposição | Modelo | Comparação | RP (IC 95%) | p | n |\n|---|---|---|---|---|---|---|")
     for _, r in S.iterrows():
         w(f"| {nb(r.base)} | {r.exposicao} | {r.modelo} | {r.comparacao} | {rp(r, 'rp')} | {formata_p(r.p)} | {int(r.n)} |")
@@ -156,24 +154,18 @@ def main():
     def h(hip, base, expo="digital"):
         return H[(H.hipotese == hip) & (H.base == base) & (H.exposicao == expo)].iloc[0]
     bruta_pns = R2[(R2.base == "pns2019") & (R2.exposicao == "digital") & (R2.modelo == "bruta")].iloc[0]
-    tv36 = C[(C.hipotese == "H3.6") & (C.exposicao == "TV") & C.metodo.str.startswith("interação país")].iloc[0]
-    tv36s = C[(C.hipotese == "H3.6 (sensibilidade)") & (C.exposicao == "TV")].iloc[0]
-    h36 = H[H.hipotese == "H3.6"].iloc[0]
     w("## Leitura\n")
-    f1p = H[(H.familia == "1 (digital)") & H.hipotese.isin(["H3.1", "H3.2", "H3.3"])]
-    tv1 = H[(H.familia == "1 (TV)") & H.hipotese.isin(["H3.1", "H3.2", "H3.3"])]
-    h33 = h("H3.3", "nhanes0506")
-    w(f"- **Dentro de cada país (família 1).** Com ajuste por idade, sexo e escolaridade, tela digital ≥ 3 h/dia se "
-      f"associou a mais problema de sono frequente no Vigitel (RP {rp(h('H3.1', 'vigitel2024'))}), na PNS "
-      f"(RP {rp(h('H3.2', 'pns2019'))}) e no NHANES (RP {rp(h('H3.3', 'nhanes0506'))}). "
-      f"{int((f1p.decisao == 'rejeita H0').sum())} de 3 rejeitam H0 depois de Holm com a regra de gl do projeto. "
-      f"Com TV, {int((tv1.decisao == 'rejeita H0').sum())} de 3 (RP de {num(tv1.estimativa.min())} a "
+    f1p = H[(H.familia == "1 (digital)") & H.hipotese.isin(["H3.1", "H3.2"])]
+    tv1 = H[(H.familia == "1 (TV)") & H.hipotese.isin(["H3.1", "H3.2"])]
+    h32 = h("H3.2", "pns2019")
+    w(f"- **Nas duas pesquisas brasileiras (família 1).** Com ajuste por idade, sexo e escolaridade, tela digital "
+      f"≥ 3 h/dia se associou a mais problema de sono frequente no Vigitel (RP {rp(h('H3.1', 'vigitel2024'))}) e na "
+      f"PNS (RP {rp(h32)}). {int((f1p.decisao == 'rejeita H0').sum())} de 2 rejeitam H0 depois de Holm. "
+      f"Com TV, {int((tv1.decisao == 'rejeita H0').sum())} de 2 (RP de {num(tv1.estimativa.min())} a "
       f"{num(tv1.estimativa.max())}).")
-    w(f"- **A decisão de H3.3 depende da regra de graus de liberdade.** Com UPAs − estratos ({int(h33.gl2)} gl, regra "
-      f"do projeto) o p Holm é {formata_p(h33.p_holm)} ({h33.decisao}). Com a regra do svyglm "
-      f"({int(h33.gl2_svyglm)} gl), o p Holm vai a {formata_p(h33.p_holm_svyglm)} ({h33.decisao_svyglm}). "
-      f"A estimativa (RP {num(h33.estimativa)}) é a mesma; muda só a incerteza atribuída a um desenho com "
-      f"{int(h33.gl2)} gl. Vigitel e PNS não dependem da regra.")
+    w(f"- **Regra de graus de liberdade.** Na PNS ({int(h32.gl2)} gl de desenho), a regra do svyglm "
+      f"({int(h32.gl2_svyglm)} gl) dá p Holm {formata_p(h32.p_holm_svyglm)} ({h32.decisao_svyglm}): com tantas UPAs, "
+      f"a regra não muda nada. O Vigitel não tem estrato nem UPA.")
     w(f"- **Confundimento por idade na PNS.** A RP bruta da tela digital é {rp(bruta_pns, 'rp')}: quem usa mais tela "
       f"é mais jovem e jovens relatam menos problema de sono. Ajustada, passa a {rp(h('H3.2', 'pns2019'))}.")
     d34 = H[H.hipotese == "H3.4"]
@@ -184,12 +176,6 @@ def main():
       f"em {abaixo} das {len(L)} combinações (1 ou mais em: {'; '.join(acima) or 'nenhuma'}), e o excesso aparece em "
       f"≥ 3 h. O teste exploratório de desvio da linearidade tem p < 0,05 em {int((L.p < 0.05).sum())} das {len(L)}. "
       f"Os dados apontam um limiar perto de 3 h, não uma relação linear.")
-    w(f"- **Brasil × EUA (H3.6).** Para a tela digital, não foi detectada diferença entre a RP do NHANES e a do "
-      f"Vigitel (razão {rp(h36)}, p Holm {formata_p(h36.p_holm)}). O IC é compatível com uma RP dos EUA de "
-      f"{num(100 * (1 - h36.ic_inf), 0)}% menor a {num(100 * (h36.ic_sup - 1), 0)}% maior que a do Brasil: "
-      f"ausência de evidência de diferença, não prova de igualdade. Para a TV (complementar, fora de Holm) a razão foi "
-      f"{rp(tv36, 'razao')}, p {formata_p(tv36.p)}, mas sem peso fica em {rp(tv36s, 'razao')} "
-      f"(p {formata_p(tv36s.p)}): a diferença depende da ponderação do NHANES e não deve ser lida como robusta.")
     f2 = H[H.familia == "2"]
     i1829 = I[(I.base == "pns2019") & (I.exposicao == "digital") & (I.faixa == "18-29")].iloc[0]
     h39 = H[H.hipotese == "H3.9"].iloc[0]
@@ -208,12 +194,11 @@ def main():
     w("## Limitações\n")
     w("- Transversal: associação, não efeito. Causalidade reversa (quem dorme mal pode usar mais tela à noite) e "
       "confundimento residual (saúde mental, trabalho em turnos, renda) seguem possíveis.")
-    w("- NHANES 2005-06 é anterior ao smartphone; a comparação mistura país e época (2005 × 2024).")
-    w("- O item da PNS (problema de sono em geral, 2 semanas) não é o mesmo do Vigitel e do NHANES (dificuldade "
-      "para adormecer); H3.9 mistura base e item.")
+    w("- Sem comparação internacional nesta spec: os EUA saíram do trabalho (base única de 2005, antes do "
+      "smartphone). A posição do Brasil frente a outros países fica na spec 004.")
+    w("- O item da PNS (problema de sono em geral, 2 semanas) não é o mesmo do Vigitel (dificuldade para "
+      "adormecer); H3.9 mistura pesquisa e item.")
     w("- Vigitel cobre só as capitais e não divulga estrato e UPA: a variância usa só o peso.")
-    w(f"- NHANES tem {gl_nh} graus de liberdade de desenho: intervalos largos e testes com pouco poder; a decisão de "
-      f"H3.3 muda com a regra de gl (ver acima).")
     w("- Renda não entrou (ausente no contrato de variáveis).")
     (OUT / "RESUMO.md").write_text("\n".join(o) + "\n", encoding="utf-8")
     print("\n".join(o))

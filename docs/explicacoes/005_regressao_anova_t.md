@@ -6,7 +6,7 @@ Spec 005. Números em `resultados/005/RESUMO.md`; passo a passo no notebook `ana
 
 Pergunta: **quanto o sono muda, em média, quando o uso de tela muda e as outras variáveis ficam fixas?**
 
-O modelo do Vigitel e do NHANES é:
+O modelo do Vigitel é:
 
 ```text
 índice de insônia = β0 + β1·D(1 a <3 h) + β2·D(≥3 h) + β3·idade + β4·feminino + β5·D(médio) + β6·D(superior) + erro
@@ -16,7 +16,7 @@ O modelo do Vigitel e do NHANES é:
   que fica de fora é a **referência** (tela < 1 h, sexo masculino, escolaridade abaixo do médio). Pôr todas as categorias
   causa a "armadilha das dummies": as colunas somam 1 e a regressão não tem solução única.
 - **β2** é a diferença média do índice entre quem usa ≥ 3 h e quem usa < 1 h, **com idade, sexo e escolaridade iguais**. É o
-  coeficiente testado na H5.1 e na H5.2.
+  coeficiente testado na H5.1.
 - Nas bases de repositório a tela é contínua, e o β é a mudança em Y para cada hora (ou ponto de escala) a mais.
 
 ## 2. Como ler o SUMMARY OUTPUT do Excel, linha por linha
@@ -63,29 +63,24 @@ Com uma variável só (q = 1), F parcial = t². O ganho de R² (ΔR²) e o f² =
 - **Amostra grande torna quase tudo significativo.** No Vigitel (27 mil pessoas), a tela explica 0,38% da variância do
   índice de insônia e o p é < 0,001. Por isso cada teste vem com tamanho de efeito e IC.
 
-## 5. Peso amostral: por que o NHANES muda de resposta
+## 5. Peso amostral
 
-Vigitel e NHANES são amostras complexas: cada pessoa representa um número diferente de pessoas da população (peso), e no
-NHANES as entrevistas vêm em conglomerados (30 UPAs em 15 estratos). A Regressão do Excel trata todo mundo como amostra
-aleatória simples. A versão com peso usa:
+> **EUA fora do trabalho (decisão do grupo, 2026-11-27).** O NHANES 2005-06 e a comparação Brasil × EUA na base
+> empilhada (H5.2, H5.8, H5.10 e H5.11) saíram da análise: a única base dos EUA era de 2005, antes do smartphone.
+
+O Vigitel é uma amostra complexa: cada pessoa representa um número diferente de pessoas da população (peso). A
+Regressão do Excel trata todo mundo como amostra aleatória simples. A versão com peso usa:
 
 - **WLS** (mínimos quadrados ponderados) para a estimativa;
-- **erro padrão por linearização** (o mesmo princípio do pacote `survey` do R), que reconhece que pessoas da mesma UPA se
-  parecem.
+- **erro padrão robusto** (o mesmo princípio da linearização do pacote `survey` do R). O Vigitel só divulga o peso,
+  sem estrato nem UPA, então cada pessoa conta como a sua própria UPA.
 
-No NHANES, isso aumenta muito o erro padrão e deixa só 15 graus de liberdade (30 UPAs − 15 estratos, a regra única do
-projeto, a mesma da spec 003). Sem peso, o coeficiente de ≥ 3 h é significativo (p < 0,001). Com o desenho, não é
-(p = 0,145; com a regra do `svyglm` do R, que desconta os parâmetros e deixa 9 gl, p = 0,158 — a decisão não muda).
-A spec manda decidir pela versão com peso. A versão do Excel fica como demonstração da técnica e sensibilidade.
+No Vigitel, o peso quase dobra o erro padrão do coeficiente de ≥ 3 h, mas a decisão não muda (p < 0,001 nas duas
+versões). A spec manda decidir pela versão com peso; a versão do Excel fica como demonstração da técnica e sensibilidade.
 
-O resultado sem peso do NHANES também é **frágil** por outro motivo: sem as observações influentes (Cook > 4/n), o p
-sobe para cerca de 0,167.
-
-**Quando o teste envolve mais de um coeficiente** (a ANOVA ponderada, o F global ponderado e a interação da H5.11), o F de
-Wald recebe a correção de Korn-Graubard: F = (d − q + 1)/(d·q)·W, com gl (q, d − q + 1), onde d é o gl do desenho e q o
-número de coeficientes testados. Com poucos graus de liberdade (NHANES), ela evita que o p fique pequeno demais.
-Na H5.11, a variância da interação vem quase toda do NHANES, então o teste usa o gl de desenho do NHANES (15), e não
-o da base empilhada (que seria de 27 mil, dominado pelas pessoas do Vigitel).
+**Quando o teste envolve mais de um coeficiente** (a ANOVA ponderada e o F global ponderado), o F de Wald recebe a
+correção de Korn-Graubard: F = (d − q + 1)/(d·q)·W, com gl (q, d − q + 1), onde d é o gl do desenho e q o número de
+coeficientes testados. Com d na casa das dezenas de milhares (Vigitel), ela coincide com W/q.
 
 **d de Cohen** tem a mesma definição sem e com peso: diferença de médias dividida pelo desvio-padrão combinado dentro
 dos grupos (com peso, os pesos são normalizados para somar n).
@@ -98,10 +93,10 @@ dos grupos (com peso, os pesos são normalizados para somar n).
 | B | fórmula `T.DIST.2T` / `F.DIST.RT` ao lado da saída | p copiado ou digitado errado; gl errado |
 | C | script, por álgebra matricial | erro de clique no Excel; intervalo errado; planilha editada à mão |
 
-Resultado: 920 de 920 números dentro da tolerância nos três caminhos (maior diferença relativa 4,5 × 10⁻¹⁰), mais
-**2 exceções documentadas**, uma por base com teste t (Vigitel e NHANES). Elas mostram um detalhe que ninguém via: no
-teste t de Welch, **o Excel arredonda os graus de liberdade para inteiro**, então o p dele difere do p exato em até
-1,5 × 10⁻⁵ (relativo), acima da tolerância. O relatório usa o gl fracionário; com o mesmo gl inteiro, Excel e script batem.
+Resultado: 611 de 611 números dentro da tolerância nos três caminhos (maior diferença relativa 4,5 × 10⁻¹⁰), mais
+**1 exceção documentada**, no teste t do Vigitel. Ela mostra um detalhe que ninguém via: no teste t de Welch,
+**o Excel arredonda os graus de liberdade para inteiro**, então o p dele difere do p exato em 4,5 × 10⁻⁷ (relativo),
+acima da tolerância. O relatório usa o gl fracionário; com o mesmo gl inteiro, Excel e script batem.
 Em `resultados/005/conferencia.csv`, as colunas `dentro_tolerancia` e `excecao_documentada` separam os dois casos.
 
 ## 7. Pressupostos e o que fizemos quando falharam
@@ -109,20 +104,16 @@ Em `resultados/005/conferencia.csv`, as colunas `dentro_tolerancia` e `excecao_d
 | Pressuposto | Achado | O que fizemos |
 |---|---|---|
 | Normalidade dos resíduos | rejeitada em todas as bases (desfechos discretos e assimétricos) | com n de centenas ou mais, t e F são aproximadamente válidos; QQ-plots no relatório |
-| Variância constante | violada em Vigitel, NHANES e Xuzhou (Breusch-Pagan) | erro padrão robusto HC3 como sensibilidade: nenhuma decisão muda |
+| Variância constante | violada no Vigitel e em Xuzhou (Breusch-Pagan) | erro padrão robusto HC3 como sensibilidade: nenhuma decisão muda |
 | Multicolinearidade | VIF da tela ≤ 1,6; com a categoria menos frequente como referência, dummies de renda (Xuzhou) e escolaridade dos pais (Argentina) tinham VIF > 10 | referência passou a ser a categoria mais frequente: VIF máximo ≤ 2,0, coeficiente da tela igual |
 | Observações influentes | cerca de 5% com Cook > 4/n | reestimar sem elas: a Turquia perde significância |
 
 ## 8. O que concluímos (sem linguagem causal)
 
-- Em 5 das 6 bases o coeficiente da tela é diferente de zero depois de Holm; em 4 delas o sinal é o esperado (mais tela, pior sono).
-- O efeito é **pequeno**: o bloco de tela acrescenta de 0,1% (NHANES) a 1,5% (Japão) de R², exceto no uso problemático de
+- Nas 5 bases o coeficiente da tela é diferente de zero depois de Holm; em 4 delas o sinal é o esperado (mais tela, pior sono).
+- O efeito é **pequeno**: o bloco de tela acrescenta de 0,4% (Vigitel) a 1,5% (Japão) de R², exceto no uso problemático de
   smartphone em Xuzhou (6,8%).
 - **Argentina:** mais tela antes de dormir se associa a **menor** latência. O resultado não se sustenta com outra
   definição de amostra.
-- **Brasil × EUA (H5.11):** não foi detectada diferença entre os coeficientes da tela dos dois países (F(2; 14) = 0,19,
-  p = 0,830), mas o IC é largo (−0,81 a 0,47 ponto na diferença do coeficiente de ≥ 3 h): não dá para afirmar que é igual.
-- **NHANES (H5.2):** com o desenho amostral, não se rejeita H0 (p = 0,145); o resultado sem peso também perde
-  significância sem as observações influentes.
 - É associação em dados transversais: a direção pode ser a inversa (quem dorme mal fica mais tempo na tela) e pode
   haver confundimento não medido.

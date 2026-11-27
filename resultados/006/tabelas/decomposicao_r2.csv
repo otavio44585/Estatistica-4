@@ -1,0 +1,9 @@
+﻿base;desfecho;n;fator;rotulo;r2_completo;r2_unico;r2_unico_pct;r2_sozinho;r2_sozinho_pct
+vigitel2024;índice de insônia (0–12);27029;tela;tempo de tela;0,041614;0,003757;0,375703;0,002814;0,281414
+vigitel2024;índice de insônia (0–12);27029;idade;idade;0,041614;7,8e-05;0,0078;0,0;3e-06
+vigitel2024;índice de insônia (0–12);27029;sexo;sexo;0,041614;0,029402;2,94021;0,028644;2,864433
+vigitel2024;índice de insônia (0–12);27029;escolaridade;escolaridade;0,041614;0,010011;1,001081;0,007539;0,753897
+pns2019;problema de sono (0–3);88531;tela;tempo de tela;0,038889;0,001717;0,171726;0,003083;0,30834
+pns2019;problema de sono (0–3);88531;idade;idade;0,038889;0,011461;1,146105;0,016397;1,639712
+pns2019;problema de sono (0–3);88531;sexo;sexo;0,038889;0,01982;1,981982;0,021309;2,130931
+pns2019;problema de sono (0–3);88531;escolaridade;escolaridade;0,038889;0,00116;0,115988;0,00395;0,394987

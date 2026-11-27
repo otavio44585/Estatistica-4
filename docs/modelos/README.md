@@ -8,8 +8,8 @@
 <h1 align="center">Insônia digital</h1>
 
 <p align="center">
-  Associação entre uso de telas e sono em adultos no Brasil, nos EUA e em outros quatro países,<br>
-  com microdados abertos e comparação com a literatura. Trabalho de Estatística 4 da Faculdade ESEG.
+  Associação entre uso de telas e sono em adultos no Brasil (PNS 2019 e Vigitel 2024), comparada com outros<br>
+  quatro países e com a literatura, a partir de microdados abertos. Trabalho de Estatística 4 da Faculdade ESEG.
 </p>
 
 <p align="center">
@@ -33,7 +33,7 @@
 | Apresentação (slides) | [abrir](https://otavio44585.github.io/Estatistica-4/site/apresentacao.html) | [`site/apresentacao.html`](site/apresentacao.html) |
 | Roteiro da apresentação | [abrir](https://otavio44585.github.io/Estatistica-4/site/roteiro.html) | [`site/roteiro.html`](site/roteiro.html) |
 | Verificação independente | [abrir](https://otavio44585.github.io/Estatistica-4/site/verificacao.html) | [`site/verificacao.html`](site/verificacao.html) |
-| Etapas: dados, PCA e AF, Brasil × EUA, mundo, regressão | [001](https://otavio44585.github.io/Estatistica-4/site/001.html) · [002](https://otavio44585.github.io/Estatistica-4/site/002.html) · [003](https://otavio44585.github.io/Estatistica-4/site/003.html) · [004](https://otavio44585.github.io/Estatistica-4/site/004.html) · [005](https://otavio44585.github.io/Estatistica-4/site/005.html) | `site/001.html` … `site/005.html` |
+| Etapas: dados, PCA e AF, Brasil (PNS × Vigitel), mundo, regressão, figuras-síntese | [001](https://otavio44585.github.io/Estatistica-4/site/001.html) · [002](https://otavio44585.github.io/Estatistica-4/site/002.html) · [003](https://otavio44585.github.io/Estatistica-4/site/003.html) · [004](https://otavio44585.github.io/Estatistica-4/site/004.html) · [005](https://otavio44585.github.io/Estatistica-4/site/005.html) · [006](https://otavio44585.github.io/Estatistica-4/site/006.html) | `site/001.html` … `site/006.html` |
 
 As páginas são arquivos HTML autocontidos (estilo, figuras e logo embutidos): também abrem direto no navegador, sem internet, depois de baixar o repositório.
 
@@ -44,12 +44,15 @@ As páginas são arquivos HTML autocontidos (estilo, figuras e logo embutidos): 
 
 ## Resultados em 1 minuto
 
-1. **A associação aparece nos dois países.** Quem usa computador, tablet ou celular 3 h ou mais por dia no lazer (contra menos de 1 h) relata mais problema de sono: razão de prevalências ajustada de {{rp_digital_vigitel2024}} (IC 95% {{rp_digital_vigitel2024_ic}}) no Vigitel 2024, {{rp_digital_pns2019}} ({{rp_digital_pns2019_ic}}) na PNS 2019 e {{rp_digital_nhanes0506}} ({{rp_digital_nhanes0506_ic}}) no NHANES 2005-06.
-2. **Brasil × EUA: não foi detectada diferença.** A razão entre as duas razões de prevalência é {{h36_razao}} (IC 95% {{h36_ic}}; p Holm {{h36_pholm}}). Não detectar diferença não prova que sejam iguais: o intervalo vai de uma associação {{h36_ic_pct_inf}} menor a {{h36_ic_pct_sup}} maior nos EUA.
-3. **No NHANES, a H3.3 depende da regra de graus de liberdade.** Com gl = UPAs − estratos ({{nhanes_gl}} gl, a regra do projeto), p Holm = {{rp_digital_nhanes0506_pholm}} e H0 é rejeitada. Pela regra do `svyglm` do R ({{h33_gl_svyglm}} gl), p Holm = {{h33_pholm_svyglm}} e H0 deixaria de ser rejeitada. As demais decisões não mudam.
-4. **O efeito é pequeno.** No Vigitel, o tempo de tela explica {{H51_dr2_pct}} da variação do índice de insônia. Nas sete bases, a correlação com o tempo total de tela é ρ = {{meta_rho_total}}, abaixo da meta-análise de referência (r = 0,28); uso problemático (ρ = {{meta_rho_problematico}}) e celular antes de dormir (ρ = {{meta_rho_presono}}) se associam mais.
-5. **A idade confunde.** Sem ajuste, a PNS mostra o contrário (RP bruta {{rp_bruta_digital_pns2019}}), porque quem mais usa tela é mais jovem. Ajustada por idade, sexo e escolaridade, a RP vai a {{rp_ajustada_digital_pns2019}}.
-6. **A medida de insônia é a mesma nos dois países.** Os três sintomas formam um único fator no Brasil e nos EUA, com cargas praticamente iguais (congruência de Tucker φ = {{tucker_insonia}}), o que autoriza a comparação.
+> [!NOTE]
+> **Os EUA saíram do trabalho em 2026-11-27.** A única base americana (NHANES 2005-06) é de antes do smartphone e não ajuda a responder a pergunta. A decisão do grupo veio depois de ver os resultados e está registrada no Histórico das specs 001 a 006.
+
+1. **A associação aparece nas duas pesquisas brasileiras.** Quem usa computador, tablet ou celular 3 h ou mais por dia no lazer (contra menos de 1 h) relata mais problema de sono: razão de prevalências ajustada de {{rp_digital_vigitel2024}} (IC 95% {{rp_digital_vigitel2024_ic}}; p Holm {{rp_digital_vigitel2024_pholm}}) no Vigitel 2024 e {{rp_digital_pns2019}} ({{rp_digital_pns2019_ic}}; p Holm {{rp_digital_pns2019_pholm}}) na PNS 2019.
+2. **PNS e Vigitel concordam.** Não foi detectada diferença entre as duas pesquisas: a razão entre as razões de prevalência é {{h39_razao}} (IC 95% {{h39_ic}}; p Holm {{h39_pholm}}). Não detectar diferença não prova que sejam iguais, e as perguntas de sono são diferentes.
+3. **O efeito é pequeno.** A tela explica {{r2u_vigitel2024_tela}} da variação do índice de insônia no Vigitel e {{r2u_pns2019_tela}} na PNS: menos que o sexo ({{r2u_vigitel2024_sexo}} e {{r2u_pns2019_sexo}}) e, na PNS, menos que a idade ({{r2u_pns2019_idade}}).
+4. **A idade confunde.** Sem ajuste, a PNS mostra o contrário (RP bruta {{rp_bruta_digital_pns2019}}): {{pns_tela3h_18_29}} dos adultos de 18 a 29 anos usam tela 3 h ou mais, contra {{pns_tela3h_60mais}} dos de 60 ou mais, e os jovens relatam menos problema de sono. Ajustada por idade, sexo e escolaridade, a RP vai a {{rp_ajustada_digital_pns2019}}.
+5. **O Brasil no mundo.** As duas pesquisas brasileiras combinadas dão correlação ρ = {{meta_rho_brasil}}; China, Argentina, Turquia e Japão, ρ = {{meta_rho_resto}}. Não foi detectada diferença (exploratório, p = {{brasil_resto_p}}). Com tempo total de tela, a correlação (ρ = {{meta_rho_total}}) fica bem abaixo da meta-análise de referência (r = 0,28); uso problemático (ρ = {{meta_rho_problematico}}) e celular antes de dormir (ρ = {{meta_rho_presono}}) se associam mais.
+6. **O índice de insônia do Vigitel mede uma coisa só.** Os três sintomas formam um único fator ({{var_pc1_insonia3_vigitel}} da variância na primeira componente; α = {{alfa_insonia3_vigitel}}), e a soma 0–12 resume o fator (r = {{r_soma_pc1_insonia3_vigitel}}).
 
 > [!IMPORTANT]
 > **Associação, não causa.** Os dados são transversais, e a literatura descreve também o caminho inverso: quem não dorme pega o celular. Nada aqui permite dizer que a tela causa insônia.
@@ -72,6 +75,7 @@ python -m pytest
 | `python -m analise.rodar_tudo` | Tudo, na ordem das specs, a partir dos microdados brutos |
 | `python -m analise.rodar_tudo --sem-brutos` | Pula a harmonização (001) e usa os processados já existentes |
 | `python -m analise.rodar_tudo --sem-excel` | Pula a automação do Excel; a conferência lê as saídas já exportadas em `resultados/005/excel_saidas/` |
+| `python -m analise.relatorio.figuras_apresentacao` | Gera as figuras-síntese em `resultados/006/` (teste desenhado, decomposição do R², confundimento por idade, Brasil no mundo) |
 | `python -m analise.relatorio.relatorio` | Preenche relatório, roteiro, slides e este README com os números de `resultados/` |
 | `python -m analise.relatorio.gerar_site` | Gera `site/*.html` e o `index.html` da raiz |
 | `python -m analise.relatorio.numeros` | Lista as chaves de números disponíveis para os modelos |
@@ -86,7 +90,7 @@ Todo resultado próprio do relatório sai de um arquivo em `resultados/`, gerado
 | Pasta | Conteúdo |
 |---|---|
 | `specs/` | Planejamento por SDD: princípios (`constitution.md`) e uma pasta por etapa com especificação, plano e tarefas. Começar por [`specs/README.md`](specs/README.md) |
-| `analise/` | Código: harmonização das bases (`harmonizacao/`), PCA e análise fatorial (`multivariada/`), Brasil × EUA (`brasil_eua/`), comparação mundial (`mundial/`), regressão linear (`regressao/`), relatório e páginas (`relatorio/`) |
+| `analise/` | Código: harmonização das bases (`harmonizacao/`), PCA e análise fatorial (`multivariada/`), as duas pesquisas brasileiras (`brasil_eua/`, nome mantido para não quebrar links), comparação mundial (`mundial/`), regressão linear (`regressao/`), relatório, figuras-síntese e páginas (`relatorio/`) |
 | `analise/notebooks/` | Um notebook por etapa, já executado, com a narrativa de cada técnica |
 | `resultados/` | Tabelas (CSV com `;` e vírgula decimal) e figuras geradas pelos scripts; `RESUMO.md` por etapa |
 | `docs/` | Estado da arte, inventários, explicações didáticas (`docs/explicacoes/`), relatório e roteiro |
@@ -105,7 +109,7 @@ flowchart LR
   B[("Microdados brutos<br/>fora do git")] --> S1["001 Harmonização"]
   S1 --> P[("analise/dados/processados")]
   P --> S2["002 PCA e análise fatorial"]
-  S2 --> S3["003 Brasil × EUA"]
+  S2 --> S3["003 Brasil: PNS × Vigitel"]
   S2 --> S4["004 Mundo"]
   S2 --> S5["005 Regressão, ANOVA e t"]
   S3 --> S6["006 Relatório, site e slides"]
@@ -119,11 +123,11 @@ flowchart LR
 |---|---|
 | [000-levantamento](specs/000-levantamento/spec.md) | Qual é o estado da arte e que dados abertos existem? |
 | [001-dados-harmonizados](specs/001-dados-harmonizados/spec.md) | Dá para medir tela e sono de forma comparável entre as bases? |
-| [002-estrutura-latente](specs/002-estrutura-latente/spec.md) | Que construtos os itens medem, e são os mesmos entre países? (PCA e AF) |
-| [003-brasil-eua](specs/003-brasil-eua/spec.md) | A associação tela × sono tem a mesma magnitude no Brasil e nos EUA? |
-| [004-comparacao-mundial](specs/004-comparacao-mundial/spec.md) | Onde o Brasil se posiciona frente a outros países e à literatura? |
+| [002-estrutura-latente](specs/002-estrutura-latente/spec.md) | Que construtos os itens medem, e quantas dimensões cada escala tem? (PCA e AF) |
+| [003-brasil-eua](specs/003-brasil-eua/spec.md) | Brasil: tela e sono nas duas pesquisas nacionais (PNS 2019 e Vigitel 2024). Quem usa mais tela relata mais problema de sono, e as duas pesquisas concordam? |
+| [004-comparacao-mundial](specs/004-comparacao-mundial/spec.md) | Onde o Brasil se posiciona frente a outros países (China, Argentina, Turquia, Japão) e à literatura? |
 | [005-regressao-linear](specs/005-regressao-linear/spec.md) | Quanto o sono varia com a tela, com covariáveis fixas? (regressão, ANOVA, t, conferência dos p-valores) |
-| [006-entrega](specs/006-entrega/spec.md) | Relatório, apresentação e reprodutibilidade |
+| [006-entrega](specs/006-entrega/spec.md) | Relatório, apresentação, figuras-síntese e reprodutibilidade |
 
 ## Fontes dos dados
 
@@ -131,13 +135,12 @@ flowchart LR
 |---|---|---|---|---|
 | PNS 2019 | Brasil | {{n_pns2019}} | [IBGE, microdados](https://ftp.ibge.gov.br/PNS/2019/Microdados/) | Aberto |
 | Vigitel 2024 | Brasil, 27 capitais | {{n_vigitel2024}} | [Ministério da Saúde](https://svs.aids.gov.br/daent/cgdnt/vigitel/) | Aberto; licença não declarada |
-| NHANES 2005-06 | EUA | {{n_nhanes0506}} | [CDC/NCHS](https://wwwn.cdc.gov/nchs/nhanes/) | Aberto, domínio público |
 | Xuzhou (SAS-SV × PSQI) | China | {{n_xuzhou}} | [PLOS ONE, material suplementar](https://doi.org/10.1371/journal.pone.0340852.s001) | CC BY 4.0 |
 | Pérez-Chada (tela e sono) | Argentina | {{n_argentina}} | [Mendeley Data](https://doi.org/10.17632/pj9hzmp7ym.1) | CC BY 4.0 |
 | Doomscrolling × sono | Turquia | {{n_turquia}} | [Mendeley Data](https://doi.org/10.17632/tjbkb6f25x.1) | CC BY 4.0 |
 | Okajima (celular antes de dormir) | Japão | {{n_japao}} | [Zenodo](https://zenodo.org/records/20743494) | CC BY 4.0 |
 
-Contraponto intrapessoal usado só na análise de sensibilidade: Siebers et al. (2024), Holanda, [UvA Figshare](https://doi.org/10.21942/uva.26395903.v2). Inventário completo, com as fontes descartadas e o motivo: [`docs/inventario-dados.md`](docs/inventario-dados.md).
+Total analisado: {{n_total}} pessoas. O NHANES 2005-06 (EUA) foi usado até 2026-11-27 e retirado do trabalho (base anterior ao smartphone). Contraponto intrapessoal usado só na análise de sensibilidade: Siebers et al. (2024), Holanda, [UvA Figshare](https://doi.org/10.21942/uva.26395903.v2). Inventário completo, com as fontes descartadas e o motivo: [`docs/inventario-dados.md`](docs/inventario-dados.md).
 
 ## Princípios (resumo)
 

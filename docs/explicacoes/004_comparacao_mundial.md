@@ -1,4 +1,6 @@
-# Comparação mundial: como pusemos 7 bases de 6 países no mesmo gráfico
+# Comparação mundial: como pusemos 6 bases de 5 países no mesmo gráfico
+
+**Decisão do grupo (2026-11-27):** o NHANES 2005-06 (EUA) saiu do trabalho inteiro. A única base dos EUA era de 2005, antes do smartphone, e a comparação misturava país com época.
 
 Explicação para o grupo da spec 004. Os números estão em `resultados/004/RESUMO.md`, e o passo a passo com código está no notebook `analise/notebooks/05_comparacao_mundial.ipynb`.
 
@@ -6,7 +8,7 @@ Explicação para o grupo da spec 004. Os números estão em `resultados/004/RES
 
 Cada base mede sono e tela de um jeito:
 
-- **Brasil e EUA:** faixas de horas de tela e frequência de sintomas de insônia.
+- **Brasil:** faixas de horas de tela e frequência de sintomas de insônia (Vigitel) ou problema de sono (PNS).
 - **China e Turquia:** escalas de dependência do celular e o PSQI.
 - **Japão:** horas de celular antes de dormir e a Escala de Insônia de Atenas.
 - **Argentina:** horas de tela e minutos para adormecer.
@@ -48,30 +50,31 @@ Cada passo é feito à mão no notebook e conferido com o `statsmodels`; a difer
 
 **Dois intervalos para a média combinada.**
 
-- O **DerSimonian-Laird** usa a distribuição normal. Com poucas bases (aqui 7), esse intervalo sai estreito demais.
+- O **DerSimonian-Laird** usa a distribuição normal. Com poucas bases (aqui 6), esse intervalo sai estreito demais.
 - O **Hartung-Knapp** corrige isso: reescala o erro padrão pela dispersão observada entre as bases e usa t com k − 1 graus de liberdade.
 
-Mostramos os dois lado a lado. No global, o DL dá 0,017 a 0,146 e o Hartung-Knapp, −0,016 a 0,178, que inclui o zero. Nenhum dos quatro testes usa esse intervalo, então nenhuma decisão muda. Muda a leitura: o "número combinado" é ainda menos firme do que parecia. O Hartung-Knapp foi acrescentado depois da verificação independente.
+Mostramos os dois lado a lado. No global, o DL dá 0,015 a 0,165 e o Hartung-Knapp, −0,029 a 0,207, que inclui o zero. Nenhum dos quatro testes usa esse intervalo, então nenhuma decisão muda. Muda a leitura: o "número combinado" é ainda menos firme do que parecia. O Hartung-Knapp foi acrescentado depois da verificação independente.
 
-**Efeito do desenho nos inquéritos.** O EP de cada correlação supõe amostra aleatória simples, mas PNS, Vigitel e NHANES têm pesos desiguais. Isso aumenta a variância por um fator chamado *deff*: pelo menos 1 + CV² dos pesos (Kish).
+**Efeito do desenho nos inquéritos.** O EP de cada correlação supõe amostra aleatória simples, mas PNS e Vigitel têm pesos desiguais. Isso aumenta a variância por um fator chamado *deff*: pelo menos 1 + CV² dos pesos (Kish).
 
-- O deff deu 3,2 na PNS, 3,7 no Vigitel e 1,6 no NHANES.
-- Multiplicando a variância desses três inquéritos pelo deff, I² cai de 98,4% para 97,5% e Q de 382 para 243. A heterogeneidade continua enorme e as decisões não mudam.
+- O deff deu 3,2 na PNS e 3,7 no Vigitel.
+- Multiplicando a variância desses dois inquéritos pelo deff, I² cai de 98,7% para 97,9% e Q de 376 para 241. A heterogeneidade continua enorme e as decisões não mudam.
 - Esse deff ignora estrato e conglomerado, então ainda subestima a incerteza.
 
 ## Os quatro testes e como ler cada um
 
 | Hipótese | Pergunta | Resultado | Como ler |
 |---|---|---|---|
-| H4.1 | O efeito é o mesmo em todas as bases? | Q = 382, p < 0,001 | Não é. Varia muito (I² = 98%). |
-| H4.2 | O tipo de exposição muda a associação? | Q entre = 5,3, p = 0,072 (Holm 0,216) | A ordem bate com a literatura: tempo total 0,02 < pré-sono 0,14 < uso problemático 0,18. Mas com tão poucas bases por grupo, o teste não tem poder para afirmar a diferença. "Não rejeitar" não quer dizer "são iguais". |
-| H4.3 | O Brasil difere dos outros países com tempo total? | z = −0,33, p = 0,743 | Não foi detectada diferença. O IC da diferença (escala z, −0,11 a 0,08) é compatível com diferenças pequenas nos dois sentidos. As duas bases brasileiras discordam entre si (ver abaixo). |
-| H4.4 | Nossa estimativa de tempo total é equivalente à da meta-análise de referência (r = 0,28)? | TOST p = 1,000 | Não. Ficamos bem abaixo (0,022). |
+| H4.1 | O efeito é o mesmo em todas as bases? | Q = 376, p < 0,001 | Não é. Varia muito (I² = 99%). |
+| H4.2 | O tipo de exposição muda a associação? | Q entre = 4,8, p = 0,090 (Holm 0,270) | A ordem bate com a literatura: tempo total 0,02 < pré-sono 0,14 < uso problemático 0,18. Mas com tão poucas bases por grupo, o teste não tem poder para afirmar a diferença. "Não rejeitar" não quer dizer "são iguais". |
+| H4.3 | O Brasil difere dos outros países com tempo total? | z = −0,08, p = 0,939 | Não foi detectada diferença. Sem o NHANES, o outro lado é só a Argentina (k = 1, adolescentes): o teste compara o Brasil com uma base. As duas bases brasileiras discordam entre si (ver abaixo). |
+| H4.4 | Nossa estimativa de tempo total é equivalente à da meta-análise de referência (r = 0,28)? | TOST p = 1,000 | Não. Ficamos bem abaixo (0,017). |
+| Exploratório | Os estudos brasileiros diferem do resto do mundo (Argentina, Japão, China, Turquia, todas as exposições)? | Brasil 0,016 × resto 0,131; z = −1,36, p = 0,173 | Não foi detectada diferença. Pedido depois de ver os resultados, fora de Holm, e mistura tipos de exposição: o resto do mundo sobe por causa das escalas de uso problemático e de pré-sono. |
 
 **H4.2 foi registrada com uma ordem, mas testada sem ela.**
 
 - A spec escreveu H4.2 como "tempo total < pré-sono < uso problemático". O teste fixado no plano (Q entre subgrupos) só pergunta se os grupos diferem, sem usar a ordem.
-- Como análise **exploratória**, fora da correção de Holm, ajustamos uma reta às três médias de subgrupo (escore 0, 1, 2). A inclinação é positiva (z = 2,22, p = 0,026). Isso combina com a ordem prevista, mas são só três pontos, e o teste foi escolhido depois de ver os dados.
+- Como análise **exploratória**, fora da correção de Holm, ajustamos uma reta às três médias de subgrupo (escore 0, 1, 2). A inclinação é positiva (z = 2,11, p = 0,035; valores em `resultados/004/RESUMO.md`). Isso combina com a ordem prevista, mas são só três pontos, e o teste foi escolhido depois de ver os dados.
 - O subgrupo pré-sono tem uma base só (Japão), então não tem τ² nem intervalo de Hartung-Knapp próprios.
 
 **Teste de equivalência (TOST).** Num teste comum, H0 é "igual" e só se conclui "diferente". Para concluir "equivalente", invertemos: H0 é "fora do intervalo 0,21–0,35" e fazemos dois testes unilaterais, um contra cada limite. Só se os dois rejeitarem dá para dizer que a estimativa está dentro.
@@ -88,7 +91,7 @@ O **ρ parcial** remove a parte da ordem que é explicada pela idade. Ajustado p
 
 A meta-análise de referência (Han, Zhou e Liu, 2024) encontrou r = 0,28 para uso geral × qualidade do sono. Nossa estimativa de tempo total é bem menor. Explicações possíveis, que este trabalho **não** consegue separar:
 
-- **População:** a referência tem sobretudo estudantes e jovens. PNS, Vigitel e NHANES cobrem todos os adultos.
+- **População:** a referência tem sobretudo estudantes e jovens. PNS e Vigitel cobrem todos os adultos.
 - **Medida:** qualidade do sono (PSQI) é diferente de frequência de sintomas de insônia, problema de sono em 2 semanas ou latência.
 - **Exposição:** faixas grosseiras de horas por dia atenuam a correlação.
 - **Seleção da literatura:** estudos publicados tendem a ter efeitos maiores do que inquéritos nacionais, que não foram feitos para testar essa associação.

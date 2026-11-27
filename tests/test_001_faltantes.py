@@ -8,11 +8,11 @@ from analise.comum.faltantes import troca_por_nan, recodifica
 from analise.comum.validacao import valida
 from analise.harmonizacao import recodes as R
 
-BASES = ["pns2019", "vigitel2024", "nhanes0506", "xuzhou", "argentina", "turquia", "japao"]
+BASES = ["pns2019", "vigitel2024", "xuzhou", "argentina", "turquia", "japao"]
 
 
 def test_validacao_falha_com_codigo_especial():
-    sujo = pd.DataFrame({"sintoma_1": [0, 2, 9], "idade": [30, 40, 50]})   # 9 = não sabe no NHANES
+    sujo = pd.DataFrame({"sintoma_1": [0, 2, 9], "idade": [30, 40, 50]})   # 9 = ignorado na PNS
     with pytest.raises(AssertionError, match="sintoma_1"):
         valida(sujo)
 
@@ -21,24 +21,23 @@ def test_validacao_passa_com_dado_limpo():
     valida(pd.DataFrame({"sintoma_1": [0, 2, np.nan], "insonia_idx": [0, 12, 5], "tela_digital_cat": [0, 1, 2]}))
 
 
-def test_troca_por_nan_nhanes():
-    df = pd.DataFrame({"SLQ080": [0, 4, 7, 9], "SLD020M": [15, 60, 77, 99]})
-    out = troca_por_nan(df, "nhanes0506")
-    assert out.SLQ080.isna().tolist() == [False, False, True, True]
-    assert out.SLD020M.isna().tolist() == [False, False, True, True]
+def test_troca_por_nan_pns_e_vigitel():
+    pns = troca_por_nan(pd.DataFrame({"N010": [1, 4, 9], "P04502": [2, 6, 9]}), "pns2019")
+    assert pns.N010.isna().tolist() == [False, False, True] and pns.P04502.isna().tolist() == [False, False, True]
+    vig = troca_por_nan(pd.DataFrame({"q59b": [1, 2, 777, 888], "r703": [1, 5, 777, 888]}), "vigitel2024")
+    assert vig.q59b.isna().tolist() == [False, False, True, True] and vig.r703.isna().tolist() == [False, False, True, True]
 
 
 def test_recodificacao_exposicao_bate_com_o_plano():
-    # plano 001: PNS P04502 6,1 -> 0; 2,3 -> 1; 4,5 -> 2 ; NHANES PAD600 6,0 -> 0; 1,2 -> 1; 3-5 -> 2
+    # plano 001: PNS P04502 6,1 -> 0; 2,3 -> 1; 4,5 -> 2 ; Vigitel q59c (0 = não usa) 0,1 -> 0; 2,3 -> 1; 4-7 -> 2
     assert recodifica(pd.Series([6, 1, 2, 3, 4, 5, 9]), R.PNS_CAT).tolist()[:6] == [0, 0, 1, 1, 2, 2]
     assert np.isnan(recodifica(pd.Series([9]), R.PNS_CAT).iloc[0])
-    assert recodifica(pd.Series([6, 0, 1, 2, 3, 4, 5]), R.NH_CAT).tolist() == [0, 0, 1, 1, 2, 2, 2]
     assert recodifica(pd.Series([0, 1, 2, 3, 4, 5, 6, 7]), R.VIG_CAT).tolist() == [0, 0, 1, 1, 2, 2, 2, 2]
 
 
 def test_ordem_phq9_pns():
-    # o item de sono do PHQ-9 (3º) é a pergunta N010 da PNS e a DPQ030 do NHANES
-    assert R.PHQ_PNS[2] == "N010" and R.PHQ_NH[2] == "DPQ030"
+    # o item de sono do PHQ-9 (3º na ordem do instrumento) é a pergunta N010 da PNS
+    assert R.PHQ_PNS[2] == "N010"
 
 
 @pytest.mark.parametrize("base", BASES)

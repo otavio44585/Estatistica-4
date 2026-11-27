@@ -2,7 +2,7 @@
 
 Spec-Driven Development adaptado a análise de dados. A especificação (pergunta, hipóteses, critérios de aceite) é a fonte de verdade; scripts, notebooks e números do relatório derivam dela. O layout segue o do GitHub Spec Kit (`specs/NNN-nome/` com `spec.md`, `plan.md`, `tasks.md`), então adotar a CLI depois não exige mover nada.
 
-Tema: **insônia digital** — associação entre uso de telas e sono, comparando Brasil, EUA e outros países com microdados abertos e com a literatura.
+Tema: **insônia digital** — associação entre uso de telas e sono no Brasil (PNS 2019 e Vigitel 2024), comparada com outros quatro países (China, Argentina, Turquia, Japão) e com a literatura, a partir de microdados abertos. Os EUA (NHANES 2005-06) saíram do trabalho em 2026-11-27 (ver Execução).
 
 ## Ciclo
 
@@ -29,11 +29,11 @@ Regras:
 |---|---|---|---|
 | [000-levantamento](000-levantamento/spec.md) | Qual é o estado da arte e que dados abertos existem? | — | concluída (2026-11-13) |
 | [001-dados-harmonizados](001-dados-harmonizados/spec.md) | Dá para medir tela e sono de forma comparável entre as bases? | 000 | executada (2026-11-27); aprovação do grupo pendente |
-| [002-estrutura-latente](002-estrutura-latente/spec.md) | Que construtos os itens medem, e são os mesmos entre países? (PCA + AF) | 001 | executada (2026-11-27); aprovação do grupo pendente |
-| [003-brasil-eua](003-brasil-eua/spec.md) | A associação tela × sono tem a mesma magnitude no Brasil e nos EUA? | 001, 002 | executada (2026-11-27); aprovação do grupo pendente |
-| [004-comparacao-mundial](004-comparacao-mundial/spec.md) | Onde o Brasil se posiciona frente a outros países e à literatura? | 001, 002 | executada (2026-11-27); aprovação do grupo pendente |
+| [002-estrutura-latente](002-estrutura-latente/spec.md) | Que construtos os itens medem, e quantas dimensões cada escala tem? (PCA + AF; comparação entre países retirada com os EUA) | 001 | executada (2026-11-27); aprovação do grupo pendente |
+| [003-brasil-eua](003-brasil-eua/spec.md) | Brasil: tela e sono nas duas pesquisas nacionais (PNS 2019 e Vigitel 2024). Pasta com o nome antigo, mantido para não quebrar links | 001, 002 | executada (2026-11-27); reescopada sem os EUA no mesmo dia; aprovação do grupo pendente |
+| [004-comparacao-mundial](004-comparacao-mundial/spec.md) | Onde o Brasil se posiciona frente a outros países (China, Argentina, Turquia, Japão) e à literatura? | 001, 002 | executada (2026-11-27); aprovação do grupo pendente |
 | [005-regressao-linear](005-regressao-linear/spec.md) | Quanto o sono varia com a tela, com covariáveis fixas? (regressão linear múltipla, ANOVA, t, conferência dos p-valores) | 001, 002 | executada (2026-11-27); aprovação do grupo pendente |
-| [006-entrega](006-entrega/spec.md) | Relatório, apresentação e reprodutibilidade | 002–005, enunciado | primeira versão gerada (2026-11-27); ajustar ao enunciado |
+| [006-entrega](006-entrega/spec.md) | Relatório, apresentação, figuras-síntese e reprodutibilidade | 002–005, enunciado | primeira versão gerada (2026-11-27), refeita sem os EUA no mesmo dia; ajustar ao enunciado |
 
 ## Fluxo de dados
 
@@ -45,12 +45,12 @@ analise/dados/processados/<base>.parquet
    │
    ├─ 002: PCA por SVD + análise fatorial ─► escores latentes (insônia, PHQ-9, uso problemático)
    │                                            │
-   ├─ 003: Brasil × EUA ◄───────────────────────┤  RP ajustada, interação país × tela
+   ├─ 003: Brasil (PNS × Vigitel) ◄─────────────┤  RP ajustada nas duas pesquisas, comparação entre elas
    ├─ 004: mundo ◄──────────────────────────────┤  efeito comum (r), meta-análise, Q / I², subgrupos
    └─ 005: regressão linear ◄───────────────────┘  MQO (Excel + script), ANOVA, t, conferência dos p
                  │
                  ▼
-           006: relatório + apresentação
+           006: relatório + apresentação + figuras-síntese (resultados/006)
 ```
 
 ## Onde fica cada coisa
@@ -71,3 +71,11 @@ analise/dados/processados/<base>.parquet
 ## Execução
 
 Em 2026-11-27 as specs 001–005 foram executadas a pedido de um integrante, antes da aprovação formal do grupo (exceção ao princípio 12, registrada aqui). Cada spec tem no Histórico as decisões tomadas na execução; o grupo revisa e pode reabrir qualquer uma. Pipeline completo: `python -m analise.rodar_tudo`.
+
+**2026-11-27, decisão do grupo: os EUA saíram do trabalho inteiro.** A única base americana (NHANES 2005-06) é de antes do smartphone, e o tempo de tela daquela época não é comparável com o de 2019–2024; comparar os dois países misturaria país e época. A decisão foi tomada **depois de ver os resultados** que incluíam o NHANES, e está registrada no Histórico de cada spec (001 a 006). Consequências:
+
+- o núcleo passa a ter 6 bases: PNS 2019 e Vigitel 2024 (Brasil) e as 4 de repositório (China, Argentina, Turquia, Japão);
+- a 003 passa a ser "Brasil: tela e sono nas duas pesquisas nacionais"; a pasta `003-brasil-eua` e o pacote `analise/brasil_eua` mantêm o nome para não quebrar links;
+- hipóteses retiradas, com a numeração original mantida: H2.2–H2.4, H3.3, H3.6 (e as partes NHANES de H3.4, H3.7 e H3.8), H5.2, H5.8, H5.10 e H5.11;
+- análise nova, exploratória e fora de Holm: Brasil (PNS + Vigitel) × resto do mundo (spec 004);
+- relatório, README, páginas, slides, roteiro e testes refeitos sem os EUA; a verificação independente ganhou a seção "Itens superados pela retirada dos EUA".

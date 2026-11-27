@@ -25,10 +25,9 @@ class Modelo:
     peso: bool           # inquérito com peso amostral
 
 
+# H5.2 (NHANES 2005-06) e H5.11 (base empilhada Vigitel + NHANES) retiradas em 2026-11-27: EUA fora do trabalho.
 MODELOS = [
     Modelo("H5.1", "vigitel2024", "Vigitel 2024", "insonia_idx", "índice de insônia (0-12)",
-           ("tela_1a3h", "tela_3h_mais"), "tela_3h_mais", True),
-    Modelo("H5.2", "nhanes0506", "NHANES 2005-06", "insonia_idx", "índice de insônia (0-12)",
            ("tela_1a3h", "tela_3h_mais"), "tela_3h_mais", True),
     Modelo("H5.3", "xuzhou", "Xuzhou", "psqi", "PSQI (0-21)", ("sas_sv",), "sas_sv", False),
     Modelo("H5.4", "argentina", "Argentina", "latencia_min", "latência (min)", ("tela_presono_h",), "tela_presono_h", False),
@@ -59,7 +58,7 @@ def matriz(base: str, sens_serie: bool = False, y_col: str | None = None) -> tup
     n0 = len(d)
     cov = pd.DataFrame(index=d.index)
     tela = pd.DataFrame(index=d.index)
-    if base in ("vigitel2024", "nhanes0506"):
+    if base == "vigitel2024":
         y = d.insonia_idx
         tela["tela_1a3h"] = (d.tela_digital_cat == 1).astype(float).where(d.tela_digital_cat.notna())
         tela["tela_3h_mais"] = (d.tela_digital_cat == 2).astype(float).where(d.tela_digital_cat.notna())
@@ -104,28 +103,9 @@ def matriz(base: str, sens_serie: bool = False, y_col: str | None = None) -> tup
     ok = df.notna().all(axis=1) & desenho.notna().all(axis=1)
     info = dict(n_partida=n0, n_final=int(ok.sum()), tela=list(tela.columns), cov=list(cov.columns),
                 desenho=desenho[ok].reset_index(drop=True), tela_cat=None)
-    if base in ("vigitel2024", "nhanes0506"):
+    if base == "vigitel2024":
         info["tela_cat"] = d.tela_digital_cat[ok].reset_index(drop=True)
     return df[ok].reset_index(drop=True), info
-
-
-def empilhada() -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Base Vigitel + NHANES para H5.11: + país (EUA = 1) + país × tela. Pesos reescalados para somar o n de cada base."""
-    partes, desenhos = [], []
-    for base, eua in (("vigitel2024", 0.0), ("nhanes0506", 1.0)):
-        df, info = matriz(base)
-        df["eua"] = eua
-        df["eua_x_tela_1a3h"] = eua * df.tela_1a3h
-        df["eua_x_tela_3h_mais"] = eua * df.tela_3h_mais
-        des = info["desenho"].copy()
-        des["peso"] = des.peso * len(des) / des.peso.sum()
-        des["estrato"] = des.get("estrato", pd.Series(-1, index=des.index)).astype(float) + (1000 if eua else 0)
-        if "upa" not in des:
-            des["upa"] = np.arange(len(des), dtype=float)             # Vigitel: cada pessoa é a sua UPA
-            des["estrato"] = -1.0
-        partes.append(df)
-        desenhos.append(des[["peso", "estrato", "upa"]])
-    return pd.concat(partes, ignore_index=True), pd.concat(desenhos, ignore_index=True)
 
 
 def grupos_tela(base: str) -> dict:

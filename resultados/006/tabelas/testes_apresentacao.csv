@@ -1,0 +1,12 @@
+﻿spec;hipotese;base;teste;tipo;estatistica;gl;p;p_holm;decisao
+003;H3.1;vigitel2024;RP (digital);z;4,511123;inf;6e-06;2e-05;rejeita H0
+003;H3.2;pns2019;RP (digital);t;4,566699;7453,0;5e-06;2e-05;rejeita H0
+003;H3.4;vigitel2024;RP (digital);z;4,418963;inf;1e-05;2e-05;rejeita H0
+003;H3.4;pns2019;RP (digital);t;3,601477;7453,0;0,000318;0,000318;rejeita H0
+003;H3.9;pns2019 × vigitel2024;RP (digital);z;1,439735;inf;0,149942;0,749711;não rejeita H0
+005;H5.1;vigitel2024;t do coeficiente 'tela_3h_mais' (com covariáveis);t;5,114574;27028,0;0,0;1e-06;rejeita H0
+005;H5.3;xuzhou;t do coeficiente 'sas_sv' (com covariáveis);t;13,065542;2308,0;0,0;0,0;rejeita H0
+005;H5.4;argentina;t do coeficiente 'tela_presono_h' (com covariáveis);t;-2,539571;686,0;0,011318;0,022637;rejeita H0
+005;H5.5;turquia;t do coeficiente 'doomscrolling' (com covariáveis);t;2,805175;1213,0;0,005109;0,015328;rejeita H0
+005;H5.6;japao;t do coeficiente 'celular_presono_h' (com covariáveis);t;2,420191;377,0;0,015984;0,022637;rejeita H0
+005;H5.9;vigitel2024;t de Welch: ≥ 3 h × < 1 h;t;4,00142;15774,0;6,3e-05;0,000127;rejeita H0

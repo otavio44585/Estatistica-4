@@ -1,139 +1,155 @@
 # Roteiro da apresentação — Insônia digital
 
-Duração-alvo: **19 minutos + 5 de perguntas**. Material de apoio: as páginas `site/*.html` (abrem no navegador, sem internet). Os números abaixo são preenchidos pelo script a partir de `resultados/`. Se algum resultado mudar, rode `python -m analise.rodar_tudo` e o roteiro se atualiza.
+Duração-alvo: **19 minutos + 5 de perguntas**, em 18 slides. Os slides são `site/apresentacao.html` (abre no navegador, sem internet): setas para navegar, **F** tela cheia, **N** mostra estas falas embaixo do slide, **T** zera o relógio. As falas abaixo são as mesmas das notas do apresentador. Os números são preenchidos pelo script a partir de `resultados/`; se algum resultado mudar, rode `python -m analise.rodar_tudo` e o roteiro e os slides se atualizam juntos.
 
 Quem fala em cada bloco vem de `docs/modelos/integrantes.csv` (coluna `nome`). Enquanto o grupo não preencher, aparece o papel do bloco. Basta preencher os nomes e rodar `python -m analise.relatorio.relatorio`.
 
-| Bloco | Tempo | Quem | Tela |
+| Bloco | Slides | Tempo | Quem |
 |---|---|---|---|
-| 1. Pergunta e por que importa | 2 min | {{apresentador_1}} | `index.html`, topo |
-| 2. O que a literatura diz | 2 min | {{apresentador_1}} | `index.html`, seção 2 |
-| 3. Dados e harmonização | 2 min | {{apresentador_2}} | `001.html` |
-| 4. PCA e análise fatorial | 3 min | {{apresentador_2}} | `002.html` |
-| 5. Brasil × EUA (testes de hipótese) | 3 min | {{apresentador_3}} | `003.html` |
-| 6. Regressão, ANOVA, t e conferência dos p-valores | 3 min | {{apresentador_3}} | `005.html` |
-| 7. O Brasil no mundo | 2 min | {{apresentador_4}} | `004.html` |
-| 8. Conclusões e limitações | 2 min | {{apresentador_4}} | `index.html`, seções 7 e 8 |
+| 1. Pergunta e literatura | 1 a 3 | 3 min | {{apresentador_1}} |
+| 2. Dados, normalização e PCA | 4 a 6 | 4 min | {{apresentador_2}} |
+| 3. Testes de hipótese e regressão | 7 a 12 | 6 min | {{apresentador_3}} |
+| 4. Brasil no mundo, limitações e conclusões | 13 a 18 | 6 min | {{apresentador_4}} |
+
+Regras de linguagem para todos: falar em **associação**, nunca em causalidade; quando um teste não rejeita H0, dizer **"não foi detectada diferença"**, não "são iguais".
 
 ---
 
-## 1. Pergunta e por que importa ({{apresentador_1}}, 2 min)
+## 1. Pergunta e literatura ({{apresentador_1}}, 3 min)
 
-**Dizer:**
+**Slide 1 — Capa**
 
-- "Todo mundo já ouviu que celular à noite atrapalha o sono. Fomos ver se isso aparece nos dados brasileiros e se o tamanho é o mesmo de outros países."
-- "Insônia digital não é diagnóstico. Chamamos assim os problemas de sono associados ao uso de telas."
-- "A pergunta tem três partes:
-  - quem usa mais tela relata mais problema de sono?
-  - o tamanho disso é igual no Brasil e nos EUA?
-  - onde o Brasil fica frente a outros países e à literatura?"
+- Apresentar o grupo e o tema.
+- "Todo mundo já ouviu que celular à noite atrapalha o sono. Fomos ver se isso aparece nos dados brasileiros e como o Brasil se compara com pesquisas de outros países."
 
-**Mostrar:** o resumo no topo da `index.html`.
+**Slide 2 — Três perguntas sobre tela e sono, com o Brasil no centro**
 
-## 2. O que a literatura diz ({{apresentador_1}}, 2 min)
+- "Nossa pergunta tem três partes."
+- "Primeira: quem usa mais tela no lazer relata mais problema de sono?"
+- "Segunda: isso aparece nas duas pesquisas nacionais do Brasil, a PNS 2019, feita em todo o país, e o Vigitel 2024, feito nas 27 capitais? E com o mesmo tamanho?"
+- "Terceira: como os estudos brasileiros se comparam com o resto do mundo, com pesquisas da China, da Argentina, da Turquia e do Japão?"
 
-**Dizer:**
+**Slide 3 — A literatura descreve uma associação consistente**
 
-- "A associação é consistente: em 67 estudos, 90% acharam associação adversa (Hale e Guan, 2015)."
-- "O efeito é pequeno: de 3 a 8 minutos de sono a menos por hora de tela (Przybylski, 2019)."
-- "Pesa mais quando e como se usa: tela na cama e uso problemático se associam mais que o tempo total (Levenson, 2017; Hjetland, 2025; Han, Zhou e Liu, 2024)."
-- "A relação vai nos dois sentidos: quem dorme mal também pega o celular (Bauducco, 2024)."
+- "A literatura descreve uma associação consistente: 90% dos 67 estudos com crianças e adolescentes acharam associação entre tela e sono (Hale e Guan, 2015)."
+- "Na maior parte, ela é pequena: em média, o sono cai de 3 a 8 minutos por hora de tela (Przybylski, 2019)."
+- "Pesa mais como e quando se usa. Como: o uso problemático, compulsivo, tem correlação de 0,33 com problemas de sono, contra 0,28 do uso geral, numa escala de 0 a 1 (Han, Zhou e Liu, 2024). Quando: cada hora de tela já deitado na cama se associa a uma chance 59% maior de sintomas de insônia (Hjetland et al., 2025)."
+- "E a relação pode ser de mão dupla: quem dorme mal usa mais o celular para tentar pegar no sono, ou não pega no sono porque usa mais o celular (Bauducco et al., 2024)."
 
-**Transição:** "Com isso em mente, fomos aos microdados."
+**Transição:** "Com isso em mente, fomos aos dados."
 
-## 3. Dados e harmonização ({{apresentador_2}}, 2 min)
+## 2. Dados, normalização e PCA ({{apresentador_2}}, 4 min)
 
-**Dizer:**
+**Slide 4 — {{n_total}} pessoas em seis pesquisas: {{pct_n_brasil}} delas no Brasil**
 
-- "Usamos {{n_total}} pessoas de sete bases abertas.
-  - No Brasil: PNS 2019 ({{n_pns2019}} adultos) e Vigitel 2024 ({{n_vigitel2024}}).
-  - Nos EUA: NHANES 2005-06 ({{n_nhanes0506}}).
-  - E quatro amostras de China, Argentina, Turquia e Japão."
-- "Cada pesquisa pergunta de um jeito. Harmonizar é criar as mesmas variáveis em todas:
-  - 'não sabe' virou faltante;
-  - as horas de tela foram cortadas em 1 h e 3 h;
-  - cada variável ganhou uma nota de equivalência entre as bases."
-- "No Brasil, {{tela3h_pns2019}} dos adultos (PNS) usam tela digital 3 h ou mais por dia no lazer; no Vigitel, {{tela3h_vigitel2024}}. No NHANES de 2005, antes do smartphone, eram {{tela3h_nhanes0506}}."
+- "Juntamos {{n_total}} pessoas de seis pesquisas com dados abertos."
+- "O Brasil é quase tudo: {{n_brasil}} pessoas, {{pct_n_brasil}} do total, nas duas pesquisas nacionais. A PNS 2019, com {{n_pns2019}} pessoas de todo o país, e o Vigitel 2024, com {{n_vigitel2024}} pessoas das 27 capitais."
+- "Depois vem a Argentina, com {{n_argentina_reg}} pessoas, e o resto do mundo, com {{n_resto3}}: China ({{n_xuzhou}}), Turquia ({{n_turquia}}) e Japão ({{n_japao}})."
 
-**Mostrar:** a figura de exposição em `001.html`.
+**Slide 5 — Normalização da base**
 
-**Atenção:** dizer já aqui que o NHANES é de 2005; isso volta nas limitações.
+- "Antes de comparar, normalizamos a base. Primeiro, retiramos as respostas 'não sabe', 'recusou' e os dados faltantes."
+- "Segundo, juntamos as faixas de tempo de tela em três: menos de 1 hora, de 1 a 3 horas e 3 horas ou mais. Por exemplo, na PNS, '1 a menos de 2 horas' e '2 a menos de 3 horas' viraram '1 a 3 horas'."
+- "Terceiro, cada variável ganhou um grau de equivalência entre as bases: equivalente, aproximada ou não comparável. Onde as escalas não são comparáveis, comparamos por correlação, que não depende da unidade."
 
-## 4. PCA e análise fatorial ({{apresentador_2}}, 3 min)
+**Slide 6 — No Vigitel, as três perguntas de insônia formam um único fator**
 
-**Dizer:**
+- "No Vigitel, o sono é medido por três perguntas: dificuldade para adormecer; acordar e ter dificuldade de voltar a dormir; e acordar antes da hora e não voltar a dormir."
+- "A PCA mostra que as três medem uma coisa só: um fator, que explica {{var_pc1_insonia3_vigitel}} da variância. As cargas são altas: {{vig_item1_carga_pc1}}, {{vig_item2_carga_pc1}} e {{vig_item3_carga_pc1}}."
+- "Três critérios dizem quantos fatores ficar: autovalor maior que 1, gráfico scree e análise paralela. Os três dão {{fatores_insonia3_vigitel}}."
+- "O alfa de Cronbach, {{alfa_insonia3_vigitel}}, mede se as perguntas andam juntas. O KMO, {{kmo_insonia3_vigitel}}, mede se as correlações entre elas bastam para resumir em fatores. Os dois vão de 0 a 1."
+- "Por isso somamos as três respostas num índice de insônia de 0 a 12. A soma simples praticamente coincide com o componente (r = {{r_soma_pc1_insonia3_vigitel}})."
 
-- "Antes de comparar países, precisamos saber se o índice de insônia mede a mesma coisa nos dois."
-- "Os 3 sintomas são: dificuldade para adormecer, para voltar a dormir e acordar cedo demais."
-- "A PCA, feita pela decomposição em valores singulares, mostra uma dimensão só. O primeiro componente explica {{var_pc1_insonia3_vigitel}} da variância no Vigitel e {{var_pc1_insonia3_nhanes}} no NHANES."
-- "Três critérios dizem quantos fatores ficar: autovalor > 1, gráfico scree e análise paralela. Os três dão 1."
-- "A análise fatorial separa a parte comum dos itens. O coeficiente de Tucker compara as cargas dos dois países: {{tucker_insonia}}. Acima de 0,95 as estruturas são consideradas equivalentes."
-- "Conclusão: dá para comparar o índice entre os dois países, e a soma simples dos 3 itens serve (correlação {{r_soma_pc1_insonia3_vigitel}} com o componente)."
+**Se perguntarem** "por que PCA e análise fatorial?": a PCA resume a variância total; a análise fatorial modela só a parte comum dos itens. Aqui as duas contam a mesma história (escores com r = {{r_pc1_af_insonia3_vigitel}}).
 
-**Mostrar:** o gráfico de cargas Brasil × EUA em `002.html`.
+## 3. Testes de hipótese e regressão ({{apresentador_3}}, 6 min)
 
-**Se perguntarem** "por que PCA e análise fatorial?": a PCA resume a variância total; a análise fatorial modela só a variância comum. Aqui as duas contam a mesma história (escores correlacionam de {{r_pc1_af_min}} a {{r_pc1_af_max}}).
+**Slide 7 — Como lemos um teste de hipótese (curva normal)**
 
-## 5. Brasil × EUA ({{apresentador_3}}, 3 min)
+- "Antes dos resultados, como lemos um teste de hipótese. A hipótese nula, H0, diz que não há associação: a razão de prevalências é 1."
+- "Se H0 fosse verdade, a estatística do teste seguiria esta curva normal, quase sempre perto de zero."
+- "Com α = 0,05 bilateral, as caudas em âmbar, 2,5% de cada lado, além de mais ou menos 1,96, são a região de rejeição."
+- "No Vigitel, a estatística observada foi z = {{rp_digital_vigitel2024_est}}, bem dentro da cauda direita. O p-valor é {{rp_digital_vigitel2024_p}}: rejeitamos H0."
+- "Como fazemos vários testes, corrigimos os p-valores por Holm, que mantém em no máximo 5% a chance de algum falso positivo na família."
 
-**Dizer:**
+**Slide 8 — Tela digital 3 h ou mais se associa a mais problema de sono nas duas pesquisas brasileiras**
 
-- "Comparamos quem usa tela 3 h ou mais com quem usa menos de 1 h, ajustando por idade, sexo e escolaridade."
-- "A medida é a razão de prevalências. Com tela digital:
-  - Vigitel {{rp_digital_vigitel2024}} ({{rp_digital_vigitel2024_ic}});
-  - PNS {{rp_digital_pns2019}};
-  - NHANES {{rp_digital_nhanes0506}}.
-  Nos três, rejeitamos H0 de RP = 1, já com a correção de Holm."
-- "Cuidado com o NHANES: o desenho tem só {{nhanes_estratos}} estratos. Com uma regra mais conservadora de graus de liberdade, a do `svyglm` do R, o p Holm vai a {{h33_pholm_svyglm}}. Por isso dizemos que, nos EUA, a evidência é mais fraca."
-- "Brasil e EUA são diferentes? A razão entre as duas RP é {{h36_razao}}, com intervalo de {{h36_ic}}, que contém o 1. Não detectamos diferença, o que não prova que sejam iguais: o intervalo é largo."
-- **Ponto forte da fala:** "Sem ajuste, a PNS mostra o contrário: RP de {{rp_bruta_digital_pns2019}}, como se tela protegesse. É confundimento por idade: jovens usam mais tela e relatam menos problema de sono. Ajustada, vai a {{rp_ajustada_digital_pns2019}}."
+- "O resultado principal: comparamos quem usa tela digital 3 h ou mais com quem usa menos de 1 h, ajustando por idade, sexo e escolaridade."
+- "A medida é a razão de prevalências. No Vigitel, {{rp_digital_vigitel2024}} ({{rp_digital_vigitel2024_ic}}); na PNS, {{rp_digital_pns2019}} ({{rp_digital_pns2019_ic}}). Ou seja, problema de sono de {{rp_br_pct_min}} a {{rp_br_pct_max}} mais frequente no grupo de mais tela. Nas duas, rejeitamos H0, já com Holm."
+- "As duas pesquisas dão o mesmo tamanho? A razão entre as RP é {{h39_razao}}, com intervalo de {{h39_ic}}, que contém o 1 (p Holm {{h39_pholm}}). Não foi detectada diferença; lembrando que as perguntas de sono das duas são diferentes."
 
-**Mostrar:** `rp_por_pais.png` em `003.html`.
+**Se perguntarem** "por que peso amostral?": cada entrevistado representa um número diferente de pessoas. Sem peso e sem o desenho da amostra, o p-valor sai pequeno demais.
 
-**Se perguntarem** "por que peso amostral?": cada entrevistado representa um número diferente de pessoas. Sem peso e sem estrato e UPA, o p-valor sai pequeno demais.
+**Slide 9 — Regressão no Vigitel**
 
-## 6. Regressão, ANOVA, t e conferência dos p-valores ({{apresentador_3}}, 3 min)
-
-**Dizer:**
-
-- "Fizemos a regressão linear múltipla no formato da aula: SUMMARY OUTPUT do Excel, ANOVA, t de cada coeficiente, IC 95% e dummies."
-- "No Vigitel, quem usa 3 h ou mais tem índice de insônia {{H51_b}} ponto maior, numa escala de 0 a 12 (p Holm {{H51_pholm}})."
+- "Também fizemos a regressão linear múltipla no formato da aula: SUMMARY OUTPUT do Excel, ANOVA, t de cada coeficiente, IC 95% e dummies."
+- "No Vigitel, quem usa 3 h ou mais tem índice de insônia {{H51_b}} ponto maior, numa escala de 0 a 12 (t = {{H51_est}}, p Holm {{H51_pholm}})."
 - "É significativo, mas pequeno: a tela acrescenta {{H51_dr2_pct}} ao R²."
-- "No NHANES, sem peso o p seria {{H52_p_sempeso}}. Com o desenho amostral, vai a {{H52_p}} e não rejeitamos H0. O peso muda a conclusão."
-- "A ANOVA de um fator do Excel no Vigitel (F = {{H57_f_sempeso}}) dá exatamente o mesmo F que a regressão nas dummies de tela, sem covariáveis. É a mesma conta vista de dois jeitos. A decisão usa a versão com peso amostral (F de Wald = {{H57_est}})."
-- "Conferimos cada p-valor de três formas:
-  - a ferramenta Análise de Dados do Excel;
-  - a fórmula `T.DIST.2T` na planilha;
-  - o script em Python.
-  Foram {{conf_n}} números: {{conf_dentro}} dentro da tolerância e {{conf_excecoes}} exceções documentadas, porque o Excel arredonda o grau de liberdade do teste de Welch."
+- "No gráfico, a mesma associação em desvios-padrão nas outras pesquisas: positiva na China, na Turquia e no Japão; na Argentina, o sinal é contrário."
 
-**Mostrar:** a tabela de hipóteses e a figura de efeitos em `005.html`. Se der tempo, a aba do SUMMARY OUTPUT de uma base.
+**Se perguntarem** "por que a Argentina tem sinal contrário?": é frágil. Some quando a série escolar substitui a idade (p = {{H54_p_serie}}), e a medida de tela é outra.
 
-**Se perguntarem** "por que o resultado da Argentina tem sinal contrário?": é frágil. Some quando a série escolar substitui a idade (p = {{H54_p_serie}}), e são adolescentes com outra medida de tela.
+**Slide 10 — ANOVA e teste t no Vigitel**
 
-## 7. O Brasil no mundo ({{apresentador_4}}, 2 min)
+- "Com médias: o índice de insônia fica parecido entre menos de 1 h e 1 a 3 h, e sobe na faixa de 3 h ou mais."
+- "A ANOVA de um fator do Excel no Vigitel (F = {{H57_f_sempeso}}) dá exatamente o mesmo F que a regressão nas dummies de tela, sem covariáveis. É a mesma conta vista de dois jeitos. A decisão usa a versão com peso amostral (F de Wald = {{H57_est}}, p Holm {{H57_pholm}})."
+- "O teste t de Welch compara só os extremos, 3 h ou mais contra menos de 1 h: t = {{H59_est}}, p Holm {{H59_pholm}}. A diferença é pequena: d de Cohen = {{H59_efeito}}."
 
-**Dizer:**
+**Slide 11 — Todos os testes t e z, cada um na sua curva**
 
-- "Para pôr bases com escalas diferentes no mesmo gráfico, usamos a correlação de Spearman e uma meta-análise de efeitos aleatórios."
-- "O efeito varia muito entre as bases: I² = {{meta_I2}}."
-- "Com tempo total de tela, a correlação combinada é {{meta_rho_total}}. Bem abaixo dos 0,28 da meta-análise de referência."
-- "Uso problemático ({{meta_rho_problematico}}) e celular antes de dormir ({{meta_rho_presono}}) se associam mais, como diz a literatura. Mas com uma ou duas bases por grupo, o teste não confirma a diferença (p Holm {{H42_pholm}})."
-- "Entre o Brasil ({{meta_rho_brasil}}) e os outros países com tempo total, não detectamos diferença (p Holm {{H43_pholm}})."
+- "Aqui estão todos os testes t e z, cada um na sua curva. O âmbar é a região de rejeição; a seta é o valor observado."
+- "Quase todos caem fora da faixa central. A exceção é a comparação entre PNS e Vigitel, H3.9, que fica no centro: não foi detectada diferença entre as duas pesquisas."
+- "Na Argentina, H5.4, a estatística cai na cauda esquerda: associação no sentido contrário, e frágil."
 
-**Mostrar:** `floresta.png` em `004.html`.
+**Slide 12 — Tabela dos testes com as pesquisas brasileiras**
 
-## 8. Conclusões e limitações ({{apresentador_4}}, 2 min)
+- "Esta tabela resume os testes feitos com as duas pesquisas brasileiras."
+- "Os testes de associação rejeitam H0: razão de prevalências na PNS e no Vigitel, tendência por faixa de tela, regressão, ANOVA e teste t."
+- "Os testes de diferença não rejeitam: não foi detectada variação por faixa etária, entre TV e tela digital, nem entre PNS e Vigitel."
+- "Com dezenas de milhares de pessoas, até diferenças pequenas ficam significativas. Por isso olhamos também o tamanho, como fizemos com o R² e o d de Cohen."
 
-**Dizer:**
+## 4. Brasil no mundo, limitações e conclusões ({{apresentador_4}}, 6 min)
 
-1. "Mais tela, mais problema de sono no Brasil, de forma consistente, mas com associação pequena."
-2. "Não detectamos diferença entre Brasil e EUA, mas o intervalo é largo."
-3. "Como e quando se usa parece importar mais do que quanto."
-4. "Os dados são transversais: é associação, não causa."
-5. "Principais limitações: NHANES de 2005, autorrelato e itens diferentes na PNS."
+**Slide 13 — O Brasil no mundo**
 
-**Fechar:** "Todo número que mostramos sai de um script, e qualquer pessoa pode rodar tudo de novo a partir do repositório."
+- "Agora, o Brasil no mundo. Como cada pesquisa mede tela e sono de um jeito, usamos a correlação de Spearman, que vai de −1 a +1."
+- "Em âmbar, o Brasil: PNS {{rho_pns2019}} e Vigitel {{rho_vigitel2024}}. Em azul-escuro, as outras pesquisas."
+- "O experimento foi combinar as pesquisas de cada lado numa média ponderada pela precisão, a meta-análise. Brasil combinado: {{meta_rho_brasil}}. Resto do mundo combinado: {{meta_rho_resto}}. Os intervalos se sobrepõem."
+- "A correlação é pequena em todas: ela pode ir até +1, e o máximo aqui é {{rho_max}}, na China, com uso problemático do celular."
+
+**Se perguntarem** "por que a PNS dá negativo?": é a idade. Quem usa mais tela é mais jovem, e os jovens relatam menos problema de sono. Ajustada por idade, a correlação da PNS vai a {{rho_aj_pns2019}}.
+
+**Slide 14 — Tabela dos testes com as outras pesquisas e a combinação**
+
+- "Os testes com as outras pesquisas: na China, na Turquia e no Japão, a associação é positiva e rejeitamos H0. Na Argentina, o sinal é contrário."
+- "Na combinação, a associação varia muito entre as pesquisas (H4.1, I² = {{meta_I2}}). Não foi detectada diferença entre os tipos de uso (H4.2), nem entre o Brasil e a Argentina, o único outro país com tempo total de tela (H4.3)."
+- "E o tempo total de tela combinado, {{meta_rho_total}}, fica abaixo do valor da literatura: o teste de equivalência não rejeita H0 (H4.4)."
+
+**Slide 15 — Limitações: associação não é causalidade**
+
+- "A principal limitação: associação não é causalidade. Os dados são transversais, tudo medido ao mesmo tempo, então não dá para separar a direção: se a tela vem antes do sono ruim, ou se quem dorme mal usa mais tela."
+- "Autorrelato: a própria pessoa informa as horas de tela, em faixas, e como dorme."
+- "E não dá para separar a tela da pessoa. Na PNS, quem usa mais tela é mais jovem, e os jovens relatam menos problema de sono. Sem ajuste, a RP é {{rp_bruta_digital_pns2019}}, como se mais tela viesse com menos problema de sono. Ajustada por idade, sexo e escolaridade, vai a {{rp_ajustada_digital_pns2019}}. E pode haver outros fatores que não medimos."
+- "Por fim, as perguntas de sono e as amostras não são as mesmas em todas as pesquisas."
+
+**Slide 16 — A tela explica pouco do sono**
+
+- "Quanto a tela explica do sono? Separamos o quanto cada fator explica sozinho na regressão: tela, idade, sexo e escolaridade."
+- "A tela explica pouco: {{r2u_vigitel2024_tela}} da variação do sono no Vigitel e {{r2u_pns2019_tela}} na PNS. Menos que o sexo ({{r2u_vigitel2024_sexo}} e {{r2u_pns2019_sexo}}) e, na PNS, menos que a idade ({{r2u_pns2019_idade}})."
+- "Os quatro fatores juntos explicam {{r2c_vigitel2024}} no Vigitel e {{r2c_pns2019}} na PNS. A associação existe, mas o sono depende sobretudo de outras coisas."
+
+**Slide 17 — Conclusões**
+
+1. "Nas duas pesquisas brasileiras, quem usa tela digital 3 h ou mais por dia relata mais problema de sono: {{rp_br_pct_min}} a {{rp_br_pct_max}} mais frequente, com ajuste. Não foi detectada diferença entre a PNS e o Vigitel."
+2. "Mas a tela explica pouco do sono: menos que o sexo e, na PNS, menos que a idade."
+3. "No mundo, a correlação também é pequena; as maiores aparecem com uso problemático e celular antes de dormir."
+4. "Sem ajuste por idade, a PNS mostraria o contrário. Comparar grupos de uso de tela exige ajuste."
+5. "São dados transversais: é associação, não causalidade."
+
+**Slide 18 — Repositório público e perguntas**
+
+- **Fechar:** "Tudo o que mostramos está num repositório público: o código, as tabelas de resultados, o relatório e estes slides. O endereço é github.com/otavio44585/Estatistica-4, e o site é otavio44585.github.io/Estatistica-4."
+- "Obrigado. Perguntas?"
 
 ---
 
@@ -141,10 +157,11 @@ Quem fala em cada bloco vem de `docs/modelos/integrantes.csv` (coluna `nome`). E
 
 | Pergunta | Resposta curta |
 |---|---|
-| Por que não usaram só uma base? | Uma base responde se há associação; a pergunta era comparar países. Para isso, as medidas precisam ser equivalentes, o que a etapa 002 testou |
 | p < 0,001 em quase tudo não é suspeito? | Com {{n_vigitel2024}} a {{n_pns2019}} pessoas, qualquer diferença pequena fica significativa. Por isso mostramos tamanho de efeito e IC, não só p |
 | Por que Holm e não Bonferroni? | Holm mantém a chance de pelo menos um falso positivo na família em no máximo 5%, como Bonferroni, mas rejeita mais |
-| Por que a RP e não o odds ratio? | O desfecho é comum ({{prev_adormecer_nhanes0506}} a {{prev_adormecer_vigitel2024}}). Nesse caso o OR exagera a associação, e a RP se lê direto como "quantas vezes mais" |
+| Por que a RP e não o odds ratio? | O desfecho é comum ({{prev_sono_pns2019}} a {{prev_adormecer_vigitel2024}}). Nesse caso o OR exagera a associação, e a RP se lê direto como "quantas vezes mais" |
 | Tela causa insônia? | Os dados não permitem dizer. São transversais, e a literatura mostra também o caminho inverso |
+| Por que juntar pesquisas de outros países? | Para ver se o tamanho no Brasil é parecido com o de fora. Como as escalas são diferentes, a comparação é pela correlação, não pelos valores brutos |
+| O que o α de Cronbach e o KMO dizem? | O α ({{alfa_insonia3_vigitel}}) mede se as perguntas andam juntas; a partir de 0,7 é o usual para somar itens. O KMO ({{kmo_insonia3_vigitel}}) mede se as correlações bastam para resumir em fatores; abaixo de 0,5 não serve |
+| Por que a PNS dá correlação negativa? | Idade: quem usa mais tela é mais jovem, e os jovens relatam menos problema de sono. Ajustada por idade, a correlação vai a {{rho_aj_pns2019}}; a RP vai de {{rp_bruta_digital_pns2019}} a {{rp_ajustada_digital_pns2019}} |
 | Os resultados do Excel batem com os do Python? | Sim. A ferramenta do Excel foi executada de verdade e comparada número a número: {{conf_dentro}} de {{conf_n}} dentro da tolerância. As {{conf_excecoes}} exceções vêm do Excel arredondar o grau de liberdade de Welch |
-| Por que o NHANES de 2005 e não um mais recente? | É o único ciclo do NHANES com os mesmos 3 sintomas de insônia do Vigitel e com latência em minutos. Os ciclos recentes só têm horas de sono |

@@ -211,25 +211,13 @@ def confere_base(cf, base):
         exporta_aba(wb["reg_dummy_2grupos"], base, "reg_dummy_2grupos")
 
 
-def confere_empilhada(cf):
-    wb, _ = abre("empilhada")
-    df, _ = D.empilhada()
-    y = df["insonia_idx"]
-    X = df.drop(columns="insonia_idx")
-    Xr = X.drop(columns=["eua_x_tela_1a3h", "eua_x_tela_3h_mais"])
-    a_c, a_r = mqo(y, X), mqo(y, Xr)
-    confere_regressao(cf, wb["reg_completo"], "empilhada", "reg_completo", a_c, a_c.nomes)
-    confere_regressao(cf, wb["reg_restrito"], "empilhada", "reg_restrito", a_r, a_r.nomes)
-    confere_f_parcial(cf, wb["f_parcial"], "empilhada", f_parcial(a_c, a_r))
-    for aba in ("reg_completo", "reg_restrito", "f_parcial"):
-        exporta_aba(wb[aba], "empilhada", aba)
-
-
 def main():
+    # NHANES e base empilhada retirados em 2026-11-27 (EUA fora do trabalho): apaga as saídas antigas
+    for velho in list((OUT / "excel_saidas").glob("nhanes0506__*.csv")) + list((OUT / "excel_saidas").glob("empilhada__*.csv")):
+        velho.unlink()
     cf = Conferencia()
     for m in D.MODELOS:
         confere_base(cf, m.base)
-    confere_empilhada(cf)
     out = pd.DataFrame(cf.linhas)
     out["excecao_documentada"] = out.ok.astype(str) == "informativo"
     out["dentro_tolerancia"] = (~out.excecao_documentada) & (out.ok.astype(str) == "True")

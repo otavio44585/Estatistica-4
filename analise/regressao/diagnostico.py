@@ -8,7 +8,7 @@ Saídas:
   resultados/005/tabelas/sensibilidade.csv   coeficiente da tela sob cada variação, e se a decisão mudaria
   resultados/005/figuras/diagnostico_<base>.png   resíduo × ajustado e QQ-plot
   resultados/005/figuras/efeitos_padronizados.png coeficiente da tela em DP do desfecho, por base (família R1)
-  resultados/005/figuras/medias_por_faixa.png     índice de insônia por faixa de tela, Vigitel × NHANES
+  resultados/005/figuras/medias_por_faixa.png     índice de insônia por faixa de tela, Vigitel
 """
 import numpy as np
 import pandas as pd
@@ -97,26 +97,19 @@ def sensibilidade():
             c2 = inf2["tela"] + inf2["cov"]
             a = mqo(ds[m.y], ds[c2]).coef(m.tela_teste)
             add(m, "série escolar no lugar da idade (mais casos completos)", a["b"], a["ep"], a["p"], len(ds))
-        if m.base == "nhanes0506":
-            des = info["desenho"]
-            pc = mqp(df[m.y], df[cols], des.peso, des.estrato, des.upa, regra_gl="svyglm")
-            c = pc.coef(m.tela_teste)
-            add(m, f"regra do svyglm, gl = d − p + 1 = {pc.gl_res} (com peso)", c["b"], c["ep"], c["p"], len(df))
-            a = mqo(df[m.y], df[cols]).coef(m.tela_teste)
-            add(m, "sem peso (o que o Excel calcula)", a["b"], a["ep"], a["p"], len(df))
         if m.base == "vigitel2024":
             a = mqo(df[m.y], df[cols]).coef(m.tela_teste)
             add(m, "sem peso (o que o Excel calcula)", a["b"], a["ep"], a["p"], len(df))
         # desfechos secundários (exploratórios, fora das famílias)
-        alt = {"vigitel2024": ["sono_horas"], "nhanes0506": ["sono_horas", "latencia_min"], "argentina": ["sono_horas"],
+        alt = {"vigitel2024": ["sono_horas"], "argentina": ["sono_horas"],
                "turquia": ["sono_horas"], "japao": ["sono_horas"]}.get(m.base, [])
         for yc in alt:
             da, ia = D.matriz(m.base, y_col=yc)
             ca = ia["tela"] + ia["cov"]
             if m.peso:
                 des = ia["desenho"]
-                est = des.estrato if m.base == "nhanes0506" else None
-                upa = des.upa if m.base == "nhanes0506" else None
+                est = des["estrato"] if "estrato" in des else None
+                upa = des["upa"] if "upa" in des else None
                 a = mqp(da[yc], da[ca], des.peso, est, upa).coef(m.tela_teste)
             else:
                 a = mqo(da[yc], da[ca]).coef(m.tela_teste)
@@ -141,15 +134,15 @@ def figuras():
     ax.axvline(0, color=COR_NEUTRA, lw=1)
     ax.set_yticks([])
     ax.set_xlim(-0.3, 0.75)
-    ax.set_xlabel("efeito da tela em desvios-padrão do desfecho (IC 95%)\n"
-                  "Vigitel e NHANES: ≥ 3 h × < 1 h, b/DP(Y); demais: β padronizado (1 DP a mais de exposição)", fontsize=8.5)
+    ax.set_xlabel("associação da tela, em desvios-padrão do desfecho (IC 95%)\n"
+                  "Vigitel: ≥ 3 h × < 1 h, b/DP(Y); demais: β padronizado (1 DP a mais de exposição)", fontsize=8.5)
     ax.set_title("Família R1: tela × sono com covariáveis (versão que decide a hipótese)")
     ax.invert_yaxis()
     salva(fig, F / "efeitos_padronizados.png")
 
     mf = le_csv(T / "medias_por_faixa.csv")
     fig, ax = plt.subplots(figsize=(6, 3.6))
-    for base, pais in (("vigitel2024", "Brasil"), ("nhanes0506", "EUA")):
+    for base, pais in (("vigitel2024", "Brasil"),):
         s = mf[mf.base == base]
         ax.plot(s.faixa, s.media_ponderada, "o-", color=COR_PAIS[pais], label=f"{D.POR_BASE[base].rotulo} (com peso)")
         ax.plot(s.faixa, s.media, "o--", color=COR_PAIS[pais], alpha=0.5, label=f"{D.POR_BASE[base].rotulo} (sem peso)")

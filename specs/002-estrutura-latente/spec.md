@@ -1,11 +1,11 @@
 # 002 — Estrutura latente: PCA e análise fatorial
 
-Status: **concluída** (2026-11-27), aprovação do grupo pendente. Resultados em `resultados/002/RESUMO.md`.
+Status: **concluída** (2026-11-27), aprovação do grupo pendente. EUA retirados em 2026-11-27 (ver Histórico).
 
 ## Perguntas
 
-- **Q2.1** Os três sintomas de insônia formam um único construto, e esse construto é o mesmo no Brasil (Vigitel 2024) e nos EUA (NHANES 2005-06)?
-- **Q2.2** O PHQ-9 tem a mesma estrutura no Brasil (PNS 2019) e nos EUA (NHANES 2005-06), e em que fator carrega o item de sono?
+- **Q2.1** Os três sintomas de insônia formam um único construto no Brasil (Vigitel 2024)? (A parte "e nos EUA" foi retirada em 2026-11-27.)
+- **Q2.2** Que estrutura tem o PHQ-9 na PNS 2019, e em que fator carrega o item de sono? (A comparação com os EUA foi retirada em 2026-11-27.)
 - **Q2.3** As escalas de uso problemático e de procrastinação do sono (SAS-SV na China, doomscrolling e procrastinação na Turquia, AIS e BPS no Japão) são unidimensionais?
 - **Q2.4** PCA e análise fatorial contam a mesma história? Quanto da variância é comum e quanto é total, e os escores dos dois métodos ordenam as pessoas da mesma forma?
 
@@ -20,9 +20,9 @@ Viabilidade já medida em 2026-11-27, com correlação de Pearson (ver `docs/` e
 | # | H1 | H0 | Critério |
 |---|---|---|---|
 | H2.1 | Os 3 sintomas formam 1 componente/fator em cada base | mais de 1 dimensão | análise paralela retém 1; cargas ≥ 0,50 |
-| H2.2 | As cargas do fator de insônia são equivalentes entre BR e EUA | estruturas diferentes | coeficiente de congruência de Tucker φ ≥ 0,95 = equivalente; 0,85–0,94 = similar (limites de Lorenzo-Seva e ten Berge, 2006, doi:10.1027/1614-2241.2.2.57 — conferidos no resumo registrado no Crossref em 2026-11-27) |
-| H2.3 | O PHQ-9 tem a mesma estrutura em PNS e NHANES | estruturas diferentes | mesmo número de fatores retido; Tucker φ ≥ 0,95 |
-| H2.4 | O item de sono do PHQ-9 carrega no mesmo fator nos dois países | carrega em fatores diferentes | maior carga no mesmo fator |
+| H2.2 | As cargas do fator de insônia são equivalentes entre BR e EUA | estruturas diferentes | coeficiente de congruência de Tucker φ ≥ 0,95 = equivalente; 0,85–0,94 = similar (limites de Lorenzo-Seva e ten Berge, 2006, doi:10.1027/1614-2241.2.2.57 — conferidos no resumo registrado no Crossref em 2026-11-27) **Retirada em 2026-11-27 (EUA fora do trabalho).** |
+| H2.3 | O PHQ-9 tem a mesma estrutura em PNS e NHANES | estruturas diferentes | mesmo número de fatores retido; Tucker φ ≥ 0,95 **Retirada em 2026-11-27 (EUA fora do trabalho).** |
+| H2.4 | O item de sono do PHQ-9 carrega no mesmo fator nos dois países | carrega em fatores diferentes | maior carga no mesmo fator **Retirada em 2026-11-27 (EUA fora do trabalho).** |
 | H2.5 | SAS-SV, doomscrolling, AIS e BPS são unidimensionais | mais de 1 dimensão | análise paralela; a exploração prévia já viu 2 autovalores > 1 no SAS-SV de Xuzhou, no BPS do Japão e na procrastinação da Turquia |
 | H2.6 | O escore do 1º componente (PCA) e o escore fatorial correlacionam r ≥ 0,95 | r < 0,95 | correlação de Pearson entre escores |
 
@@ -62,3 +62,9 @@ Análise fatorial confirmatória multigrupo (invariância métrica e escalar for
   - H2.6 compara o 1º componente com o escore fatorial da solução de 1 fator em todos os conjuntos, inclusive os de 2 dimensões, porque os dois escores resumem o instrumento num índice só.
   - Tucker acompanhado da maior diferença absoluta entre cargas (φ fica inflado quando todas as cargas são positivas).
   - Limite de Tucker conferido; "a verificar" retirado.
+- 2026-11-27 (decisão do grupo, registrada antes da mudança no código): **os EUA (NHANES 2005-06) saem do trabalho inteiro**, porque a única base americana é de 2005, antes do smartphone. Na 002:
+  - saem os conjuntos `insonia3_nhanes`, `sono7_nhanes` e `phq9_nhanes`;
+  - **H2.2, H2.3 e H2.4 retiradas em 2026-11-27 (EUA fora do trabalho)**, porque dependiam da comparação Brasil × EUA (congruência de Tucker e posição do item de sono nos dois países);
+  - H2.1 fica só no Vigitel 2024, e H2.5 e H2.6 ficam nos conjuntos restantes;
+  - o PHQ-9 da PNS continua (estrutura e fator do item de sono, sem comparação);
+  - nova tabela `resultados/002/tabelas/vigitel_indice.csv` (e `vigitel_indice_resumo.csv`) com o índice de insônia do Vigitel item a item, para a apresentação.

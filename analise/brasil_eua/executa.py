@@ -1,4 +1,7 @@
-"""T042–T049 — Executa as hipóteses H3.1–H3.4 e H3.6–H3.9 da spec 003 e as sensibilidades.
+"""T042–T049 — Executa as hipóteses da spec 003 (Brasil: PNS 2019 e Vigitel 2024) e as sensibilidades.
+
+Desde 2026-11-27 os EUA (NHANES 2005-06) estão fora do trabalho (decisão do usuário; ver Histórico da spec):
+H3.3 e H3.6 foram retiradas, e H3.4, H3.7 e H3.8 rodam só no Vigitel e na PNS. Não há mais base empilhada.
 
 Uso: python -m analise.brasil_eua.executa
 Saídas em resultados/003/tabelas e resultados/003/figuras.
@@ -7,7 +10,6 @@ Correções da verificação independente (2026-11-27):
 - gl do desenho = UPAs − estratos é a regra única; a regra do svyglm (d − p + 1) entra como sensibilidade
   (colunas *_svyglm em hipoteses.csv e linhas em sensibilidade.csv);
 - Wald conjunto com correção de Korn-Graubard (survey.Ajuste.wald);
-- base empilhada Vigitel + NHANES: o gl mostrado é o do NHANES (15), conservador; Satterthwaite registrado;
 - RP por faixa etária estimada por domínio (variância com o desenho inteiro).
 """
 import numpy as np
@@ -27,8 +29,6 @@ BASES = {
                         desfecho="dificuldade para adormecer quase sempre ou sempre"),
     "pns2019": dict(y="problema_sono_freq", desenho=dict(peso="peso", estrato="estrato", upa="upa"),
                     desfecho="problema de sono em mais da metade dos dias (2 semanas)"),
-    "nhanes0506": dict(y="dif_adormecer_freq", desenho=dict(peso="peso", estrato="estrato", upa="upa"),
-                       desfecho="dificuldade para adormecer often/almost always (5 ou mais vezes por mês)"),
 }
 EXPOS = {"tela_digital_cat": "digital", "tela_tv_cat": "TV"}
 ORD = {"tela_digital_cat": "tela_digital_ord", "tela_tv_cat": "tela_tv_ord"}
@@ -36,7 +36,7 @@ COV = "C(faixa_etaria) + sexo + C(escolaridade3)"
 COVARS = ["faixa_etaria", "sexo", "escolaridade3"]
 FAIXAS = ["18-29", "30-44", "45-59", "60+"]
 # corte alternativo de exposição alta (sensibilidade): valores de tela_*_ord
-CORTE_ALT = {"vigitel2024": (5, "≥ 4 h"), "nhanes0506": (5, "≥ 4 h"), "pns2019": (5, "≥ 6 h (a PNS não separa 4 h)")}
+CORTE_ALT = {"vigitel2024": (5, "≥ 4 h"), "pns2019": (5, "≥ 6 h (a PNS não separa 4 h)")}
 
 
 def carrega(base):
@@ -180,55 +180,12 @@ def main():
         return dict(razao=np.exp(dif), ic_inf=np.exp(dif - 1.959964 * ep), ic_sup=np.exp(dif + 1.959964 * ep),
                     estatistica=z, p=2 * stats.norm.sf(abs(z)), tipo="z", gl1=None, gl2=None)
     for x in EXPOS:
-        # base empilhada Vigitel + NHANES, pesos reescalados para somar o n de cada base
-        partes = []
-        for b, eua in (("vigitel2024", 0), ("nhanes0506", 1)):
-            d = amostra(dados[b], BASES[b]["y"], x)
-            d["peso_r"] = d.peso * len(d) / d.peso.sum()
-            d["eua"] = eua
-            if eua:
-                d["est_e"] = "N" + d.estrato.astype(int).astype(str)
-                d["upa_e"] = d.est_e + "_" + d.upa.astype(int).astype(str)
-            else:
-                d["est_e"] = "V"
-                d["upa_e"] = "V_" + d.index.astype(str)
-            partes.append(d[["dif_adormecer_freq", "expo", *COVARS, "peso_r", "eua", "est_e", "upa_e"]])
-        st = pd.concat(partes, ignore_index=True)
-        aj0 = poisson_desenho(st, f"dif_adormecer_freq ~ C(expo) + {COV} + eua + eua:C(expo)",
-                              peso="peso_r", estrato="est_e", upa="upa_e")
-        # gl mostrado = gl de desenho do NHANES (UPAs − estratos = 15): a variância da interação vem quase
-        # toda do NHANES; o gl total da base empilhada (~27 mil) seria otimista. Satterthwaite registrado.
-        gl_nh = ajustados[("nhanes0506", x)].gl
-        gl_satt = aj0.satterthwaite("eua:C(expo)[T.2]")
-        aj = aj0.com_gl(gl_nh)
-        t2 = aj.termo("eua:C(expo)[T.2]")
-        p_satt = float(2 * stats.t.sf(abs(t2["estatistica"]), gl_satt))
-        conj = aj.wald([t for t in aj.nomes if t.startswith("eua:")])
-        zt = ztest("vigitel2024", "nhanes0506", x)
-        comp.append(dict(hipotese="H3.6", exposicao=EXPOS[x], comparacao="NHANES ÷ Vigitel (RP de tela alta)",
-                         metodo="interação país × tela na base empilhada (1 gl, categoria 2)",
-                         razao=t2["rp"], ic_inf=t2["ic_inf"], ic_sup=t2["ic_sup"], estatistica=t2["estatistica"],
-                         tipo="t", gl1=1, gl2=aj.gl, p=t2["p"], n=aj.n, n_param=aj.n_param,
-                         gl_satterthwaite=gl_satt, p_satterthwaite=p_satt, gl_base_empilhada=aj0.gl))
-        comp.append(dict(hipotese="H3.6", exposicao=EXPOS[x], comparacao="NHANES ÷ Vigitel",
-                         metodo="interação conjunta (2 gl)", razao=np.nan, ic_inf=np.nan, ic_sup=np.nan,
-                         estatistica=conj["estatistica"], tipo=conj["tipo"], gl1=conj["gl1"], gl2=conj["gl2"],
-                         p=conj["p"], n=aj.n, n_param=aj.n_param, gl_satterthwaite=np.nan, gl_base_empilhada=aj0.gl))
-        comp.append(dict(hipotese="H3.6", exposicao=EXPOS[x], comparacao="NHANES ÷ Vigitel",
-                         metodo="z da diferença dos log-RP (modelos separados)", **zt, n=np.nan))
         comp.append(dict(hipotese="H3.9", exposicao=EXPOS[x], comparacao="Vigitel ÷ PNS (RP de tela alta)",
                          metodo="z da diferença dos log-RP (modelos separados)", **ztest("pns2019", "vigitel2024", x),
                          n=np.nan))
-        # sensibilidade: H3.6 com os modelos ajustados sem peso
-        sv = sens[(sens.modelo == "ajustada sem peso") & (sens.exposicao == EXPOS[x])].set_index("base")
-        dif = sv.loc["nhanes0506", "beta"] - sv.loc["vigitel2024", "beta"]
-        ep = np.sqrt(sv.loc["nhanes0506", "ep"] ** 2 + sv.loc["vigitel2024", "ep"] ** 2)
-        comp.append(dict(hipotese="H3.6 (sensibilidade)", exposicao=EXPOS[x], comparacao="NHANES ÷ Vigitel",
-                         metodo="z da diferença dos log-RP, modelos ajustados SEM peso", razao=np.exp(dif),
-                         ic_inf=np.exp(dif - 1.959964 * ep), ic_sup=np.exp(dif + 1.959964 * ep),
-                         estatistica=dif / ep, p=2 * stats.norm.sf(abs(dif / ep)), tipo="z", gl1=None, gl2=None,
-                         n=np.nan))
-    comp = pd.DataFrame(comp)
+    comp = pd.DataFrame(comp).reindex(columns=[      # mesmas colunas de antes (H3.6 retirada em 2026-11-27)
+        "hipotese", "exposicao", "comparacao", "metodo", "razao", "ic_inf", "ic_sup", "estatistica", "tipo", "gl1",
+        "gl2", "p", "n", "n_param", "gl_satterthwaite", "p_satterthwaite", "gl_base_empilhada"])
 
     # exploratório: desvio da linearidade no log (β1 = β2/2 sob tendência linear com escores 0/1/2)
     lin = []
@@ -242,7 +199,7 @@ def main():
     lin = pd.DataFrame(lin)
 
     # ---------- tabela de hipóteses com Holm ----------
-    nome_h = {"vigitel2024": "H3.1", "pns2019": "H3.2", "nhanes0506": "H3.3"}
+    nome_h = {"vigitel2024": "H3.1", "pns2019": "H3.2"}
     H = []
     for x, rot in EXPOS.items():
         fam = f"1 ({rot})"
@@ -260,12 +217,6 @@ def main():
                           h0="sem tendência (β = 0)", estimativa=r.rp, ic_inf=r.ic_inf, ic_sup=r.ic_sup,
                           estatistica=r.estatistica, tipo_estat=r.tipo_estat, gl1=None, gl2=r.gl, p=r.p, n=r.n,
                           n_param=r.n_param, gl_desenho=r.gl))
-    r = comp[(comp.hipotese == "H3.6") & (comp.exposicao == "digital") & comp.metodo.str.startswith("interação país")].iloc[0]
-    H.append(dict(familia="2", hipotese="H3.6", base="vigitel2024 + nhanes0506", exposicao="digital",
-                  descricao="RP de tela digital alta difere entre EUA e Brasil (razão NHANES ÷ Vigitel)",
-                  h0="RP_BR = RP_EUA", estimativa=r.razao, ic_inf=r.ic_inf, ic_sup=r.ic_sup,
-                  estatistica=r.estatistica, tipo_estat="t", gl1=1, gl2=r.gl2, p=r.p, n=r.n,
-                  n_param=r.n_param, gl_desenho=r.gl2))
     for b in BASES:
         r = h37[(h37.base == b) & (h37.exposicao == "digital")].iloc[0]
         rr = idade_df[(idade_df.base == b) & (idade_df.exposicao == "digital")]
@@ -302,7 +253,7 @@ def main():
     for fam, idx in H.groupby("familia").groups.items():
         H.loc[idx, "p_holm_svyglm"] = holm(H.loc[idx, "p_svyglm"].values)
     H["decisao_svyglm"] = H.p_holm_svyglm.apply(decisao)
-    linhas_gl = H[H.hipotese.isin(["H3.1", "H3.2", "H3.3"]) & H.gl_desenho.notna()]
+    linhas_gl = H[H.hipotese.isin(["H3.1", "H3.2"]) & H.gl_desenho.notna()]
     extra = [dict(base=r.base, exposicao=r.exposicao, desfecho=BASES[r.base]["y"],
                   modelo="ajustada, gl pela regra do svyglm (d − p + 1)", comparacao="2 vs 0",
                   termo="C(expo)[T.2]", rp=r.estimativa, ic_inf=np.nan, ic_sup=np.nan, estatistica=r.estatistica,
@@ -331,7 +282,7 @@ def main():
 def figuras(rps, idade_df, prev):
     import matplotlib.pyplot as plt
     # 1. RP bruta e ajustada por base e exposição
-    fig, ax = plt.subplots(figsize=(7.5, 4.2))
+    fig, ax = plt.subplots(figsize=(7.5, 3.4))
     ordem = [(b, e) for b in BASES for e in ("digital", "TV")]
     for i, (b, e) in enumerate(ordem):
         cor = G.COR_PAIS[G.PAIS_BASE[b]]
@@ -354,14 +305,14 @@ def figuras(rps, idade_df, prev):
     ax.plot([], [], "o", mfc="white", mec="k", label="bruta")
     ax.plot([], [], "o", mfc="k", mec="k", label="ajustada (idade, sexo, escolaridade)")
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=2, fontsize=8)
-    ax.set_title("Problema de sono frequente com tela alta: Brasil × EUA")
+    ax.set_title("Problema de sono frequente com tela alta: PNS 2019 e Vigitel 2024")
     G.salva(fig, F / "rp_por_pais.png")
 
     # 2. RP por faixa etária (tela digital)
     fig, ax = plt.subplots(figsize=(7, 3.8))
     for j, b in enumerate(BASES):
         r = idade_df[(idade_df.base == b) & (idade_df.exposicao == "digital")].set_index("faixa").loc[FAIXAS]
-        xs = np.arange(4) + (j - 1) * 0.12
+        xs = np.arange(4) + (j - 0.5) * 0.14
         cor = G.COR_PAIS[G.PAIS_BASE[b]]
         ls = "-" if b != "pns2019" else ":"
         ax.errorbar(xs, r.rp, yerr=[r.rp - r.ic_inf, r.ic_sup - r.rp], fmt="o", ls=ls, color=cor, capsize=3,
@@ -384,14 +335,14 @@ def figuras(rps, idade_df, prev):
     for ax, e in zip(axes, ("digital", "TV")):
         for j, b in enumerate(BASES):
             r = prev[(prev.base == b) & (prev.exposicao == e)].sort_values("categoria")
-            ax.bar(r.categoria + (j - 1) * 0.27, r.prevalencia_ponderada * 100, width=0.26,
+            ax.bar(r.categoria + (j - 0.5) * 0.36, r.prevalencia_ponderada * 100, width=0.34,
                    color=G.COR_PAIS[G.PAIS_BASE[b]], alpha=1 if b != "pns2019" else 0.55, label=G.NOME_BASE[b])
         ax.set_xticks([0, 1, 2])
         ax.set_xticklabels(["< 1 h", "1 a < 3 h", "≥ 3 h"])
         ax.set_title(f"Tela {e}")
     axes[0].set_ylabel("Prevalência ponderada (%)")
     axes[1].legend(fontsize=7)
-    fig.suptitle("Problema de sono frequente por tempo de tela (desfechos diferem entre bases)", fontsize=10)
+    fig.suptitle("Problema de sono frequente por tempo de tela, PNS 2019 e Vigitel 2024 (desfechos diferem)", fontsize=10)
     G.salva(fig, F / "prevalencia_por_faixa_tela.png")
 
 

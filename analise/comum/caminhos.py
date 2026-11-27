@@ -17,7 +17,7 @@ def brutos() -> Path:
     if not p.is_dir():
         raise RuntimeError(
             "Pasta dos brutos não encontrada. Defina STAT4_BRUTOS com o caminho da pasta "
-            "que contém pns_2019/, vigitel_2006_2024/, nhanes_2005_2006/ etc."
+            "que contém pns_2019/, vigitel_2006_2024/ e as pastas dos repositórios"
         )
     return p
 

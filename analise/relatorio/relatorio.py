@@ -63,13 +63,18 @@ def main():
     N = carrega()
     N["data"] = dt.date.today().strftime("%d/%m/%Y")
     apresentadores(N)
+    erros = []
     for origem, destino in MODELOS.items():
         modelo = RAIZ / "docs" / "modelos" / origem
         if not modelo.exists():
             if origem in OPCIONAIS:
                 continue
             raise FileNotFoundError(modelo)
-        texto = preenche(modelo.read_text(encoding="utf-8"), N)
+        try:
+            texto = preenche(modelo.read_text(encoding="utf-8"), N)
+        except KeyError as e:                       # um modelo com chave faltando não impede os outros
+            erros.append(f"{origem}: {e}")
+            continue
         if destino.suffix == ".html":
             aviso = f"<!-- GERADO por analise/relatorio/relatorio.py a partir de docs/modelos/{origem}. Edite o modelo. -->\n"
             texto = embute_imagens(texto)
@@ -79,6 +84,8 @@ def main():
         destino.parent.mkdir(parents=True, exist_ok=True)
         destino.write_text(texto, encoding="utf-8")
         print(destino.relative_to(RAIZ).as_posix())
+    if erros:
+        raise KeyError("modelos com marcadores sem valor:\n" + "\n".join(erros))
 
 
 if __name__ == "__main__":

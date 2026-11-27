@@ -8,7 +8,6 @@ Gerado por `analise/harmonizacao/figuras.py` a partir de `resultados/001/tabelas
 |---|---|
 | PNS 2019 (Brasil) | 88.531 |
 | Vigitel 2024 (Brasil) | 27.048 |
-| NHANES 2005-06 (EUA) | 5.563 |
 | Xuzhou (China) | 2.317 |
 | Pérez-Chada (Argentina) | 864 |
 | Doomscrolling (Turquia) | 1.216 |
@@ -32,13 +31,6 @@ Gerado por `analise/harmonizacao/figuras.py` a partir de `resultados/001/tabelas
 | Vigitel 2024 (Brasil) | `tela_tv_cat` | 1 a < 3 h | 11.940 | 44,1 | 44,4 |
 | Vigitel 2024 (Brasil) | `tela_tv_cat` | ≥ 3 h | 4.790 | 17,7 | 20,8 |
 | Vigitel 2024 (Brasil) | `dif_adormecer_freq` | sim | 6.092 | 22,5 | 22,0 |
-| NHANES 2005-06 (EUA) | `tela_digital_cat` | não usa ou < 1 h | 3.959 | 71,2 | 68,1 |
-| NHANES 2005-06 (EUA) | `tela_digital_cat` | 1 a < 3 h | 1.158 | 20,8 | 24,5 |
-| NHANES 2005-06 (EUA) | `tela_digital_cat` | ≥ 3 h | 445 | 8,0 | 7,3 |
-| NHANES 2005-06 (EUA) | `tela_tv_cat` | não usa ou < 1 h | 842 | 15,2 | 16,8 |
-| NHANES 2005-06 (EUA) | `tela_tv_cat` | 1 a < 3 h | 2.366 | 42,6 | 45,5 |
-| NHANES 2005-06 (EUA) | `tela_tv_cat` | ≥ 3 h | 2.349 | 42,3 | 37,8 |
-| NHANES 2005-06 (EUA) | `dif_adormecer_freq` | sim | 880 | 15,8 | 16,0 |
 
 ![Tela digital por base](figuras/exposicao_tela_digital.png)
 

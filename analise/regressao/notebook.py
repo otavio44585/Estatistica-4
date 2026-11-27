@@ -14,6 +14,8 @@ A ordem é a da aula: álgebra matricial → saída no formato do Excel → Exce
 - Spec: `specs/005-regressao-linear/spec.md` (hipóteses fixadas antes de rodar).
 - Scripts: `analise/regressao/` (`ols.py`, `dados.py`, `modelos.py`, `confere_excel.py`, `diagnostico.py`).
 - Resumo dos resultados: `resultados/005/RESUMO.md`.
+- **EUA fora do trabalho (decisão do grupo, 2026-11-27):** H5.2, H5.8, H5.10 e H5.11 (NHANES 2005-06 e base
+  empilhada) foram retiradas; a numeração original das hipóteses é mantida.
 
 Regenerar tudo, a partir da raiz do repositório:
 
@@ -100,12 +102,12 @@ pequena, mas só aparece porque o p foi conferido por mais de um caminho:"""),
     C("""cf[cf.excecao_documentada.astype(str) == "True"][["base", "item", "A_toolpak", "C_script", "dif_rel_A_C"]]"""),
     M("""## 3. Família R1 — o coeficiente da tela em cada base
 
-Seis testes t (um por base), corrigidos por Holm. Em Vigitel e NHANES decide a versão **com peso amostral**
-(princípio 8); nas bases de repositório, a do Excel (não há desenho complexo).
+Cinco testes t (um por base), corrigidos por Holm. No Vigitel decide a versão **com peso amostral** (princípio 8);
+nas bases de repositório, a do Excel (não há desenho complexo).
 
-**Graus de liberdade com peso:** regra única do projeto (a mesma da spec 003): gl = nº de UPAs − nº de estratos
-(NHANES: 15). Quando o Wald testa mais de um coeficiente (q > 1), usa a correção de Korn-Graubard:
-F = (d − q + 1)/(d·q)·W, com gl (q, d − q + 1). A regra do `svyglm` do R (d − p + 1) aparece na sensibilidade."""),
+**Erro padrão com peso:** o Vigitel só divulga o peso (sem estrato nem UPA), então cada pessoa é a sua UPA e o
+gl é n − 1. Quando o Wald testa mais de um coeficiente (q > 1), usa a correção de Korn-Graubard,
+F = (d − q + 1)/(d·q)·W, que com d tão grande coincide com W/q."""),
     C("""h = le_csv(T / "hipoteses.csv")
 r1 = h[h.familia == "R1"].copy()
 r1["p"] = r1.p.map(formata_p); r1["p_holm"] = r1.p_holm.map(formata_p)
@@ -113,14 +115,11 @@ r1[["hipotese", "rotulo", "y", "b", "ic_inf", "ic_sup", "estatistica", "gl2", "p
     C("""display(Image(filename=str(F / "efeitos_padronizados.png")))"""),
     M("""Leitura: no Vigitel, tela digital ≥ 3 h/dia se associa a um índice de insônia cerca de 0,6 ponto maior (escala 0–12)
 que < 1 h, com idade, sexo e escolaridade fixos. O ganho de R² do bloco de tela é pequeno (menos de 1%): a associação
-existe, mas explica pouco da variação entre pessoas. No NHANES, com o desenho amostral (30 UPAs), o IC inclui 0.
-Na Argentina o sinal é o contrário do esperado."""),
-    M("""## 4. Família R2 — ANOVA de um fator, teste t e Brasil × EUA
+existe, mas explica pouco da variação entre pessoas. Na Argentina o sinal é o contrário do esperado."""),
+    M("""## 4. Família R2 — ANOVA de um fator e teste t (Vigitel)
 
 - **ANOVA de um fator:** compara as médias das 3 faixas de tela. O F é idêntico ao F global da regressão de Y nas 2 dummies.
-- **Teste t:** ≥ 3 h × < 1 h. Com variâncias iguais, o t é idêntico ao t da dummy numa regressão simples.
-- **H5.11:** a base empilhada Vigitel + NHANES ganha a variável país e as interações país × tela; o F parcial das duas
-  interações testa se o coeficiente da tela é o mesmo nos dois países (teste de Chow restrito à tela)."""),
+- **Teste t:** ≥ 3 h × < 1 h. Com variâncias iguais, o t é idêntico ao t da dummy numa regressão simples."""),
     C("""r2 = h[h.familia == "R2"].copy()
 for c in ("p", "p_holm", "p_sem_peso"): r2[c] = r2[c].map(formata_p)
 r2[["hipotese", "rotulo", "teste", "estatistica", "gl1", "gl2", "p", "p_holm", "decisao", "efeito_nome", "efeito", "p_sem_peso"]].round(4)"""),

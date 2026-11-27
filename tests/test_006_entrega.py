@@ -8,7 +8,7 @@ from analise.comum import caminhos
 from analise.relatorio.relatorio import MARCADOR, preenche
 
 RAIZ = caminhos.RAIZ
-PAGINAS = ["index", "001", "002", "003", "004", "005", "roteiro", "verificacao"]
+PAGINAS = ["index", "001", "002", "003", "004", "005", "006", "roteiro", "verificacao"]
 CAUSAIS = [r"\bcausa(m|ram)?\b(?! insônia\?)", r"\bprovoca", r"\befeitos? d[aeo]s?\b", r"\bleva(m)? (a|ao|à)\b"]
 
 
@@ -72,3 +72,13 @@ def test_referencias_do_relatorio_tem_doi():
 def test_roteiro_sem_marcador_de_pessoa():
     """Sugestão da verificação: nada de "Pessoa 1–4"; o nome (ou o papel do bloco) vem de integrantes.csv."""
     assert not re.search(r"Pessoa [1-4]", _texto("roteiro_apresentacao.md"))
+
+
+def test_relatorio_registra_a_retirada_dos_eua():
+    """Decisão do grupo (2026-11-27): EUA fora do trabalho. O relatório diz quando e que veio depois dos resultados,
+    e nenhuma tabela de resultados do relatório traz linha do NHANES."""
+    texto = _texto("relatorio.md")
+    assert "2026-11-27" in texto and "depois de ver os resultados" in texto
+    linhas_tabela = [l for l in texto.splitlines() if l.startswith("|")]
+    assert not [l for l in linhas_tabela if "NHANES" in l or "EUA" in l], "linha de tabela com os EUA"
+    assert "Tucker" not in texto

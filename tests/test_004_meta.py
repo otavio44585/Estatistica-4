@@ -87,7 +87,7 @@ def test_resultados_da_004_consistentes():
     assert (h.p_holm >= h.p - 1e-12).all()
     assert le_csv(tab / "conferencia_statsmodels.csv").diferenca_abs.max() < 1e-10
     ef = le_csv(tab / "efeitos_por_base.csv")
-    assert len(ef) == 7 and ef.ep_usado.nunique() == 1
+    assert len(ef) == 6 and "nhanes0506" not in set(ef.base) and ef.ep_usado.nunique() == 1
 
 
 # ---- correções da verificação independente (2026-11-27)
@@ -120,7 +120,28 @@ def test_meta_global_hk_bate_com_verificacao_independente():
     if not f.exists():
         pytest.skip("rode analise.mundial.rodar")
     g = le_csv(f).iloc[0]
-    assert g.analise.startswith("global")
-    # verificador obteve −0,016 a 0,178 (ρ) por Hartung-Knapp
-    assert abs(g.rho_ic_inf_hk - (-0.016)) < 0.001 and abs(g.rho_ic_sup_hk - 0.178) < 0.001
+    assert g.analise == "global (6 bases)"
+    # HK recalculado a partir dos efeitos por base (o verificador conferiu a mesma fórmula com 7 bases)
+    ef = le_csv(f.parent / "efeitos_por_base.csv")
+    m = M.dersimonian_laird(ef.z, ef.ep ** 2)
+    hk = M.hartung_knapp(ef.z, ef.ep ** 2, m["tau2"])
+    assert np.isclose(g.rho_ic_inf_hk, np.tanh(hk["ic_inf_hk"])) and np.isclose(g.rho_ic_sup_hk, np.tanh(hk["ic_sup_hk"]))
     assert g.rho_ic_inf_hk < g.rho_ic_inf and g.rho_ic_sup_hk > g.rho_ic_sup   # HK é mais largo aqui
+
+
+def test_sem_nhanes_e_brasil_x_resto_exploratorio():
+    """Decisão do grupo (2026-11-27): NHANES fora; Brasil × resto do mundo só como exploratório, fora de Holm."""
+    tab = caminhos.RESULTADOS / "004" / "tabelas"
+    if not (tab / "meta_analise.csv").exists():
+        pytest.skip("rode analise.mundial.rodar")
+    meta = le_csv(tab / "meta_analise.csv")
+    assert not meta.bases.str.contains("nhanes0506").any()
+    resto = meta[meta.analise == "resto do mundo (4 bases)"].iloc[0]
+    assert resto.papel == "exploratório" and set(resto.bases.split(", ")) == {"argentina", "japao", "xuzhou", "turquia"}
+    outros = meta[meta.analise == "outros países, tempo total (Argentina)"].iloc[0]
+    assert outros.k == 1
+    assert "resto do mundo" not in " ".join(le_csv(tab / "hipoteses.csv").hipotese)
+    ex = le_csv(tab / "exploratorio_referencia.csv")
+    assert ex.analise.str.startswith("EXPLORATÓRIO: Brasil (PNS + Vigitel) × resto do mundo").sum() == 1
+    sens = le_csv(tab / "sensibilidade.csv")
+    assert not sens.analise.str.contains("NHANES").any()

@@ -2,7 +2,7 @@
 
 Valem para toda spec, plano e tarefa. Mudar um princípio é decisão do grupo, registrada aqui com data.
 
-Versão 1 — rascunho de 2026-11-27, aguardando aprovação do grupo.
+Versão 1 — rascunho de 2026-11-27, aguardando aprovação do grupo. Revisão de 2026-11-27: princípio 8 sem o NHANES (EUA fora do trabalho).
 
 ## Dados e fontes
 
@@ -16,7 +16,7 @@ Versão 1 — rascunho de 2026-11-27, aguardando aprovação do grupo.
 
 6. **Hipótese antes do teste.** H0, H1, teste, α e modelo ficam registrados na spec antes da análise confirmatória. O que surgir depois é exploratório e assim rotulado. A análise exploratória de 2026-11-27 (`docs/exploratorio_*`) já foi vista: as hipóteses que nasceram dela dizem isso na spec.
 7. **p-valor nunca sozinho.** Todo teste reporta estatística, graus de liberdade, p, tamanho de efeito e IC 95%. α = 0,05 bilateral. Correção de Holm dentro de cada família de hipóteses definida na spec.
-8. **Desenho amostral respeitado.** Estimativa populacional de inquérito (PNS, Vigitel, NHANES, PeNSE, NSCH, YRBS, ATUS) usa peso e, quando a base tiver, estrato e UPA. Técnica que não aceita peso declara isso e ganha sensibilidade com peso.
+8. **Desenho amostral respeitado.** Estimativa populacional de inquérito (PNS, Vigitel, PeNSE, NSCH, YRBS, ATUS) usa peso e, quando a base tiver, estrato e UPA. Técnica que não aceita peso declara isso e ganha sensibilidade com peso. O NHANES saiu desta lista em 2026-11-27, quando os EUA foram retirados do trabalho (decisão do grupo, `specs/README.md`, Execução).
 9. **Comparação só entre medidas harmonizadas.** Quando a equivalência é aproximada (faixas diferentes, item diferente, ano diferente), a tabela de comparação diz o quê e quanto.
 10. **Associação não é causalidade.** Os dados são transversais; o texto do relatório não usa "causa", "efeito de" nem "provoca" para resultados observacionais.
 11. **Bruta e ajustada lado a lado.** Toda estimativa comparativa aparece sem e com o conjunto de covariáveis fixado no plano. A análise exploratória já mostrou confundimento forte por idade (PNS: RP bruta 0,90, ajustada 1,17).

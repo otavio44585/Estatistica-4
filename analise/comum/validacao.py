@@ -23,7 +23,6 @@ FAIXAS = {
     "idade": (10, 120), "sexo": (0, 1), "escolaridade3": (0, 2),
     "depressao_phq9": (0, 27), "depressao_diag": (0, 1),
     **{f"phq{i}": (0, 3) for i in range(1, 10)},
-    **{f"slq{i:03d}": (0, 4) for i in range(80, 150, 10)},
     "peso": (0, INF),
 }
 

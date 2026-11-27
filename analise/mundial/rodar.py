@@ -95,7 +95,7 @@ def main():
     ef["peso_aleatorio_pct"] = glob["peso_aleatorio"] * 100
     ef["peso_fixo_pct"] = glob["peso_fixo"] * 100
 
-    metas = [meta_linha("global (7 bases)", ef, "H4.1")]
+    metas = [meta_linha(f"global ({len(ef)} bases)", ef, "H4.1")]
     # ---- T064: subgrupos (H4.2)
     sub, qb = M.subgrupos(ef, "tipo")
     for t in TIPOS:
@@ -104,7 +104,10 @@ def main():
     br = ef[ef.pais == "Brasil"]
     outros_tt = ef[(ef.tipo == "tempo total") & (ef.pais != "Brasil")]
     metas.append(meta_linha("Brasil (PNS + Vigitel)", br, "H4.3"))
-    metas.append(meta_linha("outros países, tempo total (NHANES + Argentina)", outros_tt, "H4.3"))
+    metas.append(meta_linha("outros países, tempo total (Argentina)", outros_tt, "H4.3"))
+    # EXPLORATÓRIO (decidido depois de ver os resultados, fora de Holm): Brasil × resto do mundo, todas as exposições
+    resto = ef[ef.pais != "Brasil"]
+    metas.append(meta_linha(f"resto do mundo ({len(resto)} bases)", resto, "exploratório"))
     meta = pd.DataFrame(metas)
     salva_csv(meta, tab / "meta_analise.csv")
 
@@ -129,7 +132,8 @@ def main():
              estimativa=np.nan, ic_inf=np.nan, ic_sup=np.nan),
         dict(hipotese="H4.3", h0="Brasil = outros países com tempo total", teste="z da diferença (escala z de Fisher)",
              estatistica=h43["z"], gl=np.nan, p=h43["p"],
-             efeito=f"ρ Brasil = {np.tanh(mbr['mu']):.3f}; ρ outros = {np.tanh(mout['mu']):.3f}",
+             efeito=f"ρ Brasil = {np.tanh(mbr['mu']):.3f}; ρ outros = {np.tanh(mout['mu']):.3f} "
+                    f"(outros com tempo total: k = {len(outros_tt)}, só a Argentina, adolescentes)",
              estimativa=h43["diferenca_z"], ic_inf=h43["diferenca_z"] - M.Z975 * h43["ep"],
              ic_sup=h43["diferenca_z"] + M.Z975 * h43["ep"]),
         dict(hipotese="H4.4", h0="estimativa de tempo total fora de [0,21; 0,35] (Han, Zhou e Liu, 2024)",
@@ -160,6 +164,17 @@ def main():
                 "meta-regressão das médias de subgrupo, pesos 1/EP²)",
         rho=np.nan, ic_inf=np.nan, ic_sup=np.nan, z=td["z"], p=td["p"],
         inclinacao_z=td["inclinacao"], ep_inclinacao=td["ep"], p_unilateral=td["p_unilateral"])])], ignore_index=True)
+    mresto = M.dersimonian_laird(resto.z, resto.ep ** 2)
+    hk_resto, hk_br = M.hartung_knapp(resto.z, resto.ep ** 2, mresto["tau2"]), M.hartung_knapp(br.z, br.ep ** 2, mbr["tau2"])
+    cr = M.compara_z(mbr["mu"], mbr["ep"], mresto["mu"], mresto["ep"])
+    expl = pd.concat([expl, pd.DataFrame([dict(
+        analise=f"EXPLORATÓRIO: Brasil (PNS + Vigitel) × resto do mundo ({len(resto)} bases, todas as exposições); "
+                "decidido depois de ver os resultados, fora de Holm",
+        rho=np.tanh(mbr["mu"]), ic_inf=np.tanh(mbr["ic_inf"]), ic_sup=np.tanh(mbr["ic_sup"]), z=cr["z"], p=cr["p"],
+        rho_resto=np.tanh(mresto["mu"]), ic_inf_resto=np.tanh(mresto["ic_inf"]), ic_sup_resto=np.tanh(mresto["ic_sup"]),
+        ic_inf_resto_hk=np.tanh(hk_resto["ic_inf_hk"]), ic_sup_resto_hk=np.tanh(hk_resto["ic_sup_hk"]),
+        diferenca_z=cr["diferenca_z"], ic_inf_dif=cr["diferenca_z"] - M.Z975 * cr["ep"],
+        ic_sup_dif=cr["diferenca_z"] + M.Z975 * cr["ep"])])], ignore_index=True)
     salva_csv(expl, tab / "exploratorio_referencia.csv")
 
     # ---- T066: sensibilidades
@@ -180,7 +195,7 @@ def main():
             ef_w.loc[i, "z"] = np.arctanh(rw)
             sens.append(dict(analise=f"{NOME_BASE[p.base]}: ρ ponderado pelo peso amostral", grupo="ponderada",
                              k=1, rho=rw, ic_inf=np.nan, ic_sup=np.nan, Q=np.nan, p_Q=np.nan, I2=np.nan, n=len(d)))
-    # efeito do desenho: variância × deff de Kish nos 3 inquéritos (verificação independente, 2026-11-27)
+    # efeito do desenho: variância × deff de Kish nos 2 inquéritos (PNS, Vigitel) (verificação independente, 2026-11-27)
     ef_d = ef.copy()
     infl = ef_d.deff_kish.fillna(1.0)
     ef_d["ep"] = ef_d.ep * np.sqrt(infl)
@@ -200,11 +215,11 @@ def main():
     mb, mo = M.dersimonian_laird(bd.z, bd.ep ** 2), M.dersimonian_laird(od.z, od.ep ** 2)
     c = M.compara_z(mb["mu"], mb["ep"], mo["mu"], mo["ep"])
     sens.append(dict(analise="H4.3 com variância × deff de Kish (Brasil − outros, escala z)", grupo="efeito do desenho (deff)",
-                     k=4, rho=np.tanh(mb["mu"]), ic_inf=c["diferenca_z"] - M.Z975 * c["ep"],
+                     k=len(bd) + len(od), rho=np.tanh(mb["mu"]), ic_inf=c["diferenca_z"] - M.Z975 * c["ep"],
                      ic_sup=c["diferenca_z"] + M.Z975 * c["ep"], Q=np.nan, p_Q=np.nan, I2=np.nan, n=np.nan,
                      z_teste=c["z"], p=c["p"], rho_outros=np.tanh(mo["mu"])))
     m = M.dersimonian_laird(ef_w.z, ef_w.ep ** 2)
-    sens.append(dict(analise="global com ρ ponderado nos 3 inquéritos", grupo="ponderada", k=m["k"],
+    sens.append(dict(analise="global com ρ ponderado nos 2 inquéritos", grupo="ponderada", k=m["k"],
                      rho=np.tanh(m["mu"]), ic_inf=np.tanh(m["ic_inf"]), ic_sup=np.tanh(m["ic_sup"]),
                      Q=m["Q"], p_Q=m["p_Q"], I2=m["I2"], n=np.nan))
     # bruta × ajustada por idade (princípio 11); Xuzhou não tem idade e entra bruta
@@ -265,9 +280,12 @@ def main():
     salva_csv(sens_df, tab / "sensibilidade.csv")
     salva_csv(ef, tab / "efeitos_por_base.csv")
 
-    from analise.mundial.floresta import desenha, bruta_ajustada
+    from analise.mundial.floresta import desenha, bruta_ajustada, brasil_vs_resto
     desenha(ef, meta, out / "figuras" / "floresta.png", HAN_GERAL)
+    brasil_vs_resto(ef, meta, out / "figuras" / "brasil_vs_resto.png")
     bruta_ajustada(pd.DataFrame(aj), out / "figuras" / "bruta_ajustada_idade.png")
+    from analise.mundial import resumo
+    resumo.main()
     print(hip[["hipotese", "estatistica", "gl", "p_txt", "p_holm_txt", "decisao"]].to_string(index=False))
     print(meta[["analise", "k", "rho", "rho_ic_inf", "rho_ic_sup", "Q", "p_Q", "I2", "tau2"]].round(4).to_string(index=False))
     print(sens_df[["analise", "rho", "ic_inf", "ic_sup", "n"]].round(3).to_string(index=False))

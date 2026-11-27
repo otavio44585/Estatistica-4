@@ -77,3 +77,4 @@ Valores das meta-análises tirados de `docs/inventario-papers-internacional.md` 
   - `metodos.tendencia_ordenada` (exploratório de H4.2): linha nova em `exploratorio_referencia.csv`.
   - A floresta mostra o IC de Hartung-Knapp do global em linha tracejada.
   - Nenhuma regra de decisão do plano mudou.
+- 2026-11-27, NHANES removido do trabalho (decisão do grupo, registrada na spec antes do código). `pares.PRINCIPAIS` com 6 bases; "global (6 bases)"; subgrupo tempo total = PNS, Vigitel, Argentina; H4.3 com "outros" = Argentina (k = 1); deff só em PNS e Vigitel; comparação exploratória Brasil × resto do mundo (4 bases) em `meta_analise.csv` (papel "exploratório") e `exploratorio_referencia.csv`.

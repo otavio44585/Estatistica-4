@@ -59,8 +59,7 @@ CASOS = [  # base, desfecho, exposição, RP de MH na exploração (docs/explora
     ("pns2019", "problema_sono_freq", "tela_tv_cat", 1.18),
     ("vigitel2024", "dif_adormecer_freq", "tela_digital_cat", 1.23),
     ("vigitel2024", "dif_adormecer_freq", "tela_tv_cat", 1.24),
-    ("nhanes0506", "dif_adormecer_freq", "tela_digital_cat", 1.38),
-    ("nhanes0506", "dif_adormecer_freq", "tela_tv_cat", 1.36),
+    # NHANES retirado em 2026-11-27 (EUA fora do trabalho)
 ]
 
 

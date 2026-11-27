@@ -2,11 +2,11 @@
 
 Para cada base: analise/dados/excel/<base>_resultados.xlsx (fora do git: tem microdados) com
   dados        Y na coluna A, tela e covariáveis contíguas (só casos completos, tudo numérico)
-  anova        Y em 3 colunas, uma por faixa de tela (Vigitel e NHANES)
-  teste_t      Y em 2 colunas: ≥ 3 h e < 1 h (Vigitel e NHANES)
+  anova        Y em 3 colunas, uma por faixa de tela (Vigitel)
+  teste_t      Y em 2 colunas: ≥ 3 h e < 1 h (Vigitel)
   dummy_2grupos Y e a dummy ≥ 3 h, só nesses dois grupos (mostra que t com variâncias iguais = t da dummy)
   log          n antes e depois de remover faltantes
-e a base empilhada Vigitel + NHANES (H5.11). Também escreve analise/dados/excel/plano_toolpak.json,
+(NHANES e base empilhada retirados em 2026-11-27: EUA fora do trabalho). Também escreve analise/dados/excel/plano_toolpak.json,
 que o excel_toolpak.ps1 executa, com as fórmulas do caminho B (p recalculado pela estatística e pelos gl).
 """
 import json
@@ -107,26 +107,10 @@ def prepara_base(base: str) -> dict:
     return {"arquivo": arq.name, "tarefas": tarefas}
 
 
-def prepara_empilhada() -> dict:
-    df, _ = D.empilhada()
-    n, ncol = len(df), df.shape[1]
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = "dados"
-    _escreve(ws, df)
-    arq = PASTA / "empilhada_resultados.xlsx"
-    wb.save(arq)
-    print(f"empilhada: {n} linhas -> {arq.name}")
-    return {"arquivo": arq.name, "tarefas": [
-        _tarefa_reg("reg_completo", "dados", n, 2, ncol, ncol),
-        _tarefa_reg("reg_restrito", "dados", n, 2, ncol - 2, ncol - 2),
-        {"ferramenta": "Formulas", "aba_dados": "dados", "aba_saida": "f_parcial",
-         "formulas": _f_parcial("reg_completo", "reg_restrito", 2)},
-    ]}
-
-
 def main():
-    pastas = [prepara_base(m.base) for m in D.MODELOS] + [prepara_empilhada()]
+    for velho in ("nhanes0506_resultados.xlsx", "empilhada_resultados.xlsx"):   # EUA fora do trabalho
+        (PASTA / velho).unlink(missing_ok=True)
+    pastas = [prepara_base(m.base) for m in D.MODELOS]
     (PASTA / "plano_toolpak.json").write_text(json.dumps({"pastas": pastas}, ensure_ascii=False, indent=1),
                                               encoding="utf-8")
 

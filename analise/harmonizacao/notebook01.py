@@ -15,7 +15,6 @@ e se mostra o que cada base tem.
 |---|---|---|---|
 | PNS 2019 | Brasil | inquérito domiciliar com peso, estrato e UPA | `pns2019.py` |
 | Vigitel 2024 | Brasil (27 capitais) | inquérito telefônico com peso | `vigitel2024.py` |
-| NHANES 2005-06 | EUA | inquérito com peso, estrato e UPA | `nhanes0506.py` |
 | Xuzhou, Pérez-Chada, Doomscrolling, Okajima | China, Argentina, Turquia, Japão | amostras de conveniência (repositórios CC BY 4.0) | `repositorios.py` |
 """),
     ("md", "## 1. Quantas pessoas sobram em cada filtro\n\nOs números conferem com o inventário (`tests/test_001_contagens.py`)."),
@@ -24,10 +23,10 @@ n = pd.read_csv("resultados/001/tabelas/n_por_base.csv", sep=";", encoding="utf-
 n"""),
     ("md", """## 2. Recodificação da exposição
 
-As faixas de horas são diferentes em cada questionário. O ponto comum é cortar em **1 h** e **3 h**:
+As faixas de horas são diferentes em cada questionário (PNS: 5 faixas; Vigitel: 7). O ponto comum é cortar em **1 h** e **3 h**:
 0 = não usa ou < 1 h; 1 = 1 a < 3 h; 2 = ≥ 3 h. As tabelas abaixo são as que o código usa (`recodes.py`)."""),
     ("code", """from analise.harmonizacao import recodes as R
-pd.DataFrame({"PNS P04502 (código → faixa)": R.PNS_CAT, "NHANES PAD600": pd.Series(R.NH_CAT)}).rename_axis("código original")"""),
+pd.DataFrame({"PNS P04502 (código → faixa)": pd.Series(R.PNS_CAT), "Vigitel q59c (código → faixa)": pd.Series(R.VIG_CAT)}).rename_axis("código original")"""),
     ("md", """## 3. Equivalência entre bases
 
 `equivalente` = mesma pergunta; `aproximada` = pergunta ou faixa diferente (a comparação diz o quê);
@@ -42,11 +41,9 @@ display(Image("resultados/001/figuras/exposicao_tela_digital.png"))
 display(Image("resultados/001/figuras/indice_insonia.png"))"""),
     ("md", """## 5. Leitura
 
-- Em 2019, 22% dos adultos brasileiros (PNS) usavam computador, tablet ou celular no lazer 3 h ou mais por dia;
-  no Vigitel 2024 (capitais) eram 27%. No NHANES 2005-06, antes do smartphone, eram 7%.
-- O NHANES de 2005 mede outra época: a comparação Brasil × EUA mistura país e período (limitação declarada na 003 e na 005).
-- Os três sintomas de insônia do Vigitel e do NHANES são a mesma pergunta, com âncoras de frequência diferentes.
-  O item de sono da PNS é o do PHQ-9 e inclui dormir demais: só é comparável de forma aproximada.
+- Em 2019, cerca de um em cada cinco adultos brasileiros (PNS) usava computador, tablet ou celular no lazer 3 h ou mais por dia; no Vigitel 2024 (capitais), cerca de um em cada quatro. Valores exatos na tabela acima.
+- Os três sintomas de insônia do Vigitel formam o índice de insônia (0 a 12). O item de sono da PNS é o do PHQ-9 e inclui dormir demais: as duas pesquisas medem sono de forma diferente.
+- Os Estados Unidos (NHANES 2005-06) foram retirados do trabalho em 2026-11-27: a base é de antes do smartphone e não ajuda nas conclusões.
 
 Os percentuais deste texto vêm de `resultados/001/tabelas/prevalencias.csv`, impresso acima."""),
 ]

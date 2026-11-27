@@ -1,4 +1,6 @@
-"""T022–T031 — PCA por SVD e análise fatorial dos 10 conjuntos de itens (spec 002).
+"""T022–T031 — PCA por SVD e análise fatorial dos conjuntos de itens (spec 002).
+
+2026-11-27: EUA (NHANES 2005-06) fora do trabalho; H2.2–H2.4 retiradas (sem comparação entre países).
 
 Uso:  python -m analise.multivariada.analisa
 Saídas: resultados/002/tabelas/*.csv, resultados/002/figuras/*.png, analise/dados/processados/escores_<base>.parquet
@@ -18,7 +20,8 @@ from analise.comum import caminhos
 from analise.comum import multivariada as mv
 from analise.comum.estatistica import salva_csv
 from analise.comum.graficos import COR_PAIS, NOME_BASE, PAIS_BASE, estilo, salva
-from analise.multivariada.conjuntos import CONJUNTOS, PARES_TUCKER, POLICORICA, POR_ID
+from analise.multivariada.conjuntos import (CONJUNTOS, INSONIA_VIGITEL_ORIGEM, NOTA_RETIRADA, PARES_TUCKER,
+                                            POLICORICA, POR_ID, RETIRADAS)
 
 import matplotlib.pyplot as plt
 
@@ -188,7 +191,8 @@ def tucker_e_h24(por_id: dict) -> pd.DataFrame:
                                    fator=f"{za['c']['base']} F{fa+1} × {zb['c']['base']} F{fb+1}", phi=phi,
                                    classificacao=classifica_tucker(phi),
                                    dif_max_carga=float(np.max(np.abs(La[:, fa] - Lb[:, fb])))))
-    t = pd.DataFrame(linhas)
+    colunas = ["hipotese", "instrumento", "base_a", "base_b", "solucao", "fator", "phi", "classificacao", "dif_max_carga"]
+    t = pd.DataFrame(linhas, columns=colunas)          # vazio desde 2026-11-27 (sem pares entre países)
     salva_csv(t, TAB / "tucker.csv")
     return t
 
@@ -196,7 +200,7 @@ def tucker_e_h24(por_id: dict) -> pd.DataFrame:
 def h24(por_id: dict) -> list[dict]:
     """Em que fator carrega o item de sono (phq3) do PHQ-9, na solução retida e na de 2 fatores."""
     out = []
-    for cid in ("phq9_pns", "phq9_nhanes"):
+    for cid in ("phq9_pns",):
         z = por_id[cid]
         for metodo, rot, k, L, Phi in z["solucoes"]:
             if metodo != "ml" or (k == 1 and rot != "nenhuma") or (k >= 2 and "oblimin" not in rot):
@@ -230,7 +234,12 @@ def exporta_escores(res: list[dict], dados: dict):
 def figuras(res: list[dict], por_id: dict, tucker: pd.DataFrame):
     estilo()
     # scree + análise paralela, todos os conjuntos
-    fig, axs = plt.subplots(2, 5, figsize=(17, 6.6))
+    ncol = 4
+    nlin = int(np.ceil(len(res) / ncol))
+    fig, axs = plt.subplots(nlin, ncol, figsize=(4.2 * ncol, 3.3 * nlin))
+    axs = np.atleast_2d(axs)
+    for ax in axs.ravel()[len(res):]:
+        ax.set_visible(False)
     for ax, z in zip(axs.ravel(), res):
         c = z["c"]
         x = np.arange(1, z["p"] + 1)
@@ -241,57 +250,62 @@ def figuras(res: list[dict], por_id: dict, tucker: pd.DataFrame):
         ax.set_title(f"{c['nome']}\n{NOME_BASE[c['base']]} — retém {z['k']}", fontsize=9)
         ax.set_xticks(x)
         ax.set_xlabel("componente")
-    axs[0, 0].set_ylabel("autovalor")
-    axs[1, 0].set_ylabel("autovalor")
+    for lin in range(nlin):
+        axs[lin, 0].set_ylabel("autovalor")
     axs[0, 0].legend(fontsize=7)
     fig.suptitle("Scree e análise paralela: número de dimensões de cada conjunto de itens", y=1.0)
     fig.tight_layout()
     salva(fig, FIG / "scree_todos.png")
 
-    # cargas BR × EUA
-    for a, b, h, arq in (("insonia3_vigitel", "insonia3_nhanes", "H2.2", "cargas_insonia_br_eua.png"),
-                         ("phq9_pns", "phq9_nhanes", "H2.3", "cargas_phq9_br_eua.png")):
-        za, zb = por_id[a], por_id[b]
-        rot = za["c"]["rotulos"]
-        x = np.arange(len(rot))
-        fig, ax = plt.subplots(figsize=(max(6, 0.85 * len(rot) + 2), 3.8))
-        ax.bar(x - 0.2, za["ml1"]["cargas"][:, 0], 0.4, color=COR_PAIS["Brasil"], label=NOME_BASE[za["c"]["base"]])
-        ax.bar(x + 0.2, zb["ml1"]["cargas"][:, 0], 0.4, color=COR_PAIS["EUA"], label=NOME_BASE[zb["c"]["base"]])
-        phi = tucker[(tucker.hipotese == h) & (tucker.solucao == "AF ML 1 fator (Pearson)")].phi.iloc[0]
-        ax.set_xticks(x, rot, rotation=25, ha="right")
-        ax.set_ylim(0, 1)
-        ax.set_ylabel("carga no fator (AF por ML)")
-        ax.set_title(f"{za['c']['nome']}: cargas Brasil × EUA — Tucker φ = {phi:.3f}".replace(".", ","))
-        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), ncol=2)
-        salva(fig, FIG / arq)
+    # índice de insônia do Vigitel 2024: cargas na PCA e na AF, item a item
+    z = por_id["insonia3_vigitel"]
+    import textwrap
+    rot = [textwrap.fill(r, 16) + f"\n({INSONIA_VIGITEL_ORIGEM[i][0]})" for i, r in zip(z["c"]["itens"], z["c"]["rotulos"])]
+    x = np.arange(len(rot))
+    br = lambda v: f"{v:.2f}".replace(".", ",")
+    fig, ax = plt.subplots(figsize=(7.6, 4.4))
+    ax.bar(x - 0.2, z["pca"]["cargas"][:, 0], 0.4, color=COR_PAIS["Brasil"], label="PCA: carga no 1º componente")
+    ax.bar(x + 0.2, z["ml1"]["cargas"][:, 0], 0.4, color="#56B4E9", label="Análise fatorial (ML): carga no fator")
+    for j in range(len(rot)):
+        ax.text(x[j] - 0.2, z["pca"]["cargas"][j, 0] + 0.02, br(z["pca"]["cargas"][j, 0]), ha="center", fontsize=8)
+        ax.text(x[j] + 0.2, z["ml1"]["cargas"][j, 0] + 0.02, br(z["ml1"]["cargas"][j, 0]), ha="center", fontsize=8)
+    ax.set_xticks(x, rot)
+    ax.set_ylim(0, 1.15)
+    ax.set_ylabel("carga (correlação item × fator)")
+    v = z["pca"]["variancia"][0] * 100
+    ax.set_title(f"Índice de insônia, Vigitel 2024: 1 fator explica {v:.0f}% da variância")
+    n_txt = f"{z['n']:,}".replace(",", ".")
+    ax.text(0.5, 0.985, f"α de Cronbach = {br(z['alfa'])} · KMO = {br(z['kmo'])} · n = {n_txt}",
+            transform=ax.transAxes, ha="center", va="top", fontsize=8, color="#555555")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.30), ncol=2, fontsize=8)
+    salva(fig, FIG / "cargas_insonia_vigitel.png")
 
-    # biplot dos 7 sintomas de sono (NHANES): cargas nos 2 primeiros componentes
-    z = por_id["sono7_nhanes"]
+    # biplot do PHQ-9 (PNS 2019): cargas nos 2 primeiros componentes
+    z = por_id["phq9_pns"]
     L = z["pca"]["cargas"]
-    fig, ax = plt.subplots(figsize=(6, 5.5))
+    fig, ax = plt.subplots(figsize=(6.4, 5.6))
     rng = np.random.default_rng(1)
     idx = rng.choice(z["n"], size=min(800, z["n"]), replace=False)
     sc = z["pca"]["escores"][idx, :2] / np.sqrt(z["pca"]["autovalores"][:2])
-    ax.scatter(sc[:, 0] / np.abs(sc).max() , sc[:, 1] / np.abs(sc).max(), s=4, color="#BBBBBB", alpha=0.5,
+    ax.scatter(sc[:, 0] / np.abs(sc).max(), sc[:, 1] / np.abs(sc).max(), s=4, color="#BBBBBB", alpha=0.5,
                label="pessoas (amostra de 800, escores reescalados)")
-    # rótulos: afasta verticalmente os que ficariam a menos de 0,07 um do outro
     pos = [[L[j, 0] * 1.06, L[j, 1] * 1.06] for j in range(len(z["c"]["rotulos"]))]
     ordem = sorted(range(len(pos)), key=lambda j: pos[j][1])
     for a_, b_ in zip(ordem, ordem[1:]):
         if abs(pos[b_][0] - pos[a_][0]) < 0.35 and pos[b_][1] - pos[a_][1] < 0.07:
             pos[b_][1] = pos[a_][1] + 0.07
-    for j, rot in enumerate(z["c"]["rotulos"]):
-        ax.arrow(0, 0, L[j, 0], L[j, 1], color=COR_PAIS["EUA"], head_width=0.02, length_includes_head=True)
-        ax.text(pos[j][0], pos[j][1], rot, fontsize=8, va="center")
-    ax.set_xlim(right=1.15)
+    for j, rotl in enumerate(z["c"]["rotulos"]):
+        ax.arrow(0, 0, L[j, 0], L[j, 1], color=COR_PAIS["Brasil"], head_width=0.02, length_includes_head=True)
+        ax.text(pos[j][0], pos[j][1], rotl, fontsize=8, va="center")
+    ax.set_xlim(right=1.2)
     v = z["pca"]["variancia"]
-    ax.set_xlabel(f"componente 1 ({v[0]*100:.0f}% da variância)".replace(".", ","))
+    ax.set_xlabel(f"componente 1 ({v[0]*100:.0f}% da variância)")
     ax.set_ylabel(f"componente 2 ({v[1]*100:.0f}%)")
     ax.axhline(0, color="#999", lw=0.6)
     ax.axvline(0, color="#999", lw=0.6)
-    ax.set_title("Biplot: 7 sintomas de sono, NHANES 2005-06")
+    ax.set_title("Biplot: PHQ-9, PNS 2019")
     ax.legend(fontsize=7, loc="lower left")
-    salva(fig, FIG / "biplot_sono7_nhanes.png")
+    salva(fig, FIG / "biplot_phq9_pns.png")
 
     # mapa de cargas das soluções com 2+ fatores (oblimin, ML)
     multi = [(zz, s) for zz in res for s in zz["solucoes"] if s[0] == "ml" and s[2] >= 2 and "oblimin" in s[1]]
@@ -316,45 +330,20 @@ def figuras(res: list[dict], por_id: dict, tucker: pd.DataFrame):
 def hipoteses(ad: pd.DataFrame, es: pd.DataFrame, tucker: pd.DataFrame, h24l: list, por_id: dict) -> pd.DataFrame:
     H = []
     a = ad.set_index("conjunto")
-    for cid in ("insonia3_vigitel", "insonia3_nhanes"):
-        z = por_id[cid]
-        mincarga = float(z["ml1"]["cargas"][:, 0].min())
-        ok = a.loc[cid, "k_paralela"] == 1 and mincarga >= 0.50
-        H.append(dict(hipotese="H2.1", conjunto=cid, criterio="análise paralela retém 1 e cargas ≥ 0,50",
-                      valor=f"retém {a.loc[cid,'k_paralela']}; menor carga {mincarga:.3f}; λ1 = {a.loc[cid,'lambda1']:.3f} ({a.loc[cid,'var_pc1']*100:.1f}%)",
-                      decisao="critério atendido: 1 dimensão" if ok else "critério não atendido"))
-    for h in ("H2.2", "H2.3"):
-        t = tucker[(tucker.hipotese == h) & (tucker.solucao == "AF ML 1 fator (Pearson)")].iloc[0]
-        extra = ""
-        if h == "H2.3":
-            ka, kb = a.loc["phq9_pns", "k_paralela"], a.loc["phq9_nhanes", "k_paralela"]
-            extra = f"; fatores retidos PNS {ka}, NHANES {kb}"
-            ok = (ka == kb) and t.phi >= 0.95
-        else:
-            ok = t.phi >= 0.95
-        H.append(dict(hipotese=h, conjunto=f"{t.base_a} × {t.base_b}",
-                      criterio="Tucker φ ≥ 0,95" + (" e mesmo número de fatores" if h == "H2.3" else ""),
-                      valor=f"φ = {t.phi:.3f} ({t.classificacao}){extra}",
-                      decisao="critério atendido: estruturas equivalentes" if ok else "critério não atendido"))
-    ret = [x for x in h24l if x["solucao"].startswith("ML 1") or "oblimin" in x["solucao"]]
-    por_sol = {}
-    for x in ret:
-        por_sol.setdefault(x["k"], {})[x["conjunto"]] = x
-    for k, dd in sorted(por_sol.items()):
-        if len(dd) < 2:
-            continue
-        pns, nh = dd["phq9_pns"], dd["phq9_nhanes"]
-        if k == 1:
-            valor, ok = "solução retida de 1 fator nos dois países: o sono carrega no único fator", True
-        else:
-            # fator do sono acompanha o cansaço (somático) ou o humor?
-            lado = lambda x: "somático (com cansaço)" if x["fator_do_sono"] == x["fator_do_cansaco"] else (
-                "afetivo (com humor)" if x["fator_do_sono"] == x["fator_do_humor"] else "outro")
-            valor = f"PNS: {lado(pns)}, carga {pns['carga_sono']:.3f}; NHANES: {lado(nh)}, carga {nh['carga_sono']:.3f}"
-            ok = lado(pns) == lado(nh)
-        H.append(dict(hipotese="H2.4" + (" (2 fatores, exploratória)" if k == 2 and "exploratória" in pns["solucao"] else ""),
-                      conjunto="phq9_pns × phq9_nhanes", criterio="maior carga do item de sono no mesmo fator",
-                      valor=valor, decisao="critério atendido" if ok else "critério não atendido"))
+    cid = "insonia3_vigitel"
+    z = por_id[cid]
+    mincarga = float(z["ml1"]["cargas"][:, 0].min())
+    ok = a.loc[cid, "k_paralela"] == 1 and mincarga >= 0.50
+    H.append(dict(hipotese="H2.1", conjunto=cid, criterio="análise paralela retém 1 e cargas ≥ 0,50",
+                  valor=f"retém {a.loc[cid,'k_paralela']}; menor carga {mincarga:.3f}; λ1 = {a.loc[cid,'lambda1']:.3f} ({a.loc[cid,'var_pc1']*100:.1f}%)",
+                  decisao="critério atendido: 1 dimensão" if ok else "critério não atendido"))
+    sono = {x["k"]: x for x in h24l if x["conjunto"] == "phq9_pns"}
+    for h, crit in RETIRADAS.items():
+        valor = "—"
+        if h == "H2.4" and 1 in sono:
+            valor = (f"descritivo, só PNS: na solução retida de 1 fator o item de sono carrega no único fator "
+                     f"(carga {sono[1]['carga_sono']:.3f})")
+        H.append(dict(hipotese=h, conjunto="—", criterio=crit, valor=valor, decisao=NOTA_RETIRADA))
     for cid in ("sassv_xuzhou", "doomscrolling_turquia", "procrastinacao_turquia", "ais_japao", "bps_japao"):
         r = a.loc[cid]
         H.append(dict(hipotese="H2.5", conjunto=cid, criterio="análise paralela retém 1",
@@ -368,6 +357,40 @@ def hipoteses(ad: pd.DataFrame, es: pd.DataFrame, tucker: pd.DataFrame, h24l: li
     return h
 
 
+def vigitel_indice(por_id: dict):
+    """Tabelas do índice de insônia do Vigitel 2024 para a apresentação: item a item e resumo."""
+    z = por_id["insonia3_vigitel"]
+    c = z["c"]
+    desc = z["d"][c["itens"]]
+    linhas = []
+    for j, (item, rot) in enumerate(zip(c["itens"], c["rotulos"])):
+        var, pergunta = INSONIA_VIGITEL_ORIGEM[item]
+        linhas.append(dict(item=item, variavel_vigitel=var, pergunta_dicionario=pergunta, rotulo=rot,
+                           escala="0 nunca, 1 raramente, 2 às vezes, 3 quase sempre, 4 sempre (r70x − 1)",
+                           media=desc[item].mean(), dp=desc[item].std(),
+                           carga_pc1=z["pca"]["cargas"][j, 0], carga_af1_ml=z["ml1"]["cargas"][j, 0],
+                           comunalidade_af1=z["ml1"]["comunalidades"][j], msa=z["msa"][j],
+                           alfa_sem_item=z["alfa_sem"][j], r_item_total=z["item_total"][j]))
+    salva_csv(pd.DataFrame(linhas), TAB / "vigitel_indice.csv")
+    chi2, gl, pb = z["bartlett"]
+    av, p95 = z["pca"]["autovalores"], z["pa"]["p95"]
+    resumo = dict(conjunto=c["id"], base=c["base"], indice="índice de insônia (soma dos 3 itens, 0-12)", n=z["n"], p=z["p"],
+                  alfa=z["alfa"], kmo=z["kmo"], bartlett_chi2=chi2, bartlett_gl=gl, bartlett_p=pb,
+                  autovalor_1=av[0], autovalor_2=av[1], autovalor_3=av[2], p95_aleatorio_1=p95[0], p95_aleatorio_2=p95[1],
+                  var_pc1=z["pca"]["variancia"][0], var_comum_af1=float((z["ml1"]["cargas"] ** 2).sum() / z["p"]),
+                  fatores_retidos=z["k"], r_pc1_soma=z["r"]["pc1_soma"], r_pc1_af=z["r"]["pc1_af"])
+    salva_csv(pd.DataFrame([resumo]), TAB / "vigitel_indice_resumo.csv")
+
+
+def limpa_obsoletos():
+    """Remove saídas de conjuntos e comparações retirados em 2026-11-27 (EUA fora do trabalho)."""
+    for f in [FIG / "cargas_insonia_br_eua.png", FIG / "cargas_phq9_br_eua.png", FIG / "biplot_sono7_nhanes.png",
+              caminhos.PROCESSADOS / "escores_nhanes0506.parquet", *TAB.glob("correlacao_*nhanes*.csv")]:
+        if f.exists():
+            f.unlink()
+            print("  removido:", f.name)
+
+
 def main():
     t0 = time.time()
     bases = sorted({c["base"] for c in CONJUNTOS})
@@ -379,7 +402,9 @@ def main():
     h24l = h24(por_id)
     figuras(res, por_id, t)
     h = hipoteses(ad, es, t, h24l, por_id)
+    vigitel_indice(por_id)
     exporta_escores(res, dados)
+    limpa_obsoletos()
     import pandas as _pd
     _pd.set_option("display.width", 250)
     _pd.set_option("display.max_colwidth", 120)

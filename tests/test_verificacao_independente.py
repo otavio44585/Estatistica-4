@@ -1,5 +1,9 @@
 """Confere, item a item, que cada correção pedida pela verificação independente (docs/verificacao_independente.md)
-está presente nos arquivos gerados. Se alguém regredir uma correção, o teste aponta qual item."""
+está presente nos arquivos gerados. Se alguém regredir uma correção, o teste aponta qual item.
+
+Os itens 1, 6 e 9 nasceram no NHANES (EUA), que saiu do trabalho em 2026-11-27. Os testes conferem o que
+ainda vale deles: a regra de gl na PNS, a correção de Korn-Graubard na H3.7 da PNS e a ausência de base empilhada
+(seção "Itens superados pela retirada dos EUA" do documento)."""
 import re
 
 import pandas as pd
@@ -27,15 +31,24 @@ def texto(rel):
 # ---- erros confirmados ---------------------------------------------------------------------------------------
 
 def test_item01_regra_unica_de_gl_e_svyglm_como_sensibilidade():
+    """Sem o NHANES, a regra gl = UPAs − estratos vale na PNS (única base com estrato e UPA); svyglm é sensibilidade."""
+    rb = csv("003", "rp_bruta_ajustada")
+    pns = rb[rb.base == "pns2019"].iloc[0]
+    gl_pns = int(pns.n_upas - pns.n_estratos)
+    assert gl_pns == 7453
     h3 = csv("003", "hipoteses")
-    r = h3[(h3.hipotese == "H3.3") & (h3.exposicao == "digital")].iloc[0]
-    assert r.gl2 == 15 and {"p_svyglm", "p_holm_svyglm", "decisao_svyglm"} <= set(h3.columns)
+    assert {"p_svyglm", "p_holm_svyglm", "decisao_svyglm"} <= set(h3.columns)
+    r = h3[(h3.hipotese == "H3.2") & (h3.exposicao == "digital")].iloc[0]
+    assert r.gl2 == gl_pns
+    so_pns = h3[h3.gl2_svyglm.notna()]
+    assert len(so_pns) and (so_pns.base == "pns2019").all() and (so_pns.gl2_svyglm < so_pns.gl2).all()
+    assert (h3.decisao_svyglm == h3.decisao).all(), "a regra do svyglm mudou alguma decisão"
+    s3 = csv("003", "sensibilidade")
+    assert s3.modelo.str.contains("regra do svyglm").any()
     h5 = csv("005", "hipoteses").set_index("hipotese")
-    assert h5.loc["H5.2", "gl2"] == 15
-    s5 = csv("005", "sensibilidade")
-    assert s5.analise.str.startswith("regra do svyglm").any()
+    assert (h5.regra_gl.dropna() == "UPAs − estratos").all()
     rel = texto("docs/relatorio.md")
-    assert "svyglm" in rel and "H3.3 deixaria de rejeitar H0" in rel
+    assert "svyglm" in rel and "UPAs − estratos" in rel and f"({gl_pns:,} gl)".replace(",", ".") in rel
 
 
 def test_item02_roteiro_usa_o_F_do_excel_na_equivalencia():
@@ -72,10 +85,13 @@ def test_item05_sem_igualdade_afirmada(rel):
         assert frase not in t, f"{rel}: '{frase}'"
 
 
-def test_item06_korn_graubard_no_nhanes():
+def test_item06_korn_graubard_na_pns():
+    """H3.7 na PNS: Wald de q = 6 interações com d = 7453 gl de desenho vira F(q, d − q + 1)."""
     h3 = csv("003", "hipoteses")
-    r = h3[(h3.hipotese == "H3.7") & (h3.base == "nhanes0506")].iloc[0]
-    assert (r.gl1, r.gl2) == (6, 10)          # F(q, d − q + 1) com d = 15, q = 6
+    r = h3[(h3.hipotese == "H3.7") & (h3.base == "pns2019")].iloc[0]
+    d, q = int(r.gl_desenho), int(r.gl1)
+    assert (q, d) == (6, 7453) and r.gl2 == d - q + 1 == 7448
+    assert "Korn-Graubard" in texto("docs/relatorio.md")
 
 
 def test_item07_frase_de_rastreabilidade_restrita_a_resultados_proprios():
@@ -87,12 +103,18 @@ def test_item08_regex_causal_ampliada():
     assert r"\befeitos? d[aeo]s?\b" in t and r"\bleva(m)? (a|ao|à)\b" in t
 
 
-def test_item09_gl_da_interacao_empilhada_e_o_do_nhanes():
+def test_item09_nenhuma_base_empilhada_nem_nhanes():
+    """O item 9 (gl da base empilhada Brasil + EUA) deixou de existir: não há base empilhada nem NHANES."""
     c = csv("003", "comparacoes_entre_bases")
-    inter = c[c.metodo.str.startswith("interação país × tela na base")]
-    assert (inter.gl2 == 15).all()
-    h5 = csv("005", "hipoteses").set_index("hipotese")
-    assert h5.loc["H5.11", "gl2"] <= 15
+    assert not c.metodo.str.contains("empilhada|interação país", regex=True).any()
+    assert c.gl_base_empilhada.isna().all()
+    h3 = csv("003", "hipoteses")
+    assert not h3.hipotese.isin(["H3.3", "H3.6"]).any()
+    assert not h3.base.astype(str).str.contains("nhanes").any()
+    h5 = csv("005", "hipoteses")
+    assert not h5.hipotese.isin(["H5.2", "H5.8", "H5.10", "H5.11"]).any()
+    for spec, nome, col in [("001", "n_por_base", "base"), ("004", "efeitos_por_base", "base")]:
+        assert not csv(spec, nome)[col].astype(str).str.contains("nhanes").any(), f"{spec}/{nome}"
 
 
 def test_item10_rp_por_faixa_estimada_por_dominio():
@@ -115,6 +137,7 @@ def test_sug_hartung_knapp_e_deff():
     assert {"rho_ic_inf_hk", "rho_ic_sup_hk", "p_efeito_hk"} <= set(m.columns)
     s = csv("004", "sensibilidade")
     assert s.analise.str.contains("deff de Kish").any()
+    assert not s.analise.str.contains("NHANES").any()         # deff só da PNS e do Vigitel
     assert "Hartung-Knapp" in texto("docs/relatorio.md")
 
 

@@ -2,8 +2,9 @@
 
 Saídas em resultados/005/tabelas/:
   summary_<base>_<modelo>.csv       layout do SUMMARY OUTPUT (sem peso = o que o Excel calcula)
-  summary_<base>_completo_ponderado.csv   Vigitel e NHANES com peso amostral
-  hipoteses.csv                     H5.1–H5.11: estatística, gl, p, p Holm, decisão, efeito, IC
+  summary_<base>_completo_ponderado.csv   Vigitel com peso amostral
+  hipoteses.csv                     H5.1, H5.3–H5.7 e H5.9: estatística, gl, p, p Holm, decisão, efeito, IC
+                                    (H5.2, H5.8, H5.10 e H5.11 retiradas em 2026-11-27: EUA fora do trabalho)
   bruta_ajustada.csv                coeficiente da tela na regressão simples × múltipla, sem e com peso
   anova_t.csv                       ANOVA de um fator e testes t (sem peso e com peso), médias por faixa
   equivalencias.csv                 checagens de consistência da spec (ANOVA = regressão nas dummies etc.)
@@ -15,17 +16,16 @@ from scipy import stats
 from analise.comum import caminhos
 from analise.comum.estatistica import holm, decisao, salva_csv
 from analise.regressao import dados as D
-from analise.regressao.ols import coef_com_gl, mqo, mqp, f_parcial, summary_output, wald_bloco
+from analise.regressao.ols import mqo, mqp, f_parcial, summary_output, wald_bloco
 
 OUT = caminhos.saida("005")
 T = OUT / "tabelas"
 
 
 def _desenho(base, info):
+    """Peso e, se a base tiver, estrato e UPA. O Vigitel só divulga o peso (cada pessoa é a sua UPA)."""
     des = info["desenho"]
-    if base == "nhanes0506":
-        return des.peso, des.estrato, des.upa
-    return des.peso, None, None
+    return des.peso, (des["estrato"] if "estrato" in des else None), (des["upa"] if "upa" in des else None)
 
 
 def _efeito_padronizado(df, m, b, ep, nome):
@@ -98,7 +98,8 @@ def regressoes():
 
 def anova_t():
     linhas, tab, equiv = [], [], []
-    for h_an, h_t, base in (("H5.7", "H5.9", "vigitel2024"), ("H5.8", "H5.10", "nhanes0506")):
+    # H5.8 e H5.10 (NHANES) retiradas em 2026-11-27: EUA fora do trabalho.
+    for h_an, h_t, base in (("H5.7", "H5.9", "vigitel2024"),):
         m = D.POR_BASE[base]
         g, info = D.grupos_tela(base)
         df, _ = D.matriz(base)
@@ -176,38 +177,9 @@ def anova_t():
     return linhas, tab, equiv
 
 
-def empilhada():
-    df, des = D.empilhada()
-    y = df["insonia_idx"]
-    X = df.drop(columns="insonia_idx")
-    Xr = X.drop(columns=["eua_x_tela_1a3h", "eua_x_tela_3h_mais"])
-    a_c, a_r = mqo(y, X), mqo(y, Xr)
-    fp = f_parcial(a_c, a_r)
-    salva_csv(summary_output(a_c), T / "summary_empilhada_completo.csv")
-    salva_csv(summary_output(a_r), T / "summary_empilhada_restrito.csv")
-    pc = mqp(y, X, des.peso, des.estrato, des.upa)
-    salva_csv(summary_output(pc), T / "summary_empilhada_completo_ponderado.csv")
-    # A variância dos termos de interação vem quase toda do NHANES (15 estratos, 30 UPAs). O gl da base
-    # empilhada (≈ 27 mil, dominado pelas pessoas do Vigitel) superestimaria a precisão; usa-se o gl de
-    # desenho do NHANES (UPAs − estratos), conservador.
-    nh = des[des.estrato >= 1000]
-    gl_nh = int(nh.groupby("estrato").upa.nunique().sum() - nh.estrato.nunique())
-    wb = wald_bloco(pc, ["eua_x_tela_1a3h", "eua_x_tela_3h_mais"], gl=gl_nh)
-    ci = coef_com_gl(pc, "eua_x_tela_3h_mais", gl_nh)
-    return dict(hipotese="H5.11", familia="R2", base="vigitel2024+nhanes0506", rotulo="Vigitel + NHANES",
-                y="índice de insônia (0-12)", teste="F parcial da interação país × tela (2 restrições)", n=a_c.n,
-                f_sem_peso=fp["f"], gl1_sem_peso=fp["gl1"], gl2_sem_peso=fp["gl2"], p_sem_peso=fp["p"],
-                versao_decisao=f"com peso (F de Wald com correção de Korn-Graubard, {pc.tipo_ep}; gl de desenho do NHANES)",
-                regra_gl=f"UPAs − estratos do NHANES ({gl_nh}); gl da base empilhada seria {pc.gl_res}",
-                estatistica=wb["f"], gl1=wb["gl1"],
-                gl2=wb["gl2"], p=wb["p"], b=ci["b"], ep=ci["ep"], ic_inf=ci["ic_inf"], ic_sup=ci["ic_sup"],
-                efeito_nome="ΔR² sem peso das interações", efeito=fp["delta_r2"], f2=fp["f2"])
-
-
 def main():
     r1, bruta, _ = regressoes()
     r2, tab, equiv = anova_t()
-    r2.append(empilhada())
     h = pd.DataFrame(r1 + r2)
     h["p_holm"] = np.nan
     for fam in ("R1", "R2"):

@@ -5,11 +5,11 @@
 | T020 | Instalar `factor_analyzer`, fixar versão em `requirements.txt` e testar import | 001 | import funciona em 2 máquinas | Claude (2026-11-27) — factor_analyzer 0.5.1 instalado, mas o `fit` é incompatível com o scikit-learn 1.9; AF própria (`analise/comum/multivariada.py`) |
 | T021 | `analise/comum/multivariada.py`: KMO, MSA, Bartlett, α, PCA-SVD, análise paralela, Tucker | T020 | testes: autovalores da PCA-SVD = `sklearn` até 1e-8; KMO = `factor_analyzer` até 1e-6 | Claude (2026-11-27) — `tests/test_002_multivariada.py` (autovalores = sklearn até 1e-8; KMO = factor_analyzer até 1e-6; AF e rotações conferidas) |
 | T022 [P] | 3 sintomas de insônia: Vigitel | T021 | tabelas e figuras em `resultados/002/` | Claude (2026-11-27) — `resultados/002/tabelas/` (`insonia3_vigitel`) |
-| T023 [P] | 3 sintomas de insônia e 7 sintomas de sono: NHANES | T021 | idem | Claude (2026-11-27) — `resultados/002/tabelas/` (`insonia3_nhanes`, `sono7_nhanes`), `biplot_sono7_nhanes.png` |
+| T023 [P] | 3 sintomas de insônia e 7 sintomas de sono: NHANES | T021 | idem | Claude (2026-11-27) — `resultados/002/tabelas/` (`insonia3_nhanes`, `sono7_nhanes`), `biplot_sono7_nhanes.png` · **retirada em 2026-11-27 (EUA fora do trabalho)** |
 | T024 | Decidir e implementar a correlação policórica | T021 | método escrito no plano; teste com dado simulado de correlação conhecida | Claude (2026-11-27) — policórica de Olsson (dois passos), teste com ρ = 0,6 conhecido em `tests/test_002_multivariada.py` |
 | T025 [P] | PHQ-9: PNS 2019 | T021 | idem T022 | Claude (2026-11-27) — `phq9_pns` em `adequacao.csv`, `af_cargas.csv` |
-| T026 [P] | PHQ-9: NHANES | T021 | idem | Claude (2026-11-27) — `phq9_nhanes` em `adequacao.csv`, `af_cargas.csv` |
-| T027 | Congruência de Tucker: insônia BR × EUA e PHQ-9 BR × EUA | T022, T023, T025, T026 | tabela de φ; H2.2 a H2.4 respondidas | Claude (2026-11-27) — `tucker.csv`, `phq9_item_sono.csv`, `hipoteses.csv` (H2.2–H2.4) |
+| T026 [P] | PHQ-9: NHANES | T021 | idem | Claude (2026-11-27) — `phq9_nhanes` em `adequacao.csv`, `af_cargas.csv` · **retirada em 2026-11-27 (EUA fora do trabalho)** |
+| T027 | Congruência de Tucker: insônia BR × EUA e PHQ-9 BR × EUA | T022, T023, T025, T026 | tabela de φ; H2.2 a H2.4 respondidas | Claude (2026-11-27) — `tucker.csv`, `phq9_item_sono.csv`, `hipoteses.csv` (H2.2–H2.4) · **retirada em 2026-11-27 (EUA fora do trabalho)** |
 | T028 [P] | SAS-SV (Xuzhou), doomscrolling e procrastinação (Turquia), AIS e BPS (Japão) | T021 | H2.5 respondida por conjunto | Claude (2026-11-27) — `hipoteses.csv` (H2.5), `cargas_multifator.png` |
 | T029 | Comparação PCA × AF e correlação dos escores | T022–T028 | H2.6 respondida | Claude (2026-11-27) — `escores_correlacao.csv` (H2.6) |
 | T030 | Robustez: policórica e correlação ponderada | T024, T027 | comparação com Pearson tabelada | Claude (2026-11-27) — `robustez.csv` |

@@ -18,7 +18,7 @@ intervalos contíguos:
 | Aba de saída (nome exato) | Intervalo Y | Intervalo X |
 |---|---|---|
 | `reg_completo` | A1:A(n+1) | da coluna B até a última |
-| `reg_simples` | A1:A(n+1) | só as colunas de tela (B, ou B:C no Vigitel e no NHANES) |
+| `reg_simples` | A1:A(n+1) | só as colunas de tela (B, ou B:C no Vigitel) |
 | `reg_covariaveis` | A1:A(n+1) | só as covariáveis (da primeira depois da tela até a última) |
 
 Passos: **Dados → Análise de Dados → Regressão (*Regression*) → OK**. Preencher Intervalo Y e Intervalo X; marcar
@@ -26,8 +26,7 @@ Passos: **Dados → Análise de Dados → Regressão (*Regression*) → OK**. Pr
 nome da tabela acima (ou intervalo de saída na célula A1 de uma aba vazia com esse nome). Resíduos são opcionais; a
 conferência não usa.
 
-Base empilhada (`empilhada_resultados.xlsx`): `reg_completo` (X = todas as colunas) e `reg_restrito` (X sem as duas
-últimas colunas, as interações `eua_x_tela_*`).
+O NHANES e a base empilhada Vigitel + NHANES saíram do trabalho em 2026-11-27 (EUA fora do trabalho).
 
 ## 2. Fórmulas de conferência (caminho B)
 
@@ -40,18 +39,18 @@ Na saída da Regressão (layout fixo: ANOVA nas linhas 12–14, coeficientes a p
 
 G12 tem de repetir o "F de significação" (F12) e a coluna H tem de repetir o "valor-P" (coluna E).
 
-Aba `f_parcial` (F parcial do bloco de tela = completo × só covariáveis; na empilhada, completo × restrito):
+Aba `f_parcial` (F parcial do bloco de tela = completo × só covariáveis):
 
 | Célula | Conteúdo |
 |---|---|
-| B2 | número de restrições q (2 no Vigitel, NHANES e empilhada; 1 nas outras) |
+| B2 | número de restrições q (2 no Vigitel; 1 nas outras) |
 | B3 | `=((reg_covariaveis!C13-reg_completo!C13)/B2)/(reg_completo!C13/reg_completo!B13)` |
 | B5 | `=reg_completo!B13` |
 | B6 | `=F.DIST.RT(B3,B2,B5)` |
 | B7 | `=reg_completo!B5-reg_covariaveis!B5` (ΔR²) |
 | B8 | `=B7/(1-reg_completo!B5)` (f²) |
 
-## 3. ANOVA de um fator (Vigitel e NHANES)
+## 3. ANOVA de um fator (Vigitel)
 
 **Dados → Análise de Dados → Anova: fator único (*Anova: Single Factor*)**. Intervalo de entrada: aba `anova`, colunas
 A:C (uma por faixa de tela, com rótulos na linha 1). Agrupado por **Colunas**; **Rótulos na primeira linha**; α = 0,05.
@@ -59,7 +58,7 @@ Saída na aba `anova_saida`, célula A1. Conferência: `H12 = F.DIST.RT(E12,C12,
 
 O F desta ANOVA tem de ser igual ao F global da aba `reg_simples` (regressão de Y nas 2 dummies de tela).
 
-## 4. Testes t (Vigitel e NHANES)
+## 4. Testes t (Vigitel)
 
 Aba `teste_t`: coluna A = ≥ 3 h, coluna B = < 1 h.
 

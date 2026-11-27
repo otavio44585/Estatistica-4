@@ -1,6 +1,6 @@
 # 005 — Regressão linear múltipla, ANOVA e teste t
 
-Status: **concluída** (2026-11-27), aprovação do grupo pendente. Resultados em `resultados/005/RESUMO.md`.
+Status: **concluída** (2026-11-27), aprovação do grupo pendente. **EUA fora do trabalho desde 2026-11-27** (ver Histórico): H5.2, H5.8, H5.10 e H5.11 retiradas. Resultados em `resultados/005/RESUMO.md`.
 
 ## Pergunta
 
@@ -15,7 +15,7 @@ A disciplina cobra regressão linear múltipla no formato do Excel: R², ANOVA c
 | Base | População | Y (desfecho) | X de interesse | Covariáveis | n de partida |
 |---|---|---|---|---|---|
 | Vigitel 2024 | adultos, 27 capitais | `insonia_idx` (0–12) | tela digital: dummies 1 a < 3 h e ≥ 3 h (referência < 1 h) | idade, sexo, escolaridade (3 faixas) | 27.048 |
-| NHANES 2005-06 | adultos, EUA | `insonia_idx` (0–12) | computador/games: mesmas faixas | idade, sexo, escolaridade (3 faixas) | 5.563 |
+| ~~NHANES 2005-06~~ | adultos, EUA | `insonia_idx` (0–12) | computador/games: mesmas faixas | idade, sexo, escolaridade (3 faixas) | 5.563 — **retirada em 2026-11-27 (EUA fora do trabalho)** |
 | Xuzhou | universitários, China | PSQI total | SAS-SV (uso problemático de smartphone, 10–60) | sexo, série, renda | 2.317 |
 | Pérez-Chada | adolescentes, Argentina | latência (min) | horas de tela antes de dormir | idade, sexo, escolaridade dos pais | 864 |
 | Doomscrolling | 18–40 anos, Turquia | latência (min) | escore `FK_TOPLAM` (provável escala de doomscrolling) | idade | 1.216 |
@@ -33,26 +33,26 @@ A exploração de 2026-11-27 olhou Vigitel e NHANES com outro desfecho (dificuld
 
 α = 0,05 bilateral. Holm dentro de cada família. O sinal esperado vem da literatura (`docs/estado-da-arte.md`) e não muda o teste, que é bilateral.
 
-**Família R1 — regressão múltipla: coeficiente da tela, com as covariáveis no modelo** (6 testes)
+**Família R1 — regressão múltipla: coeficiente da tela, com as covariáveis no modelo** (6 testes registrados; 5 depois da retirada de H5.2 em 2026-11-27)
 
 | # | Base | H0 | H1 | Sinal esperado | Teste |
 |---|---|---|---|---|---|
 | H5.1 | Vigitel | β(≥ 3 h) = 0 | β ≠ 0 | + | t do coeficiente |
-| H5.2 | NHANES | β(≥ 3 h) = 0 | β ≠ 0 | + | t do coeficiente |
+| ~~H5.2~~ | NHANES | β(≥ 3 h) = 0 | β ≠ 0 | + | t do coeficiente — **retirada em 2026-11-27 (EUA fora do trabalho)** |
 | H5.3 | Xuzhou | β(SAS-SV) = 0 | β ≠ 0 | + | t do coeficiente |
 | H5.4 | Argentina | β(tela antes de dormir) = 0 | β ≠ 0 | + | t do coeficiente |
 | H5.5 | Turquia | β(`FK_TOPLAM`) = 0 | β ≠ 0 | + | t do coeficiente; só entra se o rótulo da escala for confirmado, senão sai da família como exploratória |
 | H5.6 | Japão | β(celular antes de dormir) = 0 | β ≠ 0 | + | t do coeficiente |
 
-**Família R2 — ANOVA, teste t e Brasil × EUA** (5 testes)
+**Família R2 — ANOVA, teste t e Brasil × EUA** (5 testes registrados; 2 depois da retirada de H5.8, H5.10 e H5.11 em 2026-11-27)
 
 | # | Base | H0 | H1 | Teste |
 |---|---|---|---|---|
 | H5.7 | Vigitel | média de `insonia_idx` igual nas 3 faixas de tela | ao menos uma média diferente | ANOVA de um fator (F) |
-| H5.8 | NHANES | idem | idem | ANOVA de um fator (F) |
+| ~~H5.8~~ | NHANES | idem | idem | ANOVA de um fator (F) — **retirada em 2026-11-27 (EUA fora do trabalho)** |
 | H5.9 | Vigitel | média em ≥ 3 h = média em < 1 h | médias diferentes | t de Welch |
-| H5.10 | NHANES | idem | idem | t de Welch |
-| H5.11 | Vigitel + NHANES | coeficientes da tela iguais nos dois países | diferentes | F parcial da interação país × tela (teste de Chow restrito aos coeficientes da tela) |
+| ~~H5.10~~ | NHANES | idem | idem | t de Welch — **retirada em 2026-11-27 (EUA fora do trabalho)** |
+| ~~H5.11~~ | Vigitel + NHANES | coeficientes da tela iguais nos dois países | diferentes | F parcial da interação país × tela (teste de Chow restrito aos coeficientes da tela) — **retirada em 2026-11-27 (EUA fora do trabalho)** |
 
 H5.11 compara diferença de médias (escala aditiva). A spec 003 (H3.6) compara razão de prevalências. As duas podem discordar sem contradição, porque a escala é outra.
 
@@ -124,3 +124,4 @@ Causalidade. Modelos para desfecho censurado (Tobit) ou ordinal, citados como li
   - **Referência das dummies:** categoria mais frequente (Xuzhou: série e renda; Argentina: escolaridade dos pais e, na sensibilidade, série). VIF máximo caiu de 18,1 (Xuzhou) e 11,4 (Argentina) para ≤ 2,0; o coeficiente da tela não mudou. As planilhas foram regeradas e a Análise de Dados do Excel rodou de novo.
   - **Conferência:** `conferencia.csv` ganhou `dentro_tolerancia` e `excecao_documentada`: 920 de 920 dentro da tolerância + 2 exceções documentadas (p de Welch com gl inteiro no Excel). Em clone limpo, sem `analise/dados/excel/`, a conferência lê `resultados/005/excel_saidas/*.csv`.
   - Texto: "não foi detectada diferença" no lugar de igualdade afirmada; fragilidade de H5.2 sem influentes (p = 0,167) registrada.
+- 2026-11-27, **decisão do grupo: EUA fora do trabalho inteiro** ("a única base deles foi de 2005; pode tirar do trabalho inteiro"). Registrado antes de mudar o código. H5.2, H5.8, H5.10 e H5.11 (NHANES 2005-06 e base empilhada Vigitel + NHANES) **retiradas em 2026-11-27 (EUA fora do trabalho)**; a numeração original é mantida. Famílias passam a ser R1 = H5.1, H5.3, H5.4, H5.5, H5.6 e R2 = H5.7, H5.9 (Holm recalculado). Planilhas e saídas do Excel do NHANES e da base empilhada removidas; sem NHANES não sobra base com estrato e UPA na 005, e a sensibilidade pela regra do `svyglm` sai.

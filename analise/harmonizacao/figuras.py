@@ -9,7 +9,7 @@ from analise.comum import caminhos
 from analise.comum.estatistica import salva_csv
 from analise.comum.graficos import COR_PAIS, NOME_BASE, PAIS_BASE, estilo, salva, plt
 
-INQ = ["pns2019", "vigitel2024", "nhanes0506"]
+INQ = ["pns2019", "vigitel2024"]
 ROT_TELA = {0: "não usa ou < 1 h", 1: "1 a < 3 h", 2: "≥ 3 h"}
 
 
@@ -57,14 +57,14 @@ def main():
     ax.invert_yaxis()
     salva(fig, out / "figuras" / "exposicao_tela_digital.png")
 
-    # Figura 2: índice de insônia (0-12) no Vigitel e no NHANES, distribuição ponderada
+    # Figura 2: índice de insônia (0-12) no Vigitel 2024, distribuição ponderada
     fig, ax = plt.subplots(figsize=(7, 3.2))
-    for b, desloc in [("vigitel2024", -0.2), ("nhanes0506", 0.2)]:
+    for b, desloc in [("vigitel2024", 0.0)]:
         df = dados[b]
         p = prop_ponderada(df.insonia_idx, df.peso) * 100
-        ax.bar(p.index + desloc, p.values, width=0.4, color=COR_PAIS[PAIS_BASE[b]], label=NOME_BASE[b])
+        ax.bar(p.index + desloc, p.values, width=0.7, color=COR_PAIS[PAIS_BASE[b]], label=NOME_BASE[b])
     ax.set_xticks(range(13)); ax.set_xlabel("índice de insônia (soma dos 3 sintomas, 0 = nunca, 12 = sempre)")
-    ax.set_ylabel("% (com peso)"); ax.set_title("Distribuição do índice de insônia"); ax.legend()
+    ax.set_ylabel("% (com peso)"); ax.set_title("Distribuição do índice de insônia no Vigitel 2024")
     salva(fig, out / "figuras" / "indice_insonia.png")
     escreve_resumo(out, prev)
     print(prev.to_string())

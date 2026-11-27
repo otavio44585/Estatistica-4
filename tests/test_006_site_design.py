@@ -7,7 +7,7 @@ import pytest
 from analise.comum import caminhos
 
 RAIZ = caminhos.RAIZ
-PAGINAS = ["index", "001", "002", "003", "004", "005", "roteiro", "verificacao"]
+PAGINAS = ["index", "001", "002", "003", "004", "005", "006", "roteiro", "verificacao"]
 PAGES_URL = "https://otavio44585.github.io/Estatistica-4/"
 MARINHO = "#08223D"
 
@@ -58,3 +58,22 @@ def test_readme_gerado_do_modelo():
     assert r.startswith("<!-- Arquivo GERADO"), "README não foi gerado do modelo"
     assert PAGES_URL in r
     assert "site/assets/eseg-marinho.svg" in r
+
+
+def test_pagina_006_com_as_figuras_sintese():
+    """site/006.html mostra as figuras de resultados/006/figuras, cada uma embutida e com o caminho de origem."""
+    p = RAIZ / "site" / "006.html"
+    if not p.exists():
+        pytest.skip("site não gerado")
+    h = p.read_text(encoding="utf-8")
+    figs = sorted((RAIZ / "resultados" / "006" / "figuras").glob("*.png"))
+    assert figs, "resultados/006/figuras vazio"
+    for f in figs:
+        assert f"resultados/006/figuras/{f.name}" in h, f.name
+    assert h.count('src="data:image/png;base64,') >= len(figs)
+
+
+def test_readme_sem_eua_nas_fontes():
+    r = (RAIZ / "README.md").read_text(encoding="utf-8")
+    fontes = r.split("## Fontes dos dados", 1)[1].split("##", 1)[0]
+    assert not [l for l in fontes.splitlines() if l.startswith("| NHANES")], "NHANES na tabela de fontes"

@@ -9,7 +9,6 @@ from analise.comum import caminhos
 ESPERADO = {
     "pns2019": {"morador selecionado com entrevista (M001 = 1)": 90846, "18 anos ou mais": 88531},
     "vigitel2024": {"edição 2024": 27048},
-    "nhanes0506": {"participantes do questionário de sono (SLQ_D)": 6139, "18 anos ou mais": 5563},
     "xuzhou": {"linhas no arquivo": 2317},
     "argentina": {"completos do artigo (excluFINAL = 0)": 864},
     "turquia": {"linhas no arquivo": 1216},
@@ -27,7 +26,7 @@ def test_contagens(base):
         assert log[etapa] == n, f"{base} / {etapa}: {log[etapa]} != {n}"
 
 
-FINAL = {"pns2019": 88531, "vigitel2024": 27048, "nhanes0506": 5563, "xuzhou": 2317,
+FINAL = {"pns2019": 88531, "vigitel2024": 27048, "xuzhou": 2317,
          "argentina": 864, "turquia": 1216, "japao": 381}
 
 

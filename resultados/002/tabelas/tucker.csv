@@ -1,11 +1,1 @@
 ﻿hipotese;instrumento;base_a;base_b;solucao;fator;phi;classificacao;dif_max_carga
-H2.2;3 sintomas de insônia;vigitel2024;nhanes0506;AF ML 1 fator (Pearson);F1;0,9977143345459679;equivalente (≥ 0,95);0,07797124145614398
-H2.2;3 sintomas de insônia;vigitel2024;nhanes0506;PCA 1º componente;F1;0,9998339674454937;equivalente (≥ 0,95);0,04126023934829337
-H2.2;3 sintomas de insônia;vigitel2024;nhanes0506;AF ML 1 fator (policórica);F1;0,9985287474699515;equivalente (≥ 0,95);0,06213939591770323
-H2.2;3 sintomas de insônia;vigitel2024;nhanes0506;AF ML 1 fator (ponderada);F1;0,9962944993080379;equivalente (≥ 0,95);0,09493146488290571
-H2.3;PHQ-9;pns2019;nhanes0506;AF ML 1 fator (Pearson);F1;0,9969953247643768;equivalente (≥ 0,95);0,1141740559668567
-H2.3;PHQ-9;pns2019;nhanes0506;PCA 1º componente;F1;0,9981100543162287;equivalente (≥ 0,95);0,09727506655985696
-H2.3;PHQ-9;pns2019;nhanes0506;AF ML 1 fator (policórica);F1;0,9987903429820787;equivalente (≥ 0,95);0,07639283927338769
-H2.3;PHQ-9;pns2019;nhanes0506;AF ML 1 fator (ponderada);F1;0,9978636067799767;equivalente (≥ 0,95);0,11860280357594044
-H2.3 (exploratória);PHQ-9;pns2019;nhanes0506;AF ML 2 fatores oblimin (oblimin (exploratória, 2 fatores));pns2019 F1 × nhanes0506 F2;0,8524194355083926;similar (0,85–0,94);0,49876118381839096
-H2.3 (exploratória);PHQ-9;pns2019;nhanes0506;AF ML 2 fatores oblimin (oblimin (exploratória, 2 fatores));pns2019 F2 × nhanes0506 F1;0,8592400033436609;similar (0,85–0,94);0,40927800113254115

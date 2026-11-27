@@ -1,4 +1,5 @@
-﻿analise;rho;ic_inf;ic_sup;z;p;inclinacao_z;ep_inclinacao;p_unilateral
-exploratório: uso problemático × Han, Zhou e Liu (2024) r = 0,33 (IC 0,28–0,38);0,17752328141853554;-0,031995653481050906;0,37209708156102317;-1,4639418457114004;0,14320983855122155;;;
-complemento de H4.4: diferença tempo total × r = 0,28;0,021568066688111905;-0,04119542975557802;0,08416201898932407;-5,2850109629522795;1,256972295952444e-07;;;
-"EXPLORATÓRIO: tendência ordenada de H4.2 (escore 0 tempo total, 1 pré-sono, 2 uso problemático; meta-regressão das médias de subgrupo, pesos 1/EP²)";;;;2,2196191101289617;0,026444633934132305;0,09894564267295156;0,044577757607791875;0,013222316967066152
+﻿analise;rho;ic_inf;ic_sup;z;p;inclinacao_z;ep_inclinacao;p_unilateral;rho_resto;ic_inf_resto;ic_sup_resto;ic_inf_resto_hk;ic_sup_resto_hk;diferenca_z;ic_inf_dif;ic_sup_dif
+exploratório: uso problemático × Han, Zhou e Liu (2024) r = 0,33 (IC 0,28–0,38);0,17752328141853554;-0,031995653481050906;0,37209708156102317;-1,4639418457114004;0,14320983855122155;;;;;;;;;;;
+complemento de H4.4: diferença tempo total × r = 0,28;0,01735476282310831;-0,06043149014430981;0,09493150139351621;-4,865282694385881;1,1429332571875188e-06;;;;;;;;;;;
+"EXPLORATÓRIO: tendência ordenada de H4.2 (escore 0 tempo total, 1 pré-sono, 2 uso problemático; meta-regressão das médias de subgrupo, pesos 1/EP²)";;;;2,1090539300794275;0,034939926829584814;0,10045094949568247;0,047628440441017765;0,017469963414792407;;;;;;;;
+"EXPLORATÓRIO: Brasil (PNS + Vigitel) × resto do mundo (4 bases, todas as exposições); decidido depois de ver os resultados, fora de Holm";0,016083422267467572;-0,07651458405360409;0,10840636563975513;-1,3625392194615635;0,1730277756647266;;;;0,13137595758535262;-0,006665163581360914;0,26450365744017107;-0,054502277926969815;0,30845384266183845;-0,11605490737577753;-0,2829957450681728;0,050885930316617756

@@ -2,6 +2,8 @@
 
 Status: executado (2026-11-27).
 
+> **EUA fora do trabalho desde 2026-11-27** (decisão do grupo; ver Histórico). Os trechos deste plano sobre NHANES 2005-06 e base empilhada (H5.2, H5.8, H5.10, H5.11) ficam como registro do que foi planejado; não são mais executados.
+
 ## Modelos
 
 Vigitel e NHANES, k = 6 regressores:
@@ -167,3 +169,4 @@ Quem executa salva `<base>_resultados.xlsx`.
 - Teste de referência (`tests/test_005_confere_excel.py`) lê a planilha da aula por `STAT4_AULA`, sem copiar o material para o repositório.
 - Notebook numerado 06 (o 05 é da spec 004).
 - 2026-11-27, correções da verificação independente: gl com peso = UPAs − estratos (regra única, igual à 003; `svyglm` vira sensibilidade); Korn-Graubard nos Wald com q > 1 (`ols.korn_graubard`); H5.11 com o gl de desenho do NHANES; estrato com 1 UPA alinhado a `survey.py`; d de Cohen com DP combinado nas duas versões; referência das dummies = categoria mais frequente (VIF ≤ 2,0); conferência com colunas `dentro_tolerancia`/`excecao_documentada` e leitura de `excel_saidas/` em clone limpo. Testes novos em `tests/test_005_consistencia.py` (Korn-Graubard, estrato com 1 UPA, d de Cohen) e `tests/test_005_confere_excel.py` (clone limpo). Nenhuma decisão mudou.
+- 2026-11-27, **decisão do grupo: EUA fora do trabalho inteiro** ("a única base deles foi de 2005; pode tirar do trabalho inteiro"). Registrado antes de mudar o código. H5.2, H5.8, H5.10 e H5.11 (NHANES 2005-06 e base empilhada Vigitel + NHANES) **retiradas em 2026-11-27 (EUA fora do trabalho)**; a numeração original é mantida. Famílias passam a ser R1 = H5.1, H5.3, H5.4, H5.5, H5.6 e R2 = H5.7, H5.9 (Holm recalculado). Planilhas e saídas do Excel do NHANES e da base empilhada removidas; sem NHANES não sobra base com estrato e UPA na 005, e a sensibilidade pela regra do `svyglm` sai.

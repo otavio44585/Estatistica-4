@@ -2,6 +2,7 @@
 
 Uso:  python -m analise.multivariada.notebooks      (depois de analise.multivariada.analisa)
 Os números citados no texto dos notebooks são lidos das tabelas de resultados/002 na hora de gerar.
+2026-11-27: EUA (NHANES 2005-06) fora do trabalho; o passo a passo usa o Vigitel 2024 e a PNS 2019.
 """
 import nbformat as nbf
 from nbclient import NotebookClient
@@ -42,21 +43,27 @@ TAB = caminhos.RESULTADOS / "002" / "tabelas"; FIG = caminhos.RESULTADOS / "002"
 
 def nb_pca():
     ad = le_csv(TAB / "adequacao.csv").set_index("conjunto")
-    t = le_csv(TAB / "tucker.csv")
-    tpc = t[(t.hipotese == "H2.2") & (t.solucao == "PCA 1º componente")].phi.iloc[0]
-    av = le_csv(TAB / "pca_autovalores.csv")
-    s7 = av[av.conjunto == "sono7_nhanes"]
+    rs = le_csv(TAB / "vigitel_indice_resumo.csv").iloc[0]
     cells = [
         md("""
 # 02 — Análise de componentes principais (PCA) pela decomposição em valores singulares
 
 Spec 002, perguntas Q2.1 e Q2.4. Este notebook mostra a PCA **passo a passo pela SVD** nos 3 sintomas de insônia
-do NHANES 2005-06 (EUA) e do Vigitel 2024 (Brasil) e confere cada número com uma implementação de referência
-(`scikit-learn`). No fim, resume os 10 conjuntos de itens da spec.
+do **Vigitel 2024** e confere cada número com uma implementação de referência (`scikit-learn`). No fim, resume os
+conjuntos de itens da spec.
 
-**Por que PCA aqui?** Queremos saber se os três sintomas (dificuldade para adormecer, para voltar a dormir e
-acordar cedo demais) podem ser resumidos num único índice de insônia — o índice 0–12 usado nas specs 003 a 005.
-A PCA procura as direções que concentram a maior parte da variância dos itens padronizados.
+**Que itens juntamos?** As três perguntas de insônia do Vigitel 2024, respondidas de 1 (nunca) a 5 (sempre) e
+recodificadas para 0 a 4:
+
+| Item | Pergunta no Vigitel (dicionário) |
+|---|---|
+| `sintoma_1` (r703) | dificuldade para dormir |
+| `sintoma_2` (r704) | acordou e teve dificuldade pra dormir de novo |
+| `sintoma_3` (r705) | acordou antes da hora desejada e não conseguiu dormir de novo |
+
+**Por que PCA aqui?** Queremos saber se essas três perguntas podem ser resumidas num único **índice de insônia**
+(a soma, de 0 a 12) usado nas specs 003 a 005. A PCA procura as direções que concentram a maior parte da variância
+dos itens padronizados. Os EUA (NHANES 2005-06) saíram do trabalho em 2026-11-27.
 """),
         code(SETUP),
         md("""
@@ -66,10 +73,10 @@ Cada item vira escore z: $Z_{ij} = (X_{ij} - \\bar X_j) / s_j$, com desvio padr�
 Assim a PCA trabalha sobre a **matriz de correlação**, e itens com escalas diferentes pesam igual.
 """),
         code("""
-nh = pd.read_parquet(caminhos.processado("nhanes0506"))
+vg = pd.read_parquet(caminhos.processado("vigitel2024"))
 itens = ["sintoma_1", "sintoma_2", "sintoma_3"]
-rotulos = ["adormecer", "voltar a dormir", "acordar cedo"]
-X = nh[itens].dropna().to_numpy(float)
+rotulos = ["adormecer (r703)", "voltar a dormir (r704)", "acordar cedo (r705)"]
+X = vg[itens].dropna().to_numpy(float)
 n, p = X.shape
 Z = (X - X.mean(axis=0)) / X.std(axis=0, ddof=1)
 print(f"n = {n} pessoas com os 3 itens; p = {p} itens")
@@ -128,9 +135,11 @@ corr_item_cp1 = [np.corrcoef(Z[:, j], F[:, 0])[0, 1] for j in range(p)]
 pd.DataFrame({"carga CP1": A[:, 0], "corr(item, escore CP1)": corr_item_cp1, "carga CP2": A[:, 1]}, index=rotulos).round(4)
 """),
         md(f"""
-**Leitura.** No NHANES o 1º componente tem autovalor {f(ad.loc['insonia3_nhanes','lambda1'])} e explica
-{f(ad.loc['insonia3_nhanes','var_pc1']*100,1)}% da variância dos três sintomas; os outros dois ficam abaixo de 1.
-Todas as cargas do CP1 são altas e do mesmo sinal: o componente é um eixo de "insônia em geral".
+**Leitura.** No Vigitel o 1º componente tem autovalor {f(rs.autovalor_1)} e explica
+{f(rs.var_pc1*100,1)}% da variância das três perguntas; os outros dois ficam abaixo de 1
+({f(rs.autovalor_2)} e {f(rs.autovalor_3)}). Todas as cargas do CP1 são altas e do mesmo sinal: o componente é um
+eixo de "insônia em geral". A soma simples dos 3 itens correlaciona {f(rs.r_pc1_soma,4)} com o escore do CP1, o que
+justifica usar a soma (0–12) como índice.
 """),
         md("""
 ## Passo 5 — Quantos componentes? Kaiser, scree e análise paralela
@@ -147,50 +156,38 @@ pd.DataFrame({"observado": lam, "aleatório (média)": pa["media"], "aleatório 
               "retém?": lam > pa["p95"]}, index=["CP1", "CP2", "CP3"]).round(4)
 """),
         md("""
-## Brasil: o mesmo procedimento no Vigitel 2024
+## O índice de insônia do Vigitel, item a item
 
-Usamos a função `mv.pca_svd` (o mesmo código acima, empacotado e testado em `tests/test_002_multivariada.py`).
+Tabela pronta em `resultados/002/tabelas/vigitel_indice.csv` (cargas na PCA e na análise fatorial, comunalidade,
+MSA, α sem o item) e figura das cargas.
 """),
         code("""
-vg = pd.read_parquet(caminhos.processado("vigitel2024"))
-Xb = vg[itens].dropna().to_numpy(float)
-rb, ru = mv.pca_svd(Xb), mv.pca_svd(X)
-comp = pd.DataFrame({"carga CP1 Vigitel (BR)": rb["cargas"][:, 0], "carga CP1 NHANES (EUA)": ru["cargas"][:, 0]}, index=rotulos)
-print(f"Vigitel: n = {len(Xb)}, λ1 = {rb['autovalores'][0]:.3f} ({100*rb['variancia'][0]:.1f}%)")
-print(f"NHANES : n = {len(X)}, λ1 = {ru['autovalores'][0]:.3f} ({100*ru['variancia'][0]:.1f}%)")
-print("Tucker φ entre as cargas do CP1:", round(mv.tucker(rb["cargas"][:, 0], ru["cargas"][:, 0]), 4))
-comp.round(3)
+display(le_csv(TAB / "vigitel_indice.csv")[["variavel_vigitel", "pergunta_dicionario", "carga_pc1", "carga_af1_ml",
+                                            "comunalidade_af1", "msa", "alfa_sem_item"]])
+display(Image(filename=str(FIG / "cargas_insonia_vigitel.png")))
 """),
-        md(f"""
-**Leitura.** Nos dois países um único componente concentra a variância (Vigitel {f(ad.loc['insonia3_vigitel','var_pc1']*100,1)}%,
-NHANES {f(ad.loc['insonia3_nhanes','var_pc1']*100,1)}%), e as cargas praticamente coincidem (Tucker φ = {f(tpc)}).
-Isso sustenta usar a soma dos três sintomas como índice nas specs 003–005: a correlação entre a soma e o escore do CP1 é
-≥ 0,999 nas duas bases (`resultados/002/tabelas/escores_correlacao.csv`).
-"""),
-        md("## Os 10 conjuntos de itens da spec 002"),
+        md("## Os conjuntos de itens da spec 002"),
         code("""
 ad = le_csv(TAB / "adequacao.csv")
 ad[["conjunto", "n", "p", "lambda1", "var_pc1", "k_kaiser", "k_paralela"]]
 """),
         code('display(Image(filename=str(FIG / "scree_todos.png")))'),
         md(f"""
-**Leitura.** A análise paralela retém 1 dimensão nos dois conjuntos de insônia, nos dois PHQ-9, no doomscrolling
-e na AIS; retém 2 no SAS-SV (Xuzhou), na procrastinação (Turquia) e no BPS (Japão). Nos 7 sintomas de sono do
-NHANES, Kaiser apontaria 2 (λ2 = {f(s7.autovalor.iloc[1])}), mas o 2º autovalor não supera o P95 aleatório
-({f(s7.p95_aleatorio.iloc[1])}): a regra do plano retém 1.
+**Leitura.** A análise paralela retém 1 dimensão no índice de insônia do Vigitel, no PHQ-9 da PNS, no doomscrolling
+(Turquia) e na AIS (Japão); retém 2 no SAS-SV (China), na procrastinação (Turquia) e no BPS (Japão).
 
-## Biplot: 7 sintomas de sono (NHANES)
+## Biplot: PHQ-9 da PNS 2019
 
 O biplot mostra, no plano dos 2 primeiros componentes, as **cargas** (setas) e os **escores** (pontos). O CP1 é
-"problema de sono em geral" (todas as setas para a direita); o CP2 separa os sintomas **noturnos** (adormecer,
-acordar à noite, acordar cedo, remédio) dos **diurnos** (não descansado, sonolência, sono insuficiente).
+"sofrimento em geral" (todas as setas para a direita, {f(ad.loc['phq9_pns','var_pc1']*100,0)}% da variância); o CP2
+separa os itens somáticos (sono, cansaço, apetite) dos afetivos (humor, fracasso, autolesão).
 """),
-        code('display(Image(filename=str(FIG / "biplot_sono7_nhanes.png")))'),
+        code('display(Image(filename=str(FIG / "biplot_phq9_pns.png")))'),
         md("""
 ## Conclusão
 
 - A PCA por SVD reproduz exatamente (até $10^{-8}$) a PCA de referência; os autovalores são $\\sigma^2/(n-1)$.
-- Os 3 sintomas de insônia formam um componente dominante no Brasil e nos EUA, com cargas quase idênticas.
+- As 3 perguntas de insônia do Vigitel 2024 formam um componente dominante; a soma delas é o índice de insônia.
 - O número de dimensões dos outros instrumentos está em `resultados/002/tabelas/adequacao.csv`; a análise
   fatorial (notebook 03) confirma e interpreta essas dimensões.
 """),
@@ -199,8 +196,8 @@ acordar à noite, acordar cedo, remédio) dos **diurnos** (não descansado, sono
 
 
 def nb_af():
-    h = le_csv(TAB / "hipoteses.csv")
     ad = le_csv(TAB / "adequacao.csv").set_index("conjunto")
+    rs = le_csv(TAB / "vigitel_indice_resumo.csv").iloc[0]
     cells = [
         md("""
 # 03 — Análise fatorial
@@ -209,29 +206,35 @@ Spec 002, perguntas Q2.1 a Q2.4. A **análise fatorial (AF)** supõe que cada it
 mais um erro próprio: $x = \\Lambda f + \\varepsilon$, com $\\mathrm{Cov}(x) = \\Lambda\\Phi\\Lambda^\\top + \\Psi$.
 Diferente da PCA (que resume a variância **total**), a AF modela só a variância **comum** — a parte que os
 itens compartilham. Os números deste notebook são recalculados aqui e conferidos com `resultados/002/tabelas/`.
+
+Desde 2026-11-27 os EUA (NHANES 2005-06) estão fora do trabalho; as hipóteses H2.2–H2.4, que comparavam
+Brasil e EUA, foram retiradas. O exemplo principal é o PHQ-9 da PNS 2019.
 """),
         code(SETUP + """
-pns = pd.read_parquet(caminhos.processado("pns2019")); nh = pd.read_parquet(caminhos.processado("nhanes0506"))
+pns = pd.read_parquet(caminhos.processado("pns2019"))
 phq = [f"phq{i}" for i in range(1, 10)]
 from analise.harmonizacao.recodes import PHQ_ROTULOS
-Xb = pns[phq].dropna().to_numpy(float); Xu = nh[phq].dropna().to_numpy(float)
-Rb, Ru = np.corrcoef(Xb, rowvar=False), np.corrcoef(Xu, rowvar=False)
-print("PHQ-9: PNS n =", len(Xb), " NHANES n =", len(Xu))
+Xb = pns[phq].dropna().to_numpy(float)
+Rb = np.corrcoef(Xb, rowvar=False)
+print("PHQ-9: PNS n =", len(Xb))
 """),
-        md("""
+        md(f"""
 ## 1. Os dados servem para AF? KMO, MSA, Bartlett e α
 
-- **KMO** compara as correlações com as correlações **parciais** (pela inversa de $R$):
-  $\\mathrm{KMO} = \\sum r_{ij}^2 / (\\sum r_{ij}^2 + \\sum q_{ij}^2)$. Perto de 1 = os itens compartilham variância;
-  regra prática KMO ≥ 0,60 (*a verificar*). O **MSA** é o mesmo índice item a item.
+- **α de Cronbach** mede a **consistência interna**: se os itens "andam juntos" a ponto de a soma ser um bom
+  resumo. $\\alpha = \\frac{{k}}{{k-1}}(1 - \\sum s_j^2 / s_T^2)$; vai de 0 a 1. No índice de insônia do Vigitel,
+  α = {f(rs.alfa, 2)}.
+- **KMO** (Kaiser-Meyer-Olkin) mede se as correlações entre os itens são explicadas por algo **em comum** a todos,
+  e não só por pares de itens: compara as correlações com as correlações **parciais** (pela inversa de $R$),
+  $\\mathrm{{KMO}} = \\sum r_{{ij}}^2 / (\\sum r_{{ij}}^2 + \\sum q_{{ij}}^2)$. Vai de 0 a 1; perto de 1 = vale fazer AF;
+  regra prática KMO ≥ 0,60 (*a verificar*). O **MSA** é o mesmo índice item a item. No Vigitel, KMO = {f(rs.kmo, 2)}.
 - **Bartlett**: testa $H_0$: $R = I$ (itens não correlacionados).
   $\\chi^2 = -(n-1-(2p+5)/6)\\ln|R|$, gl $= p(p-1)/2$.
-- **α de Cronbach**: consistência interna, $\\alpha = \\frac{k}{k-1}(1 - \\sum s_j^2 / s_T^2)$.
 """),
         code("""
-for nome, X, R in (("PNS 2019", Xb, Rb), ("NHANES 2005-06", Xu, Ru)):
-    k, msa = mv.kmo(R); chi2, gl, pv = mv.bartlett(R, len(X))
-    print(f"{nome}: KMO = {k:.3f}; MSA mín = {msa.min():.3f}; Bartlett χ² = {chi2:,.1f}, gl = {gl}, p = {pv:.2e}; α = {mv.alfa_cronbach(X):.3f}")
+k, msa = mv.kmo(Rb); chi2, gl, pv = mv.bartlett(Rb, len(Xb))
+print(f"PNS 2019, PHQ-9: KMO = {k:.3f}; MSA mín = {msa.min():.3f}; Bartlett χ² = {chi2:,.1f}, gl = {gl}, p = {pv:.2e}; α = {mv.alfa_cronbach(Xb):.3f}")
+le_csv(TAB / "adequacao.csv")[["conjunto", "n", "p", "alfa", "kmo", "bartlett_chi2", "bartlett_gl", "k_paralela"]]
 """),
         md("""
 Com n de milhares, o Bartlett rejeita $H_0$ sempre (p arredondado para 0): ele só confirma que há correlação a
@@ -247,45 +250,31 @@ modelar. O tamanho do efeito está no KMO e no α.
 **unicidade** $= 1 - h_j^2$.
 """),
         code("""
-mlb, mlu = mv.af_ml(Rb, 1), mv.af_ml(Ru, 1)
+mlb = mv.af_ml(Rb, 1)
 pab = mv.af_eixos_principais(Rb, 1)
-pd.DataFrame({"PNS ML": mlb["cargas"][:, 0], "PNS eixos": pab["cargas"][:, 0], "PNS h²": mlb["comunalidades"],
-              "NHANES ML": mlu["cargas"][:, 0], "NHANES h²": mlu["comunalidades"]}, index=PHQ_ROTULOS).round(3)
+pd.DataFrame({"ML": mlb["cargas"][:, 0], "eixos principais": pab["cargas"][:, 0], "h² (ML)": mlb["comunalidades"],
+              "unicidade": 1 - mlb["comunalidades"]}, index=PHQ_ROTULOS).round(3)
 """),
         md("""
-## 3. Congruência de Tucker: a estrutura é a mesma no Brasil e nos EUA?
+## 3. Onde carrega o item de sono do PHQ-9?
 
-$\\varphi = \\sum a_i b_i / \\sqrt{\\sum a_i^2 \\sum b_i^2}$. Lorenzo-Seva e ten Berge (2006,
-doi:10.1027/1614-2241.2.2.57, limites conferidos no resumo registrado no Crossref): **0,85–0,94 = similaridade
-razoável; acima de 0,95 = fatores considerados iguais**. Cuidado: com todas as cargas positivas, φ tende a sair
-alto; por isso a tabela também traz a maior diferença absoluta entre cargas.
+Com 1 fator (a solução retida pela análise paralela), o item de sono carrega no único fator. Como a literatura
+costuma separar no PHQ-9 um fator **somático** e um **afetivo**, rodamos também uma solução **exploratória** de 2
+fatores com rotação **oblimin** (oblíqua: os fatores podem se correlacionar; Φ é a correlação entre eles).
 """),
         code("""
-print("PHQ-9, 1 fator ML: Tucker φ =", round(mv.tucker(mlb["cargas"][:, 0], mlu["cargas"][:, 0]), 4))
-le_csv(TAB / "tucker.csv")[["hipotese", "instrumento", "solucao", "fator", "phi", "classificacao", "dif_max_carga"]]
-"""),
-        code('display(Image(filename=str(FIG / "cargas_insonia_br_eua.png"))); display(Image(filename=str(FIG / "cargas_phq9_br_eua.png")))'),
-        md("""
-## 4. Onde carrega o item de sono do PHQ-9? (H2.4)
-
-Com 1 fator (a solução retida pela análise paralela nos dois países), o item de sono carrega no único fator.
-Como a literatura costuma separar no PHQ-9 um fator **somático** e um **afetivo**, rodamos também uma solução
-**exploratória** de 2 fatores com rotação **oblimin** (oblíqua: os fatores podem se correlacionar; Φ é a
-correlação entre eles).
-"""),
-        code("""
-for nome, R in (("PNS", Rb), ("NHANES", Ru)):
-    L2 = mv.af_ml(R, 2)["cargas"]; P, Phi, _ = mv.oblimin(L2)
-    df = pd.DataFrame(P, index=PHQ_ROTULOS, columns=["F1", "F2"]).round(2)
-    print(f"--- {nome}: Φ(F1,F2) = {Phi[0,1]:.3f}"); display(df)
+L2 = mv.af_ml(Rb, 2)["cargas"]; P, Phi, _ = mv.oblimin(L2)
+print(f"PNS: Φ(F1,F2) = {Phi[0,1]:.3f}")
+display(pd.DataFrame(P, index=PHQ_ROTULOS, columns=["F1", "F2"]).round(2))
+le_csv(TAB / "phq9_item_sono.csv")
 """),
         md("""
-Nos dois países o item de sono fica no mesmo fator que **cansaço** (o fator somático), não no do humor
-deprimido. A ordem F1/F2 muda de uma base para outra, mas o agrupamento é o mesmo.
+Na solução exploratória de 2 fatores, o item de sono fica no mesmo fator que **cansaço** (o fator somático), não
+no do humor deprimido.
 
-## 5. Conjuntos com 2 fatores: varimax × oblimin
+## 4. Conjuntos com 2 fatores: varimax × oblimin
 
-Para SAS-SV (Xuzhou), procrastinação do sono (Turquia) e BPS (Japão) a análise paralela retém 2 fatores.
+Para SAS-SV (China), procrastinação do sono (Turquia) e BPS (Japão) a análise paralela retém 2 fatores.
 **Varimax** força fatores não correlacionados (ortogonal); **oblimin** permite correlação.
 """),
         code("""
@@ -298,52 +287,54 @@ display(Image(filename=str(FIG / "cargas_multifator.png")))
 - **BPS (Japão)**: o 2º fator reúne exatamente os itens de redação invertida (BPS2R, BPS3R, BPS7R, BPS9R) e se
   correlaciona pouco com o 1º (Φ ≈ 0,19). É o padrão de um **fator de método** (efeito da redação), não
   necessariamente de dois construtos.
-- **SAS-SV (Xuzhou)**: um fator de "abstinência" (impaciente/inquieto/não suporta ficar sem o celular) e outro de
+- **SAS-SV (China)**: um fator de "abstinência" (impaciente/inquieto/não suporta ficar sem o celular) e outro de
   "perturbação da rotina" (perde planos, perde eficiência, usa mais que o previsto), com Φ ≈ 0,61: dimensões
   distintas, mas bem correlacionadas.
 - **Procrastinação (Turquia)**: dois blocos de itens (UE2, 3, 6, 7 × os demais), Φ ≈ 0,38. Sem codebook, não dá
   para afirmar se o 2º bloco é de itens invertidos.
 
-## 6. Escores: PCA × AF × soma (H2.6)
+## 5. Escores: PCA × AF × soma (H2.6)
 
 Escore fatorial pelo método de regressão (Thurstone): $\\hat F = Z\\,R^{-1}\\Lambda\\Phi$.
 """),
         code("""
-Z = mv.padroniza(Xu)
-f_af = mv.escores_regressao(Z, Ru, mlu["cargas"])[:, 0]
-pc = mv.pca_svd(Xu)
+Z = mv.padroniza(Xb)
+f_af = mv.escores_regressao(Z, Rb, mlb["cargas"])[:, 0]
+pc = mv.pca_svd(Xb)
 pc1 = pc["escores"][:, 0]
-print("NHANES PHQ-9: r(PC1, AF) =", round(np.corrcoef(pc1, f_af)[0, 1], 4), " r(PC1, soma) =", round(np.corrcoef(pc1, Xu.sum(axis=1))[0, 1], 4))
+print("PNS PHQ-9: r(PC1, AF) =", round(abs(np.corrcoef(pc1, f_af)[0, 1]), 4), " r(PC1, soma) =", round(abs(np.corrcoef(pc1, Xb.sum(axis=1))[0, 1]), 4))
 le_csv(TAB / "escores_correlacao.csv")
 """),
         md("""
-## 7. Robustez: correlação policórica e correlação ponderada
+## 6. Robustez: correlação policórica e correlação ponderada
 
 Os itens são ordinais (0–3 ou 0–4). A correlação de Pearson entre categorias subestima a associação entre os
 traços contínuos que estão por trás. A **policórica** (Olsson, 1979, doi:10.1007/BF02296207) estima essa
 correlação supondo uma normal bivariada latente cortada em limiares: os limiares vêm das proporções marginais e
-$\\rho$ maximiza a verossimilhança da tabela cruzada. A **ponderada** usa o peso amostral do inquérito.
+$\\rho$ maximiza a verossimilhança da tabela cruzada. A **ponderada** usa o peso amostral do inquérito. O
+coeficiente de Tucker aqui compara as cargas de cada solução com as da solução de Pearson **na mesma base**.
 """),
         code("""
-Xi = nh[["sintoma_1", "sintoma_2", "sintoma_3"]].dropna().to_numpy(int)
+vg = pd.read_parquet(caminhos.processado("vigitel2024"))
+Xi = vg[["sintoma_1", "sintoma_2", "sintoma_3"]].dropna().to_numpy(int)
 Rp = mv.policorica(Xi)
-print("NHANES, 3 sintomas — Pearson:\\n", np.corrcoef(Xi, rowvar=False).round(3), "\\npolicórica:\\n", Rp.round(3))
+print("Vigitel 2024, 3 sintomas — Pearson:\\n", np.corrcoef(Xi, rowvar=False).round(3), "\\npolicórica:\\n", Rp.round(3))
 le_csv(TAB / "robustez.csv")[["conjunto", "correlacao", "lambda1", "var1", "k_kaiser", "tucker_vs_pearson"]]
 """),
         md("""
-A policórica aumenta as correlações e o 1º autovalor, como esperado, mas as cargas mantêm o mesmo padrão
-(Tucker com a solução de Pearson ≥ 0,994) e a ponderação pelo peso amostral quase não muda nada (Tucker ≥ 0,998).
+A policórica aumenta as correlações e o 1º autovalor, como esperado, mas as cargas mantêm o mesmo padrão, e a
+ponderação pelo peso amostral quase não muda nada (coluna `tucker_vs_pearson`).
 
-## 8. Decisão sobre as hipóteses H2.1–H2.6
+## 7. Decisão sobre as hipóteses
 """),
         code("le_csv(TAB / 'hipoteses.csv')"),
         md(f"""
 ## Conclusão
 
-- **H2.1 e H2.2**: os 3 sintomas formam 1 fator no Brasil e nos EUA, com estruturas equivalentes
-  (Tucker φ = {h[h.hipotese=='H2.2'].valor.iloc[0].split('(')[0].replace('φ = ','').strip().replace('.',',')}).
-- **H2.3 e H2.4**: o PHQ-9 tem 1 fator nos dois países, equivalente entre eles; o item de sono acompanha o
-  cansaço quando se força a solução de 2 fatores.
+- **H2.1**: as 3 perguntas de insônia do Vigitel 2024 formam 1 fator (α = {f(rs.alfa, 2)}, KMO = {f(rs.kmo, 2)},
+  {f(rs.var_pc1*100, 0)}% da variância no 1º componente). A soma delas é o índice de insônia.
+- **H2.2–H2.4**: retiradas em 2026-11-27, com a saída dos EUA do trabalho. Fica o descritivo da PNS: o PHQ-9 tem
+  1 fator, e o item de sono acompanha o cansaço quando se força a solução de 2 fatores.
 - **H2.5**: doomscrolling e AIS são unidimensionais; SAS-SV, procrastinação (Turquia) e BPS têm 2 dimensões —
   no BPS, compatível com efeito dos itens invertidos.
 - **H2.6**: escore da PCA e escore fatorial ordenam as pessoas quase igual (r ≥ 0,95 em todos os conjuntos).

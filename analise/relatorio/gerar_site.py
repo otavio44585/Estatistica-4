@@ -5,6 +5,7 @@ Fontes:
   docs/explicacoes/00N_*.md         -> site/00N.html           (explicação da técnica)
   resultados/00N/RESUMO.md          -> site/00N.html           (resultados, depois da explicação)
   resultados/00N/tabelas/hipoteses* -> tabela renderizada do CSV, no topo dos resultados
+  resultados/006/figuras + tabelas  -> site/006.html          (figuras-síntese da apresentação, com legenda)
   docs/roteiro_apresentacao.md      -> site/roteiro.html
   docs/verificacao_independente.md  -> site/verificacao.html
   (sem fonte)                       -> index.html na raiz     (GitHub Pages: redireciona para site/index.html)
@@ -40,17 +41,18 @@ PAGES_URL = "https://otavio44585.github.io/Estatistica-4/"
 # (slug, título, spec ou None, descrição do cartão na visão geral). Estas são geradas aqui.
 PAGINAS = [
     ("index", "Visão geral", None, ""),
-    ("001", "Dados", "001", "Sete bases abertas harmonizadas: tela, sono e covariáveis na mesma escala."),
-    ("002", "PCA e análise fatorial", "002", "O índice de insônia mede a mesma coisa no Brasil e nos EUA?"),
-    ("003", "Brasil × EUA", "003", "Razões de prevalência ajustadas e a comparação entre os dois países."),
-    ("004", "Mundo", "004", "Meta-análise das sete bases e posição do Brasil frente à literatura."),
+    ("001", "Dados", "001", "Seis bases abertas harmonizadas: tela, sono e covariáveis na mesma escala."),
+    ("002", "PCA e análise fatorial", "002", "O índice de insônia do Vigitel mede uma coisa só? Quantas dimensões tem cada escala?"),
+    ("003", "Brasil: PNS × Vigitel", "003", "Razões de prevalência ajustadas nas duas pesquisas nacionais e a comparação entre elas."),
+    ("004", "Mundo", "004", "Meta-análise das seis bases, Brasil × resto do mundo e posição frente à literatura."),
     ("005", "Regressão, ANOVA e t", "005", "Formato da disciplina, com os p-valores conferidos no Excel e no script."),
+    ("006", "Figuras-síntese", "006", "Teste desenhado, quanto a tela explica, confundimento por idade e o Brasil no mundo."),
     ("roteiro", "Roteiro", None, "Quem fala o quê, bloco a bloco, e que tela mostrar."),
     ("verificacao", "Verificação", None, "O que a revisão independente refez, apontou e como foi resolvido."),
 ]
 # Só na navegação: gerada por analise.relatorio.relatorio (docs/modelos/apresentacao.html).
 EXTERNAS = {"apresentacao": ("Apresentação", "Slides da apresentação oral, com os números lidos de resultados/.")}
-NAV = ["index", "001", "002", "003", "004", "005", "apresentacao", "roteiro", "verificacao"]
+NAV = ["index", "001", "002", "003", "004", "005", "006", "apresentacao", "roteiro", "verificacao"]
 
 # Tokens do design system da ESEG. --link no tema claro mistura turquesa (65%) e marinho (35%):
 # o turquesa puro sobre branco tem contraste 3,1:1, abaixo do 4,5:1 do WCAG AA para texto; o
@@ -186,18 +188,51 @@ TABELAS = {
     "002": [("hipoteses", None, "Decisão das hipóteses H2.1–H2.6"),
             ("adequacao", ["conjunto", "n", "p", "alfa", "kmo", "bartlett_chi2", "bartlett_gl", "lambda1", "var_pc1",
                            "k_kaiser", "k_paralela", "k_decidido"], "Adequação e número de fatores por conjunto de itens"),
-            ("tucker", ["hipotese", "instrumento", "base_a", "base_b", "solucao", "phi", "classificacao", "dif_max_carga"],
-             "Congruência de Tucker entre países")],
+            ("vigitel_indice", ["variavel_vigitel", "rotulo", "media", "dp", "carga_pc1", "carga_af1_ml",
+                                "comunalidade_af1", "msa", "alfa_sem_item", "r_item_total"],
+             "Índice de insônia do Vigitel 2024, pergunta a pergunta")],
     "003": [("hipoteses", ["familia", "hipotese", "base", "exposicao", "estimativa", "ic_inf", "ic_sup", "estatistica",
-                           "tipo_estat", "gl2", "p", "p_holm", "decisao"], "Decisão das hipóteses H3.1–H3.9 (RP ajustada)")],
+                           "tipo_estat", "gl2", "p", "p_holm", "decisao"],
+             "Decisão das hipóteses H3.1–H3.9 (RP ajustada; H3.3 e H3.6 retiradas com os EUA)"),
+            ("rp_bruta_ajustada", ["base", "exposicao", "modelo", "comparacao", "rp", "ic_inf", "ic_sup", "p", "n"],
+             "Razão de prevalências bruta, só idade e ajustada")],
     "004": [("hipoteses", ["hipotese", "h0", "teste", "estatistica", "gl", "p", "p_holm", "decisao", "efeito"],
              "Decisão das hipóteses H4.1–H4.4"),
             ("efeitos_por_base", ["nome", "tipo", "n", "rho", "rho_ic_inf", "rho_ic_sup", "peso_aleatorio_pct"],
-             "Correlação de Spearman por base (positivo = mais tela, pior sono)")],
+             "Correlação de Spearman por base (positivo = mais tela, pior sono)"),
+            ("meta_analise", ["analise", "papel", "k", "rho", "rho_ic_inf", "rho_ic_sup", "p_efeito", "rho_ic_inf_hk",
+                              "rho_ic_sup_hk", "p_efeito_hk", "I2"],
+             "Meta-análise: global, subgrupos, Brasil e resto do mundo")],
     "005": [("hipoteses", ["hipotese", "familia", "base", "teste", "n", "versao_decisao", "b", "ic_inf", "ic_sup",
                            "estatistica", "gl2", "p", "p_holm", "decisao", "efeito_nome", "efeito"],
-             "Decisão das hipóteses H5.1–H5.11")],
+             "Decisão das hipóteses H5.1–H5.9 (H5.2, H5.8, H5.10 e H5.11 retiradas com os EUA)")],
 }
+
+# Página 006: figuras-síntese da apresentação (analise.relatorio.figuras_apresentacao), cada uma com legenda e,
+# quando houver, a tabela de onde saem os números. (figura, título, legenda, tabela em resultados/006/tabelas ou None)
+FIGURAS_006 = [
+    ("teste_explicado", "Um teste de hipótese desenhado (H3.1, Vigitel 2024)",
+     "A curva é a distribuição da estatística z se H0 (RP = 1) fosse verdadeira. As áreas em âmbar somam α = 0,05, "
+     "2,5% em cada cauda, além de ±1,96. A seta marca o z observado: quando ele cai numa das caudas, rejeita-se H0.",
+     None),
+    ("testes_painel", "A mesma leitura para cada teste t ou z confirmatório",
+     "Specs 003 e 005, na versão que decide. O título de cada painel traz a decisão e o p corrigido por Holm.",
+     "testes_apresentacao"),
+    ("decomposicao_r2", "Quanto a tela explica do sono",
+     "Queda do R² da regressão linear ponderada quando cada fator sai do modelo: a parte da variação do sono que só "
+     "aquele fator explica. Vigitel: índice de insônia (0–12); PNS: problema de sono (0–3).",
+     "decomposicao_r2"),
+    ("confundimento_idade", "Confundimento por idade na PNS 2019",
+     "Por faixa etária, com peso amostral: % dos adultos com tela digital 3 h ou mais por dia e % com problema de sono "
+     "em mais da metade dos dias. As curvas andam em sentidos opostos, e é isso que inverte a RP bruta.",
+     "confundimento_idade_pns"),
+    ("brasil_no_mundo", "O Brasil no mundo",
+     "Correlação de Spearman (IC 95%) por base, o Brasil combinado (PNS + Vigitel) e o resto do mundo combinado "
+     "(Argentina, Japão, China, Turquia), por meta-análise de efeitos aleatórios. Comparação exploratória, pedida "
+     "depois de ver os resultados e fora da correção de Holm.",
+     None),
+]
+COLUNAS_006 = {"decomposicao_r2": ["base", "desfecho", "n", "rotulo", "r2_completo", "r2_unico_pct", "r2_sozinho_pct"]}
 COLUNAS_P = {"p", "p_holm", "p_q", "p_rho", "p_efeito", "bartlett_p"}
 
 ROTULOS = {
@@ -214,13 +249,23 @@ ROTULOS = {
     "classificacao": "Classificação", "dif_max_carga": "Maior diferença entre cargas", "criterio": "Critério",
     "valor": "Valor obtido", "variavel": "Variável", "categoria": "Categoria", "pct_sem_peso": "% sem peso",
     "pct_com_peso": "% com peso",
+    "variavel_vigitel": "Variável", "rotulo": "Pergunta / fator", "media": "Média", "dp": "DP",
+    "carga_pc1": "Carga na PCA", "carga_af1_ml": "Carga na AF", "comunalidade_af1": "Comunalidade", "msa": "MSA",
+    "alfa_sem_item": "α sem o item", "r_item_total": "r item-total", "modelo": "Modelo", "comparacao": "Comparação",
+    "rp": "RP", "analise": "Combinação", "papel": "Papel", "k": "k", "p_efeito": "p (DL)",
+    "rho_ic_inf_hk": "IC 95% inf. (HK)", "rho_ic_sup_hk": "IC 95% sup. (HK)", "p_efeito_hk": "p (HK)", "I2": "I²",
+    "spec": "Spec", "desfecho": "Desfecho", "r2_completo": "R² do modelo completo",
+    "r2_unico_pct": "% explicado só pelo fator", "r2_sozinho_pct": "% explicado pelo fator sozinho",
+    "faixa_etaria": "Faixa etária", "pct_tela_3h": "% com tela ≥ 3 h", "pct_problema_sono": "% com problema de sono",
 }
 LEGENDAS = {
     ("002", "adequacao"): "KMO ≥ 0,60 e Bartlett significativo indicam que os itens têm correlação suficiente para análise fatorial. O número de fatores retidos segue a análise paralela de Horn.",
-    ("002", "tucker"): "φ ≥ 0,95: estruturas equivalentes; 0,85–0,94: similares (Lorenzo-Seva e ten Berge, 2006). A maior diferença entre cargas complementa φ, que sai alto quando todas as cargas são positivas.",
-    ("003", "hipoteses"): "Estimativa = razão de prevalências (RP), tela ≥ 3 h × < 1 h, ajustada por faixa etária, sexo e escolaridade. RP > 1: mais problema de sono no grupo de mais tela. Holm dentro de cada família.",
+    ("002", "vigitel_indice"): "As três perguntas de insônia do Vigitel, recodificadas de 0 (nunca) a 4 (sempre). Cargas altas nas duas técnicas e α que cairia sem qualquer item: a soma 0–12 resume uma dimensão só.",
+    ("003", "hipoteses"): "Estimativa = razão de prevalências (RP), tela ≥ 3 h × < 1 h, ajustada por faixa etária, sexo e escolaridade. RP > 1: mais problema de sono no grupo de mais tela. H0: RP = 1 (ou razão = 1 em H3.8 e H3.9), α = 0,05 bilateral, Holm dentro de cada família.",
+    ("003", "rp_bruta_ajustada"): "Na PNS, a RP bruta da tela digital fica abaixo de 1 e passa a acima de 1 com o ajuste por idade: quem usa mais tela é mais jovem, e os jovens relatam menos problema de sono.",
     ("004", "efeitos_por_base"): "ρ positivo = mais tela, pior sono. Peso = participação de cada base na estimativa combinada de efeitos aleatórios.",
-    ("005", "hipoteses"): "Coeficiente = diferença no desfecho por categoria ou unidade de tela, com covariáveis fixas. Nos inquéritos decide a versão com peso amostral; nas bases de repositório não há desenho e vale a regressão do Excel.",
+    ("004", "meta_analise"): "IC por DerSimonian-Laird (DL, normal) e por Hartung-Knapp (HK, t com k − 1 gl, mais honesto com poucas bases). A linha do resto do mundo é exploratória, decidida depois de ver os resultados.",
+    ("005", "hipoteses"): "Coeficiente = diferença no desfecho por categoria ou unidade de tela, com covariáveis fixas. H0: coeficiente = 0 (ou médias iguais), α = 0,05 bilateral. No Vigitel decide a versão com peso amostral; nas bases de repositório não há desenho e vale a regressão do Excel.",
 }
 
 
@@ -249,9 +294,8 @@ def tabela_conferencia() -> str:
     if not f.exists():
         return ""
     c = pd.read_csv(f, sep=";", decimal=",", encoding="utf-8-sig")
-    ok = c.ok.astype(str).str.strip().str.lower()
-    c["_exc"] = ok.eq("informativo")
-    c["_dentro"] = ok.eq("true")
+    c["_exc"] = c.excecao_documentada.astype(str).str.strip().str.lower().eq("true")
+    c["_dentro"] = c.dentro_tolerancia.astype(str).str.strip().str.lower().eq("true") & ~c["_exc"]
     g = c.groupby("base").agg(numeros=("item", "size"), dentro=("_dentro", "sum"), excecoes=("_exc", "sum"),
                               mx_a=("dif_rel_A_C", "max"), mx_b=("dif_rel_B_C", "max")).reset_index()
     for k in ["mx_a", "mx_b"]:
@@ -286,7 +330,7 @@ def pagina(slug: str, titulo: str, corpo: str) -> str:
         for s in NAV)
     return f"""<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#08223D"><meta name="description" content="Insônia digital: uso de telas e sono no Brasil, nos EUA e em outros países. Estatística 4, Faculdade ESEG.">
+<meta name="theme-color" content="#08223D"><meta name="description" content="Insônia digital: uso de telas e sono no Brasil (PNS 2019 e Vigitel 2024) e em outros quatro países. Estatística 4, Faculdade ESEG.">
 <title>{html.escape(titulo)} · Insônia digital</title><script>{JS_CABECA}</script><style>{CSS}</style></head>
 <body><a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="barra"><a class="marca" href="index.html"><img src="{logo_uri()}" alt="Faculdade ESEG" width="56" height="40"><span><strong>Insônia digital</strong><small>Estatística 4 · Faculdade ESEG</small></span></a><button class="tema" type="button" aria-label="Alternar tema claro ou escuro">◐ Tema</button></div></header>
@@ -336,7 +380,7 @@ small{{color:#C2C3C7}}
 <body><main class="caixa">
 <img src="{logo_uri()}" alt="Faculdade ESEG" width="78" height="56">
 <h1>Insônia digital</h1>
-<p>Uso de telas e sono no Brasil, nos EUA e em outros quatro países. Trabalho de Estatística 4.</p>
+<p>Uso de telas e sono no Brasil (PNS 2019 e Vigitel 2024), comparado com outros quatro países e com a literatura. Trabalho de Estatística 4.</p>
 <p>Abrindo a visão geral… Se a página não mudar sozinha, use o botão.</p>
 <a class="botao" href="site/index.html">Abrir o site</a>
 <p>{extras}</p>
@@ -374,6 +418,27 @@ def pagina_spec(spec: str, titulo: str) -> str:
     return "\n".join(partes)
 
 
+def pagina_006(titulo: str) -> str:
+    """Figuras-síntese da apresentação: cada figura com título, legenda e a tabela de onde saem os números."""
+    pasta = RAIZ / "resultados" / "006"
+    partes = [f'<p class="kicker">Etapa 006</p><h1>{html.escape(titulo)}</h1>',
+              "<p>Figuras feitas para a apresentação a partir dos dados processados e das tabelas das specs 003 a 005 "
+              "(<code>python -m analise.relatorio.figuras_apresentacao</code>). Os números aparecem na figura e na tabela "
+              "logo abaixo; nenhum foi digitado à mão.</p>"]
+    for nome, tit, legenda, tabela in FIGURAS_006:
+        f = pasta / "figuras" / f"{nome}.png"
+        if not f.exists():
+            continue
+        rel = f.resolve().relative_to(RAIZ.resolve()).as_posix()
+        partes.append(f"<h2>{html.escape(tit)}</h2><p>{html.escape(legenda)}</p>")
+        partes.append(f'<figure><img alt="{html.escape(tit)}" src="{_data_uri(f)}">'
+                      f'<figcaption class="secao-rotulo">{rel}</figcaption></figure>')
+        t = pasta / "tabelas" / f"{tabela}.csv" if tabela else None
+        if t is not None and t.exists():
+            partes.append(tabela_csv(t, COLUNAS_006.get(tabela)))
+    return "\n".join(partes)
+
+
 def _sem_titulo(texto: str) -> str:
     """Rebaixa o '# título' do markdown para não repetir o h1 da página."""
     return re.sub(r"^# (.+)$", r"## \1", texto, count=1, flags=re.M)
@@ -391,6 +456,8 @@ def main():
         elif slug in ("roteiro", "verificacao"):
             f = RAIZ / "docs" / ("roteiro_apresentacao.md" if slug == "roteiro" else "verificacao_independente.md")
             corpo, _ = md_para_html(f.read_text(encoding="utf-8"), f.parent) if f.exists() else (f"<h1>{titulo} pendente</h1>", None)
+        elif slug == "006":
+            corpo = pagina_006(titulo)
         else:
             corpo = pagina_spec(spec, titulo)
         (SITE / f"{slug}.html").write_text(pagina(slug, titulo, corpo), encoding="utf-8")
