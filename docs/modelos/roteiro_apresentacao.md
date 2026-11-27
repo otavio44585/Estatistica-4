@@ -1,6 +1,6 @@
 # Roteiro da apresentação — Insônia digital
 
-Duração-alvo: **18 minutos + 5 de perguntas**. Material de apoio: as páginas `site/*.html` (abrem no navegador, sem internet). Os números abaixo são preenchidos pelo script a partir de `resultados/`. Se algum resultado mudar, rode `python -m analise.rodar_tudo` e o roteiro se atualiza.
+Duração-alvo: **19 minutos + 5 de perguntas**. Material de apoio: as páginas `site/*.html` (abrem no navegador, sem internet). Os números abaixo são preenchidos pelo script a partir de `resultados/`. Se algum resultado mudar, rode `python -m analise.rodar_tudo` e o roteiro se atualiza.
 
 Quem fala em cada bloco vem de `docs/modelos/integrantes.csv` (coluna `nome`). Enquanto o grupo não preencher, aparece o papel do bloco. Basta preencher os nomes e rodar `python -m analise.relatorio.relatorio`.
 
@@ -13,7 +13,7 @@ Quem fala em cada bloco vem de `docs/modelos/integrantes.csv` (coluna `nome`). E
 | 5. Brasil × EUA (testes de hipótese) | 3 min | {{apresentador_3}} | `003.html` |
 | 6. Regressão, ANOVA, t e conferência dos p-valores | 3 min | {{apresentador_3}} | `005.html` |
 | 7. O Brasil no mundo | 2 min | {{apresentador_4}} | `004.html` |
-| 8. Conclusões e limitações | 1 min | {{apresentador_4}} | `index.html`, seções 7 e 8 |
+| 8. Conclusões e limitações | 2 min | {{apresentador_4}} | `index.html`, seções 7 e 8 |
 
 ---
 
@@ -123,7 +123,7 @@ Quem fala em cada bloco vem de `docs/modelos/integrantes.csv` (coluna `nome`). E
 
 **Mostrar:** `floresta.png` em `004.html`.
 
-## 8. Conclusões e limitações ({{apresentador_4}}, 1 min)
+## 8. Conclusões e limitações ({{apresentador_4}}, 2 min)
 
 **Dizer:**
 

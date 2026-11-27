@@ -1,0 +1,1044 @@
+<!doctype html>
+<!--
+  Deck da apresentação (Estatística 4, ESEG). Modelo: docs/modelos/apresentacao.html.
+  python -m analise.relatorio.relatorio preenche os marcadores com os números de resultados/
+  (analise.relatorio.numeros), embute as imagens como data URI e grava site/apresentacao.html.
+  Regra do projeto: nenhum resultado próprio digitado à mão. Números da literatura vêm com a citação.
+  Navegação: setas, Espaço, PageUp/PageDown, Home/End · F tela cheia · N notas do apresentador · T zera o relógio.
+  PDF: Chrome > Imprimir > Salvar como PDF, Margens: Nenhuma, Gráficos de plano de fundo: ligado.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insônia digital · apresentação · Estatística 4 · Faculdade ESEG</title>
+<style>
+/* Tokens da ESEG, copiados de Eseg/design-system/tokens.css (extraídos do site eseg.edu.br). Não recolorir. */
+:root {
+  --eseg-marinho: #08223D; --eseg-turquesa: #00A1B8; --eseg-turquesa-claro: #00AFC4;
+  --eseg-ambar: #F1B634; --eseg-ambar-forte: #EFA910; --eseg-verde-neon: #00FF7F;
+  --eseg-noite: #000414; --eseg-noite-2: #0F1322; --eseg-noite-3: #1F2230; --eseg-grafite: #333643; --eseg-grafite-2: #474A56;
+  --eseg-branco: #FFFFFF; --eseg-gelo: #FAFAFA; --eseg-borda: #E5E6E7; --eseg-cinza: #C2C3C7; --eseg-cinza-2: #999BA1;
+  --eseg-fonte: "Public Sans", sans-serif; --eseg-peso-titulo: 600; --eseg-peso-texto: 400;
+  --eseg-raio: 16px; --eseg-raio-pilula: 100px;
+}
+/* Geometria do deck: slide travado em 1280×720; escala só na tela, via --s (JS). */
+:root {
+  --slide-w: 1280px; --slide-h: 720px; --s: 1;
+  --fonte: "Public Sans", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; background: var(--eseg-noite); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: var(--fonte); font-weight: 400; color: var(--eseg-noite-3); counter-reset: slide; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, ol, ul, figure, table { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+b, strong { font-weight: 600; }
+code { font-family: Consolas, "Cascadia Mono", "SFMono-Regular", Menlo, monospace; font-size: .92em; text-transform: none; letter-spacing: 0; }
+.sem-caixa { text-transform: none; }
+.nw { white-space: nowrap; }
+
+.frame { position: relative; height: 100vh; overflow: hidden; scroll-snap-align: start; counter-increment: slide; }
+.slide {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--slide-w); height: var(--slide-h);
+  transform: translate(-50%, -50%) scale(var(--s)); transform-origin: center center;
+  overflow: hidden; display: flex; flex-direction: column;
+  padding: 40px 64px 0; background: var(--eseg-branco); color: var(--eseg-noite-3);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, .45);
+}
+body.modo-notas .slide { top: 31vh; }
+
+/* cabeçalho, corpo, rodapé */
+.cabeca { flex: none; }
+.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--eseg-grafite-2); }
+.eyebrow::before { content: ""; width: 32px; height: 4px; border-radius: 2px; background: var(--eseg-turquesa); flex: none; }
+.titulo { margin-top: 12px; font-size: 34px; line-height: 1.2; font-weight: 600; color: var(--eseg-marinho); letter-spacing: -.005em; max-width: 1130px; text-wrap: balance; }
+.corpo { flex: 1; min-height: 0; margin: 24px 0 18px; display: grid; gap: 28px; grid-template-rows: minmax(0, 1fr); }
+.rodape { flex: none; height: 50px; display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--eseg-borda); font-size: 12px; color: var(--eseg-grafite-2); letter-spacing: .02em; }
+.rodape img { height: 24px; width: auto; }
+.rodape .num { margin-left: auto; font-weight: 600; color: var(--eseg-marinho); font-variant-numeric: tabular-nums; }
+.rodape .num::before { content: counter(slide, decimal-leading-zero); }
+
+/* slide escuro (marinho): logo branco, destaque âmbar */
+.slide.escuro { background: var(--eseg-marinho); color: var(--eseg-branco); }
+.escuro .titulo { color: var(--eseg-branco); }
+.escuro .eyebrow { color: var(--eseg-cinza); }
+.escuro .eyebrow::before { background: var(--eseg-turquesa-claro); }
+.escuro .rodape { border-top-color: rgba(255, 255, 255, .16); color: var(--eseg-cinza-2); }
+.escuro .rodape .num { color: var(--eseg-branco); }
+
+/* grades */
+.g-fig-d { grid-template-columns: minmax(0, 1fr) 340px; }
+.g-fig-e { grid-template-columns: 400px minmax(0, 1fr); }
+.g-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g-pilha { grid-template-rows: auto auto; align-content: start; }
+.centro { align-content: center; grid-template-rows: auto; }
+
+/* peças */
+.cartao { background: var(--eseg-gelo); border: 1px solid var(--eseg-borda); border-radius: var(--eseg-raio); padding: 20px 22px; }
+.cartao-escuro { background: var(--eseg-marinho); color: var(--eseg-branco); border-radius: var(--eseg-raio); padding: 22px 24px; }
+.rotulo { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--eseg-grafite-2); }
+.cartao-escuro .rotulo, .escuro .rotulo { color: var(--eseg-cinza); }
+.valor { font-size: 44px; font-weight: 600; line-height: 1.05; color: var(--eseg-marinho); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.cartao-escuro .valor, .escuro .valor { color: var(--eseg-branco); }
+.acento { color: var(--eseg-ambar) !important; }                       /* só sobre marinho */
+.marca { background: linear-gradient(transparent 58%, rgba(241, 182, 52, .65) 58%); padding: 0 2px; }  /* âmbar sobre claro */
+.texto { font-size: 17px; line-height: 1.5; }
+.pequeno { font-size: 14px; line-height: 1.45; color: var(--eseg-grafite-2); }
+.escuro .pequeno, .cartao-escuro .pequeno { color: var(--eseg-cinza); }
+.cita { font-size: 12.5px; line-height: 1.4; color: var(--eseg-grafite-2); }
+.pilula { display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; padding: 3px 10px; border-radius: var(--eseg-raio-pilula); background: var(--eseg-borda); color: var(--eseg-marinho); }
+.pilula.br { background: var(--eseg-ambar); }
+.br-barra { border-left: 6px solid var(--eseg-ambar); }
+.nums { font-variant-numeric: tabular-nums; }
+
+.fig { min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.fig img { flex: 0 1 auto; min-height: 0; width: 100%; height: auto; object-fit: contain; object-position: center; }
+.fig figcaption { flex: none; font-size: 12.5px; line-height: 1.4; color: var(--eseg-grafite-2); }
+.painel { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+
+/* capa */
+.capa { padding: 0; }
+.capa-logo { position: absolute; left: 72px; top: 60px; height: 72px; width: auto; }
+.capa-texto { position: absolute; left: 72px; top: 214px; width: 760px; }
+.capa h1 { margin-top: 20px; font-size: 92px; line-height: 1.02; font-weight: 600; letter-spacing: -.02em; }
+.capa-sub { margin-top: 18px; font-size: 28px; line-height: 1.3; color: var(--eseg-cinza); max-width: 640px; }
+.capa-meta { margin-top: 34px; font-size: 18px; color: var(--eseg-branco); }
+.capa-meta .ponto { color: var(--eseg-turquesa-claro); padding: 0 8px; }
+.capa-data { position: absolute; left: 72px; bottom: 56px; font-size: 15px; color: var(--eseg-cinza); letter-spacing: .03em; }
+.capa-arte { position: absolute; right: 96px; top: 100px; width: 300px; height: 520px; }
+
+/* slide 2: perguntas */
+.perguntas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.perguntas li { display: flex; flex-direction: column; gap: 12px; min-height: 300px; padding: 26px 26px 22px; }
+.perguntas .idx { width: 46px; height: 46px; border-radius: 50%; background: var(--eseg-marinho); color: var(--eseg-branco); display: grid; place-items: center; font-weight: 600; font-size: 20px; }
+.perguntas h3 { margin-top: 4px; font-size: 28px; font-weight: 600; color: var(--eseg-marinho); }
+.perguntas .q { font-size: 21px; line-height: 1.4; color: var(--eseg-noite-3); }
+.perguntas .metodo { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--eseg-borda); font-size: 14.5px; color: var(--eseg-grafite-2); }
+.definicao { display: flex; align-items: center; gap: 18px; padding: 22px 26px; border-radius: var(--eseg-raio); background: var(--eseg-marinho); color: var(--eseg-branco); font-size: 19px; line-height: 1.45; }
+.definicao b { color: var(--eseg-turquesa-claro); white-space: nowrap; }
+
+/* slide 3: literatura */
+.lit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.lit .cartao { display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 18px; min-height: 290px; }
+.lit .valor { font-size: 42px; }
+.lit .texto { font-size: 17px; line-height: 1.45; }
+.lit .cita { margin-top: auto; padding-top: 10px; }
+.faixa-br { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: start; padding: 18px 24px; border-radius: var(--eseg-raio); background: var(--eseg-gelo); border: 1px solid var(--eseg-borda); font-size: 17px; line-height: 1.5; }
+
+/* tabelas */
+table.dados { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.dados th { text-align: left; font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--eseg-grafite-2); font-weight: 600; padding: 0 10px 8px; border-bottom: 2px solid var(--eseg-marinho); }
+.dados td { padding: 8px 10px; border-bottom: 1px solid var(--eseg-borda); vertical-align: top; }
+.dados td:first-child { font-weight: 600; color: var(--eseg-marinho); }
+.dados .n { text-align: right; white-space: nowrap; }
+.dados tr.br td:first-child { box-shadow: inset 6px 0 0 var(--eseg-ambar); padding-left: 18px; }
+.harmoniza { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+.harmoniza .rotulo { align-self: center; padding-right: 6px; }
+.harmoniza .cartao { padding: 12px 16px; font-size: 14.5px; line-height: 1.4; }
+
+/* slide 5 e 8: grupos Brasil / EUA */
+.grupo { padding-left: 16px; border-left: 6px solid var(--eseg-borda); display: flex; flex-direction: column; gap: 12px; }
+.grupo.br { border-left-color: var(--eseg-ambar); }
+.linha-num .base { font-size: 14px; font-weight: 600; color: var(--eseg-marinho); }
+.linha-num .valor { font-size: 40px; }
+.linha-num .det { font-size: 13px; color: var(--eseg-grafite-2); margin-top: 2px; }
+
+/* slide 6: PCA */
+.g-pca { grid-template-columns: 330px minmax(0, 1fr); }
+.itens li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--eseg-borda); font-size: 17px; line-height: 1.35; }
+.itens li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--eseg-turquesa); flex: none; transform: translateY(-1px); }
+.seta-indice { margin-top: 16px; font-size: 17px; font-weight: 600; color: var(--eseg-marinho); }
+table.pca { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.pca th { font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--eseg-grafite-2); font-weight: 600; padding: 0 12px 10px; text-align: right; border-bottom: 2px solid var(--eseg-marinho); }
+.pca th:first-child { text-align: left; }
+.pca td { padding: 11px 12px; border-bottom: 1px solid var(--eseg-borda); font-size: 16px; }
+.pca td.v { text-align: right; font-size: 30px; font-weight: 600; color: var(--eseg-marinho); width: 190px; }
+.pca .col-br { background: rgba(241, 182, 52, .16); }
+.pca th.col-br { color: var(--eseg-marinho); box-shadow: inset 0 4px 0 var(--eseg-ambar); padding-top: 10px; }
+.metodo-faixa { margin-top: 14px; font-size: 14px; color: var(--eseg-grafite-2); }
+.outras { margin-top: 22px; }
+.outras ul { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.outras li { padding: 6px 12px; border-radius: var(--eseg-raio-pilula); border: 1px solid var(--eseg-borda); background: var(--eseg-gelo); font-size: 14px; color: var(--eseg-grafite); font-variant-numeric: tabular-nums; }
+.outras li b { color: var(--eseg-marinho); margin-right: 4px; }
+
+/* slide 9: ressalva */
+.regras { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: stretch; }
+.regras .seta { display: grid; place-items: center; font-size: 30px; color: var(--eseg-turquesa); }
+.regra { display: flex; flex-direction: column; gap: 12px; padding: 28px 30px; }
+.regra .valor { font-size: 54px; margin: 4px 0; }
+.regra .texto { font-size: 18px; }
+.decisao { align-self: flex-start; font-size: 13px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 5px 12px; border-radius: var(--eseg-raio-pilula); border: 1.5px solid var(--eseg-marinho); color: var(--eseg-marinho); }
+.cartao-escuro .decisao { border-color: var(--eseg-ambar); color: var(--eseg-ambar); }
+
+/* slide 10: Brasil × EUA */
+.g-br-eua { grid-template-columns: 470px minmax(0, 1fr); }
+.razao .valor { font-size: 88px; margin: 6px 0 10px; }
+.lista-pontos li { padding: 12px 0; border-bottom: 1px solid var(--eseg-borda); font-size: 16.5px; line-height: 1.45; }
+.lista-pontos li:first-child { padding-top: 0; }
+.frase { font-size: 24px; line-height: 1.3; font-weight: 600; color: var(--eseg-marinho); padding-bottom: 14px !important; }
+
+/* slide 11: confundimento */
+.confunde { display: grid; grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr); align-items: center; }
+.confunde .valor { font-size: 120px; line-height: 1; }
+.confunde .seta { font-size: 56px; color: var(--eseg-turquesa-claro); text-align: center; }
+.confunde .texto { margin-top: 10px; color: var(--eseg-cinza); }
+
+/* slide 14: conferência */
+.caminhos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.caminho { display: flex; gap: 16px; align-items: flex-start; padding: 24px 24px; }
+.caminho .letra { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--eseg-turquesa); color: var(--eseg-marinho); display: grid; place-items: center; font-weight: 600; font-size: 18px; flex: none; }
+.caminho h3 { font-size: 20px; font-weight: 600; color: var(--eseg-marinho); margin-bottom: 4px; }
+.caminho .pequeno { font-size: 15px; }
+.converge { height: 30px; margin: 4px 0; border: 2px solid var(--eseg-turquesa); border-top: none; border-radius: 0 0 16px 16px; width: 70%; justify-self: center; }
+.resultado { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.resultado > div { padding: 24px 24px; }
+.resultado .valor { font-size: 60px; margin: 4px 0; }
+
+/* slide 16: subgrupos */
+.subgrupos li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--eseg-borda); }
+.subgrupos .valor { font-size: 34px; grid-row: span 2; align-self: center; }
+.subgrupos .nome { font-size: 17px; font-weight: 600; color: var(--eseg-marinho); }
+
+/* slides 17 e 18: listas numeradas */
+.limites { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; align-content: start; }
+.limites li { padding: 16px 20px; border-radius: 12px; background: var(--eseg-gelo); border: 1px solid var(--eseg-borda); font-size: 16px; line-height: 1.45; }
+.limites li b { display: block; color: var(--eseg-marinho); font-size: 17.5px; margin-bottom: 4px; }
+.limites li.chave { background: var(--eseg-marinho); border-color: var(--eseg-marinho); color: var(--eseg-cinza); }
+.limites li.chave b { color: var(--eseg-ambar); }
+.conclusoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 48px; align-content: start; counter-reset: conc; }
+.conclusoes li { counter-increment: conc; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; font-size: 19px; line-height: 1.45; color: var(--eseg-cinza); }
+.conclusoes li::before { content: counter(conc); width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--eseg-turquesa-claro); color: var(--eseg-branco); display: grid; place-items: center; font-weight: 600; font-size: 18px; }
+.conclusoes li b { color: var(--eseg-branco); }
+.conclusoes li.chave::before { border-color: var(--eseg-ambar); background: var(--eseg-ambar); color: var(--eseg-marinho); }
+
+/* encerramento */
+.fim { padding: 0; }
+.fim .capa-logo { top: 60px; }
+.fim-texto { position: absolute; left: 72px; top: 200px; width: 900px; }
+.fim h2 { font-size: 52px; line-height: 1.15; font-weight: 600; letter-spacing: -.01em; }
+.fim .sub { margin-top: 18px; font-size: 22px; color: var(--eseg-cinza); }
+.cmd { margin-top: 30px; display: inline-flex; flex-direction: column; gap: 6px; padding: 16px 22px; border-radius: 12px; background: var(--eseg-noite-2); color: var(--eseg-branco); font-size: 18px; border: 1px solid rgba(255, 255, 255, .12); }
+.cmd code::before { content: "$ "; color: var(--eseg-turquesa-claro); }
+.perguntas-fim { position: absolute; right: 96px; bottom: 76px; font-size: 64px; font-weight: 600; }
+
+/* notas do apresentador e HUD: só na tela */
+.notes { display: none; }
+body.modo-notas .frame.atual .notes {
+  display: block; position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; height: 36vh; overflow: auto;
+  background: var(--eseg-noite-2); color: var(--eseg-borda); border-top: 3px solid var(--eseg-turquesa);
+  padding: 14px 40px 22px; font-size: 19px; line-height: 1.5;
+}
+.notes .quem { font-size: 13px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--eseg-turquesa-claro); margin-bottom: 6px; }
+.notes ul { list-style: disc; padding-left: 22px; }
+.notes li { margin: 4px 0; }
+.notes .extra { margin-top: 8px; font-size: 16px; color: var(--eseg-cinza); }
+.hud { position: fixed; z-index: 30; right: 16px; bottom: 14px; display: flex; gap: 12px; align-items: center; padding: 6px 14px; border-radius: var(--eseg-raio-pilula); background: rgba(0, 4, 20, .6); color: rgba(255, 255, 255, .85); font: 600 13px var(--fonte); font-variant-numeric: tabular-nums; }
+.hud { transition: opacity .4s ease; }
+body.ocioso:not(.modo-notas) .hud { opacity: 0; }
+.hud .dica { font-weight: 400; color: rgba(255, 255, 255, .55); }
+.hud .relogio { display: none; color: var(--eseg-ambar); }
+body.modo-notas .hud { bottom: calc(36vh - 48px); right: 28px; }
+body.modo-notas .hud .relogio { display: inline; }
+:fullscreen .hud .dica { display: none; }
+.frame[data-corte] .slide { outline: 4px dashed var(--eseg-erro, #F04438); }
+
+/* PDF: Chrome > Imprimir > Salvar como PDF, margens Nenhuma, gráficos de fundo ligado */
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+  html { scroll-snap-type: none; background: #fff; }
+  body { margin: 0; background: #fff; }
+  .frame { height: auto; overflow: visible; break-after: page; page-break-after: always; }
+  .frame:last-child { break-after: auto; page-break-after: auto; }
+  .slide { position: relative; left: auto; top: auto; transform: none !important; box-shadow: none; outline: none !important; }
+  .no-print, .notes, .hud { display: none !important; }
+}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<!-- ============ BLOCO 1 · Pergunta ============ -->
+<section class="frame" id="s1">
+<div class="slide escuro capa">
+  <img class="capa-logo" src="site/assets/eseg-branco.svg" alt="Faculdade ESEG">
+  <div class="capa-texto">
+    <p class="eyebrow">Estatística 4 · Faculdade ESEG</p>
+    <h1>Insônia digital</h1>
+    <p class="capa-sub">Uso de telas e sono no Brasil, nos EUA e em outros quatro países</p>
+    <p class="capa-meta"><span class="acento">{{n_total}} pessoas</span><span class="ponto">·</span>sete bases abertas<span class="ponto">·</span>Brasil em foco</p>
+  </div>
+  <p class="capa-data">Apresentação do trabalho · {{data}}</p>
+  <svg class="capa-arte" viewBox="0 0 300 520" aria-hidden="true">
+    <defs><mask id="lua"><rect width="300" height="520" fill="#fff"/><circle cx="184" cy="190" r="60" fill="#000"/></mask></defs>
+    <rect x="8" y="8" width="284" height="504" rx="44" fill="rgba(255,255,255,0.03)" stroke="#00AFC4" stroke-opacity="0.55" stroke-width="3"/>
+    <rect x="118" y="30" width="64" height="10" rx="5" fill="#00AFC4" fill-opacity="0.35"/>
+    <circle cx="150" cy="218" r="74" fill="#F1B634" mask="url(#lua)"/>
+    <rect x="62" y="356" width="176" height="12" rx="6" fill="#00AFC4" fill-opacity="0.45"/>
+    <rect x="62" y="384" width="132" height="12" rx="6" fill="#00AFC4" fill-opacity="0.3"/>
+    <rect x="62" y="412" width="154" height="12" rx="6" fill="#00AFC4" fill-opacity="0.2"/>
+  </svg>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 1 · Pergunta e por que importa · 2 min · {{apresentador_1}}</p>
+  <ul>
+    <li>Apresentar o grupo e o tema.</li>
+    <li>“Todo mundo já ouviu que celular à noite atrapalha o sono. Fomos ver se isso aparece nos dados brasileiros e se o tamanho é o mesmo de outros países.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s2">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">1 · Pergunta</p>
+    <h2 class="titulo">Três perguntas sobre tela e sono, com o <span class="marca">Brasil</span> no centro</h2>
+  </header>
+  <div class="corpo g-pilha centro">
+    <ol class="perguntas">
+      <li class="cartao"><span class="idx">1</span><h3>Há associação?</h3><p class="q">Quem usa mais tela no lazer relata mais problema de sono?</p><p class="metodo">Razão de prevalências e regressão · etapas 003 e 005</p></li>
+      <li class="cartao"><span class="idx">2</span><h3>Brasil × EUA</h3><p class="q">A associação tem o mesmo tamanho nos dois países?</p><p class="metodo">Razão entre as razões de prevalência · etapa 003</p></li>
+      <li class="cartao"><span class="idx">3</span><h3>Brasil no mundo</h3><p class="q">Onde o Brasil fica frente a outros países e à literatura?</p><p class="metodo">Correlação de Spearman e meta-análise · etapa 004</p></li>
+    </ol>
+    <p class="definicao"><b>Insônia digital</b><span>não é diagnóstico. Aqui, o termo designa os problemas de sono associados ao uso de telas, sobretudo à noite.</span></p>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 1 · Pergunta e por que importa · {{apresentador_1}}</p>
+  <ul>
+    <li>“Insônia digital não é diagnóstico. Chamamos assim os problemas de sono associados ao uso de telas.”</li>
+    <li>“A pergunta tem três partes: quem usa mais tela relata mais problema de sono? O tamanho disso é igual no Brasil e nos EUA? Onde o Brasil fica frente a outros países e à literatura?”</li>
+  </ul>
+</aside>
+</section>
+
+<!-- ============ BLOCO 2 · Literatura ============ -->
+<section class="frame" id="s3">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">2 · O que a literatura diz</p>
+    <h2 class="titulo">A literatura descreve uma associação consistente, pequena e de mão dupla</h2>
+  </header>
+  <div class="corpo g-pilha centro">
+    <div class="lit">
+      <div class="cartao"><p class="rotulo">Consistente</p><p class="valor">90%</p><p class="texto">de 67 estudos com crianças e adolescentes acharam associação adversa entre tela e sono.</p><p class="cita">Hale e Guan, 2015</p></div>
+      <div class="cartao"><p class="rotulo">Pequena</p><p class="valor">3 a 8 min</p><p class="texto">de sono a menos por hora de tela; a tela explica menos de 2% da variação.</p><p class="cita">Przybylski, 2019</p></div>
+      <div class="cartao"><p class="rotulo">Como e quando</p><p class="valor">r = 0,33</p><p class="texto">para uso problemático, contra r = 0,28 do uso geral. Tela na cama: OR 1,59 por hora.</p><p class="cita">Han, Zhou e Liu, 2024; Hjetland et al., 2025; Levenson et al., 2017</p></div>
+      <div class="cartao"><p class="rotulo">Mão dupla</p><p class="valor">⇄</p><p class="texto">Quem dorme mal também pega o celular, como passatempo enquanto o sono não vem.</p><p class="cita">Bauducco et al., 2024</p></div>
+    </div>
+    <div class="faixa-br br-barra">
+      <span class="pilula br">Brasil</span>
+      <p>Tela por 2 h ou mais antes de deitar se associou a 17 minutos a mais de latência do sono (Castro-Santos et al., 2023). Os dois inquéritos nacionais, PNS e Vigitel, perguntam sobre tela e sono, mas não tinham sido analisados com essa pergunta.</p>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 2 · O que a literatura diz · 2 min · {{apresentador_1}}</p>
+  <ul>
+    <li>“A associação é consistente: em 67 estudos, 90% acharam associação adversa (Hale e Guan, 2015).”</li>
+    <li>“O efeito é pequeno: de 3 a 8 minutos de sono a menos por hora de tela (Przybylski, 2019).”</li>
+    <li>“Pesa mais quando e como se usa: tela na cama e uso problemático se associam mais que o tempo total (Levenson, 2017; Hjetland, 2025; Han, Zhou e Liu, 2024).”</li>
+    <li>“A relação vai nos dois sentidos: quem dorme mal também pega o celular (Bauducco, 2024).”</li>
+  </ul>
+  <p class="extra"><b>Transição:</b> “Com isso em mente, fomos aos microdados.”</p>
+</aside>
+</section>
+
+<!-- ============ BLOCO 3 · Dados ============ -->
+<section class="frame" id="s4">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">3 · Dados e harmonização</p>
+    <h2 class="titulo">{{n_total}} pessoas em sete bases abertas, duas delas inquéritos nacionais do Brasil</h2>
+  </header>
+  <div class="corpo g-pilha" style="gap:20px">
+    <table class="dados">
+      <colgroup><col style="width:150px"><col style="width:150px"><col style="width:265px"><col style="width:92px"><col style="width:215px"><col></colgroup>
+      <thead><tr><th>Base</th><th>País</th><th>Desenho</th><th class="n">n</th><th>Sono</th><th>Tela</th></tr></thead>
+      <tbody>
+        <tr class="br"><td>PNS 2019</td><td>Brasil</td><td>inquérito domiciliar (peso, estrato, UPA)</td><td class="n">{{n_pns2019}}</td><td>item de sono do PHQ-9</td><td>horas de tela digital e de TV</td></tr>
+        <tr class="br"><td>Vigitel 2024</td><td>Brasil, 27 capitais</td><td>inquérito telefônico (peso)</td><td class="n">{{n_vigitel2024}}</td><td>3 sintomas de insônia</td><td>horas de tela digital e de TV</td></tr>
+        <tr><td>NHANES 2005-06</td><td>EUA</td><td>inquérito (peso, estrato, UPA)</td><td class="n">{{n_nhanes0506}}</td><td>3 sintomas, latência</td><td>horas de computador/games e de TV</td></tr>
+        <tr><td>Xuzhou</td><td>China</td><td>universitários</td><td class="n">{{n_xuzhou}}</td><td>PSQI</td><td>uso problemático (SAS-SV)</td></tr>
+        <tr><td>Pérez-Chada</td><td>Argentina</td><td>adolescentes</td><td class="n">{{n_argentina}}</td><td>latência (min)</td><td>horas por dia e antes de dormir</td></tr>
+        <tr><td>Doomscrolling</td><td>Turquia</td><td>18 a 40 anos</td><td class="n">{{n_turquia}}</td><td>PSQI, latência</td><td>escala de doomscrolling</td></tr>
+        <tr><td>Okajima</td><td>Japão</td><td>18 a 29 anos</td><td class="n">{{n_japao}}</td><td>escala de Atenas (AIS)</td><td>celular nas 3 h antes de dormir</td></tr>
+      </tbody>
+    </table>
+    <div class="harmoniza">
+      <p class="rotulo">Harmonização</p>
+      <p class="cartao">“Não sabe” e “recusou” viraram faltantes.</p>
+      <p class="cartao">Horas de tela cortadas em 1 h e 3 h nos três inquéritos.</p>
+      <p class="cartao">Cada variável com grau de equivalência entre as bases.</p>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 3 · Dados e harmonização · 2 min · {{apresentador_2}}</p>
+  <ul>
+    <li>“Usamos {{n_total}} pessoas de sete bases abertas. No Brasil: PNS 2019 ({{n_pns2019}} adultos) e Vigitel 2024 ({{n_vigitel2024}}). Nos EUA: NHANES 2005-06 ({{n_nhanes0506}}). E quatro amostras de China, Argentina, Turquia e Japão.”</li>
+    <li>“Cada pesquisa pergunta de um jeito. Harmonizar é criar as mesmas variáveis em todas: ‘não sabe’ virou faltante; as horas de tela foram cortadas em 1 h e 3 h; cada variável ganhou uma nota de equivalência entre as bases.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s5">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">3 · Dados e harmonização</p>
+    <h2 class="titulo">Tela digital 3 h ou mais por dia: {{tela3h_pns2019}} a {{tela3h_vigitel2024}} dos adultos no Brasil</h2>
+  </header>
+  <div class="corpo g-fig-d">
+    <figure class="fig">
+      <img src="resultados/001/figuras/exposicao_tela_digital.png" alt="Barras empilhadas: proporção de adultos por faixa de tempo diário de tela digital no lazer, PNS 2019, Vigitel 2024 e NHANES 2005-06">
+      <figcaption>Computador, tablet ou celular no lazer; % da população adulta com peso amostral.</figcaption>
+    </figure>
+    <div class="painel" style="justify-content:center; gap:22px">
+      <div class="grupo br">
+        <span class="pilula br" style="align-self:flex-start">Brasil</span>
+        <div class="linha-num"><p class="base">PNS 2019 · todo o país</p><p class="valor">{{tela3h_pns2019}}</p></div>
+        <div class="linha-num"><p class="base">Vigitel 2024 · 27 capitais</p><p class="valor">{{tela3h_vigitel2024}}</p></div>
+      </div>
+      <div class="grupo">
+        <span class="pilula" style="align-self:flex-start">EUA</span>
+        <div class="linha-num"><p class="base">NHANES 2005-06</p><p class="valor">{{tela3h_nhanes0506}}</p><p class="det">Antes do smartphone: a comparação mistura país e época.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 3 · Dados e harmonização · {{apresentador_2}}</p>
+  <ul>
+    <li>“No Brasil, {{tela3h_pns2019}} dos adultos (PNS) usam tela digital 3 h ou mais por dia no lazer; no Vigitel, {{tela3h_vigitel2024}}. No NHANES de 2005, antes do smartphone, eram {{tela3h_nhanes0506}}.”</li>
+  </ul>
+  <p class="extra"><b>Atenção:</b> dizer já aqui que o NHANES é de 2005; isso volta nas limitações.</p>
+</aside>
+</section>
+
+<!-- ============ BLOCO 4 · PCA e análise fatorial ============ -->
+<section class="frame" id="s6">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">4 · PCA e análise fatorial</p>
+    <h2 class="titulo">Os três sintomas de insônia formam uma única dimensão no Brasil e nos EUA</h2>
+  </header>
+  <div class="corpo g-pca">
+    <div class="cartao" style="align-self:start">
+      <p class="rotulo">Os 3 itens</p>
+      <ul class="itens" style="margin-top:8px">
+        <li>Dificuldade para adormecer</li>
+        <li>Dificuldade para voltar a dormir</li>
+        <li>Acordar cedo demais</li>
+      </ul>
+      <p class="seta-indice">→ índice de insônia, de 0 a 12</p>
+      <p class="pequeno" style="margin-top:14px">Antes de comparar países, é preciso saber se o índice mede a mesma coisa nos dois.</p>
+    </div>
+    <div>
+      <table class="pca">
+        <thead><tr><th></th><th class="col-br">Vigitel 2024 · Brasil</th><th>NHANES 2005-06 · EUA</th></tr></thead>
+        <tbody>
+          <tr><td>Variância explicada pela 1ª componente (PCA)</td><td class="v col-br">{{var_pc1_insonia3_vigitel}}</td><td class="v">{{var_pc1_insonia3_nhanes}}</td></tr>
+          <tr><td>Fatores retidos: autovalor &gt; 1, scree e análise paralela</td><td class="v col-br">{{fatores_insonia3_vigitel}}</td><td class="v">{{fatores_insonia3_nhanes}}</td></tr>
+          <tr><td>α de Cronbach</td><td class="v col-br">{{alfa_insonia3_vigitel}}</td><td class="v">{{alfa_insonia3_nhanes}}</td></tr>
+          <tr><td>KMO (adequação da amostra)</td><td class="v col-br">{{kmo_insonia3_vigitel}}</td><td class="v">{{kmo_insonia3_nhanes}}</td></tr>
+        </tbody>
+      </table>
+      <p class="metodo-faixa">PCA pela decomposição em valores singulares, Z = UΣVᵀ. Análise paralela de Horn (1965).</p>
+      <div class="outras">
+        <p class="rotulo">Fatores retidos nas outras escalas</p>
+        <ul>
+          <li><b>PHQ-9</b> PNS e NHANES · {{fatores_phq9_pns}} e {{fatores_phq9_nhanes}}</li>
+          <li><b>Doomscrolling</b> Turquia · {{fatores_doomscrolling_turquia}}</li>
+          <li><b>Atenas (AIS)</b> Japão · {{fatores_ais_japao}}</li>
+          <li><b>SAS-SV</b> China · {{fatores_sassv_xuzhou}}</li>
+          <li><b>Procrastinação do sono</b> Turquia · {{fatores_procrastinacao_turquia}} · Japão · {{fatores_bps_japao}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 4 · PCA e análise fatorial · 3 min · {{apresentador_2}}</p>
+  <ul>
+    <li>“Antes de comparar países, precisamos saber se o índice de insônia mede a mesma coisa nos dois.”</li>
+    <li>“Os 3 sintomas são: dificuldade para adormecer, para voltar a dormir e acordar cedo demais.”</li>
+    <li>“A PCA, feita pela decomposição em valores singulares, mostra uma dimensão só. O primeiro componente explica {{var_pc1_insonia3_vigitel}} da variância no Vigitel e {{var_pc1_insonia3_nhanes}} no NHANES.”</li>
+    <li>“Três critérios dizem quantos fatores ficar: autovalor &gt; 1, gráfico scree e análise paralela. Os três dão 1.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s7">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">4 · PCA e análise fatorial</p>
+    <h2 class="titulo">As cargas dos dois países são praticamente iguais: o índice pode ser comparado</h2>
+  </header>
+  <div class="corpo" style="grid-template-columns: minmax(0,1fr) 420px">
+    <figure class="fig">
+      <img src="resultados/002/figuras/cargas_insonia_br_eua.png" alt="Barras: carga de cada sintoma de insônia no fator, Vigitel 2024 (Brasil) e NHANES 2005-06 (EUA)">
+      <figcaption>Cargas no fator único, análise fatorial por máxima verossimilhança.</figcaption>
+    </figure>
+    <div class="painel">
+      <div class="cartao-escuro">
+        <p class="rotulo">Congruência de Tucker</p>
+        <p class="valor acento" style="font-size:64px; margin:4px 0 6px">φ = {{tucker_insonia}}</p>
+        <p class="pequeno">Acima de 0,95, as estruturas são consideradas equivalentes (Lorenzo-Seva e ten Berge, 2006).</p>
+      </div>
+      <div class="cartao">
+        <p class="texto"><b>Soma simples dos 3 itens</b> × 1ª componente: r = {{r_soma_pc1_insonia3_vigitel}}. A soma serve como índice.</p>
+      </div>
+      <div class="cartao">
+        <p class="texto"><b>PCA × análise fatorial:</b> escores com r de {{r_pc1_af_min}} a {{r_pc1_af_max}}. As duas contam a mesma história.</p>
+      </div>
+      <p class="pequeno">Tucker compara cargas; não é teste formal de invariância.</p>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 4 · PCA e análise fatorial · {{apresentador_2}}</p>
+  <ul>
+    <li>“A análise fatorial separa a parte comum dos itens. O coeficiente de Tucker compara as cargas dos dois países: {{tucker_insonia}}. Acima de 0,95 as estruturas são consideradas equivalentes.”</li>
+    <li>“Conclusão: dá para comparar o índice entre os dois países, e a soma simples dos 3 itens serve (correlação {{r_soma_pc1_insonia3_vigitel}} com o componente).”</li>
+  </ul>
+  <p class="extra"><b>Se perguntarem</b> “por que PCA e análise fatorial?”: a PCA resume a variância total; a análise fatorial modela só a variância comum. Aqui as duas contam a mesma história (escores correlacionam de {{r_pc1_af_min}} a {{r_pc1_af_max}}).</p>
+</aside>
+</section>
+
+<!-- ============ BLOCO 5 · Brasil × EUA ============ -->
+<section class="frame" id="s8">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">5 · Brasil × EUA</p>
+    <h2 class="titulo">Tela digital 3 h ou mais se associa a mais problema de sono nos três inquéritos</h2>
+  </header>
+  <div class="corpo g-fig-d">
+    <figure class="fig">
+      <img src="resultados/003/figuras/rp_por_pais.png" alt="Gráfico de pontos: razão de prevalências bruta e ajustada, com IC 95%, para tela digital e TV no Vigitel, na PNS e no NHANES">
+      <figcaption>RP = razão de prevalências, tela ≥ 3 h × &lt; 1 h por dia. Poisson com peso amostral e variância por linearização; ajuste por idade, sexo e escolaridade.</figcaption>
+    </figure>
+    <div class="painel" style="justify-content:center; gap:20px">
+      <p class="rotulo">Tela digital, RP ajustada</p>
+      <div class="grupo br">
+        <span class="pilula br" style="align-self:flex-start">Brasil</span>
+        <div class="linha-num"><p class="base">Vigitel 2024</p><p class="valor">{{rp_digital_vigitel2024}}</p><p class="det">IC 95% {{rp_digital_vigitel2024_ic}} · p Holm {{rp_digital_vigitel2024_pholm}}</p></div>
+        <div class="linha-num"><p class="base">PNS 2019</p><p class="valor">{{rp_digital_pns2019}}</p><p class="det">IC 95% {{rp_digital_pns2019_ic}} · p Holm {{rp_digital_pns2019_pholm}}</p></div>
+      </div>
+      <div class="grupo">
+        <span class="pilula" style="align-self:flex-start">EUA</span>
+        <div class="linha-num"><p class="base">NHANES 2005-06</p><p class="valor">{{rp_digital_nhanes0506}}</p><p class="det">IC 95% {{rp_digital_nhanes0506_ic}} · p Holm {{rp_digital_nhanes0506_pholm}}</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 5 · Brasil × EUA · 3 min · {{apresentador_3}}</p>
+  <ul>
+    <li>“Comparamos quem usa tela 3 h ou mais com quem usa menos de 1 h, ajustando por idade, sexo e escolaridade.”</li>
+    <li>“A medida é a razão de prevalências. Com tela digital: Vigitel {{rp_digital_vigitel2024}} ({{rp_digital_vigitel2024_ic}}); PNS {{rp_digital_pns2019}}; NHANES {{rp_digital_nhanes0506}}. Nos três, rejeitamos H0 de RP = 1, já com a correção de Holm.”</li>
+  </ul>
+  <p class="extra"><b>Se perguntarem</b> “por que peso amostral?”: cada entrevistado representa um número diferente de pessoas. Sem peso e sem estrato e UPA, o p-valor sai pequeno demais.</p>
+</aside>
+</section>
+
+<section class="frame" id="s9">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">5 · Brasil × EUA · ressalva</p>
+    <h2 class="titulo">Nos EUA, a evidência é mais fraca: a decisão de H3.3 depende da regra de graus de liberdade</h2>
+  </header>
+  <div class="corpo g-pilha centro" style="gap:26px">
+    <p class="texto" style="font-size:20px">O desenho do NHANES 2005-06 tem só <b>{{nhanes_estratos}} estratos</b> e <b>{{nhanes_upas}} UPAs</b>. Com tão poucos, os graus de liberdade do teste decidem.</p>
+    <div class="regras">
+      <div class="cartao regra">
+        <p class="rotulo">Regra do projeto, em todas as specs</p>
+        <p class="texto">gl = UPAs − estratos = <b>{{nhanes_gl}}</b></p>
+        <p class="valor">p Holm {{rp_digital_nhanes0506_pholm}}</p>
+        <span class="decisao">rejeita H0</span>
+      </div>
+      <div class="seta">→</div>
+      <div class="cartao-escuro regra">
+        <p class="rotulo">Regra do <code>svyglm</code> do R</p>
+        <p class="texto">desconta os parâmetros do modelo: gl = <b>{{h33_gl_svyglm}}</b></p>
+        <p class="valor acento">p Holm {{h33_pholm_svyglm}}</p>
+        <span class="decisao">deixaria de rejeitar H0</span>
+      </div>
+    </div>
+    <p class="pequeno">As demais decisões não mudam com a regra (resultados/003/tabelas/hipoteses.csv, colunas *_svyglm).</p>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 5 · Brasil × EUA · {{apresentador_3}}</p>
+  <ul>
+    <li>“Cuidado com o NHANES: o desenho tem só {{nhanes_estratos}} estratos. Com uma regra mais conservadora de graus de liberdade, a do <code>svyglm</code> do R, o p Holm vai a {{h33_pholm_svyglm}}. Por isso dizemos que, nos EUA, a evidência é mais fraca.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s10">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">5 · Brasil × EUA</p>
+    <h2 class="titulo">Não foi detectada diferença entre Brasil e EUA, mas o intervalo é largo</h2>
+  </header>
+  <div class="corpo g-br-eua">
+    <div class="cartao-escuro razao" style="align-self:center; padding:34px 34px 30px">
+      <p class="rotulo">Razão das RP de tela digital · NHANES ÷ Vigitel</p>
+      <p class="valor acento">{{h36_razao}}</p>
+      <p class="texto">IC 95% <b>{{h36_ic}}</b> · p Holm {{h36_pholm}}</p>
+      <p class="pequeno" style="margin-top:14px">O intervalo contém o 1: vai de uma associação {{h36_ic_pct_inf}} menor a {{h36_ic_pct_sup}} maior nos EUA.</p>
+    </div>
+    <ul class="lista-pontos" style="align-self:center">
+      <li class="frase">Ausência de diferença detectada não é prova de igualdade.</li>
+      <li><b>PNS × Vigitel:</b> razão {{h39_razao}} (IC 95% {{h39_ic}}; p Holm {{h39_pholm}}). Não foi detectada diferença, mas as perguntas são outras.</li>
+      <li><b>Por faixa etária:</b> não foi detectada variação (menor p Holm {{h37_pholm_min}}).</li>
+      <li><b>Na regressão (H5.11):</b> interação país × tela com p Holm {{H511_pholm}}. A mesma leitura vale para a correlação na etapa 004.</li>
+    </ul>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 5 · Brasil × EUA · {{apresentador_3}}</p>
+  <ul>
+    <li>“Brasil e EUA são diferentes? A razão entre as duas RP é {{h36_razao}}, com intervalo de {{h36_ic}}, que contém o 1. Não detectamos diferença, o que não prova que sejam iguais: o intervalo é largo.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s11">
+<div class="slide escuro">
+  <header class="cabeca">
+    <p class="eyebrow">5 · Brasil × EUA · confundimento</p>
+    <h2 class="titulo">Sem ajuste por idade, a PNS mostra o sinal invertido</h2>
+  </header>
+  <div class="corpo g-pilha" style="align-content:center; gap:34px">
+    <div class="confunde">
+      <div>
+        <p class="rotulo">PNS 2019 · RP bruta</p>
+        <p class="valor">{{rp_bruta_digital_pns2019}}</p>
+        <p class="texto">Como se mais tela viesse com menos problema de sono.</p>
+      </div>
+      <div class="seta">→</div>
+      <div>
+        <p class="rotulo">Ajustada por idade, sexo e escolaridade</p>
+        <p class="valor acento">{{rp_ajustada_digital_pns2019}}</p>
+        <p class="texto">Mesma direção das outras bases.</p>
+      </div>
+    </div>
+    <p class="texto" style="font-size:20px; color:#fff; max-width:1040px">Jovens usam mais tela e relatam menos problema de sono: a idade confunde a relação. Uma comparação sem ajuste levaria à conclusão oposta.</p>
+    <p class="pequeno nums">Bruta → ajustada nas outras bases: Vigitel {{rp_bruta_digital_vigitel2024}} → {{rp_ajustada_digital_vigitel2024}} · NHANES {{rp_bruta_digital_nhanes0506}} → {{rp_ajustada_digital_nhanes0506}}</p>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-branco.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 5 · Brasil × EUA · ponto forte da fala · {{apresentador_3}}</p>
+  <ul>
+    <li>“Sem ajuste, a PNS mostra o contrário: RP de {{rp_bruta_digital_pns2019}}, como se tela protegesse. É confundimento por idade: jovens usam mais tela e relatam menos problema de sono. Ajustada, vai a {{rp_ajustada_digital_pns2019}}.”</li>
+  </ul>
+</aside>
+</section>
+
+<!-- ============ BLOCO 6 · Regressão, ANOVA, t, conferência ============ -->
+<section class="frame" id="s12">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">6 · Regressão, ANOVA e teste t</p>
+    <h2 class="titulo">No Vigitel, quem usa tela 3 h ou mais tem índice de insônia {{H51_b}} ponto maior</h2>
+  </header>
+  <div class="corpo g-fig-e">
+    <div class="painel">
+      <div class="cartao br-barra">
+        <p class="rotulo">H5.1 · Vigitel 2024 · dummy ≥ 3 h</p>
+        <p class="valor" style="margin:4px 0">b = {{H51_b}}</p>
+        <p class="pequeno nums"><span class="nw">IC 95% {{H51_ic}}</span> · <span class="nw">{{H51_cp}}</span><br><span class="nw">p Holm {{H51_pholm}}</span> · <span class="nw">n = {{H51_n}}</span></p>
+        <p class="pequeno">Índice de 0 a 12; referência &lt; 1 h; com covariáveis e peso amostral.</p>
+      </div>
+      <div class="cartao-escuro">
+        <p class="rotulo">Significativo, mas pequeno</p>
+        <p class="texto" style="margin-top:6px">A tela acrescenta <b class="acento">{{H51_dr2_pct}}</b> ao R² (ΔR² = {{H51_dr2}}).</p>
+      </div>
+      <p class="pequeno">Formato da aula: SUMMARY OUTPUT do Excel, ANOVA, t de cada coeficiente, IC 95% e dummies.</p>
+    </div>
+    <figure class="fig">
+      <img src="resultados/005/figuras/efeitos_padronizados.png" alt="Gráfico de pontos: associação entre tela e desfecho de sono em desvios-padrão, com IC 95%, nas seis bases">
+      <figcaption>Tela × sono em desvios-padrão do desfecho, IC 95%, versão que decide cada hipótese. Na Argentina o sinal é contrário e frágil.</figcaption>
+    </figure>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 6 · Regressão, ANOVA, t e conferência · 3 min · {{apresentador_3}}</p>
+  <ul>
+    <li>“Fizemos a regressão linear múltipla no formato da aula: SUMMARY OUTPUT do Excel, ANOVA, t de cada coeficiente, IC 95% e dummies.”</li>
+    <li>“No Vigitel, quem usa 3 h ou mais tem índice de insônia {{H51_b}} ponto maior, numa escala de 0 a 12 (p Holm {{H51_pholm}}).”</li>
+    <li>“É significativo, mas pequeno: a tela acrescenta {{H51_dr2_pct}} ao R².”</li>
+  </ul>
+  <p class="extra"><b>Se perguntarem</b> “por que o resultado da Argentina tem sinal contrário?”: é frágil. Some quando a série escolar substitui a idade (p = {{H54_p_serie}}), e são adolescentes com outra medida de tela.</p>
+</aside>
+</section>
+
+<section class="frame" id="s13">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">6 · Regressão, ANOVA e teste t</p>
+    <h2 class="titulo">No NHANES, o desenho amostral muda a conclusão da regressão</h2>
+  </header>
+  <div class="corpo" style="grid-template-columns: minmax(0,1fr) 450px">
+    <figure class="fig">
+      <img src="resultados/005/figuras/medias_por_faixa.png" alt="Linhas: índice de insônia médio por faixa de tela, Vigitel 2024 e NHANES 2005-06, com e sem peso amostral">
+      <figcaption>Índice de insônia médio por faixa de tela digital, com e sem peso amostral.</figcaption>
+    </figure>
+    <div class="painel">
+      <p class="rotulo">H5.2 · NHANES 2005-06 · dummy ≥ 3 h</p>
+      <div class="cartao">
+        <p class="pequeno">Sem peso, como o Excel calcula</p>
+        <p class="texto nums"><b>{{H52_sp}}</b> · p {{H52_p_sempeso}}</p>
+      </div>
+      <div class="cartao-escuro">
+        <p class="pequeno">Com peso, estrato e UPA (decide)</p>
+        <p class="texto nums"><b>{{H52_cp}}</b> · <b class="acento">p = {{H52_p}}</b> · {{H52_decisao}}</p>
+      </div>
+      <p class="pequeno">Na regra do <code>svyglm</code>, p = {{H52_p_svyglm}}; sem observações influentes, p = {{H52_p_seminfl}}. A decisão não muda.</p>
+      <div class="cartao" style="margin-top:auto">
+        <p class="rotulo">ANOVA de um fator · Vigitel</p>
+        <p class="pequeno nums" style="margin-top:4px; color:var(--eseg-noite-3)">Excel: {{H57_sp}}, o mesmo F da regressão nas dummies de tela, sem covariáveis. Decisão com peso: Wald {{H57_cp}}, p Holm {{H57_pholm}}.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 6 · Regressão, ANOVA, t e conferência · {{apresentador_3}}</p>
+  <ul>
+    <li>“No NHANES, sem peso o p seria {{H52_p_sempeso}}. Com o desenho amostral, vai a {{H52_p}} e não rejeitamos H0. O peso muda a conclusão.”</li>
+    <li>“A ANOVA de um fator do Excel no Vigitel (F = {{H57_f_sempeso}}) dá exatamente o mesmo F que a regressão nas dummies de tela, sem covariáveis. É a mesma conta vista de dois jeitos. A decisão usa a versão com peso amostral (F de Wald = {{H57_est}}).”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s14">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">6 · Conferência dos p-valores</p>
+    <h2 class="titulo">{{conf_dentro}} de {{conf_n}} números conferem entre Excel, fórmula e script</h2>
+  </header>
+  <div class="corpo g-pilha centro" style="gap:0">
+    <div class="caminhos">
+      <div class="cartao caminho"><span class="letra">A</span><div><h3>Excel, Análise de Dados</h3><p class="pequeno">Ferramenta da aula, executada de verdade, por automação.</p></div></div>
+      <div class="cartao caminho"><span class="letra">B</span><div><h3>Fórmula na planilha</h3><p class="pequeno"><code>T.DIST.2T</code> sobre a estatística e os graus de liberdade.</p></div></div>
+      <div class="cartao caminho"><span class="letra">C</span><div><h3>Script em Python</h3><p class="pequeno">O mesmo cálculo que gera relatório, site e estes slides.</p></div></div>
+    </div>
+    <div class="converge"></div>
+    <div class="resultado" style="margin-top:8px">
+      <div class="cartao"><p class="rotulo">Comparações</p><p class="valor">{{conf_n}}</p><p class="pequeno">coeficiente, erro padrão, t, p, F e R²</p></div>
+      <div class="cartao-escuro"><p class="rotulo">Dentro da tolerância</p><p class="valor acento">{{conf_dentro}}</p><p class="pequeno">diferença relativa &lt; 1e-8</p></div>
+      <div class="cartao"><p class="rotulo">Exceções documentadas</p><p class="valor">{{conf_excecoes}}</p><p class="pequeno">teste t de Welch</p></div>
+    </div>
+    <p class="texto" style="margin-top:18px; font-size:16px">As exceções vêm do Excel arredondar o grau de liberdade de Welch para inteiro; o relatório usa o fracionário (diferença {{conf_max_A_exc}}). Maior diferença: fórmula × script {{conf_max_B}}; Excel × script {{conf_max_A}}.</p>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 6 · Conferência dos p-valores · {{apresentador_3}}</p>
+  <ul>
+    <li>“Conferimos cada p-valor de três formas: a ferramenta Análise de Dados do Excel; a fórmula <code>T.DIST.2T</code> na planilha; o script em Python.”</li>
+    <li>“Foram {{conf_n}} números: {{conf_dentro}} dentro da tolerância e {{conf_excecoes}} exceções documentadas, porque o Excel arredonda o grau de liberdade do teste de Welch.”</li>
+  </ul>
+  <p class="extra">Se der tempo, abrir a aba do SUMMARY OUTPUT de uma base.</p>
+</aside>
+</section>
+
+<!-- ============ BLOCO 7 · O Brasil no mundo ============ -->
+<section class="frame" id="s15">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">7 · O Brasil no mundo</p>
+    <h2 class="titulo">Com tempo total de tela, a correlação combinada é ρ = {{meta_rho_total}}, bem abaixo da literatura</h2>
+  </header>
+  <div class="corpo" style="grid-template-columns: minmax(0,1fr) 300px; gap:24px">
+    <figure class="fig">
+      <img src="resultados/004/figuras/floresta.png" alt="Gráfico de floresta: correlação de Spearman entre uso de tela e sono em cada base, subgrupos e estimativa global, com a faixa da meta-análise de referência">
+      <figcaption>ρ de Spearman com z de Fisher; meta-análise de efeitos aleatórios (DerSimonian e Laird, 1986). Faixa cinza: referência de Han, Zhou e Liu (2024).</figcaption>
+    </figure>
+    <div class="painel">
+      <div class="cartao">
+        <p class="rotulo">Heterogeneidade</p>
+        <p class="valor">I² = {{meta_I2}}</p>
+        <p class="pequeno nums">Q = {{meta_Q}}; gl = {{meta_glQ}}; p {{meta_pQ}}. A associação varia muito entre as bases.</p>
+      </div>
+      <div class="cartao">
+        <p class="rotulo">Tempo total × literatura</p>
+        <p class="texto nums"><b>ρ = {{meta_rho_total}}</b> ({{meta_rho_total_ic}})</p>
+        <p class="pequeno">contra r = 0,28, IC 0,21 a 0,35, do uso geral (Han, Zhou e Liu, 2024).</p>
+      </div>
+      <div class="grupo br">
+        <span class="pilula br" style="align-self:flex-start">Brasil</span>
+        <p class="pequeno nums" style="color:var(--eseg-noite-3)">PNS ρ = {{rho_pns2019}} · Vigitel ρ = {{rho_vigitel2024}}. Ajustada por idade, a PNS vai a {{rho_aj_pns2019}}.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 7 · O Brasil no mundo · 2 min · {{apresentador_4}}</p>
+  <ul>
+    <li>“Para pôr bases com escalas diferentes no mesmo gráfico, usamos a correlação de Spearman e uma meta-análise de efeitos aleatórios.”</li>
+    <li>“O efeito varia muito entre as bases: I² = {{meta_I2}}.”</li>
+    <li>“Com tempo total de tela, a correlação combinada é {{meta_rho_total}}. Bem abaixo dos 0,28 da meta-análise de referência.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s16">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">7 · O Brasil no mundo</p>
+    <h2 class="titulo">Como se usa parece pesar mais que quanto; o Brasil não se distingue dos demais</h2>
+  </header>
+  <div class="corpo" style="grid-template-columns: minmax(0,1fr) 430px; gap:36px; align-items:center">
+    <div>
+      <p class="rotulo">Correlação combinada (<span class="sem-caixa">ρ</span>) por tipo de exposição</p>
+      <ol class="subgrupos" style="margin-top:6px">
+        <li><span class="nome">Tempo total de tela</span><span class="valor nums">{{meta_rho_total}}</span><span class="pequeno nums">IC 95% {{meta_rho_total_ic}} · PNS, Vigitel, NHANES, Argentina</span></li>
+        <li><span class="nome">Celular antes de dormir</span><span class="valor nums">{{meta_rho_presono}}</span><span class="pequeno nums">IC 95% {{meta_rho_presono_ic}} · Japão</span></li>
+        <li><span class="nome">Uso problemático</span><span class="valor nums">{{meta_rho_problematico}}</span><span class="pequeno nums">IC 95% {{meta_rho_problematico_ic}} · China, Turquia</span></li>
+      </ol>
+      <p class="pequeno nums" style="margin-top:14px">A ordem é a da literatura, mas, com uma a quatro bases por grupo, o teste não confirma a diferença (Q = {{H42_Q}}; p Holm {{H42_pholm}}).</p>
+    </div>
+    <div class="cartao br-barra" style="align-self:center; display:flex; flex-direction:column; gap:12px">
+      <span class="pilula br" style="align-self:flex-start">Brasil × outros países · tempo total</span>
+      <div><p class="pequeno">Brasil, PNS + Vigitel</p><p class="valor">ρ = {{meta_rho_brasil}}</p><p class="pequeno nums">IC 95% {{meta_rho_brasil_ic}}</p></div>
+      <div><p class="pequeno">Outros países</p><p class="valor" style="font-size:34px">ρ = {{meta_rho_outros}}</p></div>
+      <p class="texto nums" style="font-size:16px">z = {{H43_z}} · p Holm {{H43_pholm}}: não foi detectada diferença.</p>
+      <p class="pequeno nums">Ajustado por idade, o Brasil vai a {{rho_aj_brasil}} ({{rho_aj_brasil_ic}}).</p>
+    </div>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 7 · O Brasil no mundo · {{apresentador_4}}</p>
+  <ul>
+    <li>“Uso problemático ({{meta_rho_problematico}}) e celular antes de dormir ({{meta_rho_presono}}) se associam mais, como diz a literatura. Mas com uma ou duas bases por grupo, o teste não confirma a diferença (p Holm {{H42_pholm}}).”</li>
+    <li>“Entre o Brasil ({{meta_rho_brasil}}) e os outros países com tempo total, não detectamos diferença (p Holm {{H43_pholm}}).”</li>
+  </ul>
+</aside>
+</section>
+
+<!-- ============ BLOCO 8 · Limitações e conclusões ============ -->
+<section class="frame" id="s17">
+<div class="slide">
+  <header class="cabeca">
+    <p class="eyebrow">8 · Limitações</p>
+    <h2 class="titulo">Associação, não causa: o que limita a leitura dos resultados</h2>
+  </header>
+  <div class="corpo centro">
+    <ul class="limites">
+      <li class="chave"><b>Dados transversais</b>Não dá para separar “tela piora o sono” de “quem dorme mal usa mais tela” (Bauducco et al., 2024).</li>
+      <li><b>Graus de liberdade do NHANES</b>Pela regra do <code>svyglm</code>, H3.3 deixaria de rejeitar H0: p Holm {{h33_pholm_svyglm}}, contra {{rp_digital_nhanes0506_pholm}}.</li>
+      <li><b>NHANES 2005-06 é de antes do smartphone</b>A comparação Brasil × EUA mistura país e época; o Vigitel cobre só as capitais.</li>
+      <li><b>O item de sono da PNS é outro</b>É o do PHQ-9, que inclui dormir demais; comparável só de forma aproximada.</li>
+      <li><b>Autorrelato e faixas de horas</b>Medidas assim atenuam as correlações.</li>
+      <li><b>Bases de repositório sem desenho amostral</b>Sexo sem rótulo em Xuzhou e no Japão; escala da Turquia inferida; {{n_arg_sem_idade}} adolescentes argentinos sem idade.</li>
+      <li><b>Tucker não é teste formal de invariância</b>A análise fatorial confirmatória multigrupo ficou fora do escopo.</li>
+    </ul>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-marinho.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 8 · Conclusões e limitações · 2 min · {{apresentador_4}}</p>
+  <ul>
+    <li>“Os dados são transversais: é associação, não causa.”</li>
+    <li>“Principais limitações: NHANES de 2005, autorrelato e itens diferentes na PNS.”</li>
+  </ul>
+</aside>
+</section>
+
+<section class="frame" id="s18">
+<div class="slide escuro">
+  <header class="cabeca">
+    <p class="eyebrow">8 · Conclusões</p>
+    <h2 class="titulo">Mais tela, mais problema de sono no Brasil: associação consistente, mas pequena</h2>
+  </header>
+  <div class="corpo centro">
+    <ol class="conclusoes">
+      <li class="chave"><span>No Brasil, tela digital 3 h ou mais por dia se associa a uma prevalência de problema de sono <b class="acento">{{rp_br_pct_min}} a {{rp_br_pct_max}} maior</b>, com ajuste por idade, sexo e escolaridade.</span></li>
+      <li><span>Nos EUA (2005-06), mesma direção. <b>Não foi detectada diferença entre os países</b>, com intervalo largo ({{h36_ic}}).</span></li>
+      <li><span><b>O efeito é pequeno:</b> no Vigitel, o tempo de tela explica {{H51_dr2_pct}} da variação do índice de insônia.</span></li>
+      <li><span><b>Como e quando se usa</b> se associa mais ao sono que o tempo total, como diz a literatura; com poucas bases, a diferença não foi confirmada.</span></li>
+      <li><span><b>Sem ajuste por idade, a conclusão se inverte.</b> Comparar grupos de uso de tela exige ajuste.</span></li>
+      <li><span><b>Dados transversais:</b> o resultado é uma associação; mostrar causa exigiria estudo longitudinal ou experimental.</span></li>
+    </ol>
+  </div>
+  <footer class="rodape"><img src="site/assets/eseg-branco.svg" alt="Faculdade ESEG"><span>Insônia digital · Estatística 4</span><span class="num"></span></footer>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Bloco 8 · Conclusões · {{apresentador_4}}</p>
+  <ol style="list-style:decimal; padding-left:22px">
+    <li>“Mais tela, mais problema de sono no Brasil, de forma consistente, mas com associação pequena.”</li>
+    <li>“Não detectamos diferença entre Brasil e EUA, mas o intervalo é largo.”</li>
+    <li>“Como e quando se usa parece importar mais do que quanto.”</li>
+    <li>“Os dados são transversais: é associação, não causa.”</li>
+  </ol>
+</aside>
+</section>
+
+<section class="frame" id="s19">
+<div class="slide escuro fim">
+  <img class="capa-logo" src="site/assets/eseg-branco.svg" alt="Faculdade ESEG">
+  <div class="fim-texto">
+    <h2>Todo número desta apresentação sai de um script.</h2>
+    <p class="sub">Qualquer pessoa pode rodar tudo de novo a partir do repositório.</p>
+    <div class="cmd"><code>python -m analise.rodar_tudo</code><code>python -m pytest</code></div>
+  </div>
+  <p class="perguntas-fim acento">Perguntas?</p>
+  <p class="capa-data">Insônia digital · Estatística 4 · Faculdade ESEG · {{data}}</p>
+</div>
+<aside class="notes no-print">
+  <p class="quem">Fechamento e perguntas · {{apresentador_4}}</p>
+  <ul>
+    <li><b>Fechar:</b> “Todo número que mostramos sai de um script, e qualquer pessoa pode rodar tudo de novo a partir do repositório.”</li>
+  </ul>
+  <p class="extra"><b>Perguntas prováveis</b></p>
+  <ul class="extra">
+    <li><b>Por que não usaram só uma base?</b> Uma base responde se há associação; a pergunta era comparar países. Para isso, as medidas precisam ser equivalentes, o que a etapa 002 testou.</li>
+    <li><b>p &lt; 0,001 em quase tudo não é suspeito?</b> Com {{n_vigitel2024}} a {{n_pns2019}} pessoas, qualquer diferença pequena fica significativa. Por isso mostramos tamanho de efeito e IC, não só p.</li>
+    <li><b>Por que Holm e não Bonferroni?</b> Holm mantém a chance de pelo menos um falso positivo na família em no máximo 5%, como Bonferroni, mas rejeita mais.</li>
+    <li><b>Por que a RP e não o odds ratio?</b> O desfecho é comum ({{prev_adormecer_nhanes0506}} a {{prev_adormecer_vigitel2024}}). Nesse caso o OR exagera a associação, e a RP se lê direto como “quantas vezes mais”.</li>
+    <li><b>Tela causa insônia?</b> Os dados não permitem dizer. São transversais, e a literatura mostra também o caminho inverso.</li>
+    <li><b>Os resultados do Excel batem com os do Python?</b> Sim: {{conf_dentro}} de {{conf_n}} dentro da tolerância. As {{conf_excecoes}} exceções vêm do Excel arredondar o grau de liberdade de Welch.</li>
+    <li><b>Por que o NHANES de 2005?</b> É o único ciclo com os mesmos 3 sintomas de insônia do Vigitel e com latência em minutos. Os ciclos recentes só têm horas de sono.</li>
+  </ul>
+</aside>
+</section>
+
+</main>
+
+<div class="hud no-print" title="Setas, Espaço, PageUp/PageDown, Home/End: navegar · F: tela cheia · N: notas · T: zerar relógio">
+  <span class="relogio" id="relogio">00:00</span>
+  <span id="posicao">1 / 1</span>
+  <span class="dica">← → · F tela cheia · N notas</span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var frames = Array.prototype.slice.call(document.querySelectorAll(".frame"));
+  var total = frames.length;
+  var atual = 0;
+  var pos = document.getElementById("posicao");
+  var relogio = document.getElementById("relogio");
+  var inicio = Date.now();
+  var raiz = document.documentElement;
+
+  function escala() {
+    var notas = document.body.classList.contains("modo-notas");
+    var alturaUtil = window.innerHeight * (notas ? 0.62 : 1);
+    var s = Math.min(window.innerWidth / 1280, alturaUtil / 720);
+    raiz.style.setProperty("--s", String(s));
+  }
+
+  function marca(i) {
+    atual = i;
+    frames.forEach(function (f, k) { f.classList.toggle("atual", k === i); });
+    pos.textContent = (i + 1) + " / " + total;
+    if (history.replaceState) { history.replaceState(null, "", "#" + (i + 1)); }
+  }
+
+  function vai(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    window.scrollTo(0, frames[i].offsetTop);
+    marca(i);
+  }
+
+  function telaCheia() {
+    if (!document.fullscreenElement) {
+      if (raiz.requestFullscreen) { raiz.requestFullscreen(); }
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) { return; }
+    var k = e.key;
+    if (k === " " && e.shiftKey) { e.preventDefault(); vai(atual - 1); return; }
+    switch (k) {
+      case "ArrowRight": case "ArrowDown": case "PageDown": case " ":
+        e.preventDefault(); vai(atual + 1); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp":
+        e.preventDefault(); vai(atual - 1); break;
+      case "Home": e.preventDefault(); vai(0); break;
+      case "End": e.preventDefault(); vai(total - 1); break;
+      case "f": case "F": telaCheia(); break;
+      case "n": case "N":
+        document.body.classList.toggle("modo-notas"); escala(); vai(atual); break;
+      case "t": case "T": inicio = Date.now(); break;
+      default: break;
+    }
+  });
+
+  /* HUD some depois de 3 s sem tecla nem mouse, para não cobrir o número do slide no rodapé */
+  var ocioso = null;
+  function acorda() {
+    document.body.classList.remove("ocioso");
+    clearTimeout(ocioso);
+    ocioso = setTimeout(function () { document.body.classList.add("ocioso"); }, 3000);
+  }
+  ["keydown", "mousemove", "touchstart"].forEach(function (ev) {
+    document.addEventListener(ev, acorda, { passive: true });
+  });
+  acorda();
+
+  var espera = null;
+  window.addEventListener("scroll", function () {
+    clearTimeout(espera);
+    espera = setTimeout(function () {
+      var i = Math.round(window.scrollY / window.innerHeight);
+      i = Math.max(0, Math.min(total - 1, i));
+      if (i !== atual) { marca(i); }
+    }, 80);
+  }, { passive: true });
+
+  window.addEventListener("resize", function () { escala(); vai(atual); });
+
+  setInterval(function () {
+    var seg = Math.floor((Date.now() - inicio) / 1000);
+    var mm = String(Math.floor(seg / 60)).padStart(2, "0");
+    var ss = String(seg % 60).padStart(2, "0");
+    relogio.textContent = mm + ":" + ss;
+  }, 1000);
+
+  /* Conferência de corte: conteúdo que excede o slide vira página cortada no PDF.
+     Marca o frame com data-corte (contorno tracejado só na tela) e avisa no console. */
+  function confereCorte() {
+    var cortes = [];
+    frames.forEach(function (f, k) {
+      var alvos = [f.querySelector(".slide")].concat(
+        Array.prototype.slice.call(f.querySelectorAll(".corpo, .cartao, .cartao-escuro, .painel")));
+      var vaza = alvos.some(function (el) {
+        return el && (el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1);
+      });
+      if (vaza) { f.setAttribute("data-corte", "1"); cortes.push(k + 1); }
+      else { f.removeAttribute("data-corte"); }
+    });
+    document.body.setAttribute("data-cortes", cortes.join(","));
+    if (cortes.length) { console.warn("Slides com conteúdo cortado: " + cortes.join(", ")); }
+  }
+
+  escala();
+  var inicial = parseInt((location.hash || "").replace("#", ""), 10);
+  vai(isNaN(inicial) ? 0 : inicial - 1);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(confereCorte); } else { confereCorte(); }
+  window.addEventListener("load", confereCorte);
+})();
+</script>
+</body>
+</html>
