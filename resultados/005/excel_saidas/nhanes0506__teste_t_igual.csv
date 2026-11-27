@@ -1,0 +1,14 @@
+﻿t-Test: Two-Sample Assuming Equal Variances;;;
+;;;
+;tela_3h_mais;tela_menos_1h;
+Mean;4.063063063063063;3.5730964467005077;
+Variance;10.447481341386533;10.589984316666731;
+Observations;444;3940;
+Pooled Variance;10.57557792277145;;
+Hypothesized Mean Difference;0;;
+df;4382;;
+t Stat;3.009669166638051;;
+P(T<=t) one-tail;0.0013151080545298383;;
+t Critical one-tail;1.64520143464149;;p conferido (fórmula)
+P(T<=t) two-tail;0.0026302161090596765;;0.0026302161090596765
+t Critical two-tail;1.9605054987974482;;

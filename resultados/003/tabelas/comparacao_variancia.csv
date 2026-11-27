@@ -1,0 +1,7 @@
+﻿base;exposicao;termo;ep_linearizacao;ep_cluster_statsmodels;ep_modelo_poisson_ponderado;ep_robusto_sem_peso;variancia;gl_desenho
+vigitel2024;digital;C(expo)[T.2];0,06083615932181259;;0,03651710766791359;0,030776303482249866;sanduíche robusto (cada pessoa = UPA, estrato único);
+vigitel2024;TV;C(expo)[T.2];0,05873750997218991;;0,03505514348926009;0,030221020810327338;sanduíche robusto (cada pessoa = UPA, estrato único);
+pns2019;digital;C(expo)[T.2];0,03755581568548006;0,03741757670609805;0,023340551899172727;0,020996696600544148;linearização (estrato + UPA);7453,0
+pns2019;TV;C(expo)[T.2];0,03454284754612279;0,03437205587031644;0,021142587463941282;0,018362452884795977;linearização (estrato + UPA);7453,0
+nhanes0506;digital;C(expo)[T.2];0,12602205384657073;0,11652515311761209;0,11663722480909869;0,09916972829468938;linearização (estrato + UPA);15,0
+nhanes0506;TV;C(expo)[T.2];0,1164912594253475;0,12943313063893522;0,10621853129464076;0,09643492536542989;linearização (estrato + UPA);15,0

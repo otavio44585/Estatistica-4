@@ -1,0 +1,27 @@
+# Microdados brutos e PDFs de papers ficam fora do git (constitution.md, princípio 4)
+pesquisa/
+dados_brutos/
+*.xpt
+*.sav
+*.dta
+*.sas7bdat
+*.zip
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dados derivados com microdados (licença do Vigitel não declarada; princípio 4).
+# Regenerar com: python -m analise.harmonizacao.<base>
+analise/dados/processados/
+analise/dados/excel/
+.pytest_cache/

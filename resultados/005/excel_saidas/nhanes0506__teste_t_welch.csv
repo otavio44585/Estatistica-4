@@ -1,0 +1,13 @@
+﻿t-Test: Two-Sample Assuming Unequal Variances;;;
+;;;
+;tela_3h_mais;tela_menos_1h;
+Mean;4.063063063063063;3.5730964467005077;
+Variance;10.447481341386533;10.589984316666731;
+Observations;444;3940;
+Hypothesized Mean Difference;0;;
+df;549;;
+t Stat;3.0259743884113464;;
+P(T<=t) one-tail;0.0012972362082762552;;
+t Critical one-tail;1.6476338806897703;;p conferido (fórmula, gl inteiro do Excel)
+P(T<=t) two-tail;0.0025944724165525104;;0.0025944724165525104
+t Critical two-tail;1.964294441521913;;

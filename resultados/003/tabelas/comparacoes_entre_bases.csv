@@ -1,0 +1,11 @@
+﻿hipotese;exposicao;comparacao;metodo;razao;ic_inf;ic_sup;estatistica;tipo;gl1;gl2;p;n;n_param;gl_satterthwaite;p_satterthwaite;gl_base_empilhada
+H3.6;digital;NHANES ÷ Vigitel (RP de tela alta);interação país × tela na base empilhada (1 gl, categoria 2);1,073035117609965;0,7992939635859555;1,4405267849872987;0,5101507630487628;t;1,0;15,0;0,6173700401413194;32581,0;12,0;8,891762951288081;0,6223673832137052;27043,0
+H3.6;digital;NHANES ÷ Vigitel;interação conjunta (2 gl);;;;0,5041259150206031;F;2,0;14,0;0,6145900028067646;32581,0;12,0;;;27043,0
+H3.6;digital;NHANES ÷ Vigitel;z da diferença dos log-RP (modelos separados);1,0678791599135957;0,8117210587447944;1,4048741102530624;0,4693126073776179;z;;;0,6388462049734083;;;;;
+H3.9;digital;Vigitel ÷ PNS (RP de tela alta);z da diferença dos log-RP (modelos separados);1,1084174770241912;0,963489646404498;1,2751453095084737;1,4397353682446912;z;;;0,1499422829326675;;;;;
+H3.6 (sensibilidade);digital;NHANES ÷ Vigitel;z da diferença dos log-RP, modelos ajustados SEM peso;1,1438325003500995;0,9868334096779728;1,325809175111032;1,784010999175984;z;;;0,07442187788604154;;;;;
+H3.6;TV;NHANES ÷ Vigitel (RP de tela alta);interação país × tela na base empilhada (1 gl, categoria 2);1,4242013197923746;1,0948770984838208;1,8525818122483224;2,8661333167344765;t;1,0;15,0;0,0117756597759146;32595,0;12,0;12,465260273552643;0,01372694248921903;27062,0
+H3.6;TV;NHANES ÷ Vigitel;interação conjunta (2 gl);;;;4,833401151127312;F;2,0;14,0;0,025346568354008246;32595,0;12,0;;;27062,0
+H3.6;TV;NHANES ÷ Vigitel;z da diferença dos log-RP (modelos separados);1,391955775559559;1,0778940181242236;1,7975244769289727;2,534914629064781;z;;;0,01124747329565967;;;;;
+H3.9;TV;Vigitel ÷ PNS (RP de tela alta);z da diferença dos log-RP (modelos separados);1,065682512674026;0,9324497631004897;1,2179521758287302;0,9335747108965735;z;;;0,3505233153451224;;;;;
+H3.6 (sensibilidade);TV;NHANES ÷ Vigitel;z da diferença dos log-RP, modelos ajustados SEM peso;1,0970897706888028;0,9420658199753833;1,2776240676914281;1,1921417902640181;z;;;0,23320565317061648;;;;;

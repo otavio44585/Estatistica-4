@@ -1,0 +1,19 @@
+﻿bloco;item;valor;coeficiente;erro_padrao;stat_t;valor_p;inferior_95;superior_95
+Estatística de regressão;R múltiplo;0,050758807006996455;;;;;;
+Estatística de regressão;R-quadrado;0,002576456488773512;;;;;;
+Estatística de regressão;R-quadrado ajustado;0,0025026443416920063;;;;;;
+Estatística de regressão;Erro padrão;3,37796117647847;;;;;;
+Estatística de regressão;Observações;27029,0;;;;;;
+ANOVA;Regressão gl;2,0;;;;;;
+ANOVA;Regressão SQ;796,5889493151917;;;;;;
+ANOVA;Regressão MQ;398,29447465759586;;;;;;
+ANOVA;F;34,9055892647521;;;;;;
+ANOVA;F de significação;7,248374645591722e-16;;;;;;
+ANOVA;Resíduo gl;27026,0;;;;;;
+ANOVA;Resíduo SQ;308383,4623289415;;;;;;
+ANOVA;Resíduo MQ;11,410621709795809;;;;;;
+ANOVA;Total gl;27028,0;;;;;;
+ANOVA;Total SQ;309180,0512782567;;;;;;
+Coeficientes;Intercepto;;4,362407031778227;0,035858733092370074;121,65535855773021;0,0;4,292122058662054;4,432692004894401
+Coeficientes;tela_1a3h;;-0,021283875567105925;0,04795587263818035;-0,4438220888542573;0,657174770224453;-0,11527986841087817;0,07271211727666632
+Coeficientes;tela_3h_mais;;0,38125330730306395;0,05421551804051307;7,0321804730920165;2,0816538907018925e-12;0,2749880854353207;0,4875185291708072

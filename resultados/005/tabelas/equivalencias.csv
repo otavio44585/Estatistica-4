@@ -1,0 +1,11 @@
+﻿base;checagem;valor_1;valor_2;dif_relativa
+vigitel2024;F da ANOVA de um fator = F global da regressão nas 2 dummies;34,90558926475122;34,9055892647521;2,5241602015647962e-14
+vigitel2024;t com variâncias iguais = t da dummy na regressão simples (2 grupos);6,827439564687805;6,8274395646884045;8,781043429492422e-14
+vigitel2024;"t de Welch × t com variâncias iguais (diferem; registrado)";6,894316488782624;6,827439564687805;0,009795315426988638
+vigitel2024;p de Welch: gl fracionário (script) × gl inteiro (Excel);5,624059241789963e-12;5,624061751425989e-12;4,462321461431983e-07
+vigitel2024;d de Cohen da função = (ȳ₁ − ȳ₀)/s combinado clássico (sem peso);0,10957887126332508;0,10957887126332508;0,0
+nhanes0506;F da ANOVA de um fator = F global da regressão nas 2 dummies;4,722326342058613;4,722326342054887;7,889985148755692e-13
+nhanes0506;t com variâncias iguais = t da dummy na regressão simples (2 grupos);3,009669166638051;3,0096691666380244;8,853249681514973e-15
+nhanes0506;"t de Welch × t com variâncias iguais (diferem; registrado)";3,0259743884113464;3,009669166638051;0,0054176126579085215
+nhanes0506;p de Welch: gl fracionário (script) × gl inteiro (Excel);0,0025944339138812946;0,002594472416552475;1,4840490241139102e-05
+nhanes0506;d de Cohen da função = (ȳ₁ − ȳ₀)/s combinado clássico (sem peso);0,15066571461815598;0,15066571461815598;0,0
