@@ -22,7 +22,8 @@ PASSOS = [
     ("005", ["analise.regressao.prepara_excel", "analise.regressao.roda_excel", "analise.regressao.modelos",
              "analise.regressao.confere_excel", "analise.regressao.diagnostico", "analise.regressao.resumo",
              "analise.regressao.notebook"]),
-    ("006", ["analise.relatorio.figuras_apresentacao", "analise.relatorio.relatorio", "analise.relatorio.gerar_site"]),
+    ("006", ["analise.relatorio.figuras_apresentacao", "analise.relatorio.relatorio", "analise.relatorio.gerar_site",
+             "analise.relatorio.exporta_pdf"]),
 ]
 
 

@@ -33,6 +33,7 @@
 |---|---|---|
 | Visão geral e conclusões | [abrir](https://otavio44585.github.io/Estatistica-4/site/index.html) | [`site/index.html`](site/index.html) |
 | Apresentação (slides) | [abrir](https://otavio44585.github.io/Estatistica-4/site/apresentacao.html) | [`site/apresentacao.html`](site/apresentacao.html) |
+| Apresentação em PDF (18 slides) | [abrir](https://otavio44585.github.io/Estatistica-4/site/apresentacao.pdf) | [`site/apresentacao.pdf`](site/apresentacao.pdf) |
 | Roteiro da apresentação | [abrir](https://otavio44585.github.io/Estatistica-4/site/roteiro.html) | [`site/roteiro.html`](site/roteiro.html) |
 | Verificação independente | [abrir](https://otavio44585.github.io/Estatistica-4/site/verificacao.html) | [`site/verificacao.html`](site/verificacao.html) |
 | Etapas: dados, PCA e AF, Brasil (PNS × Vigitel), mundo, regressão, figuras-síntese | [001](https://otavio44585.github.io/Estatistica-4/site/001.html) · [002](https://otavio44585.github.io/Estatistica-4/site/002.html) · [003](https://otavio44585.github.io/Estatistica-4/site/003.html) · [004](https://otavio44585.github.io/Estatistica-4/site/004.html) · [005](https://otavio44585.github.io/Estatistica-4/site/005.html) · [006](https://otavio44585.github.io/Estatistica-4/site/006.html) | `site/001.html` … `site/006.html` |
